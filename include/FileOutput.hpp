@@ -5,7 +5,6 @@
 #include <fstream>
 #include "FDMModule.hpp"
 
-
 namespace sf
 {
 
@@ -14,13 +13,13 @@ class Node;
 
 class FileOutput : public virtual FDMModule
 {
-        public:
+public:
 
-		// functions from FDMModule
+      // functions from FDMModule
         void initialize(Node* node);
         void update( double timestep );
 
-		FileOutput(FDMGlobals *globals, double frameRate);
+      FileOutput(FDMGlobals *globals, double frameRate);
         //FileOutput(FDMGlobals *globals, char* filename, int skipFrames);
         ~FileOutput();
 
@@ -30,10 +29,8 @@ class FileOutput : public virtual FDMModule
         //FDMGlobals *globals;
         std::ofstream fout;
         int rate;
-		double lastTime;
+      double lastTime;
         int frameCounter;
-
-
 
 };
 

@@ -1,61 +1,34 @@
-/* Basic euler functionality */
 
-#ifndef EULER
-#define EULER
-
+#ifndef __Euler_H__
+#define __Euler_H__
 
 #include "Vector3.hpp"
-#include <math.h>
 
 namespace sf
 {
+
+//------------------------------------------------------------------------------
+// Class: Euler
+//------------------------------------------------------------------------------
 class Euler : public Vector3
 {
 public:
 
-    Euler();
+    Euler() = default;
     Euler( double psi, double theta, double phi);
-    ~Euler();
+    virtual ~Euler();
 
-    void getUVW( Vector3 &uvw, Vector3 &dxdydz);
-    void getDxDyDz( Vector3 &dxdydz, Vector3 &uvw);
-    void getDeltaEuler( Euler &deltaEuler, double p, double q, double r );
-    void getPQR( Vector3 &pqr, Vector3 &eulerDot);
-    
-    //double a1;
-    //double a2;
-    //double a3;
+    void getUVW(Vector3 &uvw, Vector3 &dxdydz);
+    void getDxDyDz(Vector3 &dxdydz, Vector3 &uvw);
+    void getDeltaEuler(Euler &deltaEuler, double p, double q, double r );
+    void getPQR(Vector3 &pqr, Vector3 &eulerDot);
 
-    double getPsi()
-    {
-        return this->a1;
-    }
-
-    void setPsi(double psi)
-    {
-        this->a1 = psi;
-    }
-
-    double getTheta()
-    {
-        return this->a2;
-    }
-
-    void setTheta(double theta)
-    {
-        this->a2 = theta;
-    }
-
-    double getPhi()
-    {
-        return a3;
-    }
-
-    void setPhi(double phi)
-    {
-        this->a3 = phi;
-    }
-
+    double getPsi()                     { return a1;  }
+    void setPsi(const double x)         { a1 = x;     }
+    double getTheta()                   { return a2;  }
+    void setTheta(const double x)       { a2 = x;     }
+    double getPhi()                     { return a3;  }
+    void setPhi(const double x)         { a3 = x;     }
 };
 
 }

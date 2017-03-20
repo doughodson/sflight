@@ -9,6 +9,9 @@
 
 namespace sf {
 
+//------------------------------------------------------------------------------
+// Class: Node
+//------------------------------------------------------------------------------
 class Node
 {
 public:
@@ -22,15 +25,15 @@ public:
    void setTagName(std::string name);
 
    Node* addChild(std::string tagName);
-        
+
    Node* addChild(Node* child);
 
    int getChildCount();
-      
+
    Node* getChild(std::string childName);
 
    std::vector<Node*> getChildren(std::string childName);
-        
+
    Node* getChild(int index);
 
    void putAttribute(std::string name, std::string val);
@@ -50,7 +53,7 @@ public:
    void setParent(Node *parentNode);
 
    std::string toString();
-        
+
    bool remove(Node* node);
 
 private:

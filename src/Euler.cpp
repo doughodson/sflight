@@ -1,16 +1,13 @@
-/* Basic euler functionality */
-
-#include "Vector3.hpp"
 
 #include "Euler.hpp"
 
+#include "Vector3.hpp"
+#include <cmath>
+
 namespace sf
 {
-Euler :: Euler() {
-    Vector3();
-}
 
-Euler :: ~Euler() {
+Euler::~Euler() {
 }
 
 Euler :: Euler( double psi, double theta, double phi)
@@ -23,15 +20,15 @@ Euler :: Euler( double psi, double theta, double phi)
 
 void Euler :: getDxDyDz( Vector3 &dxdydz, Vector3 &uvw)
 {
-    double a11 = cos(a2)*cos(a1);
-    double a12 = sin(a3)*sin(a2)*cos(a1) - cos(a3)*sin(a1);
-    double a13 = cos(a3)*sin(a2)*cos(a1) + sin(a3)*sin(a1);
-    double a21 = cos(a2)*sin(a1);
-    double a22 = sin(a3)*sin(a2)*sin(a1) + cos(a3)*cos(a1);
-    double a23 = cos(a3)*sin(a2)*sin(a1) - sin(a3)*cos(a1);
-    double a31 = -sin(a2);
-    double a32 = sin(a3)*cos(a2);
-    double a33 = cos(a3)*cos(a2);
+    double a11 = std::cos(a2) * std::cos(a1);
+    double a12 = std::sin(a3) * std::sin(a2) * std::cos(a1) - std::cos(a3) * std::sin(a1);
+    double a13 = std::cos(a3) * std::sin(a2) * std::cos(a1) + std::sin(a3) * std::sin(a1);
+    double a21 = std::cos(a2) * std::sin(a1);
+    double a22 = std::sin(a3) * std::sin(a2) * std::sin(a1) + std::cos(a3) * std::cos(a1);
+    double a23 = std::cos(a3) * std::sin(a2) * std::sin(a1) - std::sin(a3) * std::cos(a1);
+    double a31 = -std::sin(a2);
+    double a32 = std::sin(a3) * std::cos(a2);
+    double a33 = std::cos(a3) * std::cos(a2);
 
     dxdydz.set1( a11 * uvw.get1() + a12 * uvw.get2() + a13 * uvw.get3() );
     dxdydz.set2( a21 * uvw.get1() + a22 * uvw.get2() + a23 * uvw.get3() );

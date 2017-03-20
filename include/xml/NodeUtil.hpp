@@ -9,6 +9,9 @@
 
 namespace sf {
 
+//------------------------------------------------------------------------------
+// Class: NodeUtil
+//------------------------------------------------------------------------------
 class NodeUtil
 {
 public:
@@ -18,7 +21,7 @@ public:
 	// All children are added to the root of the childList
 	//
    static std::vector<Node*> getList(Node* parent, std::string childName);
-		
+
    static std::string get(Node* node, std::string pathName, std::string defaultVal);
    static int getInt(Node* node, std::string pathName, int defaultVal);
    static long getLong(Node* node, std::string pathName, long defaultVal);
@@ -26,9 +29,8 @@ public:
    static double getDouble(Node* node, std::string pathName, double defaultVal);
    static bool getBool(Node* node, std::string pathName, bool defaultVal);
    static std::vector<std::string> splitString(std::string instr, char splitChar);
+};
 
-};	
-	
 }
 
 #endif

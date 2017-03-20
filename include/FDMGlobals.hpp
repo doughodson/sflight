@@ -55,7 +55,7 @@ public:
 
     /** altitude above ground (meters) */
     double altagl {};
-    
+
     /** terrain elevation (meters) */
     double terrainElev {};
 
@@ -103,14 +103,14 @@ public:
 
     /** background wind vel [north east down]  without turbulence (m/s) */
     Vector3 windVel;
-    
+
     /** wind gust [north east down] in m/s */
     Vector3 windGust;
 
     /** engine-related values */
     double throttle {};
 	 double rpm {};
-	 double fuel {};	   //kilos
+	 double fuel {};	    //kilos
 	 double fuelflow {};  // kilos/sec
 
     /** sim related items **/
@@ -120,11 +120,11 @@ public:
 
     /** Autopilot commands */
     AutoPilotCmds autoPilotCmds;
-    
+
     Node* rootNode {};
     std::vector <FDMModule*> modules {};
 
-    void addModule( FDMModule *module );
+    void addModule(FDMModule* module);
     void initialize();
     void initialize(Node* node);
     void update(double timestep);

@@ -16,7 +16,7 @@ class FDMModule
 {
 public:
    FDMModule();
-   FDMModule(FDMGlobals *globals, double frameRate);
+   FDMModule(FDMGlobals* globals, double frameRate);
    virtual ~FDMModule();
 
    virtual void update(double timestep);
@@ -29,7 +29,7 @@ public:
    double frameTime {};
    double lastTime {};
 };
-    
+
 }
 
 #endif

@@ -7,9 +7,10 @@
 namespace sf {
 
 //------------------------------------------------------------------------------
-// Implements a model of the 1976 standard atmosphere.
-// Based on values from 0 to 35,000 meters.
-// 
+// Class: Atmosphere
+// Description: Implements a model of the 1976 standard atmosphere, based on
+//              values from 0 to 35,000 meters.
+//
 // Table Used
 // Standard Atmosphere 1976
 // Height Temp Press  Density
@@ -59,20 +60,20 @@ public:
 
    void update(double timestep);
 
-   /** returns density in kg/m^3 */
+   // returns density in kg/m^3
    static double getRho( double alt_meters);
 
-   /** returns pressure in kPa */
+   // returns pressure in kPa
    static double getPressure( double alt_meters);
 
-   /** returns temperature in Kelvin */
+   // returns temperature in Kelvin
    static double getTemp( double alt_meters);
 
    static double getRemainder( double alt);
 
    static int getIndex( double alt);
 
-   /** returns speed of sound in mps */
+   // returns speed of sound in mps
    static double getSpeedSound( double tempK );
 
 private:
@@ -82,7 +83,6 @@ private:
    static const double dens[37];
 
    static int const maxIndex = 36;
-
 };
 
 }
