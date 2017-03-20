@@ -10,6 +10,8 @@
 
 #include <iostream>
 
+using namespace std;
+
 namespace sf {
 
     WaypointFollower :: WaypointFollower(FDMGlobals *globals, double frameRate) : FDMModule(globals, frameRate) {

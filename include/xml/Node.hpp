@@ -1,80 +1,66 @@
 
-#ifndef NODE_H
-#define NODE_H
+#ifndef __Node_H__
+#define __Node_H__
 
 #include <vector>
 #include <map>
 #include <iostream>
 #include <string>
 
-
-using std :: string;
-using std :: map;
-using std :: vector;
-
 namespace sf {
 
-    class Node {
+class Node
+{
+public:
+   Node();
+   Node( std::string tagName);
+   Node( std::string name, std::string text);
+   Node( Node& );
+   ~Node();
 
-    public:
+   std::string getTagName();
+   void setTagName(std::string name);
 
-        Node();
-
-        Node( string tagName);
-
-        Node( string name, string text);
+   Node* addChild(std::string tagName);
         
-        Node( Node& );
+   Node* addChild(Node* child);
 
-        ~Node();
+   int getChildCount();
+      
+   Node* getChild(std::string childName);
 
-        string getTagName();
-
-        void setTagName(string name);
-
-        Node* addChild(string tagName);
+   std::vector<Node*> getChildren(std::string childName);
         
-        Node* addChild(Node* child);
+   Node* getChild(int index);
 
-        int getChildCount();
+   void putAttribute(std::string name, std::string val);
+
+   std::string getAttribute(std::string name);
+
+   void getAttributeNames(std::string* storeArray);
+
+   int getAttributeCount();
+
+   std::string getText();
+
+   void setText(std::string text);
+
+   Node* getParent();
+
+   void setParent(Node *parentNode);
+
+   std::string toString();
         
-        Node* getChild(string childName);
+   bool remove(Node* node);
 
-        vector <Node*> getChildren(string childName);
-        
-        Node* getChild(int index);
+private:
+   std::string name;
+   std::string text;
+   std::map<std::string, std::string> attrMap;
+   std::vector<Node*> childList {};
 
-        void putAttribute(string name, string val);
-
-        string getAttribute(string name);
-
-        void getAttributeNames(string* storeArray);
-
-        int getAttributeCount();
-
-        string getText();
-
-        void setText( string text);
-
-        Node* getParent();
-
-        void setParent(Node *parentNode);
-
-        string toString();
-        
-        bool remove(Node* node);
-
-
-    private:
-        
-        string name;
-        string text;
-        map <string, string> attrMap;
-        vector <Node*> childList;
-
-        Node* parentNode;
-
-    };
+   Node* parentNode {};
+};
 
 }
 

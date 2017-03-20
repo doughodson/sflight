@@ -1,46 +1,32 @@
-#ifndef XMLPARSER_H
-#define XMLPARSER_H
+
+#ifndef __XMLParser_H__
+#define __XMLParser_H__
 
 #include "Node.hpp"
 
-using std :: string;
-using std :: istream;
-
-
+#include <iostream>
 
 namespace sf {
 
+class XMLParser
+{
+public:
+   XMLParser();
+   ~XMLParser();
 
-    class XMLParser {
+   static Node* parse (std::istream &reader, bool treatAttributesAsChildren);
+   static Node* parse (std::string filename, bool treatAttributesAsChildren);
+   static Node* parseString (std::string xmlString, bool treatAttributesAsChildren);
+   static bool isWhitespace(char ch);
 
-    public:
-
-        XMLParser();
-        ~XMLParser();
-
-
-        static Node* parse (istream &reader, bool treatAttributesAsChildren);
-        static Node* parse (string filename, bool treatAttributesAsChildren);
-        static Node* parseString (string xmlString, bool treatAttributesAsChildren);
-        static bool isWhitespace(char ch);
-
-    private:
-
-        static string readChunk(istream &reader);
-
-        static void subChars(string &srcStr);
-
-        static string putAttributes(string str, Node* node, bool treatAsChildren);
-
-        static bool startsWith(string str, string search);
-
-        static bool endsWith(string str, string search);
-
-
-
-    };
-
-
+private:
+   static std::string readChunk(std::istream &reader);
+   static void subChars(std::string &srcStr);
+   static std::string putAttributes(std::string str, Node* node, bool treatAsChildren);
+   static bool startsWith(std::string str, std::string search);
+   static bool endsWith(std::string str, std::string search);
+};
 
 }
+
 #endif

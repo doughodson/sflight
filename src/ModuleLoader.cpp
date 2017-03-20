@@ -19,10 +19,12 @@
 #include <vector>
 #include <iostream>
 
+using namespace std;
+
 namespace sf {
 
-	void ModuleLoader :: loadModules(Node* parent, FDMGlobals *globals) {
-
+void ModuleLoader :: loadModules(Node* parent, FDMGlobals *globals)
+{
 		Node *node = parent->getChild("Modules");
 		vector <Node*> nodeList = NodeUtil ::  getList(node, "Module" );
 		double defaultRate = NodeUtil :: getDouble( node, "Rate", 0);

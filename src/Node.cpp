@@ -175,7 +175,7 @@ namespace sf {
      *
      * (documentation goes here)
      */
-    void Node::putAttribute(string name, string val) {
+    void Node::putAttribute(std::string name, std::string val) {
         attrMap.insert( pair<string, string> (name, val) );
     }
     
