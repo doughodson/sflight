@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+    Document   : fiveDOF.xml
+    Created on : January 18, 2006, 6:29 PM
+    Author     : matt
+    Description:
+        Purpose of the document follows.
+-->
+<FDMSim>    
+    
+    <Modules Rate="30">
+        <Module Class="EOMFiveDOF"/>
+        <Module Class="InterpAero"/>   
+        <Module Class="SimpleAutopilot"/>
+        <Module Class="SimpleEngine" Rate="10"/>
+        <Module Class="Atmosphere" Rate="10" />
+        <Module Class="StickControl"/> 
+	  <!-- Java Modules below -->
+        <Module Class="fdm.pvi.FDMGui" Rate="10" />
+        <Module Class="fdm.control.APCommandsPlugin" Rate="5"/>
+    </Modules>     
+    
+    <Id>601</Id>                               
+    <Callsign>Test</Callsign>
+    <Name>Test</Name>
+    
+    <InitialConditions>
+        <Position Latitude="37" Longitude="121" Altitude="20000"/>
+        <Orientation Heading="0.0" Pitch="0.0" Roll="0.0"/>
+        <Airspeed>240</Airspeed>
+        <Throttle>0.75</Throttle>
+        <Weight>155000</Weight>   <!-- LBS Take off weight-->
+        <Fuel>1</Fuel>       <!-- lbs -->
+    </InitialConditions>
+    
+    <AutoPilot>
+        <Component Type="HeadingHold" MaxBank="30" kr="2.0" kPhi="10.0" />
+        <Component Type="VSHold" MaxG="2" MaxPitchUp="10" MaxPitchDown="10" />
+        <Component Type="AltitudeHold" MaxVS="1000" kAlt="0.2" />  
+        <Component Type="AutoThrottle" MaxThrottle="1.0" MinThrottle="0.1" TimeConstant="100" />  
+    </AutoPilot> 
+    
+    <Control>
+        <DesignPoint Airspeed="300" Altitude="20000"/>
+        <RudderGain>100</RudderGain>
+        <ElevatorGain>10</ElevatorGain>
+        <AileronGain>20</AileronGain>
+        <PitchGain>0.05</PitchGain>
+    </Control>
+    
+    <Design>
+        <DesignAltitude>20000</DesignAltitude>
+        <DesignWeight>155000</DesignWeight>
+        
+        <ThrustToWeight>0.33</ThrustToWeight>
+        <ThrustAngle>0</ThrustAngle>
+        
+        <WingSpan>133</WingSpan>
+        <WingArea>1745</WingArea>
+
+        <CruiseCondition Pitch="0" Throttle="0.75" Airspeed="240" FuelFlow="0"/>
+        <ClimbCondition Pitch="10" Throttle="1.0" Airspeed="180"  VS="1000" FuelFlow="0"/>
+    </Design>
+    
+    <Analysis>
+        <FileName>data/output_Route5</FileName>
+    </Analysis>
+    
+    <Terrain>
+        <DTED Level="1">/home/matt/data/dted/dted1</DTED>
+    </Terrain>
+
+    <WaypointFollower>
+        <WaypointFollow>true</WaypointFollow>
+        <WaypointList>
+            <Waypoint Lat="37" Lon="121.0" Alt="40000" Speed="861" />
+            <Waypoint Lat="37" Lon="121.5" Alt="40000" Speed="861" />
+            <Waypoint Lat="38" Lon="121.0" Alt="40000" Speed="861" />
+        </WaypointList>
+    </WaypointFollower>
+    
+    
+     <InstrumentPanel>
+        <Width>600</Width>
+        <Height>800</Height>
+        <Gauges>
+            <Gauge Class="fdm.pvi.Bezel" Height="800" Width="600" X="0" Y="0"/>
+            <Gauge Class="fdm.pvi.AirspeedStripe" Height="350" Width="75" X="50" Y="100"/>
+            <Gauge Class="fdm.pvi.AltitudeStripe" Height="350" Width="75" X="475" Y="100"/>
+            <Gauge Class="fdm.pvi.HSI" Height="300" Width="300" X="150" Y="400"/>
+            <Gauge Class="fdm.pvi.Attitude" Height="300" Width="300" X="150" Y="100"/>
+            <Gauge Class="fdm.pvi.VSI" Height="200" Width="200" X="450" Y="475"/>
+            <Gauge Class="fdm.pvi.Engine" Height="100" Width="100" X="25" Y="455"/>
+            <Gauge Class="fdm.pvi.AOA" Height="100" Width="100" X="25" Y="560"/>
+            <Gauge Class="fdm.pvi.GMeter" Height="100" Width="100" X="25" Y="665"/>
+            <Gauge Class="fdm.pvi.SimpleEngineGauge" Height="100" Width="200" X="200" Y="725"/>
+        </Gauges>
+    </InstrumentPanel>
+
+    
+    
+</FDMSim>
+

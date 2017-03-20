@@ -1,0 +1,57 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+	<META HTTP-EQUIV="CONTENT-TYPE" CONTENT="text/html; charset=windows-1252">
+	<TITLE></TITLE>
+	<META NAME="GENERATOR" CONTENT="OpenOffice.org 2.1  (Win32)">
+	<META NAME="CREATED" CONTENT="20070808;21291526">
+	<META NAME="CHANGED" CONTENT="20070808;21494393">
+	<STYLE>
+	<!--
+		H1.western { font-size: 18pt }
+	-->
+	</STYLE>
+</HEAD>
+<BODY LANG="en-US" DIR="LTR">
+<H1 CLASS="western" ALIGN=CENTER>SimpleFlight C++</H1>
+<P ALIGN=CENTER>Version 2007.08.08</P>
+<P ALIGN=LEFT>This package contains the C++ version of SimpleFlight. 
+SimpleFlight is a variable fidelity, modular flight dynamics model
+that can be run standalone or in conjunction with another simulation.
+ To build SimpleFlight, run &ldquo;make&rdquo; from the top level
+directory.  The standalone executable and shared library can both be
+created 
+</P>
+<H1 CLASS="western">Building SimpleFlight</H1>
+<OL>
+	<LI><P>Change to the top level directory</P>
+	<LI><P>Run &ldquo;make&rdquo;.  Use &ldquo;make lib&rdquo; to build
+	the shared library or &ldquo;make exe&rdquo; to build the
+	executable.  &ldquo;make all&rdquo; builds both</P>
+</OL>
+<H1 CLASS="western">Running The Standalone Version</H1>
+<P>SimpleFlight can be run on the command line with the following
+input parameters:</P>
+<P>&lt;Input XML Configuration File&gt; &lt;Number of seconds to
+execute (sec)&gt; &lt;frame rate in Hz&gt;</P>
+<H1 CLASS="western">Using the Library</H1>
+<P>SimpleFlight can be run externally by creating a new FDMGlobals
+object, populating it with modules, and passing the initialization
+information (in the form of the input XML file) to the FDMGlobals
+object.  The model can be stepped externally by calling update() on
+the FDMGlobals with a given timestep in seconds.  See the main.cpp
+listing for an example.</P>
+<H1 CLASS="western">Using SimTimer</H1>
+<P>A simulation timer is provided.  Use the start() method to execute
+in wall-clock time.  Use startContstructive() to run at maximum rate.</P>
+<H1 CLASS="western">Building New Modules</H1>
+<P>New FDM modules can be created and added to an instance of
+SimpleFlight.  Every module subclasses FDMModule.  Look at the
+modules provided for guidance on module creation.  If you would like
+to load the module from an XML input file, you must reference the
+module in the ModuleLoader class.  New modules can access XML-based
+input data by using the Node and NodeUtil classes.  The XML input
+file can contain additional information not listed in the example
+file. Simply add new XML entities to be used as input by new Modules.</P>
+</BODY>
+</HTML>

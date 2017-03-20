@@ -1,0 +1,51 @@
+
+# vs directories
+build/obj/
+vs2013/
+vs2015/
+vs2017/
+.vscode/
+
+# lib directory
+lib/
+
+# vs runtime libs
+concrt*.dll
+msvcp*.dll
+vcamp*.dll
+vccorlib*.dll
+vcomp*.dll
+vcruntime*.dll
+
+# kde plasma 5 files
+.directory
+
+*.gch
+
+# vs compiler generated files
+*.idb
+*.ilk
+*.pdb
+
+#
+# eclipse files (for now)
+#
+.cproject
+.project
+.settings/
+
+# executables
+*.exe
+
+# except for premake tool
+!premake4.exe
+
+# compiled object files
+*.[oa]
+
+# backup files
+*.bak
+
+# linux executables
+mainTest/mainTest
+
