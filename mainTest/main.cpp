@@ -1,9 +1,4 @@
 
-#include <iostream>
-#include <fstream>
-#include <stdlib.h>
-#include <string>
-
 #include "FDMGlobals.hpp"
 #include "EOMFiveDOF.hpp"
 #include "InterpAero.hpp"
@@ -22,11 +17,11 @@
 #include "TableAero.hpp"
 #include "InverseDesign.hpp"
 
-using namespace sf;
+#include <iostream>
+#include <fstream>
+#include <string>
 
-using std :: cout;
-using std :: cerr;
-using std :: endl;
+using namespace sf;
 
 int main(int argc, char** argv) {
 
