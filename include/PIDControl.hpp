@@ -6,7 +6,7 @@
 
 #include "PIControl.hpp"
 
-namespace SimpleFlight {
+namespace sf {
 
 class PIDControl : public PIControl {
 
@@ -31,6 +31,6 @@ class PIDControl : public PIControl {
 
 };
 
-}; // namespace SimpleFlight
+}
 
 #endif

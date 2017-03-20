@@ -50,6 +50,7 @@ workspace "simpleflight"
          "../../include/**.h*",
          "../../src/**.cpp"
       }
+      targetdir ("../../lib/")
       targetname "sf"
 
    -- simple application

@@ -7,7 +7,7 @@
 
 using std::string;
 
-namespace SimpleFlight
+namespace sf
 {
 class Vector3
 {
@@ -57,7 +57,7 @@ public:
 
 };
 
+}
 
-}//namespace SimpleFlight
 #endif
 

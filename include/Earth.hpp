@@ -3,7 +3,7 @@
 #ifndef EARTH_H
 #define EARTH_H
 
-namespace SimpleFlight {
+namespace sf {
     class Vector3;
     
     class Earth {
@@ -30,6 +30,7 @@ namespace SimpleFlight {
         static void getGravForce( Vector3 &v, double theta, double phi, double g );
         
     };
-    
-}//namespace SimpleFlight
+   
+}
+
 #endif

@@ -1,8 +1,8 @@
+
 #include <iostream>
 #include <fstream>
 #include <stdlib.h>
 #include <string>
-
 
 #include "FDMGlobals.hpp"
 #include "EOMFiveDOF.hpp"
@@ -20,10 +20,9 @@
 #include "Table2D.hpp"
 #include "Table3D.hpp"
 #include "TableAero.hpp"
-#include "BluemaxAero.hpp"
 #include "InverseDesign.hpp"
 
-using namespace SimpleFlight;
+using namespace sf;
 
 using std :: cout;
 using std :: cerr;

@@ -8,7 +8,7 @@
 #define TURNTYPE_HDG 0
 #define TURNTYPE_TRAJECTORY 1
 
-namespace SimpleFlight {
+namespace sf {
     
     class SimpleAutoPilot : public FDMModule {
         
@@ -51,5 +51,7 @@ namespace SimpleFlight {
                 
                 
     };
-} //namespace SimpleFlight
+
+}
+
 #endif

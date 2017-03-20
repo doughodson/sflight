@@ -1,3 +1,4 @@
+
 /** implements psuedo five DOF dynamics for fixed wing aircraft
  *
  * imposes a no-slip condition
@@ -11,11 +12,13 @@
 #include "Quaternion.hpp"
 #include "Atmosphere.hpp"
 #include "xml/NodeUtil.hpp"
-#include <math.h>
 
 #include <iostream>
+
 using namespace std;
-namespace SimpleFlight {
+
+namespace sf {
+
     EOMFiveDOF :: EOMFiveDOF(FDMGlobals *globals, double frameRate) : FDMModule(globals, frameRate) {
     }
     

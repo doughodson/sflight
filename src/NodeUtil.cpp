@@ -9,8 +9,7 @@
 
 using namespace std;
 
-
-namespace SimpleFlight {
+namespace sf {
     
     /** returns a list of nodes that contain the childName */
     vector <Node*> NodeUtil :: getList(Node* parent, string childName) {

@@ -11,7 +11,7 @@
 #include "Quaternion.hpp"
 #include "Vector3.hpp"
 
-namespace SimpleFlight {
+namespace sf {
     // forward references
     class FDMGlobals;
     
@@ -42,5 +42,6 @@ namespace SimpleFlight {
                 
     };
     
-}//namespace SimpleFlight
+}
+
 #endif

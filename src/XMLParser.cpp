@@ -1,14 +1,14 @@
 
 #include "xml/XMLParser.hpp"
+
 #include <fstream>
 #include <sstream>
 #include <iostream>
-#include <stdlib.h>
 #include <string>
 
 using namespace std;
 
-namespace SimpleFlight {
+namespace sf {
 
     XMLParser :: XMLParser() {}
 
@@ -269,9 +269,6 @@ namespace SimpleFlight {
             int searchLimit = str.length() - search.length();
             return ( str.rfind(search, searchLimit) == searchLimit );
     }
-
-
-
 
 }
 

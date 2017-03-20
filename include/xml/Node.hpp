@@ -12,7 +12,7 @@ using std :: string;
 using std :: map;
 using std :: vector;
 
-namespace SimpleFlight {
+namespace sf {
 
     class Node {
 

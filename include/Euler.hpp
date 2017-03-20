@@ -7,7 +7,7 @@
 #include "Vector3.hpp"
 #include <math.h>
 
-namespace SimpleFlight
+namespace sf
 {
 class Euler : public Vector3
 {
@@ -57,5 +57,7 @@ public:
     }
 
 };
-} //namespace SimpleFlight
+
+}
+
 #endif

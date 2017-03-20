@@ -1,18 +1,15 @@
-/** base class for all flight model modules */
 
 #include "FDMModule.hpp"
 #include "FDMGlobals.hpp"
 #include <string>
-using namespace std;
-namespace SimpleFlight
-{
 
+namespace sf {
 
-FDMModule :: FDMModule( FDMGlobals *globals, double frameRate )
+FDMModule::FDMModule(FDMGlobals *globals, double frameRate)
 {
     this->globals = globals;
     
-	if(globals != 0)
+	if (globals != nullptr)
 		globals->addModule(this);
 
     if (frameRate <= 0 ) {
@@ -23,16 +20,16 @@ FDMModule :: FDMModule( FDMGlobals *globals, double frameRate )
     }
 }
 
-FDMModule :: ~FDMModule()
+FDMModule::~FDMModule()
 {}
 
-void FDMModule :: update(double timestep)
+void FDMModule::update(double timestep)
 {}
 
-void FDMModule :: initialize(Node* node) 
+void FDMModule::initialize(Node* node) 
 {}
 
-void FDMModule :: setProperty(string tag, double val) {
+void FDMModule::setProperty(std::string tag, double val) {
 }
 	
-} //namespace SimpleFlight
+}

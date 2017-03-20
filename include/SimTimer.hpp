@@ -1,16 +1,8 @@
-//
-// File:   SimTimer.h
-// Author: default
-//
-// Created on October 31, 2006, 11:52 AM
-//
-
-
 
 #ifndef _SimTimer_H
-#define	_SimTimer_H
+#define _SimTimer_H
 
-namespace SimpleFlight {
+namespace sf {
     
     class FDMGlobals;
     class Node;
@@ -37,8 +29,8 @@ namespace SimpleFlight {
         
     };
     
-}//namespace
+}
 
-#endif	/* _SimTimer_H */
+#endif
 
 

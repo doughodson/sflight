@@ -3,7 +3,7 @@
 #ifndef QUATERNION
 #define QUATERNION
 
-namespace SimpleFlight
+namespace sf
 {
 class Euler;
 class Vector3;
@@ -51,7 +51,8 @@ protected:
 
 };
 
-}//namespace SimpleFlight
+}
+
 #endif
 
 

@@ -1,14 +1,14 @@
+
 /* class that defines a 3-d vector */
 
-
-#include <math.h>
 #include "Vector3.hpp"
+
 #include <iostream>
 #include <sstream>
 
 using namespace std;
 
-namespace SimpleFlight
+namespace sf
 {
 Vector3 :: Vector3() {
 	this->a1 = 0.0;
@@ -142,6 +142,4 @@ string Vector3 :: toString() {
     return oss.str();
 }
 
-
-
-}//namespace SimpleFlight
+}

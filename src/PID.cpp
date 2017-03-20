@@ -1,12 +1,11 @@
+
 #include "PID.hpp"
-#include <math.h>
 
-#ifdef _MSC_VER
-#include <float.h> // DBO
-#endif
+#include <cmath>
 
-namespace SimpleFlight
+namespace sf
 {
+
 PID :: PID()
 {}
 
@@ -106,7 +105,7 @@ double PID :: getOutput(double timestep, double desired_pt, double current_pt, d
     du = kp * ( ep[0] - ep[1] + (ts/ti * en) + td/ts * ( edf[0] - 2 * edf[1] + edf[2] ) );
 #ifdef _MSC_VER
     //DBO changed for Visual C++
-    if (!_finite(du) || _isnan(du))
+    if (!std::isfinite(du) || std::isnan(du))
        du = 0.0;
 #else
     if ( isinf(du) || isnan(du) )

@@ -4,11 +4,12 @@
 #include "InverseDesign.hpp"
 #include "UnitConvert.hpp"
 #include "Atmosphere.hpp"
-#include <iostream>
 #include "WindAxis.hpp"
 #include "Vector3.hpp"
 #include "xml/Node.hpp"
 #include "xml/NodeUtil.hpp"
+
+#include <iostream>
 #include <vector>
 
 
@@ -22,7 +23,7 @@
 
 using namespace std;
 
-namespace SimpleFlight {
+namespace sf {
     InverseDesign :: InverseDesign(FDMGlobals *globals, double frameRate) : FDMModule( globals, frameRate) {
         usingMachEffects = true;
     }

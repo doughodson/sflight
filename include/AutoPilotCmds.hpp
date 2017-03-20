@@ -2,116 +2,92 @@
 #ifndef AUTOPILOTCMDS_H
 #define AUTOPILOTCMDS_H
 
-namespace SimpleFlight {
-    class AutoPilotCmds {
-        
-        public:
+namespace sf {
+
+class AutoPilotCmds
+{
+public:
+   AutoPilotCmds();
+   ~AutoPilotCmds();
+
+   void setAutoPilotOn(bool onOff);        
+   bool isAutoPilotOn();
+
+   void setAutoThrottleOn(bool onOff);
+   bool isAutoThrottleOn();
             
-            AutoPilotCmds();
+   void setCmdHeading(double radHeading);
+   double getCmdHeading();
             
-            ~AutoPilotCmds();
+   void setCmdAltitude(double metersMSLAlt);
+   double getCmdAltitude();
             
-            void setAutoPilotOn(bool onOff);
+   void setCmdVertSpeed(double metersPerSec);
+   double getCmdVertSpeed();
             
-            bool isAutoPilotOn();
+   void setCmdSpeed( double metersPerSec );
+   double getCmdSpeed();
             
-            void setAutoThrottleOn(bool onOff);
+   bool isAltHoldOn();
+   void setAltHoldOn(bool altHoldOn);
             
-            bool isAutoThrottleOn();
+   bool isVsHoldOn();
+   void setVsHoldOn(bool vsHoldOn);
             
-            void setCmdHeading(double radHeading);
+   bool isHdgHoldOn();
+   void setHdgHoldOn(bool hdgHoldOn);
             
-            double getCmdHeading();
+   bool isOrbitHoldOn();
+   void setOrbitHoldOn(bool orbitHoldOn);
             
-            void setCmdAltitude(double metersMSLAlt);
+   bool isLevelOn();
+   void setLevelOn(bool levelOn);
             
-            double getCmdAltitude();
+   void setMaxPitchUp(double radPitch);
+   double getMaxPitchUp();
             
-            void setCmdVertSpeed(double metersPerSec);
+   void setMaxPitchDown(double radPitch);
+   double getMaxPitchDown();
             
-            double getCmdVertSpeed();
+   void setMaxBank(double radbank);
+   double getMaxBank();
             
-            void setCmdSpeed( double metersPerSec );
+   void setMaxVS(double vs);
+   double getMaxVS();
             
-            double getCmdSpeed();
+   void setUseMach(bool useMach);
+   bool isUsingMach();
             
-            bool isAltHoldOn();
+   void setCmdMach(double mach);
+   double getCmdMach();
             
-            void setAltHoldOn(bool altHoldOn);
+   void setCmdSideSlip(double mpsSideslip);
+   double getCmdSideSlip();
             
-            bool isVsHoldOn();
-            
-            void setVsHoldOn(bool vsHoldOn);
-            
-            bool isHdgHoldOn();
-            
-            void setHdgHoldOn(bool hdgHoldOn);
-            
-            bool isOrbitHoldOn();
-            
-            void setOrbitHoldOn(bool orbitHoldOn);
-            
-            bool isLevelOn();
-            
-            void setLevelOn(bool levelOn);
-            
-            void setMaxPitchUp(double radPitch);
-            
-            double getMaxPitchUp();
-            
-            void setMaxPitchDown(double radPitch);
-            
-            double getMaxPitchDown();
-            
-            void setMaxBank(double radbank);
-            
-            double getMaxBank();
-            
-            void setMaxVS(double vs);
-            
-            double getMaxVS();
-            
-            void setUseMach(bool useMach);
-            
-            bool isUsingMach();
-            
-            void setCmdMach(double mach);
-            
-            double getCmdMach();
-            
-            void setCmdSideSlip(double mpsSideslip);
-            
-            double getCmdSideSlip();
-            
-            protected:
+protected:
+
+   double vel {};
+   double alt {};
+   double vs {};
+   double hdg {};
+   double mach {};
+   double sideslip {};
                 
-                double vel;
-                double alt;
-                double vs;
-                double hdg;
-                double mach;
-                double sideslip;
+   bool apOn {};
+   bool atOn {};
+   bool altHoldOn {};
+   bool vsHoldOn {};
+   bool hdgHoldOn {};
+   bool orbitHoldOn {};
+   bool levelOn {};
+   bool useMach {};
                 
-                bool apOn;
-                bool atOn;
-                bool altHoldOn;
-                bool vsHoldOn;
-                bool hdgHoldOn;
-                bool orbitHoldOn;
-                bool levelOn;
-                bool useMach;
-                
-                double maxPitch;
-                double minPitch;
-                double maxBank;
-                double maxVS;
-                
-                
-                
-                
-    };
+   double maxPitch {};
+   double minPitch {};
+   double maxBank {};
+   double maxVS {};
+};
     
-    
-} //namespace SimpleFlight
+}
 
 #endif

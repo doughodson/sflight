@@ -2,14 +2,12 @@
 // it is identical to the PID controller with differential control removed
 
 #include "PIDControl.hpp"
-#include <math.h>
-#ifdef _MSC_VER
-#include <float.h> // DBO
-#endif
 
-namespace SimpleFlight {
+#include <cmath>
 
-   PIDControl :: PIDControl() : PIControl() {}
+namespace sf {
+
+PIDControl :: PIDControl() : PIControl() {}
 PIDControl :: ~PIDControl() {}
 
     PIDControl :: PIDControl(double minVal, double maxVal, double p, double i, double d)
@@ -57,14 +55,8 @@ PIDControl :: ~PIDControl() {}
 
         du = kp * ( ep0 - ep1 + ts/ti * en + td/ts * ( edf0 - 2 * edf1 + edf2 ) );
 
-#ifdef _MSC_VER
-       //DBO changed for Visual C++
-        if (!_finite(du) || _isnan(du))
+        if (!std::isfinite(du) || std::isnan(du))
             du = 0.0;
-#else
-         if ( isinf(du) || isnan(du) )
-            du = 0.0;
-#endif
 
         // check for max and min conditions (to prevent integrator windup)
         if (u + du > max ) {
@@ -81,4 +73,3 @@ PIDControl :: ~PIDControl() {}
     }
 
 }
-; //namespace SimpleFlight

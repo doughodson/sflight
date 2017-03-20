@@ -3,7 +3,7 @@
 #ifndef WAYPOINT_H
 #define WAYPOINT_H
 
-namespace SimpleFlight
+namespace sf
 {
 class Waypoint
 {
@@ -37,8 +37,7 @@ protected:
 
 };
 
-}//namespace SimpleFlight
-
+}
 
 #endif
 

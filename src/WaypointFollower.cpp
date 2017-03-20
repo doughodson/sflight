@@ -1,25 +1,17 @@
 
 #include "WaypointFollower.hpp"
-#include <iostream>
+
 #include "FDMGlobals.hpp"
 #include "Earth.hpp"
 #include "UnitConvert.hpp"
-
-#ifdef _WIN32
-#define _USE_MATH_DEFINES
-#include <cmath>
-#else
-#include <math.h>
-#endif
-
+#include "constants.hpp"
 #include "xml/NodeUtil.hpp"
 #include "UnitConvert.hpp"
 
-using std :: string;
-using std::cout;
-using std::endl;
+#include <iostream>
 
-namespace SimpleFlight {
+namespace sf {
+
     WaypointFollower :: WaypointFollower(FDMGlobals *globals, double frameRate) : FDMModule(globals, frameRate) {
         currentWp = 0;
         wpNum = 0;
@@ -93,7 +85,7 @@ namespace SimpleFlight {
         double hdgDiff = fabs( UnitConvert :: wrapHeading(hdg - az, true) );
         
         bool isClose = dist < distTol;
-        bool isBehind =  fabs(hdgDiff) > M_PI / 2.;
+        bool isBehind =  fabs(hdgDiff) > sf::PI / 2.;
         
         if ( isClose && isBehind) {
             loadWaypoint();
@@ -104,7 +96,7 @@ namespace SimpleFlight {
 	    globals->autoPilotCmds.setCmdHeading(az);
         }
         else {
-            if ( hdgDiff >= M_PI ) {
+            if ( hdgDiff >= PI ) {
                 globals->autoPilotCmds.setCmdHeading( az );
             }
             else {
@@ -118,7 +110,7 @@ namespace SimpleFlight {
     void WaypointFollower :: loadWaypoint() {
         currentWp = 0;
         
-        cout << "loading wpt: " << wpNum << endl;
+        std::cout << "loading wpt: " << wpNum << std::endl;
         
         if (waypoints.size() > wpNum) {
             setState(true);
@@ -166,5 +158,6 @@ namespace SimpleFlight {
     void WaypointFollower :: setCurrentWp(int num) {
           this->wpNum = num;
     }
-}//namespace SimpleFlight
+
+}
 

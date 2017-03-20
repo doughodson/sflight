@@ -1,8 +1,9 @@
 
 #include "Table3D.hpp"
+
 #include <iostream>
 
-namespace SimpleFlight {
+namespace sf {
     
     
     Table3D :: Table3D( const int numPages, double pageVals[]) {
@@ -74,7 +75,4 @@ namespace SimpleFlight {
         }   
     }
     
-    
-    
-    
-};
+}

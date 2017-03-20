@@ -1,9 +1,9 @@
 
-#include <math.h>
+
 #include "Vector3.hpp"
 #include "WindAxis.hpp"
 
-namespace SimpleFlight
+namespace sf
 {
 /** takes an input of drag, sideforce, and lift and returns [fx, fy, fz] in the body axis
      *  @param lift force 90 degrees to Vinf ( -z direction for alpha = 0)
@@ -30,5 +30,5 @@ void WindAxis :: bodyToWind ( Vector3& ret, double alpha, double beta, double fx
     ret.set2(-fx * cos(alpha)*cos(beta) + fy*cos(alpha)*sin(beta) - fz*sin(alpha) );
     ret.set3( fx * sin(beta) - fy * cos(beta) );
 }
-} //namespace SimpleFlight
+}
 

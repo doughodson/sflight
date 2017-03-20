@@ -2,7 +2,7 @@
 #ifndef PID_H
 #define PID_H
 
-namespace SimpleFlight
+namespace sf
 {
 class PID
 {
@@ -37,5 +37,7 @@ public :
 
 
 };
-}//namespace SimpleFlight
+
+}
+
 #endif

@@ -1,17 +1,17 @@
 
 #include "SimpleEngine.hpp"
-#include <iostream>
 #include "FDMGlobals.hpp"
 #include "UnitConvert.hpp"
 #include "Earth.hpp"
-#include <math.h>
 #include "xml/Node.hpp"
 #include "xml/NodeUtil.hpp"
 #include "Atmosphere.hpp"
+
+#include <iostream>
 #include <vector>
 
 using std :: string;
-namespace SimpleFlight {
+namespace sf {
     
     SimpleEngine :: SimpleEngine( FDMGlobals *globals, double frameRate) : FDMModule(globals, frameRate) {
         seaLevelTemp = Atmosphere::getTemp(0);
@@ -110,4 +110,4 @@ namespace SimpleFlight {
         globals->mass -= globals->fuelflow * timestep;
     }
     
-} //namespace SimpleFlight
+}

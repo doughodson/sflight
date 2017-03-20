@@ -1,7 +1,7 @@
 
 #include "Waypoint.hpp"
 
-namespace SimpleFlight
+namespace sf
 {
     Waypoint :: Waypoint()
     {}
@@ -59,4 +59,6 @@ namespace SimpleFlight
     void Waypoint :: setBearing(double radBearing) {
         this->bearing = radBearing;
     }
-}//namespace SimpleFlight
+
+}
+

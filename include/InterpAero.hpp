@@ -4,7 +4,7 @@
 #define INTERPAEROCOEF_H
 
 #include "FDMModule.hpp"
-namespace SimpleFlight {
+namespace sf {
     class FDMGlobals;
     
     
@@ -57,5 +57,6 @@ namespace SimpleFlight {
                 
     };
     
-}//namespace SimpleFlight
+}
+
 #endif

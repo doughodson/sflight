@@ -1,10 +1,10 @@
+
 /** sets up a simple aero lookup table system */
 
 #include "FDMGlobals.hpp"
 #include "TableAero.hpp"
 #include "UnitConvert.hpp"
 #include "Atmosphere.hpp"
-#include <iostream>
 #include "WindAxis.hpp"
 #include "Vector3.hpp"
 #include "xml/Node.hpp"
@@ -12,18 +12,11 @@
 #include "Table3D.hpp"
 #include "Table2D.hpp"
 
-
-#ifdef _WIN32
-#define _USE_MATH_DEFINES
-#include <cmath>
-#else
-#include <math.h>
-#endif
-
+#include <iostream>
 
 using namespace std;
 
-namespace SimpleFlight {
+namespace sf {
     
     TableAero :: TableAero(FDMGlobals *globals, double frameRate) : FDMModule( globals, frameRate)
     {}
@@ -232,6 +225,4 @@ namespace SimpleFlight {
  
     }
     
-    
-    
-} //namespace SimpleFlight
+}

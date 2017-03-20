@@ -1,12 +1,13 @@
 
 #include "Table2D.hpp"
+#include "xml/NodeUtil.hpp"
+
 #include <string>
 #include <iostream>
-#include "xml/NodeUtil.hpp"
 
 using std::string;
 
-namespace SimpleFlight {
+namespace sf {
     
     Table2D :: Table2D() {
         numRows = 0;

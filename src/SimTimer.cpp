@@ -3,9 +3,10 @@
 #include "FDMGlobals.hpp"
 #include "xml/Node.hpp"
 #include "xml/NodeUtil.hpp"
-#include <time.h>
 #include <iostream>
 
+
+//#include <time.h>
 
 #ifdef _WIN32
 #include "windows.h"
@@ -13,7 +14,7 @@
 #include <unistd.h>
 #endif
 
-namespace SimpleFlight {
+namespace sf {
     
     
     SimTimer :: SimTimer(FDMGlobals *globals, double frameRate) {
@@ -84,5 +85,4 @@ namespace SimpleFlight {
         
     }
     
-    
-} //namespace
+}

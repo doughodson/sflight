@@ -1,10 +1,11 @@
+
 // this is taken from a Flightgear help page as a simple PIDControl algorithm. The original source is not cited.
 // it is identical to the PID controller with differential control removed
 
 #ifndef PICONTROL_H
 #define PICONTROL_H
 
-namespace SimpleFlight {
+namespace sf {
 
 class PIControl {
 
@@ -43,6 +44,6 @@ class PIControl {
 
 };
 
-}; // namespace SimpleFlight
+}
 
 #endif

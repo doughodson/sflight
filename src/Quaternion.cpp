@@ -1,13 +1,14 @@
-/* Implements quaternion math */
 
+/* Implements quaternion math */
 
 #include "Quaternion.hpp"
 #include "Euler.hpp"
+
 #include <iostream>
 
 using namespace std;
 
-namespace SimpleFlight {
+namespace sf {
     Quaternion :: Quaternion() {
         initialize(0., 0., 0.);
     }
@@ -191,6 +192,4 @@ namespace SimpleFlight {
         
     }
     
-    
-    
-} //namespace SimpleFlight
+}

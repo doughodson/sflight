@@ -5,7 +5,7 @@
 #include "Table2D.hpp"
 
 
-namespace SimpleFlight {
+namespace sf {
     
     
 class Table3D {    
@@ -37,6 +37,6 @@ class Table3D {
 
 };
 
-};
+}
 
 #endif

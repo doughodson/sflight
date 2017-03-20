@@ -1,13 +1,10 @@
 
-
 #include "AutoPilotCmds.hpp"
 #include "UnitConvert.hpp"
-#include <math.h>
 
-namespace SimpleFlight
-{
+namespace sf {
 
-AutoPilotCmds :: AutoPilotCmds()
+AutoPilotCmds::AutoPilotCmds()
 {
    this->apOn = false;
    this->atOn = false;
@@ -17,16 +14,13 @@ AutoPilotCmds :: AutoPilotCmds()
    this->orbitHoldOn = false;
    this->useMach = false;
    this->levelOn = false;
-   
 
    this->hdg = 0;
    this->alt = 0;
    this->vel = 0;
    this->vs = 0;
    this->sideslip = 0;
-
 }
-
 
 AutoPilotCmds :: ~AutoPilotCmds()
 {}
@@ -35,7 +29,6 @@ void AutoPilotCmds :: setAutoPilotOn(bool onOff)
 {
     this->apOn = onOff;
 }
-
 
 bool AutoPilotCmds :: isAutoPilotOn()
 {
@@ -206,5 +199,4 @@ void AutoPilotCmds :: setUseMach(bool useMach) {
 	this->useMach = useMach;
 }
 
-
-} //namespace SimpleFlight
+}

@@ -1,12 +1,12 @@
-/** calculations related to the earth */
 
 #include "Vector3.hpp"
-#include <math.h>
+
 #include "Earth.hpp"
 #include "UnitConvert.hpp"
 
-namespace SimpleFlight
+namespace sf
 {
+
 const double Earth :: epsilon = 0.0818191908426;
 const double Earth :: gravEq = 9.7803267714;
 const double Earth :: radiusEq = 6378137.0;
@@ -90,4 +90,4 @@ void Earth :: getGravForce( Vector3 &v, double theta, double phi, double g )
 
 }
 
-} //namespace SimpleFlight
+}

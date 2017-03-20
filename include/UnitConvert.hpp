@@ -1,20 +1,18 @@
-/** basic conversions used in the flight model */
 
-#ifndef UNITCONVERT_H
-#define UNITCONVERT_H
+#ifndef __UnitConvert_H__
+#define __UnitConvert_H__
 
-#include <math.h>
+#include "constants.hpp"
+#include <cmath>
 
-#define PI 3.14159265358979323846
-#define TWO_PI 6.28318530717958647692
-
-
-namespace SimpleFlight
+namespace sf
 {
 
+//------------------------------------------------------------------------------
+// basic conversions used in the flight model
+//------------------------------------------------------------------------------
 class UnitConvert
 {
-
 public:
     static inline double toDegs(double rad);
     static inline double toRads(double deg);
@@ -35,7 +33,6 @@ public:
     static inline double toHeadingRadians(double degHeading);
     static inline double NMtoEarthRadians(double distNM);
     static inline double signum( double input);
-
 };
 
 double UnitConvert :: toDegs(double rad)
@@ -134,7 +131,7 @@ double UnitConvert :: wrapHeading(double heading, bool isRadians)
         heading = UnitConvert :: toRads(heading);
     }
 
-    heading = heading - floor( ( heading + PI ) / TWO_PI) * TWO_PI;
+    heading = heading - std::floor( ( heading + PI ) / TWO_PI) * TWO_PI;
 
     if (isRadians)
         return  heading;
@@ -159,6 +156,6 @@ double UnitConvert :: NMtoEarthRadians(double distNM) {
 }
 
 
-};//namespace
+}
 
 #endif

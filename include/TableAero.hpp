@@ -7,7 +7,7 @@
 
 
 
-namespace SimpleFlight
+namespace sf
 {
     
 class Table3D;
@@ -47,5 +47,6 @@ class TableAero : public virtual FDMModule{
 
 };
 
-}//namespace SimpleFlight
+}
+
 #endif

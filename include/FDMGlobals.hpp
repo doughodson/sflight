@@ -1,9 +1,9 @@
-/* Global variables for use by the flight model */
 
-#ifndef FDMGLOBALS_H
-#define FDMGLOBALS_H
+#ifndef __FDMGlobals_H__
+#define __FDMGlobals_H__
 
 #include <vector>
+
 #include "Earth.hpp"
 #include "Euler.hpp"
 #include "Quaternion.hpp"
@@ -11,61 +11,56 @@
 #include "AutoPilotCmds.hpp"
 #include "xml/Node.hpp"
 
-
-
-namespace SimpleFlight
-{
-
+namespace sf {
 class FDMModule;
 
-using std :: string;
-
+//------------------------------------------------------------------------------
+// Class: FDMGlobals
+// Description: Global variables for use by the flight model
+//------------------------------------------------------------------------------
 class FDMGlobals
 {
-
 public:
-
     FDMGlobals();
     ~FDMGlobals();
 
     /** lat, lon (radians) and alt (meters) */
-    double lat;
-    
-    double lon;
-    
-    double alt;
+    double lat {};
+    double lon {};
+    double alt {};
 
     /** mass (kg) */
-    double mass;
+    double mass {};
 
     /** air density (kg/m3) */
-    double rho ;
+    double rho {};
 
     /** magnitude of vehicle true airspeed (m/s) */
-    double vInf;
+    double vInf {};
 
     /** mach number*/
-    double mach;
+    double mach {};
 
     /** angle of attack (radians) */
-    double alpha;
+    double alpha {};
+
     /** sideslip angle (radians) */
-    double beta;
+    double beta {};
 
     /** change in alpha with time (rad/sec)  */
-    double alphaDot;
+    double alphaDot {};
 
     /** change in beta with time (rads/sec) */
-    double betaDot ;
+    double betaDot {};
 
     /** altitude above ground (meters) */
-    double altagl;
+    double altagl {};
     
     /** terrain elevation (meters) */
-    double terrainElev;
+    double terrainElev {};
 
     /** gravitational accel (m/s2) */
-    double g;
+    double g {};
 
     /** velocity in the body axis [u, v, w] (m/s) */
     Vector3 uvw;
@@ -112,32 +107,30 @@ public:
     /** wind gust [north east down] in m/s */
     Vector3 windGust;
 
-
-	/** engine-related values */
-    double throttle;
-	double rpm;
-	double fuel;	   //kilos
-	double fuelflow;  // kilos/sec
+    /** engine-related values */
+    double throttle {};
+	 double rpm {};
+	 double fuel {};	   //kilos
+	 double fuelflow {};  // kilos/sec
 
     /** sim related items **/
-    unsigned int frameNum;
-    double simTime;
-    bool paused;
-    
+    unsigned int frameNum {};
+    double simTime {};
+    bool paused {};
+
     /** Autopilot commands */
     AutoPilotCmds autoPilotCmds;
     
-    
-    Node* rootNode;
-    std::vector <FDMModule*> modules;
+    Node* rootNode {};
+    std::vector <FDMModule*> modules {};
 
     void addModule( FDMModule *module );
     void initialize();
     void initialize(Node* node);
     void update(double timestep);
-	void setProperty(string tag, double val);
-
-
+    void setProperty(string tag, double val);
 };
-} //namespace SimpleFlight
+
+}
+
 #endif

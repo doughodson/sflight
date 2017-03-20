@@ -6,7 +6,7 @@
 #include "FDMModule.hpp"
 
 
-namespace SimpleFlight
+namespace sf
 {
 
 class FDMGlobals;
@@ -37,6 +37,6 @@ class FileOutput : public virtual FDMModule
 
 };
 
-} //namespace SimpleFlight
+}
 
 #endif

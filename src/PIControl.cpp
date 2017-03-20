@@ -2,12 +2,10 @@
 // it is identical to the PID controller with differential control removed
 
 #include "PIControl.hpp"
-#include <math.h>
-#ifdef _MSC_VER
-#include <float.h> // DBO
-#endif
 
-namespace SimpleFlight {
+#include <cmath>
+
+namespace sf {
 
 PIControl :: PIControl() {}
 
@@ -86,14 +84,8 @@ double PIControl :: getOutput(double timestep, double desired_pt, double current
 
     du = kp * ( ep0 - ep1 + ts/ti * en );
 
-#ifdef _MSC_VER
-       //DBO changed for Visual C++
-        if (!_finite(du) || _isnan(du))
+        if (!std::isfinite(du) || std::isnan(du))
             du = 0.0;
-#else
-         if ( isinf(du) || isnan(du) )
-            du = 0.0;
-#endif
 
     // check for max and min conditions (to prevent integrator windup)
     if (u + du > max ) {

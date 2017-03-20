@@ -7,7 +7,7 @@
 #include <vector>
 
 
-namespace SimpleFlight {
+namespace sf {
     
     class Waypoint {
         
@@ -59,6 +59,6 @@ namespace SimpleFlight {
                 
     };
     
-}//namespace SimpleFlight
+}
 
 #endif

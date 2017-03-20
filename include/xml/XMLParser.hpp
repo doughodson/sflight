@@ -8,7 +8,7 @@ using std :: istream;
 
 
 
-namespace SimpleFlight {
+namespace sf {
 
 
     class XMLParser {

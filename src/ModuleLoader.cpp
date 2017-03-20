@@ -2,10 +2,7 @@
 #include "ModuleLoader.hpp"
 #include "FDMGlobals.hpp"
 #include "xml/Node.hpp"
-#include <string>
 #include "xml/NodeUtil.hpp"
-#include <vector>
-#include <iostream>
 
 #include "EOMFiveDOF.hpp"
 #include "InterpAero.hpp"
@@ -18,10 +15,11 @@
 #include "InverseDesign.hpp"
 #include "FileOutput.hpp"
 
+#include <string>
+#include <vector>
+#include <iostream>
 
-
-namespace SimpleFlight {
-
+namespace sf {
 
 	void ModuleLoader :: loadModules(Node* parent, FDMGlobals *globals) {
 

@@ -1,13 +1,14 @@
 
 #include "xml/Node.hpp"
+#include "xml/NodeUtil.hpp"
+
 #include <algorithm>
 #include <iterator>
 #include <iostream>
-#include "xml/NodeUtil.hpp"
 
 using namespace std;
 
-namespace SimpleFlight {
+namespace sf {
     
     Node :: Node() {
         this->name = "";

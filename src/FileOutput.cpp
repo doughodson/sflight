@@ -9,7 +9,7 @@
 
 using namespace std;
 
-namespace SimpleFlight
+namespace sf
 {
 
 

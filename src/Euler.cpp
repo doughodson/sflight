@@ -1,10 +1,10 @@
 /* Basic euler functionality */
 
 #include "Vector3.hpp"
-#include <math.h>
+
 #include "Euler.hpp"
 
-namespace SimpleFlight
+namespace sf
 {
 Euler :: Euler() {
     Vector3();

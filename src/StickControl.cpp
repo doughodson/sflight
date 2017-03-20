@@ -1,11 +1,12 @@
+
 #include "StickControl.hpp"
-#include <math.h>
+
 #include "FDMGlobals.hpp"
 #include "UnitConvert.hpp"
 #include "xml/NodeUtil.hpp"
 #include "Atmosphere.hpp"
 
-namespace SimpleFlight {
+namespace sf {
     
     
     StickControl::StickControl(FDMGlobals *globals, double frameRate) : FDMModule(globals, frameRate) {
@@ -69,5 +70,5 @@ namespace SimpleFlight {
         
     }
     
-    
+   
 }

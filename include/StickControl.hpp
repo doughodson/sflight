@@ -13,7 +13,7 @@
 #include "Vector3.hpp"
 #include "xml/Node.hpp"
 
-namespace SimpleFlight {
+namespace sf {
     
     
     class StickControl : public virtual FDMModule {
@@ -43,7 +43,5 @@ namespace SimpleFlight {
     
 }
 
-
-
-#endif	/* _StickControl_H */
+#endif
 

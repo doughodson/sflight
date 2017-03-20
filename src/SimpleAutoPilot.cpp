@@ -1,23 +1,15 @@
 
-
 #include "SimpleAutoPilot.hpp"
 #include "UnitConvert.hpp"
 #include "FDMGlobals.hpp"
 #include "Atmosphere.hpp"
-
-#ifdef _WIN32
-#define _USE_MATH_DEFINES
-#include <cmath>
-#else
-#include <math.h>
-#endif
-
-#include <stdlib.h>
-#include <iostream>
 #include "xml/NodeUtil.hpp"
 
+#include <iostream>
+#include <algorithm>
+
 using namespace std;
-namespace SimpleFlight {
+namespace sf {
     
     SimpleAutoPilot :: SimpleAutoPilot(FDMGlobals *globals, double frameRate) : FDMModule( globals, frameRate) {
         kphi = 0.05;
@@ -62,8 +54,8 @@ namespace SimpleFlight {
                 minG =  (NodeUtil :: getDouble(tmp, "MinG", minG) - 1 )* Earth :: getG(0, 0, 0);
                 maxG_rate = maxG;
                 minG_rate = minG;
-                globals->autoPilotCmds.setMaxPitchUp( UnitConvert::toRads( NodeUtil :: getDouble(tmp, "MaxPitchUp", M_PI/2.)));
-                globals->autoPilotCmds.setMaxPitchDown( UnitConvert::toRads( NodeUtil :: getDouble(tmp, "MaxPitchDown", -M_PI/2.)) );
+                globals->autoPilotCmds.setMaxPitchUp( UnitConvert::toRads( NodeUtil :: getDouble(tmp, "MaxPitchUp", PI/2.)));
+                globals->autoPilotCmds.setMaxPitchDown( UnitConvert::toRads( NodeUtil :: getDouble(tmp, "MaxPitchDown", -PI/2.)) );
                 kpitch = NodeUtil :: getDouble(tmp, "PitchWeight", 0);
                 
             }else if ( NodeUtil :: get( tmp, "Type", "" ) == "AutoThrottle" ) {
@@ -90,7 +82,7 @@ namespace SimpleFlight {
             globals->pqrdot.multiply(0);
             
             if ( globals->autoPilotCmds.isOrbitHoldOn() ) {
-                updateHdg(timestep, globals->eulers.getPsi() + M_PI/2. * UnitConvert::signum( globals->autoPilotCmds.getMaxBank() ) );
+                updateHdg(timestep, globals->eulers.getPsi() + PI/2. * UnitConvert::signum( globals->autoPilotCmds.getMaxBank() ) );
                 updateAlt(timestep );
                 
             }
@@ -130,7 +122,7 @@ namespace SimpleFlight {
         
         double phiCmd = kphi * hdgDiff * globals->vInf * maxBankRate;
         // bound phiCmd to -maxBank...maxBank
-        phiCmd = min( globals->autoPilotCmds.getMaxBank(), max(-globals->autoPilotCmds.getMaxBank(), phiCmd) );
+        phiCmd = std::min( globals->autoPilotCmds.getMaxBank(), max(-globals->autoPilotCmds.getMaxBank(), phiCmd) );
         
         // bound pCmd to -maxBankRate...maxBankRate
         double pCmd = min( maxBankRate, max(-maxBankRate, phiCmd - globals->eulers.getPhi()) );
@@ -232,4 +224,5 @@ namespace SimpleFlight {
         
         
     }
-} // namespace SimpleFlight
+
+}

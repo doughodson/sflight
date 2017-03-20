@@ -6,7 +6,7 @@
 
 using std::string;
 
-namespace SimpleFlight {
+namespace sf {
     
     
 class Table2D {    
@@ -53,6 +53,6 @@ class Table2D {
 
 };
 
-};
+}
 
 #endif

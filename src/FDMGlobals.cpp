@@ -1,4 +1,3 @@
-/* Global variables for use by the flight model */
 
 #include "FDMGlobals.hpp"
 
@@ -7,9 +6,9 @@
 #include "Quaternion.hpp"
 #include "Earth.hpp"
 #include "FDMModule.hpp"
-#include <stdlib.h>
-//#include <iostream>
+
 #include <string>
+
 #include "UnitConvert.hpp"
 #include "xml/NodeUtil.hpp"
 #include "UnitConvert.hpp"
@@ -20,7 +19,8 @@
 
 using namespace std;
 
-namespace SimpleFlight {
+namespace sf {
+
     FDMGlobals :: FDMGlobals() {
         
         this->lat = 0;

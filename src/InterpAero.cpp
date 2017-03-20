@@ -4,24 +4,17 @@
 #include "InterpAero.hpp"
 #include "UnitConvert.hpp"
 #include "Atmosphere.hpp"
-#include <iostream>
 #include "WindAxis.hpp"
 #include "Vector3.hpp"
 #include "xml/Node.hpp"
 #include "xml/NodeUtil.hpp"
+#include "constants.hpp"
 
-
-#ifdef _WIN32
-#define _USE_MATH_DEFINES
-#include <cmath>
-#else
-#include <math.h>
-#endif
-
+#include <iostream>
 
 using namespace std;
 
-namespace SimpleFlight {
+namespace sf {
     InterpAero :: InterpAero(FDMGlobals *globals, double frameRate) : FDMModule( globals, frameRate) {
         usingMachEffects = true;
     }
@@ -68,7 +61,7 @@ namespace SimpleFlight {
         wingSpan = UnitConvert :: toMeters( NodeUtil :: getDouble(tmp, "WingSpan", 6.0) );
         wingArea = UnitConvert :: toSqMeters( NodeUtil :: getDouble(tmp, "WingArea", 6.0) );
         
-        wingEffects = M_PI * wingSpan * wingSpan / wingArea;
+        wingEffects = PI * wingSpan * wingSpan / wingArea;
         //wingEffects = 1.0;
         
         thrustAngle = UnitConvert :: toRads( NodeUtil :: getDouble(tmp, "ThrustAngle", 0.0) );

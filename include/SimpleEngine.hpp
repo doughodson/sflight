@@ -5,7 +5,7 @@
 
 #include "FDMModule.hpp"
 
-namespace SimpleFlight {
+namespace sf {
     
     class SimpleEngine : public virtual FDMModule {
         
@@ -42,5 +42,6 @@ namespace SimpleFlight {
                 
     };
 
-}//namespace SimpleFlight
+}
+
 #endif

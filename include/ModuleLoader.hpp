@@ -6,7 +6,7 @@
 
 using std :: string;
 
-namespace SimpleFlight {
+namespace sf {
 
 	class Node;
 	class FDMGlobals;
