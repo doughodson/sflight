@@ -38,7 +38,7 @@ vcruntime*.dll
 *.exe
 
 # except for premake tool
-!premake4.exe
+!premake5-alpha11.exe
 
 # compiled object files
 *.[oa]
