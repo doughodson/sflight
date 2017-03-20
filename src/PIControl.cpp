@@ -84,8 +84,8 @@ double PIControl :: getOutput(double timestep, double desired_pt, double current
 
     du = kp * ( ep0 - ep1 + ts/ti * en );
 
-        if (!std::isfinite(du) || std::isnan(du))
-            du = 0.0;
+    if (!std::isinf(du) || std::isnan(du))
+        du = 0.0;
 
     // check for max and min conditions (to prevent integrator windup)
     if (u + du > max ) {

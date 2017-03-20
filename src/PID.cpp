@@ -103,14 +103,8 @@ double PID :: getOutput(double timestep, double desired_pt, double current_pt, d
     //System.out.println("edf: " + edf[0]);
 
     du = kp * ( ep[0] - ep[1] + (ts/ti * en) + td/ts * ( edf[0] - 2 * edf[1] + edf[2] ) );
-#ifdef _MSC_VER
-    //DBO changed for Visual C++
-    if (!std::isfinite(du) || std::isnan(du))
+    if (!std::isinf(du) || std::isnan(du))
        du = 0.0;
-#else
-    if ( isinf(du) || isnan(du) )
-        du = 0.0;
-#endif
 
     // check for max and min conditions (to prevent integrator windup)
     if (u + du > max )

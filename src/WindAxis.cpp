@@ -2,6 +2,7 @@
 
 #include "Vector3.hpp"
 #include "WindAxis.hpp"
+#include <cmath>
 
 namespace sf
 {
@@ -17,18 +18,18 @@ void WindAxis :: windToBody ( Vector3& ret, double alpha, double beta, double li
     lift = -lift;
     drag = -drag;
 
-    ret.set1(cos(alpha)*cos(beta) * drag - cos(alpha)*sin(beta)*sideforce - sin(alpha) * lift );
-    ret.set2( sin(beta)*drag + cos(beta)*sideforce );
-    ret.set3 ( sin(alpha)*cos(beta)*drag - sin(alpha)*sin(beta)*sideforce + cos(alpha)*lift );
+    ret.set1(std::cos(alpha) * std::cos(beta) * drag - std::cos(alpha) * std::sin(beta)*sideforce - std::sin(alpha) * lift );
+    ret.set2( std::sin(beta) * drag + std::cos(beta) * sideforce );
+    ret.set3 ( std::sin(alpha) * std::cos(beta)*drag - std::sin(alpha) * std::sin(beta) * sideforce + std::cos(alpha) * lift );
 
 }
 
 /** takes inputs of forces in the negative body axis directions and returns the lift, drag, and sideforce */
 void WindAxis :: bodyToWind ( Vector3& ret, double alpha, double beta, double fx, double fy, double fz)
 {
-    ret.set1( fx * sin(alpha)*cos(beta) - fy*sin(alpha)*sin(beta) - fz*cos(alpha) );
-    ret.set2(-fx * cos(alpha)*cos(beta) + fy*cos(alpha)*sin(beta) - fz*sin(alpha) );
-    ret.set3( fx * sin(beta) - fy * cos(beta) );
+    ret.set1( fx * std::sin(alpha) * std::cos(beta) - fy * std::sin(alpha) * std::sin(beta) - fz * std::cos(alpha) );
+    ret.set2(-fx * std::cos(alpha) * std::cos(beta) + fy * std::cos(alpha) * std::sin(beta) - fz * std::sin(alpha) );
+    ret.set3( fx * std::sin(beta) - fy * std::cos(beta) );
 }
 }
 

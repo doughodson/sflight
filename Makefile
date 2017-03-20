@@ -5,12 +5,13 @@ include makedefs
 # ------------------------------------------------------------------------
 # sf              : -
 #
-PROJECTS = sf
+PROJECTS = src
 
 # Examples        : Requires
 # ------------------------------------------------------------------------
 # mainTest        : libsf
 #
+PROJECTS += mainTest
 
 .PHONY: all clean $(PROJECTS)
 

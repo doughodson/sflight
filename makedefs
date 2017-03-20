@@ -12,7 +12,7 @@ CPPFLAGS += -g -O2
 # Modify standard flags
 # ---
 CPPFLAGS += -fPIC
-CPPFLAGS += -I$(OE_ROOT)/include -I$(OE_3RD_PARTY_ROOT)/include
+CPPFLAGS += -I../include
 CPPFLAGS += -pthread
 CPPFLAGS += -Wall
 #CPPFLAGS += -Wextra
@@ -27,3 +27,4 @@ CPPFLAGS += -std=c++11
 #CXX = g++
 #CXX = clang++
 
+LDFLAGS += -L../lib

@@ -55,7 +55,7 @@ PIDControl :: ~PIDControl() {}
 
         du = kp * ( ep0 - ep1 + ts/ti * en + td/ts * ( edf0 - 2 * edf1 + edf2 ) );
 
-        if (!std::isfinite(du) || std::isnan(du))
+        if (!std::isinf(du) || std::isnan(du))
             du = 0.0;
 
         // check for max and min conditions (to prevent integrator windup)
