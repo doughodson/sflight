@@ -12,15 +12,6 @@
 #include <iostream>
 #include <vector>
 
-
-#ifdef _WIN32
-#define _USE_MATH_DEFINES
-#include <cmath>
-#else
-#include <math.h>
-#endif
-
-
 using namespace std;
 
 namespace sf {
@@ -228,4 +219,4 @@ namespace sf {
         return ( staticTSFC + dTSFCdM * mach  ) * thrust;
     }
     
-} //namespace SimpleFlight
+}
