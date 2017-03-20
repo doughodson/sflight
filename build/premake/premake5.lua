@@ -56,7 +56,7 @@ workspace "simpleflight"
    -- simple application
    project "mainTest"
       kind "ConsoleApp"
-      targetname "mainCockpit"
+      targetname "mainTest"
       targetdir "../../mainTest"
       debugdir "../../mainTest"
       files {
