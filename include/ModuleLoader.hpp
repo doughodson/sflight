@@ -1,28 +1,21 @@
 
-#ifndef MODULE_LOADER_H
-#define MODULE_LOADER_H
+#ifndef __ModuleLoader_H__
+#define __ModuleLoader_H__
 
-#include <string>
+namespace sf
+{
+class Node;
+class FDMGlobals;
 
-using std :: string;
-
-namespace sf {
-
-	class Node;
-	class FDMGlobals;
-
-	class ModuleLoader {
-
-	public:
-
-		static void loadModules(Node* node, FDMGlobals *globals);
-
-
-	};
-
-
+//------------------------------------------------------------------------------
+// Class: ModuleLoader
+//------------------------------------------------------------------------------
+class ModuleLoader
+{
+ public:
+   static void loadModules(Node* node, FDMGlobals* globals);
+};
 
 }
-
 
 #endif

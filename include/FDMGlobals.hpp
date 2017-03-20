@@ -128,7 +128,7 @@ public:
     void initialize();
     void initialize(Node* node);
     void update(double timestep);
-    void setProperty(string tag, double val);
+    void setProperty(std::string tag, double val);
 };
 
 }

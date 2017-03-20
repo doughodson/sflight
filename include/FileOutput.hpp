@@ -2,36 +2,34 @@
 #ifndef FileOutput_H
 #define FileOutput_H
 
-#include <fstream>
 #include "FDMModule.hpp"
+#include <fstream>
 
 namespace sf
 {
-
 class FDMGlobals;
 class Node;
 
+//------------------------------------------------------------------------------
+// Class: FileOutput
+//------------------------------------------------------------------------------
 class FileOutput : public virtual FDMModule
 {
 public:
+   FileOutput(FDMGlobals* globals, double frameRate);
+   ~FileOutput();
 
-      // functions from FDMModule
-        void initialize(Node* node);
-        void update( double timestep );
+   virtual void initialize(Node* node) override;
+   virtual void update(double timestep) override;
 
-      FileOutput(FDMGlobals *globals, double frameRate);
-        //FileOutput(FDMGlobals *globals, char* filename, int skipFrames);
-        ~FileOutput();
+   void update();
+   void close();
 
-        void update();
-        void close();
-
-        //FDMGlobals *globals;
-        std::ofstream fout;
-        int rate;
-      double lastTime;
-        int frameCounter;
-
+   //FDMGlobals *globals;
+   std::ofstream fout;
+   int rate {};
+   double lastTime {};
+   int frameCounter {};
 };
 
 }
