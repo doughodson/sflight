@@ -47,5 +47,5 @@ vcruntime*.dll
 *.bak
 
 # linux executables
-mainTest/mainTest
+examples/mainTest/mainTest
 
