@@ -2,9 +2,8 @@
 #ifndef _SimTimer_H
 #define _SimTimer_H
 
+namespace sf {
 namespace xml { class Node; }
-namespace sf
-{
 class FDMGlobals;
 
 //------------------------------------------------------------------------------

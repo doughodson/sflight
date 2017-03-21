@@ -9,9 +9,8 @@
 #define TURNTYPE_HDG 0
 #define TURNTYPE_TRAJECTORY 1
 
+namespace sf {
 namespace xml { class Node; }
-namespace sf
-{
 
 //------------------------------------------------------------------------------
 // Class: SimpleAutoPilot

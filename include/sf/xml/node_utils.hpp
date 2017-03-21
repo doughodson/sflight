@@ -7,6 +7,7 @@
 #include <string>
 #include <vector>
 
+namespace sf {
 namespace xml {
 
 //
@@ -24,7 +25,7 @@ double getDouble(Node* node, std::string pathName, double defaultVal);
 bool getBool(Node* node, std::string pathName, bool defaultVal);
 std::vector<std::string> splitString(std::string instr, char splitChar);
 
-
+}
 }
 
 #endif

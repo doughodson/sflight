@@ -7,9 +7,8 @@
 
 #include <vector>
 
+namespace sf {
 namespace xml { class Node; }
-namespace sf
-{
 
 //------------------------------------------------------------------------------
 // Class: Waypoint

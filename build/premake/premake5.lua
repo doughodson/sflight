@@ -47,7 +47,7 @@ workspace "simpleflight"
    project "sf_xml"
       kind "StaticLib"
       files {
-         "../../include/xml/**.h*",
+         "../../include/sf/xml/**.h*",
          "../../src/xml/**.cpp"
       }
       targetdir ("../../lib/")
@@ -57,7 +57,7 @@ workspace "simpleflight"
    project "sf_fdm"
       kind "StaticLib"
       files {
-         "../../include/fdm/**.h*",
+         "../../include/sf/fdm/**.h*",
          "../../src/fdm/**.cpp"
       }
       targetdir ("../../lib/")

@@ -12,8 +12,8 @@
 
 #include <vector>
 
-namespace xml { class Node; }
 namespace sf {
+namespace xml { class Node; }
 class FDMModule;
 
 //------------------------------------------------------------------------------

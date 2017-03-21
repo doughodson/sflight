@@ -6,8 +6,8 @@
 #include <map>
 #include <string>
 
-namespace xml
-{
+namespace sf {
+namespace xml {
 
 //------------------------------------------------------------------------------
 // Class: Node
@@ -60,11 +60,11 @@ class Node
    std::string name;
    std::string text;
    std::map<std::string, std::string> attrMap;
-   std::vector<
-   Node*> childList {};
+   std::vector<Node*> childList {};
 
    Node* parentNode {};
 };
+}
 }
 
 #endif

@@ -7,6 +7,7 @@
 #include <iostream>
 #include <string>
 
+namespace sf {
 namespace xml {
 
 Node* parse (std::istream &reader, bool treatAttributesAsChildren);
@@ -20,6 +21,7 @@ std::string putAttributes(std::string str, Node* node, bool treatAsChildren);
 bool startsWith(std::string str, std::string search);
 bool endsWith(std::string str, std::string search);
 
+}
 }
 
 #endif

@@ -5,8 +5,8 @@
 #include <iterator>
 #include <iostream>
 
-namespace xml
-{
+namespace sf {
+namespace xml {
 
 Node::Node(std::string tagName)
 {
@@ -254,5 +254,6 @@ std::string Node::toString() const
    +"\n";
    delete[] attrNames;
    return ret;
+}
 }
 }

@@ -4,9 +4,8 @@
 
 #include "sf/fdm/modules/FDMModule.hpp"
 
+namespace sf {
 namespace xml { class Node; }
-namespace sf
-{
 class Table3D;
 class FDMGlobals;
 

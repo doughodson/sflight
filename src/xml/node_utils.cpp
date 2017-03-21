@@ -10,8 +10,8 @@
 #include <cmath>
 #include <cctype>
 
-namespace xml
-{
+namespace sf {
+namespace xml {
 
 // returns a list of nodes that contain the childName
 std::vector<Node*> getList(Node *parent, std::string childName)
@@ -153,5 +153,6 @@ std::vector<std::string> splitString(std::string inStr, char splitChar)
    }
 
    return retV;
+}
 }
 }

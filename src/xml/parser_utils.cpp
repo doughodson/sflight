@@ -6,8 +6,8 @@
 #include <iostream>
 #include <string>
 
-namespace xml
-{
+namespace sf {
+namespace xml {
 
 Node* parse(std::string filename, bool treatAttributesAsChildren)
 {
@@ -270,5 +270,6 @@ bool endsWith(std::string str, std::string search)
 {
    int searchLimit = str.length() - search.length();
    return (str.rfind(search, searchLimit) == searchLimit);
+}
 }
 }

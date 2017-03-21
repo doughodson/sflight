@@ -6,9 +6,8 @@
 
 #include <fstream>
 
+namespace sf {
 namespace xml { class Node; }
-namespace sf
-{
 class FDMGlobals;
 
 //------------------------------------------------------------------------------

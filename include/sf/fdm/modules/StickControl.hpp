@@ -8,9 +8,8 @@
 
 #include "sf/xml/Node.hpp"
 
+namespace sf {
 namespace xml { class Node; }
-namespace sf
-{
 
 //------------------------------------------------------------------------------
 // Class: StickControl

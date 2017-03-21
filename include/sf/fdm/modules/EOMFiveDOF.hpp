@@ -7,8 +7,8 @@
 #include "sf/fdm/Quaternion.hpp"
 #include "sf/fdm/Vector3.hpp"
 
-namespace xml { class Node; }
 namespace sf {
+namespace xml { class Node; }
 class FDMGlobals;
 
 //------------------------------------------------------------------------------
