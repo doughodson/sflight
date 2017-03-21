@@ -1,6 +1,6 @@
 
-#include "fdm/Quaternion.hpp"
-#include "fdm/Euler.hpp"
+#include "sf/fdm/Quaternion.hpp"
+#include "sf/fdm/Euler.hpp"
 
 #include <iostream>
 #include <cmath>

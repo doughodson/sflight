@@ -1,17 +1,17 @@
 
-#include "fdm/modules/TableAero.hpp"
+#include "sf/fdm/modules/TableAero.hpp"
 
-#include "fdm/modules/Atmosphere.hpp"
+#include "sf/fdm/modules/Atmosphere.hpp"
 
-#include "xml/Node.hpp"
-#include "xml/node_utils.hpp"
+#include "sf/xml/Node.hpp"
+#include "sf/xml/node_utils.hpp"
 
-#include "fdm/FDMGlobals.hpp"
-#include "fdm/UnitConvert.hpp"
-#include "fdm/WindAxis.hpp"
-#include "fdm/Vector3.hpp"
-#include "fdm/Table3D.hpp"
-#include "fdm/Table2D.hpp"
+#include "sf/fdm/FDMGlobals.hpp"
+#include "sf/fdm/UnitConvert.hpp"
+#include "sf/fdm/WindAxis.hpp"
+#include "sf/fdm/Vector3.hpp"
+#include "sf/fdm/Table3D.hpp"
+#include "sf/fdm/Table2D.hpp"
 
 #include <iostream>
 #include <cmath>

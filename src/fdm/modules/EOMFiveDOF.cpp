@@ -1,16 +1,16 @@
 
-#include "fdm/modules/EOMFiveDOF.hpp"
+#include "sf/fdm/modules/EOMFiveDOF.hpp"
 
-#include "fdm/modules/Atmosphere.hpp"
+#include "sf/fdm/modules/Atmosphere.hpp"
 
-#include "fdm/FDMGlobals.hpp"
-#include "fdm/Earth.hpp"
-#include "fdm/Vector3.hpp"
-#include "fdm/Euler.hpp"
-#include "fdm/Quaternion.hpp"
+#include "sf/fdm/FDMGlobals.hpp"
+#include "sf/fdm/Earth.hpp"
+#include "sf/fdm/Vector3.hpp"
+#include "sf/fdm/Euler.hpp"
+#include "sf/fdm/Quaternion.hpp"
 
-#include "xml/Node.hpp"
-#include "xml/node_utils.hpp"
+#include "sf/xml/Node.hpp"
+#include "sf/xml/node_utils.hpp"
 
 #include <iostream>
 #include <cmath>

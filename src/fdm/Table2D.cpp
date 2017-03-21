@@ -1,7 +1,7 @@
 
-#include "fdm/Table2D.hpp"
+#include "sf/fdm/Table2D.hpp"
 
-#include "xml/node_utils.hpp"
+#include "sf/xml/node_utils.hpp"
 
 #include <string>
 #include <iostream>

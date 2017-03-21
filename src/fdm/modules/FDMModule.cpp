@@ -1,7 +1,7 @@
 
-#include "fdm/modules/FDMModule.hpp"
+#include "sf/fdm/modules/FDMModule.hpp"
 
-#include "fdm/FDMGlobals.hpp"
+#include "sf/fdm/FDMGlobals.hpp"
 
 namespace sf
 {

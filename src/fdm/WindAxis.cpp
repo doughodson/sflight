@@ -1,7 +1,7 @@
 
 
-#include "fdm/Vector3.hpp"
-#include "fdm/WindAxis.hpp"
+#include "sf/fdm/Vector3.hpp"
+#include "sf/fdm/WindAxis.hpp"
 
 #include <cmath>
 

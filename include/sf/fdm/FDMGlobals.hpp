@@ -2,13 +2,13 @@
 #ifndef __FDMGlobals_H__
 #define __FDMGlobals_H__
 
-#include "xml/Node.hpp"
+#include "sf/xml/Node.hpp"
 
-#include "fdm/Earth.hpp"
-#include "fdm/Euler.hpp"
-#include "fdm/Quaternion.hpp"
-#include "fdm/Vector3.hpp"
-#include "fdm/AutoPilotCmds.hpp"
+#include "sf/fdm/Earth.hpp"
+#include "sf/fdm/Euler.hpp"
+#include "sf/fdm/Quaternion.hpp"
+#include "sf/fdm/Vector3.hpp"
+#include "sf/fdm/AutoPilotCmds.hpp"
 
 #include <vector>
 

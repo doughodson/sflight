@@ -2,10 +2,10 @@
 #ifndef __EOMFiveDOF_H__
 #define __EOMFiveDOF_H__
 
-#include "fdm/modules/FDMModule.hpp"
+#include "sf/fdm/modules/FDMModule.hpp"
 
-#include "fdm/Quaternion.hpp"
-#include "fdm/Vector3.hpp"
+#include "sf/fdm/Quaternion.hpp"
+#include "sf/fdm/Vector3.hpp"
 
 namespace xml { class Node; }
 namespace sf {

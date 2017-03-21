@@ -2,7 +2,7 @@
 #ifndef __xml_parser_utils_H__
 #define __xml_parser_utils_H__
 
-#include "xml/Node.hpp"
+#include "sf/xml/Node.hpp"
 
 #include <iostream>
 #include <string>

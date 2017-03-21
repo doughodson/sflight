@@ -2,10 +2,9 @@
 #ifndef FileOutput_H
 #define FileOutput_H
 
-#include "fdm/modules/FDMModule.hpp"
+#include "sf/fdm/modules/FDMModule.hpp"
 
 #include <fstream>
-
 
 namespace xml { class Node; }
 namespace sf

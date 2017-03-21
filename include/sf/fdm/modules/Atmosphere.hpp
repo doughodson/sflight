@@ -2,7 +2,7 @@
 #ifndef __Atmosphere_H__
 #define __Atmosphere_H__
 
-#include "fdm/modules/FDMModule.hpp"
+#include "sf/fdm/modules/FDMModule.hpp"
 
 namespace sf {
 

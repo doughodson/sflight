@@ -2,7 +2,7 @@
 #ifndef __InverseDesign_H__
 #define __InverseDesign_H__
 
-#include "fdm/modules/FDMModule.hpp"
+#include "sf/fdm/modules/FDMModule.hpp"
 
 namespace xml { class Node; }
 namespace sf

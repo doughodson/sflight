@@ -2,11 +2,11 @@
 #ifndef _StickControl_H
 #define _StickControl_H
 
-#include "fdm/modules/FDMModule.hpp"
+#include "sf/fdm/modules/FDMModule.hpp"
 
-#include "fdm/Vector3.hpp"
+#include "sf/fdm/Vector3.hpp"
 
-#include "xml/Node.hpp"
+#include "sf/xml/Node.hpp"
 
 namespace xml { class Node; }
 namespace sf

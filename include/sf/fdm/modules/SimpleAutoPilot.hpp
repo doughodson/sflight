@@ -2,9 +2,9 @@
 #ifndef __AutoPilot_H__
 #define __AutoPilot_H__
 
-#include "fdm/modules/FDMModule.hpp"
+#include "sf/fdm/modules/FDMModule.hpp"
 
-#include "xml/Node.hpp"
+#include "sf/xml/Node.hpp"
 
 #define TURNTYPE_HDG 0
 #define TURNTYPE_TRAJECTORY 1

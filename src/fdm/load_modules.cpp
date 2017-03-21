@@ -1,19 +1,19 @@
 
-#include "fdm/load_modules.hpp"
+#include "sf/fdm/load_modules.hpp"
 
-#include "xml/Node.hpp"
-#include "xml/node_utils.hpp"
+#include "sf/xml/Node.hpp"
+#include "sf/xml/node_utils.hpp"
 
-#include "fdm/modules/Atmosphere.hpp"
-#include "fdm/modules/EOMFiveDOF.hpp"
-#include "fdm/modules/FileOutput.hpp"
-#include "fdm/modules/InterpAero.hpp"
-#include "fdm/modules/InverseDesign.hpp"
-#include "fdm/modules/SimpleAutoPilot.hpp"
-#include "fdm/modules/SimpleEngine.hpp"
-#include "fdm/modules/StickControl.hpp"
-#include "fdm/modules/TableAero.hpp"
-#include "fdm/modules/WaypointFollower.hpp"
+#include "sf/fdm/modules/Atmosphere.hpp"
+#include "sf/fdm/modules/EOMFiveDOF.hpp"
+#include "sf/fdm/modules/FileOutput.hpp"
+#include "sf/fdm/modules/InterpAero.hpp"
+#include "sf/fdm/modules/InverseDesign.hpp"
+#include "sf/fdm/modules/SimpleAutoPilot.hpp"
+#include "sf/fdm/modules/SimpleEngine.hpp"
+#include "sf/fdm/modules/StickControl.hpp"
+#include "sf/fdm/modules/TableAero.hpp"
+#include "sf/fdm/modules/WaypointFollower.hpp"
 
 #include <string>
 #include <vector>

@@ -1,10 +1,10 @@
 
-#include "fdm/SimTimer.hpp"
+#include "sf/fdm/SimTimer.hpp"
 
-#include "xml/Node.hpp"
-#include "xml/node_utils.hpp"
+#include "sf/xml/Node.hpp"
+#include "sf/xml/node_utils.hpp"
 
-#include "fdm/FDMGlobals.hpp"
+#include "sf/fdm/FDMGlobals.hpp"
 
 #include <iostream>
 

@@ -1,7 +1,7 @@
 
-#include "fdm/Euler.hpp"
+#include "sf/fdm/Euler.hpp"
 
-#include "fdm/Vector3.hpp"
+#include "sf/fdm/Vector3.hpp"
 
 #include <cmath>
 

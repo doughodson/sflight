@@ -1,7 +1,7 @@
 
-#include "fdm/modules/Atmosphere.hpp"
+#include "sf/fdm/modules/Atmosphere.hpp"
 
-#include "fdm/FDMGlobals.hpp"
+#include "sf/fdm/FDMGlobals.hpp"
 
 #include <cmath>
 

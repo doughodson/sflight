@@ -1,8 +1,8 @@
 
-#include "fdm/Vector3.hpp"
+#include "sf/fdm/Vector3.hpp"
 
-#include "fdm/Earth.hpp"
-#include "fdm/UnitConvert.hpp"
+#include "sf/fdm/Earth.hpp"
+#include "sf/fdm/UnitConvert.hpp"
 
 namespace sf
 {

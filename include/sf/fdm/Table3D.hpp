@@ -2,7 +2,7 @@
 #ifndef __Table3D_H__
 #define __Table3D_H__
 
-#include "fdm/Table2D.hpp"
+#include "sf/fdm/Table2D.hpp"
 
 namespace sf
 {

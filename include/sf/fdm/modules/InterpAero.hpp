@@ -2,7 +2,7 @@
 #ifndef __InterpAero_H__
 #define __InterpAero_H__
 
-#include "fdm/modules/FDMModule.hpp"
+#include "sf/fdm/modules/FDMModule.hpp"
 
 namespace xml { class Node; }
 namespace sf

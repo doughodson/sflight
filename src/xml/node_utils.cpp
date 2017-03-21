@@ -1,8 +1,8 @@
 
-#include "xml/node_utils.hpp"
+#include "sf/xml/node_utils.hpp"
 
-#include "xml/Node.hpp"
-#include "xml/parser_utils.hpp"
+#include "sf/xml/Node.hpp"
+#include "sf/xml/parser_utils.hpp"
 
 #include <vector>
 #include <string>

@@ -1,14 +1,14 @@
 
-#include "fdm/modules/SimpleEngine.hpp"
+#include "sf/fdm/modules/SimpleEngine.hpp"
 
-#include "fdm/modules/Atmosphere.hpp"
+#include "sf/fdm/modules/Atmosphere.hpp"
 
-#include "xml/Node.hpp"
-#include "xml/node_utils.hpp"
+#include "sf/xml/Node.hpp"
+#include "sf/xml/node_utils.hpp"
 
-#include "fdm/FDMGlobals.hpp"
-#include "fdm/UnitConvert.hpp"
-#include "fdm/Earth.hpp"
+#include "sf/fdm/FDMGlobals.hpp"
+#include "sf/fdm/UnitConvert.hpp"
+#include "sf/fdm/Earth.hpp"
 
 #include <iostream>
 #include <vector>

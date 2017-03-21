@@ -1,6 +1,6 @@
 
-#include "fdm/AutoPilotCmds.hpp"
-#include "fdm/UnitConvert.hpp"
+#include "sf/fdm/AutoPilotCmds.hpp"
+#include "sf/fdm/UnitConvert.hpp"
 
 namespace sf {
 

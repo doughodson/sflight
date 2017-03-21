@@ -1,10 +1,10 @@
 
-#include "xml/Node.hpp"
-#include "xml/parser_utils.hpp"
+#include "sf/xml/Node.hpp"
+#include "sf/xml/parser_utils.hpp"
 
-#include "fdm/FDMGlobals.hpp"
-#include "fdm/SimTimer.hpp"
-#include "fdm/load_modules.hpp"
+#include "sf/fdm/FDMGlobals.hpp"
+#include "sf/fdm/SimTimer.hpp"
+#include "sf/fdm/load_modules.hpp"
 
 #include <cstdlib>
 #include <iostream>

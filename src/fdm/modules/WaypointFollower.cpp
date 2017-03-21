@@ -1,14 +1,14 @@
 
-#include "fdm/modules/WaypointFollower.hpp"
+#include "sf/fdm/modules/WaypointFollower.hpp"
 
-#include "xml/Node.hpp"
-#include "xml/node_utils.hpp"
+#include "sf/xml/Node.hpp"
+#include "sf/xml/node_utils.hpp"
 
-#include "fdm/FDMGlobals.hpp"
-#include "fdm/Earth.hpp"
-#include "fdm/UnitConvert.hpp"
-#include "fdm/constants.hpp"
-#include "fdm/UnitConvert.hpp"
+#include "sf/fdm/FDMGlobals.hpp"
+#include "sf/fdm/Earth.hpp"
+#include "sf/fdm/UnitConvert.hpp"
+#include "sf/fdm/constants.hpp"
+#include "sf/fdm/UnitConvert.hpp"
 
 #include <iostream>
 #include <cmath>

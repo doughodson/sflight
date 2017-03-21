@@ -2,7 +2,7 @@
 #ifndef __PIDConttol_H__
 #define __PIDConttol_H__
 
-#include "fdm/PIControl.hpp"
+#include "sf/fdm/PIControl.hpp"
 
 namespace sf
 {

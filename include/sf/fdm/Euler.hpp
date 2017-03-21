@@ -2,7 +2,7 @@
 #ifndef __Euler_H__
 #define __Euler_H__
 
-#include "fdm/Vector3.hpp"
+#include "sf/fdm/Vector3.hpp"
 
 namespace sf
 {

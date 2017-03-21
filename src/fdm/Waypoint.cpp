@@ -1,5 +1,5 @@
 
-#include "fdm/Waypoint.hpp"
+#include "sf/fdm/Waypoint.hpp"
 
 namespace sf
 {

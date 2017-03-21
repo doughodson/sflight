@@ -1,5 +1,5 @@
 
-#include "xml/Node.hpp"
+#include "sf/xml/Node.hpp"
 
 #include <algorithm>
 #include <iterator>

@@ -1,5 +1,5 @@
 
-#include "fdm/Table3D.hpp"
+#include "sf/fdm/Table3D.hpp"
 
 #include <iostream>
 

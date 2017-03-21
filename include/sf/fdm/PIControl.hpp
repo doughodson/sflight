@@ -1,9 +1,6 @@
 
-// this is taken from a Flightgear help page as a simple PIDControl algorithm. The original source is not cited.
-// it is identical to the PID controller with differential control removed
-
-#ifndef PICONTROL_H
-#define PICONTROL_H
+#ifndef __PIControl_H__
+#define __PIControl_H__
 
 namespace sf
 {
