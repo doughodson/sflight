@@ -3,9 +3,11 @@ include makedefs
 
 # Library         : Requires
 # ------------------------------------------------------------------------
+# xml             :
 # sf              : -
 #
-PROJECTS = src
+PROJECTS = src/xml
+PROJECTS += src
 
 # Examples        : Requires
 # ------------------------------------------------------------------------

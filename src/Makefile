@@ -15,9 +15,6 @@ OBJS =  \
 	modules/StickControl.o \
 	modules/TableAero.o \
 	modules/WaypointFollower.o \
-	xml/Node.o \
-	xml/node_utils.o \
-	xml/parser_utils.o \
 	AutoPilotCmds.o \
 	Earth.o \
 	Euler.o \
@@ -43,6 +40,5 @@ $(LIB) : $(OBJS)
 
 clean:
 	-rm -f modules/*.o
-	-rm -f xml/*.o
 	-rm -f *.o
 	-rm -f $(LIB)

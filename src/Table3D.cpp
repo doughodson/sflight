@@ -7,7 +7,7 @@ namespace sf
 {
 
 Table3D::Table3D(const int numPages, double pageVals[])
-    : numPages(numPages), pageVals(pageVals)
+    : pageVals(pageVals), numPages(numPages)
 {
    data = new Table2D*[numPages];
 }

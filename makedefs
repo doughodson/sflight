@@ -13,6 +13,7 @@ CPPFLAGS += -g -O2
 # ---
 CPPFLAGS += -fPIC
 CPPFLAGS += -I../include
+CPPFLAGS += -I../../include
 CPPFLAGS += -pthread
 CPPFLAGS += -Wall
 #CPPFLAGS += -Wextra
