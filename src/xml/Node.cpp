@@ -10,13 +10,13 @@ namespace sf
 
 Node::Node(std::string tagName)
 {
-   this->name = tagName;
+   name = tagName;
 }
 
 Node::Node(std::string tagName, std::string text)
 {
-   this->name = tagName;
-   this->text = text;
+   name = tagName;
+   text = text;
 }
 
 Node::Node(Node &node)
@@ -59,7 +59,7 @@ std::string Node::getTagName()
 
 void Node::setTagName(std::string name)
 {
-   this->name = name;
+   name = name;
 }
 
 Node *Node::addChild(std::string tagName)
@@ -88,11 +88,11 @@ Node *Node::getChild(int index)
    return 0;
 }
 
-/**
-     * Returns the first child encountered with specified name, or null
-     * if none is found.  To find a nested child, specify the childname
-     * as tags separated by "/"
-     */
+//
+// Returns the first child encountered with specified name, or null
+// if none is found.  To find a nested child, specify the childname
+// as tags separated by "/"
+//
 Node *Node::getChild(std::string childName)
 {
    Node *tmp = this;
@@ -119,10 +119,10 @@ Node *Node::getChild(std::string childName)
    return nullptr;
 }
 
-/**
-     * Returns a vector containing all children encountered with specified name, or null
-     * if none are found.
-     */
+//
+// Returns a vector containing all children encountered with specified name, or null
+// if none are found.
+//
 std::vector<Node *> Node::getChildren(std::string childName)
 {
 
@@ -190,27 +190,27 @@ void Node::getAttributeNames(std::string *storeArray)
 int Node::getAttributeCount()
 {
 
-   return this->attrMap.size();
+   return attrMap.size();
 }
 
 std::string Node::getText()
 {
-   return this->text;
+   return text;
 }
 
 void Node::setText(std::string text)
 {
-   this->text = text;
+   text = text;
 }
 
 Node *Node::getParent()
 {
-   return this->parentNode;
+   return parentNode;
 }
 
 void Node::setParent(Node *parentNode)
 {
-   this->parentNode = parentNode;
+   parentNode = parentNode;
 }
 
 bool Node::remove(Node *node)

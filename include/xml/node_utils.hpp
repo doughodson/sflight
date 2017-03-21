@@ -2,7 +2,7 @@
 #ifndef __node_utils_H__
 #define __node_utils_H__
 
-#include "Node.hpp"
+#include "xml/Node.hpp"
 
 #include <string>
 #include <vector>

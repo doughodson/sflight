@@ -2,7 +2,7 @@
 #ifndef __XMLParser_H__
 #define __XMLParser_H__
 
-#include "Node.hpp"
+#include "xml/Node.hpp"
 
 #include <iostream>
 

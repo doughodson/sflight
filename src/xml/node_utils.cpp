@@ -12,7 +12,7 @@
 namespace sf
 {
 
-/** returns a list of nodes that contain the childName */
+// returns a list of nodes that contain the childName
 std::vector<Node *> getList(Node *parent, std::string childName)
 {
 
@@ -132,7 +132,7 @@ std::vector<std::string> splitString(std::string inStr, char splitChar)
    while (i < len)
    {
 
-      //trim leading delimeters
+      // trim leading delimeters
       while (i < len && (charStr[i] == splitChar || XMLParser::isWhitespace(charStr[i])))
       {
          i++;

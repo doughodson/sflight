@@ -161,9 +161,9 @@ std::string XMLParser::readChunk(std::istream &r)
             }
             return "";
          }
-         if (!isWhitespace((char)ch) || buf.length() > 0)
+         if (!isWhitespace(static_cast<char>(ch)) || buf.length() > 0)
          {
-            buf += (char)ch;
+            buf += static_cast<char>(ch);
          }
          ch = r.get();
       }
@@ -220,7 +220,6 @@ std::string XMLParser::putAttributes(std::string str, Node *node, bool treatAsCh
    {
       while (str.length() > 0)
       {
-
          while (isWhitespace(str[0]))
          {
             str = str.substr(1, str.length() - 1);
@@ -236,8 +235,8 @@ std::string XMLParser::putAttributes(std::string str, Node *node, bool treatAsCh
          std::string name = str.substr(0, nameEnd);
          std::string attr = str.substr(nameEnd + 2, attrEnd - nameEnd - 2);
 
-         //subChars( name );
-         //subChars( attr );
+         // subChars( name );
+         // subChars( attr );
          if (treatAsChildren)
          {
             Node *tmp = node->addChild(name);
