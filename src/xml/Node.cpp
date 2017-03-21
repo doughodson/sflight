@@ -19,25 +19,25 @@ Node::Node(std::string tagName, std::string text)
    text = text;
 }
 
-Node::Node(Node &node)
+Node::Node(const Node& src)
 {
-   name = node.getTagName();
-   text = node.getText();
+   name = src.getTagName();
+   text = src.getText();
 
-   int cnt = node.getAttributeCount();
+   int cnt = src.getAttributeCount();
    std::string *arry = new std::string[cnt];
-   node.getAttributeNames(arry);
+   src.getAttributeNames(arry);
 
    for (int i = 0; i < cnt; i++)
    {
-      putAttribute(arry[i], node.getAttribute(arry[i]));
+      putAttribute(arry[i], src.getAttribute(arry[i]));
    }
 
-   cnt = node.getChildCount();
+   cnt = src.getChildCount();
 
    for (int i = 0; i < cnt; i++)
    {
-      Node *tmp = new Node(*node.getChild(i));
+      Node *tmp = new Node(*src.getChild(i));
       addChild(tmp);
    }
 
@@ -52,9 +52,9 @@ Node::~Node()
    }
 }
 
-std::string Node::getTagName()
+std::string Node::getTagName() const
 {
-   return this->name;
+   return name;
 }
 
 void Node::setTagName(std::string name)
@@ -75,12 +75,12 @@ Node *Node::addChild(Node *child)
    return child;
 }
 
-int Node::getChildCount()
+int Node::getChildCount() const
 {
    return childList.size();
 }
 
-Node *Node::getChild(int index)
+Node *Node::getChild(int index) const
 {
    if (index < getChildCount())
       return childList[index];
@@ -93,11 +93,11 @@ Node *Node::getChild(int index)
 // if none is found.  To find a nested child, specify the childname
 // as tags separated by "/"
 //
-Node *Node::getChild(std::string childName)
+Node *Node::getChild(std::string childName) const
 {
-   Node *tmp = this;
+   const Node *tmp = this;
 
-   int splitPt = childName.find_first_of("/");
+   const int splitPt = childName.find_first_of("/");
    std::string tail = "";
 
    if (splitPt != std::string::npos)
@@ -123,14 +123,13 @@ Node *Node::getChild(std::string childName)
 // Returns a vector containing all children encountered with specified name, or null
 // if none are found.
 //
-std::vector<Node *> Node::getChildren(std::string childName)
+std::vector<Node*> Node::getChildren(std::string childName) const
 {
+   std::vector<Node*> list;
 
-   std::vector<Node *> list;
+   const Node *tmp = this;
 
-   Node *tmp = this;
-
-   int splitPt = childName.find_first_of("/");
+   const int splitPt = childName.find_first_of("/");
    std::string tail = "";
 
    if (splitPt != std::string::npos)
@@ -166,16 +165,16 @@ void Node::putAttribute(std::string name, std::string val)
    attrMap.insert(std::pair<std::string, std::string>(name, val));
 }
 
-std::string Node::getAttribute(std::string name)
+std::string Node::getAttribute(const std::string name) const
 {
    if (attrMap.count(name) == 1)
    {
-      return attrMap[name];
+      return attrMap.at(name);
    }
    return 0;
 }
 
-void Node::getAttributeNames(std::string *storeArray)
+void Node::getAttributeNames(std::string *storeArray) const
 {
    std::map<std::string, std::string>::const_iterator iter;
    int i = 0;
@@ -187,30 +186,29 @@ void Node::getAttributeNames(std::string *storeArray)
    }
 }
 
-int Node::getAttributeCount()
+int Node::getAttributeCount() const
 {
-
    return attrMap.size();
 }
 
-std::string Node::getText()
+std::string Node::getText() const
 {
    return text;
 }
 
-void Node::setText(std::string text)
+void Node::setText(const std::string x)
 {
-   text = text;
+   text = x;
 }
 
-Node *Node::getParent()
+Node *Node::getParent() const
 {
    return parentNode;
 }
 
-void Node::setParent(Node *parentNode)
+void Node::setParent(Node *x)
 {
-   parentNode = parentNode;
+   parentNode = x;
 }
 
 bool Node::remove(Node *node)
@@ -229,7 +227,7 @@ bool Node::remove(Node *node)
    return false;
 }
 
-std::string Node::toString()
+std::string Node::toString() const
 {
    std::string ret = "<" + getTagName() + " ";
    std::string *attrNames = new std::string[getAttributeCount()];

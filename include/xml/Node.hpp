@@ -4,7 +4,6 @@
 
 #include <vector>
 #include <map>
-#include <iostream>
 #include <string>
 
 namespace xml
@@ -19,41 +18,41 @@ class Node
    Node() = default;
    Node(std::string tagName);
    Node(std::string name, std::string text);
-   Node(Node &);
+   Node(const Node&);
    virtual ~Node();
 
-   std::string getTagName();
+   std::string getTagName() const;
    void setTagName(std::string name);
 
    Node *addChild(std::string tagName);
 
    Node *addChild(Node *child);
 
-   int getChildCount();
+   int getChildCount() const;
 
-   Node *getChild(std::string childName);
+   Node *getChild(std::string childName) const;
 
-   std::vector<Node *> getChildren(std::string childName);
+   std::vector<Node*> getChildren(std::string childName) const;
 
-   Node *getChild(int index);
+   Node *getChild(int index) const;
 
    void putAttribute(std::string name, std::string val);
 
-   std::string getAttribute(std::string name);
+   std::string getAttribute(const std::string name) const;
 
-   void getAttributeNames(std::string *storeArray);
+   void getAttributeNames(std::string *storeArray) const;
 
-   int getAttributeCount();
+   int getAttributeCount() const;
 
-   std::string getText();
+   std::string getText() const;
 
-   void setText(std::string text);
+   void setText(const std::string text);
 
-   Node *getParent();
+   Node *getParent() const;
 
-   void setParent(Node *parentNode);
+   void setParent(Node *);
 
-   std::string toString();
+   std::string toString() const;
 
    bool remove(Node *node);
 
@@ -61,7 +60,8 @@ class Node
    std::string name;
    std::string text;
    std::map<std::string, std::string> attrMap;
-   std::vector<Node*> childList {};
+   std::vector<
+   Node*> childList {};
 
    Node* parentNode {};
 };

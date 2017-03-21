@@ -10,6 +10,7 @@
 #include "constants.hpp"
 #include "UnitConvert.hpp"
 
+#include <iostream>
 #include <cmath>
 
 namespace sf
