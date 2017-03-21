@@ -6,7 +6,7 @@
 
 #include <iostream>
 
-namespace sf {
+namespace xml {
 
 //------------------------------------------------------------------------------
 // Class: XMLParser
@@ -14,8 +14,8 @@ namespace sf {
 class XMLParser
 {
 public:
-   XMLParser();
-   ~XMLParser();
+   XMLParser() = default;
+   virtual ~XMLParser() = default;
 
    static Node* parse (std::istream &reader, bool treatAttributesAsChildren);
    static Node* parse (std::string filename, bool treatAttributesAsChildren);

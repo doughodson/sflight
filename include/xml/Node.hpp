@@ -7,7 +7,7 @@
 #include <iostream>
 #include <string>
 
-namespace sf
+namespace xml
 {
 
 //------------------------------------------------------------------------------
@@ -20,7 +20,7 @@ class Node
    Node(std::string tagName);
    Node(std::string name, std::string text);
    Node(Node &);
-   ~Node();
+   virtual ~Node();
 
    std::string getTagName();
    void setTagName(std::string name);

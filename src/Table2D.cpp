@@ -1,5 +1,6 @@
 
 #include "Table2D.hpp"
+
 #include "xml/node_utils.hpp"
 
 #include <string>
@@ -7,14 +8,6 @@
 
 namespace sf
 {
-
-Table2D::Table2D()
-{
-   numRows = 0;
-   numCols = 0;
-   rowVals = 0;
-   colVals = 0;
-}
 
 Table2D::Table2D(const int numRows, const int numCols, double rowVals[], double colVals[])
 {
@@ -49,7 +42,7 @@ Table2D::~Table2D()
 
 void Table2D::setData(std::string data)
 {
-   std::vector<std::string> v = splitString(data, ',');
+   std::vector<std::string> v = xml::splitString(data, ',');
 
    if (v.size() != numRows * numCols)
       return;

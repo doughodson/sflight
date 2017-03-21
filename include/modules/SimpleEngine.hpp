@@ -4,6 +4,7 @@
 
 #include "FDMModule.hpp"
 
+namespace xml { class Node; }
 namespace sf
 {
 
@@ -18,7 +19,7 @@ class SimpleEngine : public virtual FDMModule
    ~SimpleEngine();
 
    // module interface
-   virtual void initialize(Node *node) override;
+   virtual void initialize(xml::Node *node) override;
    virtual void update(double timestep) override;
 
  protected:

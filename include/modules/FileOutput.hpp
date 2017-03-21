@@ -5,10 +5,11 @@
 #include "FDMModule.hpp"
 #include <fstream>
 
+
+namespace xml { class Node; }
 namespace sf
 {
 class FDMGlobals;
-class Node;
 
 //------------------------------------------------------------------------------
 // Class: FileOutput
@@ -20,7 +21,7 @@ public:
    ~FileOutput();
 
    // module interface
-   virtual void initialize(Node* node) override;
+   virtual void initialize(xml::Node* node) override;
    virtual void update(double timestep) override;
 
    void update();

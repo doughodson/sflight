@@ -3,9 +3,11 @@
 
 #include "modules/Atmosphere.hpp"
 
+#include "xml/Node.hpp"
+#include "xml/node_utils.hpp"
+
 #include "UnitConvert.hpp"
 #include "FDMGlobals.hpp"
-#include "xml/node_utils.hpp"
 
 #include <iostream>
 #include <algorithm>
@@ -20,46 +22,46 @@ SimpleAutoPilot::SimpleAutoPilot(FDMGlobals *globals, const double frameRate)
 
 SimpleAutoPilot::~SimpleAutoPilot() {}
 
-void SimpleAutoPilot::initialize(Node* node)
+void SimpleAutoPilot::initialize(xml::Node* node)
 {
-   Node *apProps = node->getChild("AutoPilot");
+   xml::Node *apProps = node->getChild("AutoPilot");
 
-   std::vector<Node *> comps = getList(apProps, "Component");
+   std::vector<xml::Node*> comps = xml::getList(apProps, "Component");
 
    for (int i = 0; i < comps.size(); i++)
    {
-      Node *tmp = comps[i];
+      xml::Node *tmp = comps[i];
 
-      if (get(tmp, "Type", "") == "HeadingHold")
+      if (xml::get(tmp, "Type", "") == "HeadingHold")
       {
 
-         globals->autoPilotCmds.setMaxBank(UnitConvert::toRads(getDouble(tmp, "MaxBank", 30)));
-         kphi = getDouble(tmp, "BankWeight", kphi);
-         maxBankRate = UnitConvert::toRads(getDouble(tmp, "MaxBankRate", maxBankRate));
+         globals->autoPilotCmds.setMaxBank(UnitConvert::toRads(xml::getDouble(tmp, "MaxBank", 30)));
+         kphi = xml::getDouble(tmp, "BankWeight", kphi);
+         maxBankRate = UnitConvert::toRads(xml::getDouble(tmp, "MaxBankRate", maxBankRate));
          turnType = get(tmp, "TurnType", "").find("TRAJECTORY") == 0 ? TURNTYPE_TRAJECTORY : TURNTYPE_HDG;
       }
-      else if (get(tmp, "Type", "") == "AltitudeHold")
+      else if (xml::get(tmp, "Type", "") == "AltitudeHold")
       {
 
-         globals->autoPilotCmds.setMaxVS(UnitConvert::FPMtoMPS(getDouble(tmp, "MaxVS", 0)));
-         kalt = getDouble(tmp, "AltWeight", 0.2);
+         globals->autoPilotCmds.setMaxVS(UnitConvert::FPMtoMPS(xml::getDouble(tmp, "MaxVS", 0)));
+         kalt = xml::getDouble(tmp, "AltWeight", 0.2);
       }
-      else if (get(tmp, "Type", "") == "VSHold")
+      else if (xml::get(tmp, "Type", "") == "VSHold")
       {
 
-         maxG = (getDouble(tmp, "MaxG", maxG) - 1) * Earth::getG(0, 0, 0);
-         minG = (getDouble(tmp, "MinG", minG) - 1) * Earth::getG(0, 0, 0);
+         maxG = (xml::getDouble(tmp, "MaxG", maxG) - 1) * Earth::getG(0, 0, 0);
+         minG = (xml::getDouble(tmp, "MinG", minG) - 1) * Earth::getG(0, 0, 0);
          maxG_rate = maxG;
          minG_rate = minG;
-         globals->autoPilotCmds.setMaxPitchUp(UnitConvert::toRads(getDouble(tmp, "MaxPitchUp", PI / 2.)));
-         globals->autoPilotCmds.setMaxPitchDown(UnitConvert::toRads(getDouble(tmp, "MaxPitchDown", -PI / 2.)));
-         kpitch = getDouble(tmp, "PitchWeight", 0);
+         globals->autoPilotCmds.setMaxPitchUp(UnitConvert::toRads(xml::getDouble(tmp, "MaxPitchUp", PI / 2.)));
+         globals->autoPilotCmds.setMaxPitchDown(UnitConvert::toRads(xml::getDouble(tmp, "MaxPitchDown", -PI / 2.)));
+         kpitch = xml::getDouble(tmp, "PitchWeight", 0);
       }
-      else if (get(tmp, "Type", "") == "AutoThrottle")
+      else if (xml::get(tmp, "Type", "") == "AutoThrottle")
       {
-         maxThrottle = getDouble(tmp, "MaxThrottle", maxThrottle);
-         minThrottle = getDouble(tmp, "MinThrottle", minThrottle);
-         spoolTime = getDouble(tmp, "SpoolTime", spoolTime);
+         maxThrottle = xml::getDouble(tmp, "MaxThrottle", maxThrottle);
+         minThrottle = xml::getDouble(tmp, "MinThrottle", minThrottle);
+         spoolTime = xml::getDouble(tmp, "SpoolTime", spoolTime);
       }
    }
 

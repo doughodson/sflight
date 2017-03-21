@@ -2,12 +2,12 @@
 #ifndef __loadModules_H__
 #define __loadModules_H__
 
+namespace xml { class Node; }
 namespace sf
 {
-class Node;
 class FDMGlobals;
 
-void load_modules(Node* node, FDMGlobals* globals);
+void load_modules(xml::Node* node, FDMGlobals* globals);
 
 }
 

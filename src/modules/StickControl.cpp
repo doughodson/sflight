@@ -3,9 +3,11 @@
 
 #include "modules/Atmosphere.hpp"
 
+#include "xml/Node.hpp"
+#include "xml/node_utils.hpp"
+
 #include "FDMGlobals.hpp"
 #include "UnitConvert.hpp"
-#include "xml/node_utils.hpp"
 
 namespace sf
 {
@@ -15,26 +17,24 @@ StickControl::StickControl(FDMGlobals *globals, const double frameRate)
 {
 }
 
-StickControl::~StickControl() {}
-
-void StickControl::initialize(Node *node)
+void StickControl::initialize(xml::Node *node)
 {
-   Node* cntrlNode = node->getChild("Control");
+   xml::Node* cntrlNode = node->getChild("Control");
 
-   double designAlt = UnitConvert::toMeters(getDouble(cntrlNode, "DesignAltitude", 0));
+   double designAlt = UnitConvert::toMeters(xml::getDouble(cntrlNode, "DesignAltitude", 0));
 
-   double designSpeed = UnitConvert::toMPS(getDouble(cntrlNode, "DesignAirspeed", 0));
+   double designSpeed = UnitConvert::toMPS(xml::getDouble(cntrlNode, "DesignAirspeed", 0));
    if (designSpeed == 0)
-      designSpeed = getDouble(cntrlNode, "DesignPoint/Mach", 0) *
+      designSpeed = xml::getDouble(cntrlNode, "DesignPoint/Mach", 0) *
                     Atmosphere::getSpeedSound(Atmosphere::getTemp(designAlt));
 
    designQbar = 0.5 * Atmosphere::getRho(designAlt) * designSpeed * designSpeed;
 
-   elevGain = getDouble(cntrlNode, "ElevatorGain", 20);
-   ailGain = getDouble(cntrlNode, "AileronGain", 50);
-   rudGain = getDouble(cntrlNode, "RudderGain", 20);
+   elevGain = xml::getDouble(cntrlNode, "ElevatorGain", 20);
+   ailGain = xml::getDouble(cntrlNode, "AileronGain", 50);
+   rudGain = xml::getDouble(cntrlNode, "RudderGain", 20);
 
-   pitchGain = getDouble(cntrlNode, "PitchGain", 0);
+   pitchGain = xml::getDouble(cntrlNode, "PitchGain", 0);
 
    elevGain = UnitConvert::toRads(elevGain);
    ailGain = UnitConvert::toRads(ailGain);

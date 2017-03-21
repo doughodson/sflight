@@ -7,6 +7,7 @@
 
 #include <vector>
 
+namespace xml { class Node; }
 namespace sf
 {
 
@@ -30,10 +31,10 @@ class WaypointFollower : public FDMModule
 {
  public:
    WaypointFollower(FDMGlobals *globals, double frameRate);
-   ~WaypointFollower();
+   virtual ~WaypointFollower() = default;
 
    // module interface
-   void initialize(Node *node);
+   void initialize(xml::Node *node);
    void update(double timestep);
 
    void loadWaypoint();

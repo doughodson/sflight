@@ -4,6 +4,7 @@
 
 #include "FDMModule.hpp"
 
+namespace xml { class Node; }
 namespace sf
 {
 class FDMGlobals;
@@ -18,7 +19,7 @@ class InterpAero : public virtual FDMModule
    InterpAero(FDMGlobals *globals, double frameRate);
 
    // module interface
-   virtual void initialize(Node *node) override;
+   virtual void initialize(xml::Node *node) override;
    virtual void update(double timestep) override;
 
    void createCoefs(double pitch, double u, double vz, double thrust, double &alpha, double &cl, double &cd);

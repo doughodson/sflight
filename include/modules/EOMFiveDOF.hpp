@@ -6,6 +6,7 @@
 #include "Quaternion.hpp"
 #include "Vector3.hpp"
 
+namespace xml { class Node; }
 namespace sf {
 class FDMGlobals;
 
@@ -18,22 +19,22 @@ class EOMFiveDOF : public FDMModule
 {
 public:
    EOMFiveDOF(FDMGlobals* globals, double frameRate);
-   ~EOMFiveDOF();
+   virtual ~EOMFiveDOF() = default;
 
-    void computeEOM(double timestep);
-    void initialize(Node* node);
-    void update(double timestep);
+   void computeEOM(double timestep);
+   void initialize(xml::Node* node);
+   void update(double timestep);
 
 private:
-    Quaternion quat;
-    Quaternion qdot;
-    Vector3 forces;
-    Vector3 uvw;
-    Vector3 pqr;
-    Vector3 xyz;
-    Vector3 gravAccel;
-    double gravConst {};
-    bool autoRudder {};
+   Quaternion quat;
+   Quaternion qdot;
+   Vector3 forces;
+   Vector3 uvw;
+   Vector3 pqr;
+   Vector3 xyz;
+   Vector3 gravAccel;
+   double gravConst {};
+   bool autoRudder {};
 };
 
 }

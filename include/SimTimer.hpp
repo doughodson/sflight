@@ -2,10 +2,10 @@
 #ifndef _SimTimer_H
 #define _SimTimer_H
 
+namespace xml { class Node; }
 namespace sf
 {
 class FDMGlobals;
-class Node;
 
 //------------------------------------------------------------------------------
 // Class: SimTimer
@@ -15,12 +15,12 @@ class SimTimer
  public:
    SimTimer(FDMGlobals *globals, const double frameRate);
    SimTimer(FDMGlobals *globals, const double frameRate, const long maxFrames);
-   ~SimTimer();
+   virtual ~SimTimer() = default;
 
    void start();
    void startConstructive();
    void stop();
-   void initialize(Node *node);
+   void initialize(xml::Node *node);
 
  private:
    FDMGlobals* globals {};

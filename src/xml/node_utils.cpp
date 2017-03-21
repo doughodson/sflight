@@ -9,7 +9,7 @@
 #include <cmath>
 #include <cctype>
 
-namespace sf
+namespace xml
 {
 
 // returns a list of nodes that contain the childName

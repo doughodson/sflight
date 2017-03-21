@@ -4,10 +4,10 @@
 
 #include <string>
 
+namespace xml { class Node; }
 namespace sf
 {
 class FDMGlobals;
-class Node;
 
 //------------------------------------------------------------------------------
 // Class: FDMModule
@@ -21,7 +21,7 @@ class FDMModule
    virtual ~FDMModule();
 
    // module interface
-   virtual void initialize(Node *node)                    {};
+   virtual void initialize(xml::Node *node)               {};
    virtual void update(double timestep)                   {};
    virtual void setProperty(std::string tag, double val)  {};
 

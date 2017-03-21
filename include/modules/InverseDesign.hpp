@@ -4,6 +4,7 @@
 
 #include "FDMModule.hpp"
 
+namespace xml { class Node; }
 namespace sf
 {
 class FDMGlobals;
@@ -19,7 +20,7 @@ class InverseDesign : public virtual FDMModule
    InverseDesign(FDMGlobals *globals, double frameRate);
 
    // module interface
-   virtual void initialize(Node *node) override;
+   virtual void initialize(xml::Node *node) override;
    virtual void update(double timestep) override;
 
    void getAeroCoefs(double pitch, double u, double vz, double rho, double weight, double thrust, double &alpha, double &cl, double &cd);

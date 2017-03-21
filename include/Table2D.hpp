@@ -13,9 +13,9 @@ namespace sf
 class Table2D
 {
  public:
-   Table2D();
+   Table2D() = default;
    Table2D(const int numRows, const int numCols, double rowVals[], double colVals[]);
-   ~Table2D();
+   virtual ~Table2D();
 
    int getNumCols();
    int getNumRows();

@@ -22,16 +22,16 @@
 namespace sf
 {
 
-void load_modules(Node* parent, FDMGlobals* globals)
+void load_modules(xml::Node* parent, FDMGlobals* globals)
 {
-   Node* node = parent->getChild("Modules");
-   std::vector<Node*> nodeList = getList(node, "Module");
-   const double defaultRate = getDouble(node, "Rate", 0);
+   xml::Node* node = parent->getChild("Modules");
+   std::vector<xml::Node*> nodeList = xml::getList(node, "Module");
+   const double defaultRate = xml::getDouble(node, "Rate", 0);
 
    for (int i = 0; i < nodeList.size(); i++)
    {
-      const std::string className = get(nodeList[i], "Class", "");
-      const double rate = getDouble(nodeList[i], "Rate", 0);
+      const std::string className = xml::get(nodeList[i], "Class", "");
+      const double rate = xml::getDouble(nodeList[i], "Rate", 0);
 
       if (className == "EOMFiveDOF") {
          new EOMFiveDOF(globals, rate);

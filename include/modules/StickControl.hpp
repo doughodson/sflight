@@ -6,6 +6,7 @@
 #include "Vector3.hpp"
 #include "xml/Node.hpp"
 
+namespace xml { class Node; }
 namespace sf
 {
 
@@ -16,10 +17,10 @@ class StickControl : public virtual FDMModule
 {
  public:
    StickControl(FDMGlobals *globals, const double frameRate);
-   ~StickControl();
+   virtual ~StickControl() = default;
 
    // module interface
-   virtual void initialize(Node *node) override;
+   virtual void initialize(xml::Node *node) override;
    virtual void update(double timestep) override;
    virtual void setProperty(std::string tag, double val) override  {};
 

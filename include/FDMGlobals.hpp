@@ -9,8 +9,10 @@
 #include "Quaternion.hpp"
 #include "Vector3.hpp"
 #include "AutoPilotCmds.hpp"
+
 #include "xml/Node.hpp"
 
+namespace xml { class Node; }
 namespace sf {
 class FDMModule;
 
@@ -26,7 +28,7 @@ public:
 
     void addModule(FDMModule* module);
     void initialize();
-    void initialize(Node* node);
+    void initialize(xml::Node* node);
     void update(double timestep);
     void setProperty(std::string tag, double val);
 
@@ -115,9 +117,9 @@ public:
 
     // engine-related values
     double throttle {};
-	 double rpm {};
-	 double fuel {};	    // kilos
-	 double fuelflow {};  // kilos/sec
+	double rpm {};
+	double fuel {};	    // kilos
+	double fuelflow {};  // kilos/sec
 
     // sim related items
     unsigned int frameNum {};
@@ -127,8 +129,8 @@ public:
     // Autopilot commands
     AutoPilotCmds autoPilotCmds;
 
-    Node* rootNode {};
-    std::vector <FDMModule*> modules {};
+    xml::Node* rootNode {};
+    std::vector<FDMModule*> modules {};
 };
 
 }

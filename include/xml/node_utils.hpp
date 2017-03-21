@@ -7,7 +7,7 @@
 #include <string>
 #include <vector>
 
-namespace sf {
+namespace xml {
 
 //
 // traverses the parent's childList and returns a new Node

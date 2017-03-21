@@ -55,7 +55,7 @@ void InverseDesign::update(double timestep)
    globals->fuel -= globals->fuelflow * timestep;
 }
 
-void InverseDesign::initialize(Node *node)
+void InverseDesign::initialize(xml::Node *node)
 {
    double thrustRatio {};
    double speedSound {};
@@ -67,15 +67,15 @@ void InverseDesign::initialize(Node *node)
 
    double rho {};
 
-   Node *tmp = node->getChild("Design");
+   xml::Node *tmp = node->getChild("Design");
 
-   usingMachEffects = getBool(tmp, "CompressibleFlow", false);
+   usingMachEffects = xml::getBool(tmp, "CompressibleFlow", false);
 
    //get Engine parameters
-   thrustAngle = UnitConvert::toRads(getDouble(tmp, "Engine/ThrustAngle", 0.0));
-   staticThrust = UnitConvert::toNewtons(getDouble(tmp, "Engine/StaticThrust", 0));
+   thrustAngle = UnitConvert::toRads(xml::getDouble(tmp, "Engine/ThrustAngle", 0.0));
+   staticThrust = UnitConvert::toNewtons(xml::getDouble(tmp, "Engine/StaticThrust", 0));
 
-   std::string engineType = get(tmp, "Engine/Type", "");
+   std::string engineType = xml::get(tmp, "Engine/Type", "");
    if (engineType == "Turbojet")
    {
       dTdM = 0;
@@ -93,7 +93,7 @@ void InverseDesign::initialize(Node *node)
    }
 
    // setup flight conditions (2 points expected)
-   std::vector<Node *> fcNodes = tmp->getChildren("FlightConditions/FlightCondition");
+   std::vector<xml::Node*> fcNodes = tmp->getChildren("FlightConditions/FlightCondition");
 
    // get default values
    designWeight = getDouble(tmp, "FlightConditions/Weight", 0.0);

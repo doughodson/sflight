@@ -2,10 +2,11 @@
 
 #include "modules/FileOutput.hpp"
 
-#include "FDMGlobals.hpp"
-#include "UnitConvert.hpp"
 #include "xml/Node.hpp"
 #include "xml/node_utils.hpp"
+
+#include "FDMGlobals.hpp"
+#include "UnitConvert.hpp"
 
 #include <iostream>
 #include <iomanip>
@@ -21,7 +22,7 @@ FileOutput::~FileOutput()
     fout.close();
 }
 
-void FileOutput::initialize(Node* node)
+void FileOutput::initialize(xml::Node* node)
 {
    std::string filename = get(node, "FileOutput/Path", "");
    rate = getDouble(node, "FileOutput/Rate", 1);

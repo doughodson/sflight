@@ -6,12 +6,8 @@
 #include <iostream>
 #include <string>
 
-namespace sf
+namespace xml
 {
-
-XMLParser::XMLParser() {}
-
-XMLParser::~XMLParser() {}
 
 Node *XMLParser::parse(std::string filename, bool treatAttributesAsChildren)
 {

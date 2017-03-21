@@ -19,8 +19,8 @@ int main(int argc, char** argv)
 	auto globals = new sf::FDMGlobals();
 
    // parse input file and return top node
-	auto parser = new sf::XMLParser();
-	sf::Node* node = parser->parse(argv[1], true);
+	auto parser = new xml::XMLParser();
+	xml::Node* node = parser->parse(argv[1], true);
 
    //
 	load_modules(node, globals);

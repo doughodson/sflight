@@ -8,6 +8,8 @@
 #include "Vector3.hpp"
 #include "Euler.hpp"
 #include "Quaternion.hpp"
+
+#include "xml/Node.hpp"
 #include "xml/node_utils.hpp"
 
 #include <iostream>
@@ -20,16 +22,12 @@ EOMFiveDOF::EOMFiveDOF(FDMGlobals *globals, double frameRate) : FDMModule(global
 {
 }
 
-EOMFiveDOF::~EOMFiveDOF()
-{
-}
-
 void EOMFiveDOF::update(double timestep)
 {
-   this->computeEOM(timestep);
+   computeEOM(timestep);
 }
 
-void EOMFiveDOF::initialize(Node *node)
+void EOMFiveDOF::initialize(xml::Node *node)
 {
    quat = Quaternion(globals->eulers);
    qdot = Quaternion();
@@ -41,7 +39,7 @@ void EOMFiveDOF::initialize(Node *node)
    gravAccel = Vector3();
 
    gravConst = Earth::getG(0, 0, 0);
-   autoRudder = getBool(node, "Control/AutoRudder", true);
+   autoRudder = xml::getBool(node, "Control/AutoRudder", true);
 }
 
 void EOMFiveDOF::computeEOM(double timestep)
@@ -119,7 +117,7 @@ void EOMFiveDOF::computeEOM(double timestep)
    globals->pqr.add(pqr);
 
    // adjust the quaternion based on the body angular rates
-   double psi = globals->eulers.getPsi();
+   const double psi = globals->eulers.getPsi();
    quat.getQdot(qdot, globals->pqr.get1(), globals->pqr.get2(), globals->pqr.get3());
    qdot.multiply(timestep);
    quat.add(qdot);

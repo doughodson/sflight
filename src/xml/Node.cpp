@@ -5,7 +5,7 @@
 #include <iterator>
 #include <iostream>
 
-namespace sf
+namespace xml
 {
 
 Node::Node(std::string tagName)

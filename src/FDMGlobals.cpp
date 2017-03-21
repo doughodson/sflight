@@ -69,35 +69,35 @@ void FDMGlobals::initialize()
    }
 }
 
-void FDMGlobals::initialize(Node* node)
+void FDMGlobals::initialize(xml::Node* node)
 {
    rootNode = node;
 
    mass = (UnitConvert::toKilos(getDouble(node, "InitialConditions/Weight", 0.0)));
 
-   Node *wind = node->getChild("Wind");
+   xml::Node *wind = node->getChild("Wind");
    if (wind != 0)
    {
-      double wspeed = UnitConvert::toMPS(getDouble(wind, "Speed", 0));
-      double dir = UnitConvert::toRads(getDouble(wind, "Direction", 0) + 180);
+      double wspeed = UnitConvert::toMPS(xml::getDouble(wind, "Speed", 0));
+      double dir = UnitConvert::toRads(xml::getDouble(wind, "Direction", 0) + 180);
       windVel.set1(wspeed * std::cos(dir));
       windVel.set2(wspeed * std::sin(dir));
       windVel.set3(0);
    }
 
    // general
-   Node *tmp = node->getChild("InitialConditions/Position");
-   lat = UnitConvert::toRads(getDouble(tmp, "Latitude", 0.0));
-   lon = UnitConvert::toRads(getDouble(tmp, "Longitude", 0.0));
-   alt = UnitConvert::toMeters(getDouble(tmp, "Altitude", 0.0));
+   xml::Node *tmp = node->getChild("InitialConditions/Position");
+   lat = UnitConvert::toRads(xml::getDouble(tmp, "Latitude", 0.0));
+   lon = UnitConvert::toRads(xml::getDouble(tmp, "Longitude", 0.0));
+   alt = UnitConvert::toMeters(xml::getDouble(tmp, "Altitude", 0.0));
 
    tmp = node->getChild("InitialConditions/Orientation");
    eulers = Euler(
-       UnitConvert::toRads(getDouble(tmp, "Heading", 0.0)),
-       UnitConvert::toRads(getDouble(tmp, "Pitch", 0.0)),
-       UnitConvert::toRads(getDouble(tmp, "Roll", 0.0)));
+       UnitConvert::toRads(xml::getDouble(tmp, "Heading", 0.0)),
+       UnitConvert::toRads(xml::getDouble(tmp, "Pitch", 0.0)),
+       UnitConvert::toRads(xml::getDouble(tmp, "Roll", 0.0)));
 
-   const double speed = UnitConvert::toMPS(getDouble(node, "InitialConditions/Airspeed", 0.0));
+   const double speed = UnitConvert::toMPS(xml::getDouble(node, "InitialConditions/Airspeed", 0.0));
    const double mach = getDouble(node, "InitialConditions/Mach", 0);
    if (mach != 0 && speed == 0)
       uvw.set1(Atmosphere::getSpeedSound(Atmosphere::getTemp(alt)) * mach);
@@ -115,7 +115,7 @@ void FDMGlobals::initialize(Node* node)
    autoPilotCmds.setAutoThrottleOn(true);
    autoPilotCmds.setHdgHoldOn(true);
 
-   fuel = UnitConvert::toKilos(getDouble(node, "InitialConditions/Fuel", 0.0));
+   fuel = UnitConvert::toKilos(xml::getDouble(node, "InitialConditions/Fuel", 0.0));
 
    initialize();
 }

@@ -1,8 +1,11 @@
 
 #include "SimTimer.hpp"
-#include "FDMGlobals.hpp"
+
 #include "xml/Node.hpp"
 #include "xml/node_utils.hpp"
+
+#include "FDMGlobals.hpp"
+
 #include <iostream>
 
 #ifdef _WIN32
@@ -24,16 +27,14 @@ SimTimer::SimTimer(FDMGlobals *globals, const double frameRate, const long maxFr
 {
 }
 
-SimTimer::~SimTimer() {}
-
 void SimTimer::start()
 {
    if (globals == nullptr || frameRate == 0.0)
       return;
 
-   double time = 0;
+   double time {};
    double frameTime = 1.0 / frameRate;
-   long sleepTime = (long)(frameTime * 1E3);
+   long sleepTime = static_cast<long>(frameTime * 1E3);
 
    while (globals->frameNum < maxFrames)
    {
@@ -76,8 +77,8 @@ void SimTimer::startConstructive()
 
 void SimTimer::stop() {}
 
-void SimTimer::initialize(Node *node)
+void SimTimer::initialize(xml::Node *node)
 {
-   this->frameRate = getDouble(node, "Modules/Rate", 20);
+   this->frameRate = xml::getDouble(node, "Modules/Rate", 20);
 }
 }

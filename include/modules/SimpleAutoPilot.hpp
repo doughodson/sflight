@@ -8,6 +8,7 @@
 #define TURNTYPE_HDG 0
 #define TURNTYPE_TRAJECTORY 1
 
+namespace xml { class Node; }
 namespace sf
 {
 
@@ -21,7 +22,7 @@ class SimpleAutoPilot : public FDMModule
    ~SimpleAutoPilot();
 
    // module interface
-   virtual void initialize(Node *node) override;
+   virtual void initialize(xml::Node *node) override;
    virtual void update(double timestep) override;
 
    void updateHdg(double timestep, double cmdHdg);

@@ -3,12 +3,13 @@
 
 #include "modules/Atmosphere.hpp"
 
+#include "xml/Node.hpp"
+#include "xml/node_utils.hpp"
+
 #include "FDMGlobals.hpp"
 #include "UnitConvert.hpp"
 #include "WindAxis.hpp"
 #include "Vector3.hpp"
-#include "xml/Node.hpp"
-#include "xml/node_utils.hpp"
 #include "constants.hpp"
 
 #include <iostream>
@@ -41,7 +42,7 @@ void InterpAero::update(double timestep)
    WindAxis::windToBody(globals->aeroForce, globals->alpha, globals->beta, cl * qbar, cd * qbar, cy * qbar);
 }
 
-void InterpAero::initialize(Node *node)
+void InterpAero::initialize(xml::Node *node)
 {
    double thrustRatio{};
    double speedSound{};
@@ -52,7 +53,7 @@ void InterpAero::initialize(Node *node)
    double mach{};
    double thrust{};
 
-   Node *tmp = node->getChild("Design");
+   xml::Node *tmp = node->getChild("Design");
 
    designAlt = UnitConvert::toMeters(getDouble(tmp, "DesignAltitude", 0.0));
 

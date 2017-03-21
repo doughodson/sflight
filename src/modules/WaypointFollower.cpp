@@ -1,11 +1,13 @@
 
 #include "modules/WaypointFollower.hpp"
 
+#include "xml/Node.hpp"
+#include "xml/node_utils.hpp"
+
 #include "FDMGlobals.hpp"
 #include "Earth.hpp"
 #include "UnitConvert.hpp"
 #include "constants.hpp"
-#include "xml/node_utils.hpp"
 #include "UnitConvert.hpp"
 
 #include <cmath>
@@ -18,21 +20,19 @@ WaypointFollower::WaypointFollower(FDMGlobals *globals, double frameRate)
 {
 }
 
-WaypointFollower::~WaypointFollower() {}
-
-void WaypointFollower::initialize(Node* node)
+void WaypointFollower::initialize(xml::Node* node)
 {
-   Node *tmp = node->getChild("WaypointFollower");
+   xml::Node *tmp = node->getChild("WaypointFollower");
 
    isOn = getBool(tmp, "WaypointFollow", true);
 
    cmdPathType = (get(tmp, "PathType", "DIRECT") == "BEARING") ? PathType::BEARING : PathType::DIRECT;
 
-   std::vector<Node *> wps = getList(tmp->getChild("WaypointList"), "Waypoint");
+   std::vector<xml::Node*> wps = xml::getList(tmp->getChild("WaypointList"), "Waypoint");
 
    for (unsigned int i = 0; i < wps.size(); i++)
    {
-      Node* wp = wps[i];
+      xml::Node* wp = wps[i];
       addWaypoint(UnitConvert::toRads(getDouble(wp, "Lat", 0)),
                   UnitConvert::toRads(getDouble(wp, "Lon", 0)),
                   UnitConvert::toMeters(getDouble(wp, "Alt", 0)),
