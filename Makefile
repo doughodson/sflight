@@ -7,13 +7,13 @@ include makedefs
 # sf              : -
 #
 PROJECTS = src/xml
-PROJECTS += src
+PROJECTS += src/fdm
 
 # Examples        : Requires
 # ------------------------------------------------------------------------
 # mainTest        : libsf
 #
-PROJECTS += mainTest
+PROJECTS += examples/mainTest
 
 .PHONY: all clean $(PROJECTS)
 

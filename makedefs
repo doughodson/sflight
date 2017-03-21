@@ -12,7 +12,6 @@ CPPFLAGS += -g -O2
 # Modify standard flags
 # ---
 CPPFLAGS += -fPIC
-CPPFLAGS += -I../include
 CPPFLAGS += -I../../include
 CPPFLAGS += -pthread
 CPPFLAGS += -Wall
@@ -28,4 +27,4 @@ CPPFLAGS += -std=c++11
 #CXX = g++
 #CXX = clang++
 
-LDFLAGS += -L../lib
+LDFLAGS += -L../../lib
