@@ -1,8 +1,10 @@
 
+#include "modules/InverseDesign.hpp"
+
+#include "modules/Atmosphere.hpp"
+
 #include "FDMGlobals.hpp"
-#include "InverseDesign.hpp"
 #include "UnitConvert.hpp"
-#include "Atmosphere.hpp"
 #include "WindAxis.hpp"
 #include "Vector3.hpp"
 #include "xml/Node.hpp"

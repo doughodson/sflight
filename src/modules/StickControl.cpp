@@ -1,10 +1,11 @@
 
-#include "StickControl.hpp"
+#include "modules/StickControl.hpp"
+
+#include "modules/Atmosphere.hpp"
 
 #include "FDMGlobals.hpp"
 #include "UnitConvert.hpp"
 #include "xml/NodeUtil.hpp"
-#include "Atmosphere.hpp"
 
 namespace sf
 {
@@ -18,7 +19,7 @@ StickControl::~StickControl() {}
 
 void StickControl::initialize(Node *node)
 {
-   Node *cntrlNode = node->getChild("Control");
+   Node* cntrlNode = node->getChild("Control");
 
    double designAlt = UnitConvert::toMeters(NodeUtil::getDouble(cntrlNode, "DesignAltitude", 0));
 

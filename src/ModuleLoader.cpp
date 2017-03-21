@@ -4,16 +4,16 @@
 #include "xml/Node.hpp"
 #include "xml/NodeUtil.hpp"
 
-#include "EOMFiveDOF.hpp"
-#include "InterpAero.hpp"
-#include "SimpleAutoPilot.hpp"
-#include "SimpleEngine.hpp"
-#include "Atmosphere.hpp"
-#include "StickControl.hpp"
-#include "WaypointFollower.hpp"
-#include "TableAero.hpp"
-#include "InverseDesign.hpp"
-#include "FileOutput.hpp"
+#include "modules/Atmosphere.hpp"
+#include "modules/EOMFiveDOF.hpp"
+#include "modules/FileOutput.hpp"
+#include "modules/InterpAero.hpp"
+#include "modules/InverseDesign.hpp"
+#include "modules/SimpleAutoPilot.hpp"
+#include "modules/SimpleEngine.hpp"
+#include "modules/StickControl.hpp"
+#include "modules/TableAero.hpp"
+#include "modules/WaypointFollower.hpp"
 
 #include <string>
 #include <vector>

@@ -1,20 +1,13 @@
 
-#include "FDMGlobals.hpp"
-#include "EOMFiveDOF.hpp"
-#include "InterpAero.hpp"
-#include "SimpleAutoPilot.hpp"
-#include "WaypointFollower.hpp"
-#include "SimpleEngine.hpp"
-#include "Atmosphere.hpp"
 #include "xml/Node.hpp"
 #include "xml/NodeUtil.hpp"
 #include "xml/XMLParser.hpp"
+
+#include "FDMGlobals.hpp"
 #include "SimTimer.hpp"
 #include "ModuleLoader.hpp"
 #include "Table2D.hpp"
 #include "Table3D.hpp"
-#include "TableAero.hpp"
-#include "InverseDesign.hpp"
 
 #include <cstdlib>
 #include <iostream>

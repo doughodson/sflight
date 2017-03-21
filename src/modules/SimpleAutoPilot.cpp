@@ -1,8 +1,10 @@
 
-#include "SimpleAutoPilot.hpp"
+#include "modules/SimpleAutoPilot.hpp"
+
+#include "modules/Atmosphere.hpp"
+
 #include "UnitConvert.hpp"
 #include "FDMGlobals.hpp"
-#include "Atmosphere.hpp"
 #include "xml/NodeUtil.hpp"
 
 #include <iostream>

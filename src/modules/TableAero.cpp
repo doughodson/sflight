@@ -1,8 +1,10 @@
 
+#include "modules/TableAero.hpp"
+
+#include "modules/Atmosphere.hpp"
+
 #include "FDMGlobals.hpp"
-#include "TableAero.hpp"
 #include "UnitConvert.hpp"
-#include "Atmosphere.hpp"
 #include "WindAxis.hpp"
 #include "Vector3.hpp"
 #include "xml/Node.hpp"

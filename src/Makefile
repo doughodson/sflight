@@ -4,16 +4,21 @@ include ../makedefs
 LIB = ../lib/libsf.a
 
 OBJS =  \
-	Atmosphere.o \
+	modules/Atmosphere.o \
+	modules/EOMFiveDOF.o \
+	modules/FDMModule.o \
+	modules/FileOutput.o \
+	modules/InterpAero.o \
+	modules/InverseDesign.o \
+	modules/SimpleAutoPilot.o \
+	modules/SimpleEngine.o \
+	modules/StickControl.o \
+	modules/TableAero.o \
+	modules/WaypointFollower.o \
 	AutoPilotCmds.o \
 	Earth.o \
-	EOMFiveDOF.o \
 	Euler.o \
 	FDMGlobals.o \
-	FDMModule.o \
-	FileOutput.o \
-	InterpAero.o \
-	InverseDesign.o \
 	ModuleLoader.o \
 	Node.o \
 	NodeUtil.o \
@@ -21,16 +26,11 @@ OBJS =  \
 	PID.o \
 	PIDControl.o \
 	Quaternion.o \
-	SimpleAutoPilot.o \
-	SimpleEngine.o \
 	SimTimer.o \
-	StickControl.o \
 	Table2D.o \
 	Table3D.o \
-	TableAero.o \
 	Vector3.o \
 	Waypoint.o \
-	WaypointFollower.o \
 	WindAxis.o \
 	XMLParser.o
 
@@ -42,5 +42,6 @@ $(LIB) : $(OBJS)
 	ar rs $@ $(OBJS)
 
 clean:
+	-rm -f modules/*.o
 	-rm -f *.o
 	-rm -f $(LIB)

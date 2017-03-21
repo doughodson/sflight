@@ -1,5 +1,5 @@
 
-#include "WaypointFollower.hpp"
+#include "modules/WaypointFollower.hpp"
 
 #include "FDMGlobals.hpp"
 #include "Earth.hpp"
@@ -22,7 +22,7 @@ WaypointFollower::WaypointFollower(FDMGlobals *globals, double frameRate)
 
 WaypointFollower::~WaypointFollower() {}
 
-void WaypointFollower::initialize(Node *node)
+void WaypointFollower::initialize(Node* node)
 {
    std::cout << "INIT!!\n";
 
@@ -36,7 +36,7 @@ void WaypointFollower::initialize(Node *node)
 
    for (unsigned int i = 0; i < wps.size(); i++)
    {
-      Node *wp = wps[i];
+      Node* wp = wps[i];
       addWaypoint(UnitConvert::toRads(NodeUtil::getDouble(wp, "Lat", 0)),
                   UnitConvert::toRads(NodeUtil::getDouble(wp, "Lon", 0)),
                   UnitConvert::toMeters(NodeUtil::getDouble(wp, "Alt", 0)),

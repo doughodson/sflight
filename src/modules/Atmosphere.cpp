@@ -1,5 +1,5 @@
 
-#include "Atmosphere.hpp"
+#include "modules/Atmosphere.hpp"
 
 #include "FDMGlobals.hpp"
 
@@ -22,7 +22,7 @@ Atmosphere :: Atmosphere(FDMGlobals *globals, double frameRate) : FDMModule( glo
 
 void Atmosphere :: update(double timestep)
 {
-   globals->rho = getRho( globals->alt ); 
+   globals->rho = getRho( globals->alt );
 }
 
 int Atmosphere :: getIndex( double metersAlt)
@@ -74,7 +74,7 @@ double Atmosphere :: getTemp( double alt_meters)
 
    if (index >= 0 )  {
       return temp[index] + (temp[index+1] - temp[index]) * getRemainder( alt_meters) + 273.15;
-   } 
+   }
    return temp[0] + 273.15;
 }
 

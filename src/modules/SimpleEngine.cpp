@@ -1,16 +1,17 @@
 
-#include "SimpleEngine.hpp"
+#include "modules/SimpleEngine.hpp"
+
+#include "modules/Atmosphere.hpp"
+
 #include "FDMGlobals.hpp"
 #include "UnitConvert.hpp"
 #include "Earth.hpp"
 #include "xml/Node.hpp"
 #include "xml/NodeUtil.hpp"
-#include "Atmosphere.hpp"
 
 #include <iostream>
 #include <vector>
 
-using std::string;
 namespace sf {
 
 SimpleEngine::SimpleEngine(FDMGlobals* globals, double frameRate) : FDMModule(globals, frameRate)
@@ -23,7 +24,7 @@ SimpleEngine::~SimpleEngine() {}
 
 void SimpleEngine::initialize(Node *node)
 {
-   Node *tmp = node->getChild("Design");
+   Node* tmp = node->getChild("Design");
 
    double designAlt = UnitConvert::toMeters(NodeUtil::getDouble(tmp, "DesignAltitude", 0));
    designRho = Atmosphere::getRho(designAlt);
