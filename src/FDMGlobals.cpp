@@ -24,20 +24,6 @@ namespace sf
 
 FDMGlobals::FDMGlobals()
 {
-
-   this->lat = 0;
-   this->lon = 0;
-   this->alt = 0;
-
-   this->mass = 0.;
-   this->rho = 1.22;
-   this->vInf = 1E-32;
-   this->mach = 0.;
-   this->alpha = 0.;
-   this->beta = 0.;
-   this->alphaDot = 0.;
-   this->betaDot = 0.;
-   this->altagl = 0.;
    this->g = Earth::getG(0, 0, 0);
 
    this->uvw = Vector3();
@@ -54,15 +40,6 @@ FDMGlobals::FDMGlobals()
    this->deflections = Vector3();
    this->windVel = Vector3();
    this->windGust = Vector3();
-
-   this->throttle = 0;
-   this->rpm = 0;
-   this->fuel = 0;
-   this->fuelflow = 0;
-
-   this->simTime = 0;
-   this->frameNum = 0;
-   this->paused = true;
 
    this->modules = std::vector<FDMModule *>();
 }
@@ -82,8 +59,7 @@ void FDMGlobals::addModule(FDMModule *module)
 
 void FDMGlobals::initialize()
 {
-
-   if (rootNode == 0)
+   if (rootNode == nullptr)
       return;
 
    for (unsigned int i = 0; i < modules.size(); i++)
@@ -93,7 +69,7 @@ void FDMGlobals::initialize()
    }
 }
 
-void FDMGlobals::initialize(Node *node)
+void FDMGlobals::initialize(Node* node)
 {
    rootNode = node;
 
@@ -109,7 +85,7 @@ void FDMGlobals::initialize(Node *node)
       windVel.set3(0);
    }
 
-   //general
+   // general
    Node *tmp = node->getChild("InitialConditions/Position");
    lat = UnitConvert::toRads(NodeUtil::getDouble(tmp, "Latitude", 0.0));
    lon = UnitConvert::toRads(NodeUtil::getDouble(tmp, "Longitude", 0.0));
@@ -121,8 +97,8 @@ void FDMGlobals::initialize(Node *node)
        UnitConvert::toRads(NodeUtil::getDouble(tmp, "Pitch", 0.0)),
        UnitConvert::toRads(NodeUtil::getDouble(tmp, "Roll", 0.0)));
 
-   double speed = UnitConvert::toMPS(NodeUtil::getDouble(node, "InitialConditions/Airspeed", 0.0));
-   double mach = NodeUtil::getDouble(node, "InitialConditions/Mach", 0);
+   const double speed = UnitConvert::toMPS(NodeUtil::getDouble(node, "InitialConditions/Airspeed", 0.0));
+   const double mach = NodeUtil::getDouble(node, "InitialConditions/Mach", 0);
    if (mach != 0 && speed == 0)
       uvw.set1(Atmosphere::getSpeedSound(Atmosphere::getTemp(alt)) * mach);
    else
@@ -168,4 +144,4 @@ void FDMGlobals::setProperty(std::string tag, double val)
    }
 }
 
-} //namespace SimpleFlight
+}

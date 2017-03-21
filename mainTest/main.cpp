@@ -1,35 +1,32 @@
 
 #include "xml/Node.hpp"
-#include "xml/NodeUtil.hpp"
 #include "xml/XMLParser.hpp"
 
 #include "FDMGlobals.hpp"
 #include "SimTimer.hpp"
-#include "ModuleLoader.hpp"
-#include "Table2D.hpp"
-#include "Table3D.hpp"
+#include "loadModules.hpp"
 
 #include <cstdlib>
 #include <iostream>
 
-using namespace sf;
-
-int main(int argc, char** argv) {
-
+int main(int argc, char** argv)
+{
 	if (argc < 4) {
 		std::cout << "usage: SimpleFlight <input file> <total time (sec)> <frame rate (frames/sec)>" << std::endl;
 		return 1;
 	}
 
-	auto globals = new FDMGlobals();
+	auto globals = new sf::FDMGlobals();
 
-	auto parser = new XMLParser();
-	Node* node = parser->parse(argv[1], true);
+   // parse input file and return top node
+	auto parser = new sf::XMLParser();
+	sf::Node* node = parser->parse(argv[1], true);
 
-	ModuleLoader::loadModules(node, globals);
+   //
+	loadModules(node, globals);
 	globals->initialize(node);
 
-	auto timer = new SimTimer(globals, std::atof(argv[3]),
+	auto timer = new sf::SimTimer(globals, std::atof(argv[3]),
                                   std::atof(argv[3]) * std::atof(argv[2]));
 
 	std::cout << "Running SimpleFlight for " << argv[2] << " seconds.\n" << std::endl;
@@ -39,5 +36,4 @@ int main(int argc, char** argv) {
 	std::cout << "Done\n" << std::endl;
 
 	return 0;
-
 }

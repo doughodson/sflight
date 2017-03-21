@@ -1,6 +1,6 @@
 
-#include "ModuleLoader.hpp"
-#include "FDMGlobals.hpp"
+#include "loadModules.hpp"
+
 #include "xml/Node.hpp"
 #include "xml/NodeUtil.hpp"
 
@@ -22,7 +22,7 @@
 namespace sf
 {
 
-void ModuleLoader::loadModules(Node* parent, FDMGlobals* globals)
+void loadModules(Node* parent, FDMGlobals* globals)
 {
    Node* node = parent->getChild("Modules");
    std::vector<Node*> nodeList = NodeUtil::getList(node, "Module");
@@ -30,47 +30,28 @@ void ModuleLoader::loadModules(Node* parent, FDMGlobals* globals)
 
    for (int i = 0; i < nodeList.size(); i++)
    {
-      std::string className = NodeUtil::get(nodeList[i], "Class", "");
+      const std::string className = NodeUtil::get(nodeList[i], "Class", "");
       const double rate = NodeUtil::getDouble(nodeList[i], "Rate", 0);
 
-      if (className == "EOMFiveDOF")
-      {
+      if (className == "EOMFiveDOF") {
          new EOMFiveDOF(globals, rate);
-      }
-      else if (className == "InterpAero")
-      {
+      } else if (className == "InterpAero") {
          new InterpAero(globals, rate);
-      }
-      else if (className == "TableAero")
-      {
+      } else if (className == "TableAero") {
          new TableAero(globals, rate);
-      }
-      else if (className == "SimpleAutopilot")
-      {
+      } else if (className == "SimpleAutopilot") {
          new SimpleAutoPilot(globals, rate);
-      }
-      else if (className == "SimpleEngine")
-      {
+      } else if (className == "SimpleEngine") {
          new SimpleEngine(globals, rate);
-      }
-      else if (className == "Atmosphere")
-      {
+      } else if (className == "Atmosphere") {
          new Atmosphere(globals, rate);
-      }
-      else if (className == "WaypointFollower")
-      {
+      } else if (className == "WaypointFollower") {
          new WaypointFollower(globals, rate);
-      }
-      else if (className == "StickControl")
-      {
+      } else if (className == "StickControl") {
          new StickControl(globals, rate);
-      }
-      else if (className == "FileOutput")
-      {
+      } else if (className == "FileOutput") {
          new FileOutput(globals, rate);
-      }
-      else if (className == "InverseDesign")
-      {
+      } else if (className == "InverseDesign") {
          new InverseDesign(globals, rate);
       }
    }
