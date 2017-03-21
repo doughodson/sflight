@@ -6,7 +6,6 @@
 #include "WaypointFollower.hpp"
 #include "SimpleEngine.hpp"
 #include "Atmosphere.hpp"
-#include <time.h>
 #include "xml/Node.hpp"
 #include "xml/NodeUtil.hpp"
 #include "xml/XMLParser.hpp"
@@ -17,9 +16,8 @@
 #include "TableAero.hpp"
 #include "InverseDesign.hpp"
 
+#include <cstdlib>
 #include <iostream>
-#include <fstream>
-#include <string>
 
 using namespace sf;
 
@@ -28,25 +26,25 @@ int main(int argc, char** argv) {
 	if (argc < 4) {
 		std::cout << "usage: SimpleFlight <input file> <total time (sec)> <frame rate (frames/sec)>" << std::endl;
 		return 1;
-	} 
+	}
 
-    
-	FDMGlobals *globals = new FDMGlobals();
+	auto globals = new FDMGlobals();
 
-	XMLParser* parser = new XMLParser();
+	auto parser = new XMLParser();
 	Node* node = parser->parse(argv[1], true);
 
 	ModuleLoader::loadModules(node, globals);
 	globals->initialize(node);
 
-	SimTimer *timer = new SimTimer(globals, atof( argv[3]), atof(argv[3]) * atof( argv[2]) );
+	auto timer = new SimTimer(globals, std::atof(argv[3]),
+                                  std::atof(argv[3]) * std::atof(argv[2]));
 
 	std::cout << "Running SimpleFlight for " << argv[2] << " seconds.\n" << std::endl;
 
 	timer->startConstructive();
 
-	std::cout << "Done.\n" << std::endl;
-    
+	std::cout << "Done\n" << std::endl;
+
 	return 0;
-    
+
 }

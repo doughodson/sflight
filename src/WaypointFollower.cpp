@@ -24,11 +24,13 @@ WaypointFollower::~WaypointFollower() {}
 
 void WaypointFollower::initialize(Node *node)
 {
+   std::cout << "INIT!!\n";
+
    Node *tmp = node->getChild("WaypointFollower");
 
    isOn = NodeUtil::getBool(tmp, "WaypointFollow", true);
 
-   cmdPathType = (NodeUtil::get(tmp, "PathType", "DIRECT") == "BEARING") ? PathType::PATHTYPE_BEARING : PathType::PATHTYPE_DIRECT;
+   cmdPathType = (NodeUtil::get(tmp, "PathType", "DIRECT") == "BEARING") ? PathType::BEARING : PathType::DIRECT;
 
    vector<Node *> wps = NodeUtil::getList(tmp->getChild("WaypointList"), "Waypoint");
 
@@ -100,7 +102,7 @@ void WaypointFollower::update(double timestep)
       return;
    }
 
-   if (cmdPathType == PathType::PATHTYPE_DIRECT)
+   if (cmdPathType == PathType::DIRECT)
    {
       globals->autoPilotCmds.setCmdHeading(az);
    }

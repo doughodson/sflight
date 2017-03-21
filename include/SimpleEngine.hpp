@@ -17,6 +17,7 @@ class SimpleEngine : public virtual FDMModule
    SimpleEngine(FDMGlobals* globals, double timestep);
    ~SimpleEngine();
 
+   // module interface
    virtual void initialize(Node *node) override;
    virtual void update(double timestep) override;
 

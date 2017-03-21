@@ -19,6 +19,7 @@ public:
    FileOutput(FDMGlobals* globals, double frameRate);
    ~FileOutput();
 
+   // module interface
    virtual void initialize(Node* node) override;
    virtual void update(double timestep) override;
 

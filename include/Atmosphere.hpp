@@ -58,7 +58,8 @@ class Atmosphere : public FDMModule
 public:
    Atmosphere( FDMGlobals *globals, double frameRate);
 
-   void update(double timestep);
+   // module interface
+   void update(double timestep) override;
 
    // returns density in kg/m^3
    static double getRho( double alt_meters);

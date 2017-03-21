@@ -17,6 +17,7 @@ class InterpAero : public virtual FDMModule
  public:
    InterpAero(FDMGlobals *globals, double frameRate);
 
+   // module interface
    virtual void initialize(Node *node) override;
    virtual void update(double timestep) override;
 

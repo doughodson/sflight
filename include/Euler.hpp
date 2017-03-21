@@ -13,7 +13,6 @@ namespace sf
 class Euler : public Vector3
 {
 public:
-
     Euler() = default;
     Euler( double psi, double theta, double phi);
     virtual ~Euler();

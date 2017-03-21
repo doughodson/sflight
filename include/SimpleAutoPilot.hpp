@@ -20,6 +20,7 @@ class SimpleAutoPilot : public FDMModule
    SimpleAutoPilot(FDMGlobals* globals, const double frameRate);
    ~SimpleAutoPilot();
 
+   // module interface
    virtual void initialize(Node *node) override;
    virtual void update(double timestep) override;
 

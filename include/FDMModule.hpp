@@ -4,7 +4,8 @@
 
 #include <string>
 
-namespace sf {
+namespace sf
+{
 class FDMGlobals;
 class Node;
 
@@ -14,22 +15,21 @@ class Node;
 //------------------------------------------------------------------------------
 class FDMModule
 {
-public:
+ public:
    FDMModule();
    FDMModule(FDMGlobals* globals, double frameRate);
    virtual ~FDMModule();
 
-   virtual void update(double timestep);
-   virtual void initialize(Node* node);
-
-   virtual void setProperty(std::string tag, double val);
+   // module interface
+   virtual void initialize(Node *node)                    {};
+   virtual void update(double timestep)                   {};
+   virtual void setProperty(std::string tag, double val)  {};
 
    FDMGlobals* globals {};
 
    double frameTime {};
    double lastTime {};
 };
-
 }
 
 #endif

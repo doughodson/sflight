@@ -18,8 +18,10 @@ class StickControl : public virtual FDMModule
    StickControl(FDMGlobals *globals, const double frameRate);
    ~StickControl();
 
+   // module interface
    virtual void initialize(Node *node) override;
    virtual void update(double timestep) override;
+   virtual void setProperty(std::string tag, double val) override  {};
 
  private:
    Vector3 maxRates;

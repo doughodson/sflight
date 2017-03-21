@@ -18,6 +18,7 @@ class InverseDesign : public virtual FDMModule
  public:
    InverseDesign(FDMGlobals *globals, double frameRate);
 
+   // module interface
    virtual void initialize(Node *node) override;
    virtual void update(double timestep) override;
 

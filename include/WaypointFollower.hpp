@@ -32,8 +32,9 @@ class WaypointFollower : public FDMModule
    WaypointFollower(FDMGlobals *globals, double frameRate);
    ~WaypointFollower();
 
-   void update(double timestep);
+   // module interface
    void initialize(Node *node);
+   void update(double timestep);
 
    void loadWaypoint();
    void setState(bool isOn);
@@ -54,7 +55,7 @@ class WaypointFollower : public FDMModule
 
    bool isOn {};
 
-   enum class PathType { PATHTYPE_DIRECT, PATHTYPE_BEARING };
+   enum class PathType { DIRECT, BEARING };
 
    PathType cmdPathType;
 };
