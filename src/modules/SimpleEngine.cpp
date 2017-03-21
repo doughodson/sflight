@@ -7,7 +7,7 @@
 #include "UnitConvert.hpp"
 #include "Earth.hpp"
 #include "xml/Node.hpp"
-#include "xml/NodeUtil.hpp"
+#include "xml/node_utils.hpp"
 
 #include <iostream>
 #include <vector>
@@ -26,7 +26,7 @@ void SimpleEngine::initialize(Node *node)
 {
    Node* tmp = node->getChild("Design");
 
-   double designAlt = UnitConvert::toMeters(NodeUtil::getDouble(tmp, "DesignAltitude", 0));
+   double designAlt = UnitConvert::toMeters(getDouble(tmp, "DesignAltitude", 0));
    designRho = Atmosphere::getRho(designAlt);
    designTemp = Atmosphere::getTemp(designAlt);
    designPress = Atmosphere::getPressure(designAlt);
@@ -34,9 +34,9 @@ void SimpleEngine::initialize(Node *node)
    double speedSound = Atmosphere::getSpeedSound(designTemp);
    double airRatio = designTemp * designPress / seaLevelPress / seaLevelTemp;
 
-   thrustAngle = UnitConvert::toRads(NodeUtil::getDouble(tmp, "ThrustAngle", 0.0));
+   thrustAngle = UnitConvert::toRads(getDouble(tmp, "ThrustAngle", 0.0));
 
-   double designThrust = NodeUtil::getDouble(tmp, "ThrustToWeight", 0) * NodeUtil::getDouble(tmp, "DesignWeight", 0);
+   double designThrust = getDouble(tmp, "ThrustToWeight", 0) * getDouble(tmp, "DesignWeight", 0);
    designThrust = UnitConvert::toNewtons(designThrust);
    this->designThrust = designThrust;
    designThrust = designThrust / airRatio;
@@ -46,24 +46,24 @@ void SimpleEngine::initialize(Node *node)
    std::cout << "design thrust: " << UnitConvert::toLbsForce(designThrust) << std::endl;
 
    // setup fuel flow slope
-   double ff_1 = UnitConvert::toKilos(NodeUtil::getDouble(tmp, "CruiseCondition/FuelFlow", 0) / 3600.);
-   double mach_1 = NodeUtil::getDouble(tmp, "CruiseCondition/Mach", 0);
+   double ff_1 = UnitConvert::toKilos(getDouble(tmp, "CruiseCondition/FuelFlow", 0) / 3600.);
+   double mach_1 = getDouble(tmp, "CruiseCondition/Mach", 0);
    if (mach_1 == 0)
-      mach_1 = UnitConvert::toMPS(NodeUtil::getDouble(tmp, "CruiseCondition/Airspeed", 0)) / speedSound;
-   double throttle_1 = NodeUtil::getDouble(tmp, "CruiseCondition/Throttle", 0);
+      mach_1 = UnitConvert::toMPS(getDouble(tmp, "CruiseCondition/Airspeed", 0)) / speedSound;
+   double throttle_1 = getDouble(tmp, "CruiseCondition/Throttle", 0);
    if (throttle_1 == 0)
-      throttle_1 = UnitConvert::toNewtons(NodeUtil::getDouble(tmp, "CruiseCondition/Thrust", 0)) / designThrust;
+      throttle_1 = UnitConvert::toNewtons(getDouble(tmp, "CruiseCondition/Thrust", 0)) / designThrust;
    ff_1 = ff_1 / throttle_1 / airRatio;
 
    double thrust_1 = designThrust / throttle_1 / airRatio;
 
-   double ff_2 = UnitConvert::toKilos(NodeUtil::getDouble(tmp, "ClimbCondition/FuelFlow", 0) / 3600.);
-   double mach_2 = NodeUtil::getDouble(tmp, "ClimbCondition/Mach", 0);
+   double ff_2 = UnitConvert::toKilos(getDouble(tmp, "ClimbCondition/FuelFlow", 0) / 3600.);
+   double mach_2 = getDouble(tmp, "ClimbCondition/Mach", 0);
    if (mach_2 == 0)
-      mach_2 = UnitConvert::toMPS(NodeUtil::getDouble(tmp, "ClimbCondition/Airspeed", 0)) / speedSound;
-   double throttle_2 = NodeUtil::getDouble(tmp, "ClimbCondition/Throttle", 0);
+      mach_2 = UnitConvert::toMPS(getDouble(tmp, "ClimbCondition/Airspeed", 0)) / speedSound;
+   double throttle_2 = getDouble(tmp, "ClimbCondition/Throttle", 0);
    if (throttle_2 == 0)
-      throttle_2 = UnitConvert::toNewtons(NodeUtil::getDouble(tmp, "ClimbCondition/Thrust", 0)) / designThrust;
+      throttle_2 = UnitConvert::toNewtons(getDouble(tmp, "ClimbCondition/Thrust", 0)) / designThrust;
    ff_2 = ff_2 / throttle_2 / airRatio;
 
    FFslope = (ff_2 - ff_1) / (mach_2 - mach_1);
@@ -73,7 +73,7 @@ void SimpleEngine::initialize(Node *node)
    std::cout << "static ff: " << UnitConvert::toLbs(staticFF) * 3600 * airRatio << std::endl;
 
    // set initial conditions
-   globals->throttle = NodeUtil::getDouble(node, "InitialConditions/Throttle", 0);
+   globals->throttle = getDouble(node, "InitialConditions/Throttle", 0);
    globals->rpm = globals->throttle;
 }
 

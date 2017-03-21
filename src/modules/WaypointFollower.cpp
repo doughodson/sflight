@@ -5,7 +5,7 @@
 #include "Earth.hpp"
 #include "UnitConvert.hpp"
 #include "constants.hpp"
-#include "xml/NodeUtil.hpp"
+#include "xml/node_utils.hpp"
 #include "UnitConvert.hpp"
 
 #include <cmath>
@@ -24,20 +24,20 @@ void WaypointFollower::initialize(Node* node)
 {
    Node *tmp = node->getChild("WaypointFollower");
 
-   isOn = NodeUtil::getBool(tmp, "WaypointFollow", true);
+   isOn = getBool(tmp, "WaypointFollow", true);
 
-   cmdPathType = (NodeUtil::get(tmp, "PathType", "DIRECT") == "BEARING") ? PathType::BEARING : PathType::DIRECT;
+   cmdPathType = (get(tmp, "PathType", "DIRECT") == "BEARING") ? PathType::BEARING : PathType::DIRECT;
 
-   std::vector<Node *> wps = NodeUtil::getList(tmp->getChild("WaypointList"), "Waypoint");
+   std::vector<Node *> wps = getList(tmp->getChild("WaypointList"), "Waypoint");
 
    for (unsigned int i = 0; i < wps.size(); i++)
    {
       Node* wp = wps[i];
-      addWaypoint(UnitConvert::toRads(NodeUtil::getDouble(wp, "Lat", 0)),
-                  UnitConvert::toRads(NodeUtil::getDouble(wp, "Lon", 0)),
-                  UnitConvert::toMeters(NodeUtil::getDouble(wp, "Alt", 0)),
-                  UnitConvert::toMPS(NodeUtil::getDouble(wp, "Speed", 0)),
-                  UnitConvert::toRads(NodeUtil::getDouble(wp, "Heading", 0)));
+      addWaypoint(UnitConvert::toRads(getDouble(wp, "Lat", 0)),
+                  UnitConvert::toRads(getDouble(wp, "Lon", 0)),
+                  UnitConvert::toMeters(getDouble(wp, "Alt", 0)),
+                  UnitConvert::toMPS(getDouble(wp, "Speed", 0)),
+                  UnitConvert::toRads(getDouble(wp, "Heading", 0)));
    }
 
    if (isOn)

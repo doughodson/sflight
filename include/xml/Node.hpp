@@ -16,7 +16,7 @@ namespace sf
 class Node
 {
  public:
-   Node();
+   Node() = default;
    Node(std::string tagName);
    Node(std::string name, std::string text);
    Node(Node &);

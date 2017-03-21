@@ -10,7 +10,7 @@
 #include "modules/FDMModule.hpp"
 
 #include "UnitConvert.hpp"
-#include "xml/NodeUtil.hpp"
+#include "xml/node_utils.hpp"
 #include "UnitConvert.hpp"
 #include "Earth.hpp"
 #include "AutoPilotCmds.hpp"
@@ -73,13 +73,13 @@ void FDMGlobals::initialize(Node* node)
 {
    rootNode = node;
 
-   mass = (UnitConvert::toKilos(NodeUtil::getDouble(node, "InitialConditions/Weight", 0.0)));
+   mass = (UnitConvert::toKilos(getDouble(node, "InitialConditions/Weight", 0.0)));
 
    Node *wind = node->getChild("Wind");
    if (wind != 0)
    {
-      double wspeed = UnitConvert::toMPS(NodeUtil::getDouble(wind, "Speed", 0));
-      double dir = UnitConvert::toRads(NodeUtil::getDouble(wind, "Direction", 0) + 180);
+      double wspeed = UnitConvert::toMPS(getDouble(wind, "Speed", 0));
+      double dir = UnitConvert::toRads(getDouble(wind, "Direction", 0) + 180);
       windVel.set1(wspeed * std::cos(dir));
       windVel.set2(wspeed * std::sin(dir));
       windVel.set3(0);
@@ -87,18 +87,18 @@ void FDMGlobals::initialize(Node* node)
 
    // general
    Node *tmp = node->getChild("InitialConditions/Position");
-   lat = UnitConvert::toRads(NodeUtil::getDouble(tmp, "Latitude", 0.0));
-   lon = UnitConvert::toRads(NodeUtil::getDouble(tmp, "Longitude", 0.0));
-   alt = UnitConvert::toMeters(NodeUtil::getDouble(tmp, "Altitude", 0.0));
+   lat = UnitConvert::toRads(getDouble(tmp, "Latitude", 0.0));
+   lon = UnitConvert::toRads(getDouble(tmp, "Longitude", 0.0));
+   alt = UnitConvert::toMeters(getDouble(tmp, "Altitude", 0.0));
 
    tmp = node->getChild("InitialConditions/Orientation");
    eulers = Euler(
-       UnitConvert::toRads(NodeUtil::getDouble(tmp, "Heading", 0.0)),
-       UnitConvert::toRads(NodeUtil::getDouble(tmp, "Pitch", 0.0)),
-       UnitConvert::toRads(NodeUtil::getDouble(tmp, "Roll", 0.0)));
+       UnitConvert::toRads(getDouble(tmp, "Heading", 0.0)),
+       UnitConvert::toRads(getDouble(tmp, "Pitch", 0.0)),
+       UnitConvert::toRads(getDouble(tmp, "Roll", 0.0)));
 
-   const double speed = UnitConvert::toMPS(NodeUtil::getDouble(node, "InitialConditions/Airspeed", 0.0));
-   const double mach = NodeUtil::getDouble(node, "InitialConditions/Mach", 0);
+   const double speed = UnitConvert::toMPS(getDouble(node, "InitialConditions/Airspeed", 0.0));
+   const double mach = getDouble(node, "InitialConditions/Mach", 0);
    if (mach != 0 && speed == 0)
       uvw.set1(Atmosphere::getSpeedSound(Atmosphere::getTemp(alt)) * mach);
    else
@@ -115,7 +115,7 @@ void FDMGlobals::initialize(Node* node)
    autoPilotCmds.setAutoThrottleOn(true);
    autoPilotCmds.setHdgHoldOn(true);
 
-   fuel = UnitConvert::toKilos(NodeUtil::getDouble(node, "InitialConditions/Fuel", 0.0));
+   fuel = UnitConvert::toKilos(getDouble(node, "InitialConditions/Fuel", 0.0));
 
    initialize();
 }

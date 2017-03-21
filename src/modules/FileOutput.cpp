@@ -5,7 +5,7 @@
 #include "FDMGlobals.hpp"
 #include "UnitConvert.hpp"
 #include "xml/Node.hpp"
-#include "xml/NodeUtil.hpp"
+#include "xml/node_utils.hpp"
 
 #include <iostream>
 #include <iomanip>
@@ -23,8 +23,8 @@ FileOutput::~FileOutput()
 
 void FileOutput::initialize(Node* node)
 {
-   std::string filename = NodeUtil::get(node, "FileOutput/Path", "");
-   rate = NodeUtil::getDouble(node, "FileOutput/Rate", 1);
+   std::string filename = get(node, "FileOutput/Path", "");
+   rate = getDouble(node, "FileOutput/Rate", 1);
    std::cout << "Saving output to: " << filename << std::endl;
    fout.open(filename.c_str());
    frameCounter = 0;

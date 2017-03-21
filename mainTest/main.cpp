@@ -4,7 +4,7 @@
 
 #include "FDMGlobals.hpp"
 #include "SimTimer.hpp"
-#include "loadModules.hpp"
+#include "load_modules.hpp"
 
 #include <cstdlib>
 #include <iostream>
@@ -23,7 +23,7 @@ int main(int argc, char** argv)
 	sf::Node* node = parser->parse(argv[1], true);
 
    //
-	loadModules(node, globals);
+	load_modules(node, globals);
 	globals->initialize(node);
 
 	auto timer = new sf::SimTimer(globals, std::atof(argv[3]),

@@ -8,7 +8,7 @@
 #include "WindAxis.hpp"
 #include "Vector3.hpp"
 #include "xml/Node.hpp"
-#include "xml/NodeUtil.hpp"
+#include "xml/node_utils.hpp"
 #include "Table3D.hpp"
 #include "Table2D.hpp"
 
@@ -50,9 +50,9 @@ void TableAero::initialize(Node *node)
    if (tmp == 0)
       return;
 
-   wingSpan = UnitConvert::toMeters(NodeUtil::getDouble(tmp, "WingSpan", 6.0));
-   wingArea = UnitConvert::toSqMeters(NodeUtil::getDouble(tmp, "WingArea", 6.0));
-   thrustAngle = UnitConvert::toRads(NodeUtil::getDouble(tmp, "ThrustAngle", 0.0));
+   wingSpan = UnitConvert::toMeters(getDouble(tmp, "WingSpan", 6.0));
+   wingArea = UnitConvert::toSqMeters(getDouble(tmp, "WingArea", 6.0));
+   thrustAngle = UnitConvert::toRads(getDouble(tmp, "ThrustAngle", 0.0));
 
    Node *thrustNode = tmp->getChild("ThrustTable");
    Node *ffNode = tmp->getChild("FuelFlowTable");
@@ -72,10 +72,10 @@ void TableAero::initialize(Node *node)
 
          Node *tablenode = tables[i];
 
-         throttleVals[i] = NodeUtil::getDouble(tables[i], "Throttle", 0);
+         throttleVals[i] = getDouble(tables[i], "Throttle", 0);
 
-         std::string valstr = NodeUtil::get(tablenode, "AltVals", "");
-         std::vector<std::string> splits = NodeUtil::splitString(valstr, ',');
+         std::string valstr = get(tablenode, "AltVals", "");
+         std::vector<std::string> splits = splitString(valstr, ',');
          int numAltVals = splits.size();
 
          double *altvals = new double[numAltVals];
@@ -84,8 +84,8 @@ void TableAero::initialize(Node *node)
             altvals[j] = UnitConvert::toMeters(atof(splits[j].c_str()));
          }
 
-         valstr = NodeUtil::get(tablenode, "MachVals", "");
-         splits = NodeUtil::splitString(valstr, ',');
+         valstr = get(tablenode, "MachVals", "");
+         splits = splitString(valstr, ',');
          int numMachVals = splits.size();
 
          double *machvals = new double[numMachVals];
@@ -95,7 +95,7 @@ void TableAero::initialize(Node *node)
          }
 
          Table2D *table = new Table2D(numAltVals, numMachVals, machvals, altvals);
-         table->setData(NodeUtil::get(tablenode, "Data", ""));
+         table->setData(get(tablenode, "Data", ""));
          thrustTable->setPage(i, table);
       }
       // convert from lbs to Newtons
@@ -117,10 +117,10 @@ void TableAero::initialize(Node *node)
 
          Node *tablenode = tables[i];
 
-         throttleVals[i] = NodeUtil::getDouble(tables[i], "Throttle", 0);
+         throttleVals[i] = getDouble(tables[i], "Throttle", 0);
 
-         std::string valstr = NodeUtil::get(tablenode, "AltVals", "");
-         std::vector<std::string> splits = NodeUtil::splitString(valstr, ',');
+         std::string valstr = get(tablenode, "AltVals", "");
+         std::vector<std::string> splits = splitString(valstr, ',');
          int numAltVals = splits.size();
 
          double *altvals = new double[numAltVals];
@@ -129,8 +129,8 @@ void TableAero::initialize(Node *node)
             altvals[j] = UnitConvert::toMeters(atof(splits[j].c_str()));
          }
 
-         valstr = NodeUtil::get(tablenode, "MachVals", "");
-         splits = NodeUtil::splitString(valstr, ',');
+         valstr = get(tablenode, "MachVals", "");
+         splits = splitString(valstr, ',');
          int numMachVals = splits.size();
 
          double *machvals = new double[numMachVals];
@@ -140,7 +140,7 @@ void TableAero::initialize(Node *node)
          }
 
          Table2D *table = new Table2D(numAltVals, numMachVals, altvals, machvals);
-         table->setData(NodeUtil::get(tablenode, "Data", ""));
+         table->setData(get(tablenode, "Data", ""));
          fuelflowTable->setPage(i, table);
       }
       //convert from lbs/sec to kilos/sec
@@ -159,10 +159,10 @@ void TableAero::initialize(Node *node)
       {
          Node *tablenode = tables[i];
 
-         machVals[i] = NodeUtil::getDouble(tables[i], "Mach", 0);
+         machVals[i] = getDouble(tables[i], "Mach", 0);
 
-         std::string valstr = NodeUtil::get(tablenode, "AltVals", "");
-         std::vector<std::string> splits = NodeUtil::splitString(valstr, ',');
+         std::string valstr = get(tablenode, "AltVals", "");
+         std::vector<std::string> splits = splitString(valstr, ',');
          int numAltVals = splits.size();
 
          double *altvals = new double[numAltVals];
@@ -171,18 +171,18 @@ void TableAero::initialize(Node *node)
             altvals[j] = UnitConvert::toMeters(atof(splits[j].c_str()));
          }
 
-         valstr = NodeUtil::get(tablenode, "AlphaVals", "");
-         splits = NodeUtil::splitString(valstr, ',');
+         valstr = get(tablenode, "AlphaVals", "");
+         splits = splitString(valstr, ',');
          int numAlphaVals = splits.size();
 
-         double *alphavals = new double[numAlphaVals];
+         double* alphavals = new double[numAlphaVals];
          for (int j = 0; j < numAlphaVals; j++)
          {
             alphavals[j] = UnitConvert::toRads(atof(splits[j].c_str()));
          }
 
          Table2D *table = new Table2D(numAltVals, numAlphaVals, altvals, alphavals);
-         table->setData(NodeUtil::get(tablenode, "Data", ""));
+         table->setData(get(tablenode, "Data", ""));
          liftTable->setPage(i, table);
       }
    }
@@ -200,10 +200,10 @@ void TableAero::initialize(Node *node)
 
          Node *tablenode = tables[i];
 
-         machVals[i] = NodeUtil::getDouble(tables[i], "Mach", 0);
+         machVals[i] = getDouble(tables[i], "Mach", 0);
 
-         std::string valstr = NodeUtil::get(tablenode, "AltVals", "");
-         std::vector<std::string> splits = NodeUtil::splitString(valstr, ',');
+         std::string valstr = get(tablenode, "AltVals", "");
+         std::vector<std::string> splits = splitString(valstr, ',');
          int numAltVals = splits.size();
 
          double *altvals = new double[numAltVals];
@@ -212,8 +212,8 @@ void TableAero::initialize(Node *node)
             altvals[j] = UnitConvert::toMeters(atof(splits[j].c_str()));
          }
 
-         valstr = NodeUtil::get(tablenode, "CLVals", "");
-         splits = NodeUtil::splitString(valstr, ',');
+         valstr = get(tablenode, "CLVals", "");
+         splits = splitString(valstr, ',');
          int numAlphaVals = splits.size();
 
          double *alphavals = new double[numAlphaVals];
@@ -223,7 +223,7 @@ void TableAero::initialize(Node *node)
          }
 
          Table2D *table = new Table2D(numAltVals, numAlphaVals, altvals, alphavals);
-         table->setData(NodeUtil::get(tablenode, "Data", ""));
+         table->setData(get(tablenode, "Data", ""));
          dragTable->setPage(i, table);
       }
    }

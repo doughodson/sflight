@@ -1,6 +1,6 @@
 
 #include "Table2D.hpp"
-#include "xml/NodeUtil.hpp"
+#include "xml/node_utils.hpp"
 
 #include <string>
 #include <iostream>
@@ -49,8 +49,7 @@ Table2D::~Table2D()
 
 void Table2D::setData(std::string data)
 {
-
-   std::vector<std::string> v = NodeUtil::splitString(data, ',');
+   std::vector<std::string> v = splitString(data, ',');
 
    if (v.size() != numRows * numCols)
       return;

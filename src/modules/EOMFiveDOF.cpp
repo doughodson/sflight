@@ -8,7 +8,7 @@
 #include "Vector3.hpp"
 #include "Euler.hpp"
 #include "Quaternion.hpp"
-#include "xml/NodeUtil.hpp"
+#include "xml/node_utils.hpp"
 
 #include <iostream>
 #include <cmath>
@@ -41,7 +41,7 @@ void EOMFiveDOF::initialize(Node *node)
    gravAccel = Vector3();
 
    gravConst = Earth::getG(0, 0, 0);
-   autoRudder = NodeUtil::getBool(node, "Control/AutoRudder", true);
+   autoRudder = getBool(node, "Control/AutoRudder", true);
 }
 
 void EOMFiveDOF::computeEOM(double timestep)

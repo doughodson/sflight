@@ -1,5 +1,5 @@
 
-#include "xml/NodeUtil.hpp"
+#include "xml/node_utils.hpp"
 #include "xml/Node.hpp"
 #include "xml/XMLParser.hpp"
 
@@ -13,7 +13,7 @@ namespace sf
 {
 
 /** returns a list of nodes that contain the childName */
-std::vector<Node *> NodeUtil::getList(Node *parent, std::string childName)
+std::vector<Node *> getList(Node *parent, std::string childName)
 {
 
    if (parent == nullptr)
@@ -22,7 +22,7 @@ std::vector<Node *> NodeUtil::getList(Node *parent, std::string childName)
    return parent->getChildren(childName);
 }
 
-std::string NodeUtil::get(Node *parent, std::string pathName, std::string defaultVal)
+std::string get(Node *parent, std::string pathName, std::string defaultVal)
 {
 
    if (parent == nullptr)
@@ -36,7 +36,7 @@ std::string NodeUtil::get(Node *parent, std::string pathName, std::string defaul
    return node->getText();
 }
 
-int NodeUtil::getInt(Node *parent, std::string pathName, int defaultVal)
+int getInt(Node *parent, std::string pathName, int defaultVal)
 {
 
    if (parent == nullptr)
@@ -50,7 +50,7 @@ int NodeUtil::getInt(Node *parent, std::string pathName, int defaultVal)
    return std::atoi(node->getText().c_str());
 }
 
-long NodeUtil::getLong(Node *parent, std::string pathName, long defaultVal)
+long getLong(Node *parent, std::string pathName, long defaultVal)
 {
 
    if (parent == nullptr)
@@ -64,7 +64,7 @@ long NodeUtil::getLong(Node *parent, std::string pathName, long defaultVal)
    return std::atol(node->getText().c_str());
 }
 
-double NodeUtil::getDouble(Node *parent, std::string pathName, double defaultVal)
+double getDouble(Node *parent, std::string pathName, double defaultVal)
 {
 
    if (parent == nullptr)
@@ -80,7 +80,7 @@ double NodeUtil::getDouble(Node *parent, std::string pathName, double defaultVal
    return std::atof(node->getText().c_str());
 }
 
-float NodeUtil::getFloat(Node *parent, std::string pathName, float defaultVal)
+float getFloat(Node *parent, std::string pathName, float defaultVal)
 {
 
    if (parent == nullptr)
@@ -94,7 +94,7 @@ float NodeUtil::getFloat(Node *parent, std::string pathName, float defaultVal)
    return (float)atof(node->getText().c_str());
 }
 
-bool NodeUtil::getBool(Node *parent, std::string pathName, bool defaultVal)
+bool getBool(Node *parent, std::string pathName, bool defaultVal)
 {
 
    if (parent == nullptr)
@@ -119,7 +119,7 @@ bool NodeUtil::getBool(Node *parent, std::string pathName, bool defaultVal)
    return defaultVal;
 }
 
-std::vector<std::string> NodeUtil::splitString(std::string inStr, char splitChar)
+std::vector<std::string> splitString(std::string inStr, char splitChar)
 {
    std::vector<std::string> retV;
 

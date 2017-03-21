@@ -8,7 +8,7 @@
 #include "WindAxis.hpp"
 #include "Vector3.hpp"
 #include "xml/Node.hpp"
-#include "xml/NodeUtil.hpp"
+#include "xml/node_utils.hpp"
 #include "constants.hpp"
 
 #include <iostream>
@@ -54,33 +54,33 @@ void InterpAero::initialize(Node *node)
 
    Node *tmp = node->getChild("Design");
 
-   designAlt = UnitConvert::toMeters(NodeUtil::getDouble(tmp, "DesignAltitude", 0.0));
+   designAlt = UnitConvert::toMeters(getDouble(tmp, "DesignAltitude", 0.0));
 
-   designWeight = UnitConvert::toNewtons(NodeUtil::getDouble(tmp, "DesignWeight", 0.0));
+   designWeight = UnitConvert::toNewtons(getDouble(tmp, "DesignWeight", 0.0));
 
-   wingSpan = UnitConvert::toMeters(NodeUtil::getDouble(tmp, "WingSpan", 6.0));
-   wingArea = UnitConvert::toSqMeters(NodeUtil::getDouble(tmp, "WingArea", 6.0));
+   wingSpan = UnitConvert::toMeters(getDouble(tmp, "WingSpan", 6.0));
+   wingArea = UnitConvert::toSqMeters(getDouble(tmp, "WingArea", 6.0));
 
    wingEffects = PI * wingSpan * wingSpan / wingArea;
    //wingEffects = 1.0;
 
-   thrustAngle = UnitConvert::toRads(NodeUtil::getDouble(tmp, "ThrustAngle", 0.0));
+   thrustAngle = UnitConvert::toRads(getDouble(tmp, "ThrustAngle", 0.0));
 
-   thrustRatio = NodeUtil::getDouble(tmp, "ThrustToWeight", 0.0) * designWeight;
+   thrustRatio = getDouble(tmp, "ThrustToWeight", 0.0) * designWeight;
    speedSound = Atmosphere::getSpeedSound(Atmosphere::getTemp(designAlt));
 
    // cruise condition
-   pitch = UnitConvert::toRads(NodeUtil::getDouble(tmp, "CruiseCondition/Pitch", 0));
-   airspeed = UnitConvert::toMPS(NodeUtil::getDouble(tmp, "CruiseCondition/Airspeed", 0.0));
-   vs = UnitConvert::FPMtoMPS(NodeUtil::getDouble(tmp, "CruiseCondition/VS", 0.0));
+   pitch = UnitConvert::toRads(getDouble(tmp, "CruiseCondition/Pitch", 0));
+   airspeed = UnitConvert::toMPS(getDouble(tmp, "CruiseCondition/Airspeed", 0.0));
+   vs = UnitConvert::FPMtoMPS(getDouble(tmp, "CruiseCondition/VS", 0.0));
    if (airspeed < 1E-6)
    {
-      airspeed = NodeUtil::getDouble(tmp, "CruiseCondition/Mach", 0) * speedSound;
+      airspeed = getDouble(tmp, "CruiseCondition/Mach", 0) * speedSound;
    }
 
-   thrust = UnitConvert::toNewtons(NodeUtil::getDouble(tmp, "CruiseCondition/Thrust", 0));
+   thrust = UnitConvert::toNewtons(getDouble(tmp, "CruiseCondition/Thrust", 0));
    if (thrust < 1E-6)
-      thrust = NodeUtil::getDouble(tmp, "CruiseCondition/Throttle", 0) * thrustRatio;
+      thrust = getDouble(tmp, "CruiseCondition/Throttle", 0) * thrustRatio;
 
    createCoefs(pitch, thrust, vs, airspeed, cruiseAlpha, cruiseCL, cruiseCD);
 
@@ -93,18 +93,18 @@ void InterpAero::initialize(Node *node)
    }
 
    // climb condition
-   pitch = UnitConvert::toRads(NodeUtil::getDouble(tmp, "ClimbCondition/Pitch", 0));
-   airspeed = UnitConvert::toMPS(NodeUtil::getDouble(tmp, "ClimbCondition/Airspeed", 0.0));
-   vs = UnitConvert::FPMtoMPS(NodeUtil::getDouble(tmp, "ClimbCondition/VS", 0.0));
+   pitch = UnitConvert::toRads(getDouble(tmp, "ClimbCondition/Pitch", 0));
+   airspeed = UnitConvert::toMPS(getDouble(tmp, "ClimbCondition/Airspeed", 0.0));
+   vs = UnitConvert::FPMtoMPS(getDouble(tmp, "ClimbCondition/VS", 0.0));
    if (airspeed < 1E-6)
    {
-      airspeed = NodeUtil::getDouble(tmp, "ClimbCondition/Mach", 0) * speedSound;
+      airspeed = getDouble(tmp, "ClimbCondition/Mach", 0) * speedSound;
    }
    mach = airspeed / speedSound;
 
-   thrust = UnitConvert::toNewtons(NodeUtil::getDouble(tmp, "ClimbCondition/Thrust", 0));
+   thrust = UnitConvert::toNewtons(getDouble(tmp, "ClimbCondition/Thrust", 0));
    if (thrust < 1E-6)
-      thrust = NodeUtil::getDouble(tmp, "ClimbCondition/Throttle", 0) * thrustRatio;
+      thrust = getDouble(tmp, "ClimbCondition/Throttle", 0) * thrustRatio;
 
    createCoefs(pitch, thrust, vs, airspeed, climbAlpha, climbCL, climbCD);
 

@@ -7,7 +7,7 @@ namespace sf
 class Node;
 class FDMGlobals;
 
-void loadModules(Node* node, FDMGlobals* globals);
+void load_modules(Node* node, FDMGlobals* globals);
 
 }
 

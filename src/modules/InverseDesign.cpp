@@ -8,7 +8,7 @@
 #include "WindAxis.hpp"
 #include "Vector3.hpp"
 #include "xml/Node.hpp"
-#include "xml/NodeUtil.hpp"
+#include "xml/node_utils.hpp"
 
 #include <iostream>
 #include <vector>
@@ -69,13 +69,13 @@ void InverseDesign::initialize(Node *node)
 
    Node *tmp = node->getChild("Design");
 
-   usingMachEffects = NodeUtil::getBool(tmp, "CompressibleFlow", false);
+   usingMachEffects = getBool(tmp, "CompressibleFlow", false);
 
    //get Engine parameters
-   thrustAngle = UnitConvert::toRads(NodeUtil::getDouble(tmp, "Engine/ThrustAngle", 0.0));
-   staticThrust = UnitConvert::toNewtons(NodeUtil::getDouble(tmp, "Engine/StaticThrust", 0));
+   thrustAngle = UnitConvert::toRads(getDouble(tmp, "Engine/ThrustAngle", 0.0));
+   staticThrust = UnitConvert::toNewtons(getDouble(tmp, "Engine/StaticThrust", 0));
 
-   std::string engineType = NodeUtil::get(tmp, "Engine/Type", "");
+   std::string engineType = get(tmp, "Engine/Type", "");
    if (engineType == "Turbojet")
    {
       dTdM = 0;
@@ -96,10 +96,10 @@ void InverseDesign::initialize(Node *node)
    std::vector<Node *> fcNodes = tmp->getChildren("FlightConditions/FlightCondition");
 
    // get default values
-   designWeight = NodeUtil::getDouble(tmp, "FlightConditions/Weight", 0.0);
-   wingSpan = UnitConvert::toMeters(NodeUtil::getDouble(tmp, "FlightCondiitons/WingSpan", 6.0));
-   wingArea = UnitConvert::toSqMeters(NodeUtil::getDouble(tmp, "FlightConditions/WingArea", 6.0));
-   designAlt = NodeUtil::getDouble(tmp, "FlightConditions/Altitude", 0.0);
+   designWeight = getDouble(tmp, "FlightConditions/Weight", 0.0);
+   wingSpan = UnitConvert::toMeters(getDouble(tmp, "FlightCondiitons/WingSpan", 6.0));
+   wingArea = UnitConvert::toSqMeters(getDouble(tmp, "FlightConditions/WingArea", 6.0));
+   designAlt = getDouble(tmp, "FlightConditions/Altitude", 0.0);
 
    const int size = fcNodes.size();
 
@@ -113,17 +113,17 @@ void InverseDesign::initialize(Node *node)
    {
       tmp = fcNodes[i];
 
-      pitch = UnitConvert::toRads(NodeUtil::getDouble(tmp, "Pitch", 0));
-      airspeed = UnitConvert::toMPS(NodeUtil::getDouble(tmp, "Airspeed", 0.0));
-      vs = UnitConvert::FPMtoMPS(NodeUtil::getDouble(tmp, "VS", 0.0));
-      double alt = UnitConvert::toMeters(NodeUtil::getDouble(tmp, "Altitude", designAlt));
+      pitch = UnitConvert::toRads(getDouble(tmp, "Pitch", 0));
+      airspeed = UnitConvert::toMPS(getDouble(tmp, "Airspeed", 0.0));
+      vs = UnitConvert::FPMtoMPS(getDouble(tmp, "VS", 0.0));
+      double alt = UnitConvert::toMeters(getDouble(tmp, "Altitude", designAlt));
       speedSound = Atmosphere::getSpeedSound(Atmosphere::getTemp(alt));
       rho = Atmosphere::getRho(alt);
-      double weight = UnitConvert::toNewtons(NodeUtil::getDouble(tmp, "Weight", designWeight));
+      double weight = UnitConvert::toNewtons(getDouble(tmp, "Weight", designWeight));
 
       if (airspeed < 1E-6)
       {
-         mach[i] = NodeUtil::getDouble(tmp, "Mach", 0);
+         mach[i] = getDouble(tmp, "Mach", 0);
          airspeed = mach[i] * speedSound;
       }
       else
@@ -131,11 +131,11 @@ void InverseDesign::initialize(Node *node)
          mach[i] = airspeed / speedSound;
       }
 
-      thrust = getThrust(rho, mach[i], NodeUtil::getDouble(tmp, "Throttle", 0));
+      thrust = getThrust(rho, mach[i], getDouble(tmp, "Throttle", 0));
 
       getAeroCoefs(pitch, airspeed, vs, rho, weight, thrust, alpha[i], cl[i], cd[i]);
 
-      tsfc[i] = UnitConvert::toKilos(NodeUtil::getDouble(tmp, "FuelFlow", 0) / 3600.) / thrust;
+      tsfc[i] = UnitConvert::toKilos(getDouble(tmp, "FuelFlow", 0) / 3600.) / thrust;
 
       // apply compressibility if used.  this finds the incompressible cl and cd values by deviding by the
       // prandtl-glauert denominator.
@@ -184,7 +184,7 @@ void InverseDesign::initialize(Node *node)
    std::cout << "cdo: " << cdo << " dCDda: " << b << std::endl;
 
    // set initial conditions
-   globals->throttle = NodeUtil::getDouble(node, "InitialConditions/Throttle", 0);
+   globals->throttle = getDouble(node, "InitialConditions/Throttle", 0);
    globals->rpm = globals->throttle;
 
    delete cl;

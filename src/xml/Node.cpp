@@ -1,35 +1,22 @@
 
 #include "xml/Node.hpp"
-#include "xml/NodeUtil.hpp"
 
 #include <algorithm>
 #include <iterator>
 #include <iostream>
 
-//using namespace std;
-
 namespace sf
 {
-
-Node::Node()
-{
-   this->name = "";
-   this->text = "";
-   this->parentNode = nullptr;
-}
 
 Node::Node(std::string tagName)
 {
    this->name = tagName;
-   this->text = "";
-   this->parentNode = nullptr;
 }
 
 Node::Node(std::string tagName, std::string text)
 {
    this->name = tagName;
    this->text = text;
-   this->parentNode = nullptr;
 }
 
 Node::Node(Node &node)

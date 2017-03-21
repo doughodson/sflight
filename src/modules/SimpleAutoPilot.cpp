@@ -5,7 +5,7 @@
 
 #include "UnitConvert.hpp"
 #include "FDMGlobals.hpp"
-#include "xml/NodeUtil.hpp"
+#include "xml/node_utils.hpp"
 
 #include <iostream>
 #include <algorithm>
@@ -24,42 +24,42 @@ void SimpleAutoPilot::initialize(Node* node)
 {
    Node *apProps = node->getChild("AutoPilot");
 
-   std::vector<Node *> comps = NodeUtil::getList(apProps, "Component");
+   std::vector<Node *> comps = getList(apProps, "Component");
 
    for (int i = 0; i < comps.size(); i++)
    {
       Node *tmp = comps[i];
 
-      if (NodeUtil::get(tmp, "Type", "") == "HeadingHold")
+      if (get(tmp, "Type", "") == "HeadingHold")
       {
 
-         globals->autoPilotCmds.setMaxBank(UnitConvert::toRads(NodeUtil::getDouble(tmp, "MaxBank", 30)));
-         kphi = NodeUtil::getDouble(tmp, "BankWeight", kphi);
-         maxBankRate = UnitConvert::toRads(NodeUtil::getDouble(tmp, "MaxBankRate", maxBankRate));
-         turnType = NodeUtil::get(tmp, "TurnType", "").find("TRAJECTORY") == 0 ? TURNTYPE_TRAJECTORY : TURNTYPE_HDG;
+         globals->autoPilotCmds.setMaxBank(UnitConvert::toRads(getDouble(tmp, "MaxBank", 30)));
+         kphi = getDouble(tmp, "BankWeight", kphi);
+         maxBankRate = UnitConvert::toRads(getDouble(tmp, "MaxBankRate", maxBankRate));
+         turnType = get(tmp, "TurnType", "").find("TRAJECTORY") == 0 ? TURNTYPE_TRAJECTORY : TURNTYPE_HDG;
       }
-      else if (NodeUtil::get(tmp, "Type", "") == "AltitudeHold")
+      else if (get(tmp, "Type", "") == "AltitudeHold")
       {
 
-         globals->autoPilotCmds.setMaxVS(UnitConvert::FPMtoMPS(NodeUtil::getDouble(tmp, "MaxVS", 0)));
-         kalt = NodeUtil::getDouble(tmp, "AltWeight", 0.2);
+         globals->autoPilotCmds.setMaxVS(UnitConvert::FPMtoMPS(getDouble(tmp, "MaxVS", 0)));
+         kalt = getDouble(tmp, "AltWeight", 0.2);
       }
-      else if (NodeUtil::get(tmp, "Type", "") == "VSHold")
+      else if (get(tmp, "Type", "") == "VSHold")
       {
 
-         maxG = (NodeUtil::getDouble(tmp, "MaxG", maxG) - 1) * Earth::getG(0, 0, 0);
-         minG = (NodeUtil::getDouble(tmp, "MinG", minG) - 1) * Earth::getG(0, 0, 0);
+         maxG = (getDouble(tmp, "MaxG", maxG) - 1) * Earth::getG(0, 0, 0);
+         minG = (getDouble(tmp, "MinG", minG) - 1) * Earth::getG(0, 0, 0);
          maxG_rate = maxG;
          minG_rate = minG;
-         globals->autoPilotCmds.setMaxPitchUp(UnitConvert::toRads(NodeUtil::getDouble(tmp, "MaxPitchUp", PI / 2.)));
-         globals->autoPilotCmds.setMaxPitchDown(UnitConvert::toRads(NodeUtil::getDouble(tmp, "MaxPitchDown", -PI / 2.)));
-         kpitch = NodeUtil::getDouble(tmp, "PitchWeight", 0);
+         globals->autoPilotCmds.setMaxPitchUp(UnitConvert::toRads(getDouble(tmp, "MaxPitchUp", PI / 2.)));
+         globals->autoPilotCmds.setMaxPitchDown(UnitConvert::toRads(getDouble(tmp, "MaxPitchDown", -PI / 2.)));
+         kpitch = getDouble(tmp, "PitchWeight", 0);
       }
-      else if (NodeUtil::get(tmp, "Type", "") == "AutoThrottle")
+      else if (get(tmp, "Type", "") == "AutoThrottle")
       {
-         maxThrottle = NodeUtil::getDouble(tmp, "MaxThrottle", maxThrottle);
-         minThrottle = NodeUtil::getDouble(tmp, "MinThrottle", minThrottle);
-         spoolTime = NodeUtil::getDouble(tmp, "SpoolTime", spoolTime);
+         maxThrottle = getDouble(tmp, "MaxThrottle", maxThrottle);
+         minThrottle = getDouble(tmp, "MinThrottle", minThrottle);
+         spoolTime = getDouble(tmp, "SpoolTime", spoolTime);
       }
    }
 

@@ -1,8 +1,8 @@
 
-#include "loadModules.hpp"
+#include "load_modules.hpp"
 
 #include "xml/Node.hpp"
-#include "xml/NodeUtil.hpp"
+#include "xml/node_utils.hpp"
 
 #include "modules/Atmosphere.hpp"
 #include "modules/EOMFiveDOF.hpp"
@@ -22,16 +22,16 @@
 namespace sf
 {
 
-void loadModules(Node* parent, FDMGlobals* globals)
+void load_modules(Node* parent, FDMGlobals* globals)
 {
    Node* node = parent->getChild("Modules");
-   std::vector<Node*> nodeList = NodeUtil::getList(node, "Module");
-   const double defaultRate = NodeUtil::getDouble(node, "Rate", 0);
+   std::vector<Node*> nodeList = getList(node, "Module");
+   const double defaultRate = getDouble(node, "Rate", 0);
 
    for (int i = 0; i < nodeList.size(); i++)
    {
-      const std::string className = NodeUtil::get(nodeList[i], "Class", "");
-      const double rate = NodeUtil::getDouble(nodeList[i], "Rate", 0);
+      const std::string className = get(nodeList[i], "Class", "");
+      const double rate = getDouble(nodeList[i], "Rate", 0);
 
       if (className == "EOMFiveDOF") {
          new EOMFiveDOF(globals, rate);

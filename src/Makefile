@@ -16,13 +16,13 @@ OBJS =  \
 	modules/TableAero.o \
 	modules/WaypointFollower.o \
 	xml/Node.o \
-	xml/NodeUtil.o \
+	xml/node_utils.o \
 	xml/XMLParser.o \
 	AutoPilotCmds.o \
 	Earth.o \
 	Euler.o \
 	FDMGlobals.o \
-	ModuleLoader.o \
+	load_modules.o \
 	PIControl.o \
 	PID.o \
 	PIDControl.o \
