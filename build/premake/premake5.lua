@@ -43,27 +43,37 @@ workspace "simpleflight"
       targetsuffix "_d"
       defines { "WIN32", "_DEBUG" }
 
-   -- library
-   project "sf"
+   -- xml parser
+   project "sf_xml"
       kind "StaticLib"
       files {
-         "../../include/**.h*",
-         "../../src/**.cpp"
+         "../../include/xml/**.h*",
+         "../../src/xml/**.cpp"
       }
       targetdir ("../../lib/")
-      targetname "sf"
+      targetname "sf_xml"
+
+   -- flight dynamics model
+   project "sf_fdm"
+      kind "StaticLib"
+      files {
+         "../../include/fdm/**.h*",
+         "../../src/fdm/**.cpp"
+      }
+      targetdir ("../../lib/")
+      targetname "sf_fdm"
 
    -- simple application
    project "mainTest"
       kind "ConsoleApp"
       targetname "mainTest"
-      targetdir "../../mainTest"
-      debugdir "../../mainTest"
+      targetdir "../../examples/mainTest"
+      debugdir "../../examples/mainTest"
       files {
-         "../../mainTest/**.h*",
-         "../../mainTest/**.cpp"
+         "../../examples/mainTest/**.h*",
+         "../../examples/mainTest/**.cpp"
       }
-      links       { "sf" }
+      links { "sf_xml", "sf_fdm" }
       defines { "_CONSOLE" }
       filter "configurations:Release*"
          links { "Ws2_32", "Winmm", "comctl32", "gdi32"}
