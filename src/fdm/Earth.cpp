@@ -4,8 +4,8 @@
 #include "sf/fdm/Earth.hpp"
 #include "sf/fdm/UnitConvert.hpp"
 
-namespace sf
-{
+namespace sf {
+namespace fdm {
 
 const double Earth :: epsilon = 0.0818191908426;
 const double Earth :: gravEq = 9.7803267714;
@@ -90,4 +90,5 @@ void Earth :: getGravForce( Vector3 &v, double theta, double phi, double g )
 
 }
 
+}
 }

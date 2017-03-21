@@ -3,8 +3,8 @@
 
 #include <cmath>
 
-namespace sf
-{
+namespace sf {
+namespace fdm {
 
 PIDControl::PIDControl() : PIControl() {}
 PIDControl::~PIDControl() {}
@@ -68,5 +68,6 @@ double PIDControl::getOutput(const double timestep, const double desired_pt,
    }
 
    return u + du;
+}
 }
 }

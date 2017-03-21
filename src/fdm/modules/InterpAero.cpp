@@ -15,8 +15,8 @@
 #include <iostream>
 #include <cmath>
 
-namespace sf
-{
+namespace sf {
+namespace fdm {
 
 InterpAero::InterpAero(FDMGlobals *globals, double frameRate) : FDMModule(globals, frameRate)
 {}
@@ -158,5 +158,6 @@ double InterpAero::getBetaMach(double mach)
    if (mach > 0.95)
       mach = 0.95;
    return std::sqrt(1.0 - mach * mach);
+}
 }
 }

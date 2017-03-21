@@ -17,8 +17,8 @@
 #include <string>
 #include <cmath>
 
-namespace sf
-{
+namespace sf {
+namespace fdm {
 
 FDMGlobals::FDMGlobals()
 {
@@ -142,4 +142,5 @@ void FDMGlobals::setProperty(std::string tag, double val)
    }
 }
 
+}
 }

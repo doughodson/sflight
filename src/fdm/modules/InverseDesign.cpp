@@ -15,8 +15,8 @@
 #include <vector>
 #include <cmath>
 
-namespace sf
-{
+namespace sf {
+namespace fdm {
 
 InverseDesign::InverseDesign(FDMGlobals* globals, double frameRate) : FDMModule(globals, frameRate)
 {
@@ -229,4 +229,5 @@ double InverseDesign::getFuelFlow(double rho, double mach, double thrust)
    return (staticTSFC + dTSFCdM * mach) * thrust;
 }
 
+}
 }

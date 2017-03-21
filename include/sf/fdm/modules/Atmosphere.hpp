@@ -5,6 +5,7 @@
 #include "sf/fdm/modules/FDMModule.hpp"
 
 namespace sf {
+namespace fdm {
 
 //------------------------------------------------------------------------------
 // Class: Atmosphere
@@ -86,6 +87,7 @@ private:
    static int const maxIndex = 36;
 };
 
+}
 }
 
 #endif

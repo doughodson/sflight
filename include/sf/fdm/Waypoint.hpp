@@ -2,8 +2,8 @@
 #ifndef __Waypoint_H__
 #define __Waypoint_H__
 
-namespace sf
-{
+namespace sf {
+namespace fdm {
 
 //------------------------------------------------------------------------------
 // Class: Waypoint
@@ -38,6 +38,7 @@ class Waypoint
    double bearing {};
 };
 
+}
 }
 
 #endif

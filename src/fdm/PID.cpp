@@ -3,8 +3,8 @@
 
 #include <cmath>
 
-namespace sf
-{
+namespace sf {
+namespace fdm {
 
 PID::PID(const double minVal, const double maxVal, const double kp)
    : kp(kp), max(maxVal), min(minVal)
@@ -87,4 +87,5 @@ double PID::getOutput(const double timestep, const double desired_pt,
    return u + du;
 }
 
+}
 }

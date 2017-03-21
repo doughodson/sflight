@@ -15,8 +15,8 @@
 #include <iostream>
 #include <cmath>
 
-namespace sf
-{
+namespace sf {
+namespace fdm {
 
 EOMFiveDOF::EOMFiveDOF(FDMGlobals *globals, double frameRate) : FDMModule(globals, frameRate)
 {
@@ -145,4 +145,5 @@ void EOMFiveDOF::computeEOM(double timestep)
    globals->mach = globals->vInf / Atmosphere::getSpeedSound(Atmosphere::getTemp(globals->alt));
 }
 
-} //
+}
+}

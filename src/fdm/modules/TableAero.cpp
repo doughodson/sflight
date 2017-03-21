@@ -16,8 +16,8 @@
 #include <iostream>
 #include <cmath>
 
-namespace sf
-{
+namespace sf {
+namespace fdm {
 
 TableAero::TableAero(FDMGlobals *globals, double frameRate) : FDMModule(globals, frameRate)
 {
@@ -228,5 +228,6 @@ void TableAero::initialize(xml::Node *node)
          dragTable->setPage(i, table);
       }
    }
+}
 }
 }

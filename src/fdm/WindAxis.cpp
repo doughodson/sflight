@@ -5,8 +5,8 @@
 
 #include <cmath>
 
-namespace sf
-{
+namespace sf {
+namespace fdm {
 
 /** takes an input of drag, sideforce, and lift and returns [fx, fy, fz] in the body axis
      *  @param lift force 90 degrees to Vinf ( -z direction for alpha = 0)
@@ -33,4 +33,4 @@ void WindAxis :: bodyToWind ( Vector3& ret, double alpha, double beta, double fx
     ret.set3( fx * std::sin(beta) - fy * std::cos(beta) );
 }
 }
-
+}

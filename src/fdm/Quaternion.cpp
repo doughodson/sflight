@@ -5,8 +5,8 @@
 #include <iostream>
 #include <cmath>
 
-namespace sf
-{
+namespace sf {
+namespace fdm {
 
 Quaternion::Quaternion()
 {
@@ -200,5 +200,6 @@ void Quaternion::multiply(double d)
 void Quaternion::print()
 {
    std::cout << "eo: " << eo << " ex: " << ex << " ey: " << ey << " ez: " << ez << std::endl;
+}
 }
 }

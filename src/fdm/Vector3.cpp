@@ -5,23 +5,10 @@
 #include <sstream>
 #include <cmath>
 
-namespace sf
-{
-Vector3::Vector3()
-{
-   this->a1 = 0.0;
-   this->a2 = 0.0;
-   this->a3 = 0.0;
-}
+namespace sf {
+namespace fdm {
 
-Vector3::Vector3(double a1, double a2, double a3)
-{
-   this->a1 = a1;
-   this->a2 = a2;
-   this->a3 = a3;
-}
-
-Vector3::~Vector3()
+Vector3::Vector3(double a1, double a2, double a3):a1(a1), a2(a2), a3(a3)
 {
 }
 
@@ -149,5 +136,6 @@ std::string Vector3::toString()
    std::ostringstream oss;
    oss << "Vector3: [ " << get1() << ", " << get2() << ", " << get3() << " ]";
    return oss.str();
+}
 }
 }

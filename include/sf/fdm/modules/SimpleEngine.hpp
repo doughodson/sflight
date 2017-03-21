@@ -6,6 +6,7 @@
 
 namespace sf {
 namespace xml { class Node; }
+namespace fdm {
 
 //------------------------------------------------------------------------------
 // Class: SimpleEngine
@@ -43,6 +44,7 @@ class SimpleEngine : public virtual FDMModule
    double thrust {};
 };
 
+}
 }
 
 #endif

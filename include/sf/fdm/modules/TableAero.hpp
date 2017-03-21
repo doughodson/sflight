@@ -6,6 +6,7 @@
 
 namespace sf {
 namespace xml { class Node; }
+namespace fdm {
 class Table3D;
 class FDMGlobals;
 
@@ -41,6 +42,7 @@ class TableAero : public virtual FDMModule
    double stallCL {};
    double wingEffects {};
 };
+}
 }
 
 #endif

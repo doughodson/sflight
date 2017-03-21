@@ -5,13 +5,10 @@
 
 #include <cmath>
 
-namespace sf
-{
+namespace sf {
+namespace fdm {
 
-Euler::~Euler() {
-}
-
-Euler :: Euler( double psi, double theta, double phi)
+Euler :: Euler(double psi, double theta, double phi)
 {
     Vector3();
     this->a1 = psi;
@@ -71,5 +68,5 @@ void Euler :: getPQR( Vector3 &pqr, Vector3 &eulerDot)
     pqr.set3( -eulerDot.get2() * sin(a3) + eulerDot.get1() * cos(a2) * cos(a3) );
 }
 
-
-} //
+}
+}

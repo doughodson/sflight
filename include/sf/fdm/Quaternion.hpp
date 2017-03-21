@@ -2,8 +2,8 @@
 #ifndef __Quaternion_H__
 #define __Quaternion_H__
 
-namespace sf
-{
+namespace sf {
+namespace fdm {
 class Euler;
 class Vector3;
 
@@ -51,6 +51,7 @@ class Quaternion
    double ez {};
 };
 
+}
 }
 
 #endif

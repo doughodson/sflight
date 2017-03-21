@@ -1,5 +1,4 @@
 
-
 #include "sf/fdm/modules/FileOutput.hpp"
 
 #include "sf/xml/Node.hpp"
@@ -11,8 +10,8 @@
 #include <iostream>
 #include <iomanip>
 
-namespace sf
-{
+namespace sf {
+namespace fdm {
 
 FileOutput::FileOutput(FDMGlobals *globals, double frameRate) : FDMModule(globals, frameRate)
 {}
@@ -70,5 +69,6 @@ void FileOutput::close()
    fout.close();
 }
 
+}
 }
 

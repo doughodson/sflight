@@ -3,6 +3,7 @@
 #define __Earth_H__
 
 namespace sf {
+namespace fdm {
 class Vector3;
 
 //------------------------------------------------------------------------------
@@ -32,6 +33,7 @@ public:
    static void getGravForce(Vector3 &v, double theta, double phi, double g);
 };
 
+}
 }
 
 #endif

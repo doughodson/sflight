@@ -3,10 +3,12 @@
 #include "sf/fdm/UnitConvert.hpp"
 
 namespace sf {
+namespace fdm {
 
 void AutoPilotCmds :: setCmdHeading(const double radHeading)
 {
-    hdg = UnitConvert :: wrapHeading(radHeading, true);
+   hdg = UnitConvert :: wrapHeading(radHeading, true);
 }
 
+}
 }

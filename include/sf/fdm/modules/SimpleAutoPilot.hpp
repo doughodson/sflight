@@ -11,6 +11,7 @@
 
 namespace sf {
 namespace xml { class Node; }
+namespace fdm {
 
 //------------------------------------------------------------------------------
 // Class: SimpleAutoPilot
@@ -52,6 +53,7 @@ class SimpleAutoPilot : public FDMModule
 
    bool vsHoldOn {}, altHoldOn {}, hdgHoldOn {};
 };
+}
 }
 
 #endif

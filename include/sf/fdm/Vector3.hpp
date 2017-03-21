@@ -4,8 +4,8 @@
 
 #include <string>
 
-namespace sf
-{
+namespace sf {
+namespace fdm {
 
 //------------------------------------------------------------------------------
 // Class: Vector3
@@ -14,9 +14,9 @@ namespace sf
 class Vector3
 {
  public:
-   Vector3();
+   Vector3() = default;
    Vector3(double a1, double a2, double a3);
-   virtual ~Vector3();
+   virtual ~Vector3() = default;
 
    double a1 {};
    double a2 {};
@@ -56,6 +56,7 @@ class Vector3
    std::string toString();
 };
 
+}
 }
 
 #endif

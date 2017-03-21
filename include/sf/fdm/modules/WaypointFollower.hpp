@@ -9,6 +9,7 @@
 
 namespace sf {
 namespace xml { class Node; }
+namespace fdm {
 
 //------------------------------------------------------------------------------
 // Class: Waypoint
@@ -59,6 +60,7 @@ class WaypointFollower : public FDMModule
 
    PathType cmdPathType;
 };
+}
 }
 
 #endif

@@ -4,6 +4,7 @@
 
 namespace sf {
 namespace xml { class Node; }
+namespace fdm {
 class FDMGlobals;
 
 //------------------------------------------------------------------------------
@@ -27,6 +28,7 @@ class SimTimer
    long maxFrames {1000000000};
 };
 
+}
 }
 
 #endif

@@ -4,8 +4,8 @@
 
 #include "sf/fdm/Table2D.hpp"
 
-namespace sf
-{
+namespace sf {
+namespace fdm {
 
 //------------------------------------------------------------------------------
 // Class: Table3D
@@ -29,6 +29,7 @@ class Table3D
    double* pageVals {};
    int numPages {};
 };
+}
 }
 
 #endif

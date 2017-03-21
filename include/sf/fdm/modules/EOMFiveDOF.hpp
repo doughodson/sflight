@@ -9,6 +9,7 @@
 
 namespace sf {
 namespace xml { class Node; }
+namespace fdm {
 class FDMGlobals;
 
 //------------------------------------------------------------------------------
@@ -38,6 +39,7 @@ private:
    bool autoRudder {};
 };
 
+}
 }
 
 #endif

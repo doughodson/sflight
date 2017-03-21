@@ -9,8 +9,8 @@
 #include "sf/fdm/FDMGlobals.hpp"
 #include "sf/fdm/UnitConvert.hpp"
 
-namespace sf
-{
+namespace sf {
+namespace fdm {
 
 StickControl::StickControl(FDMGlobals *globals, const double frameRate)
     : FDMModule(globals, frameRate)
@@ -68,4 +68,5 @@ void StickControl::update(double timestep)
    globals->pqrdot.set3(globals->deflections.get3() * rudGain * qRatio - yawMom - globals->pqr.get3());
 }
 
+}
 }

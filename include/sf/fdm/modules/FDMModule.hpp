@@ -4,9 +4,9 @@
 
 #include <string>
 
-namespace sf
-{
+namespace sf {
 namespace xml { class Node; }
+namespace fdm {
 class FDMGlobals;
 
 //------------------------------------------------------------------------------
@@ -16,9 +16,8 @@ class FDMGlobals;
 class FDMModule
 {
  public:
-   FDMModule();
    FDMModule(FDMGlobals* globals, double frameRate);
-   virtual ~FDMModule();
+   virtual ~FDMModule() = default;
 
    // module interface
    virtual void initialize(xml::Node *node)               {};
@@ -30,6 +29,7 @@ class FDMModule
    double frameTime {};
    double lastTime {};
 };
+}
 }
 
 #endif

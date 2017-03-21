@@ -16,7 +16,7 @@ int main(int argc, char** argv)
 		return 1;
 	}
 
-	auto globals = new sf::FDMGlobals();
+	auto globals = new sf::fdm::FDMGlobals();
 
    // parse input file and return top node
 	sf::xml::Node* node = sf::xml::parse(argv[1], true);
@@ -25,7 +25,7 @@ int main(int argc, char** argv)
 	load_modules(node, globals);
 	globals->initialize(node);
 
-	auto timer = new sf::SimTimer(globals, std::atof(argv[3]),
+	auto timer = new sf::fdm::SimTimer(globals, std::atof(argv[3]),
                                   std::atof(argv[3]) * std::atof(argv[2]));
 
 	std::cout << "Running SimpleFlight for " << argv[2] << " seconds.\n" << std::endl;

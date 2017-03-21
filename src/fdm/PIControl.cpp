@@ -3,14 +3,13 @@
 
 #include <cmath>
 
-namespace sf
-{
+namespace sf {
+namespace fdm {
+
 PIControl::PIControl(double minVal, double maxVal, double p, double i)
    : kp(p), ti(i), max(maxVal), min(minVal)
 {
 }
-
-PIControl::~PIControl() {}
 
 void PIControl::setMax(double maxVal)
 {
@@ -93,4 +92,5 @@ double PIControl::getOutput(double timestep, double desired_pt, double current_p
    return u + du;
 }
 
+}
 }

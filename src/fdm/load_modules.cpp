@@ -19,8 +19,8 @@
 #include <vector>
 #include <iostream>
 
-namespace sf
-{
+namespace sf {
+namespace fdm {
 
 void load_modules(xml::Node* parent, FDMGlobals* globals)
 {
@@ -55,5 +55,6 @@ void load_modules(xml::Node* parent, FDMGlobals* globals)
          new InverseDesign(globals, rate);
       }
    }
+}
 }
 }

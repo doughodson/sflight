@@ -2,8 +2,8 @@
 #ifndef __PID_H__
 #define __PID_H__
 
-namespace sf
-{
+namespace sf {
+namespace fdm {
 
 //------------------------------------------------------------------------------
 // Class: PID
@@ -38,6 +38,7 @@ class PID
    double ed[3] {};
    double edf[4] {};
 };
+}
 }
 
 #endif

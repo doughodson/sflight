@@ -14,8 +14,8 @@
 #include <unistd.h>
 #endif
 
-namespace sf
-{
+namespace sf {
+namespace fdm {
 
 SimTimer::SimTimer(FDMGlobals *globals, const double frameRate)
     : globals(globals), frameRate(frameRate)
@@ -80,5 +80,6 @@ void SimTimer::stop() {}
 void SimTimer::initialize(xml::Node *node)
 {
    this->frameRate = xml::getDouble(node, "Modules/Rate", 20);
+}
 }
 }

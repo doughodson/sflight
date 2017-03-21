@@ -12,8 +12,8 @@
 #include <iostream>
 #include <algorithm>
 
-namespace sf
-{
+namespace sf {
+namespace fdm {
 
 SimpleAutoPilot::SimpleAutoPilot(FDMGlobals *globals, const double frameRate)
     : FDMModule(globals, frameRate)
@@ -230,4 +230,5 @@ void SimpleAutoPilot::updateSpeed(double timestep)
    }
 }
 
+}
 }

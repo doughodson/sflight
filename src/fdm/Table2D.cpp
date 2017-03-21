@@ -6,8 +6,8 @@
 #include <string>
 #include <iostream>
 
-namespace sf
-{
+namespace sf {
+namespace fdm {
 
 Table2D::Table2D(const int numRows, const int numCols, double rowVals[], double colVals[])
 {
@@ -189,4 +189,5 @@ void Table2D::print()
 //        //}
 //        return buf.toString();
 //    }
+}
 }

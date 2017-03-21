@@ -5,8 +5,8 @@
 #include "sf/fdm/constants.hpp"
 #include <cmath>
 
-namespace sf
-{
+namespace sf {
+namespace fdm {
 
 //------------------------------------------------------------------------------
 // basic conversions used in the flight model
@@ -155,7 +155,7 @@ double UnitConvert :: NMtoEarthRadians(double distNM) {
     return distNM / 21600.0 * TWO_PI;
 }
 
-
+}
 }
 
 #endif

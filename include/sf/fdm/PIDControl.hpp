@@ -4,8 +4,8 @@
 
 #include "sf/fdm/PIControl.hpp"
 
-namespace sf
-{
+namespace sf {
+namespace fdm {
 
 //------------------------------------------------------------------------------
 // Class: PIDControl
@@ -31,6 +31,7 @@ class PIDControl : public PIControl
    double ed {};
 };
 
+}
 }
 
 #endif

@@ -1,8 +1,8 @@
 
 #include "sf/fdm/Waypoint.hpp"
 
-namespace sf
-{
+namespace sf {
+namespace fdm {
 
 Waypoint::Waypoint(double lat, double lon, double alt, double speed, double bearing)
     : lat(lat), lon(lon), alt(alt), speed(speed), bearing(bearing)
@@ -57,5 +57,6 @@ double Waypoint::getBearing()
 void Waypoint::setBearing(double radBearing)
 {
    this->bearing = radBearing;
+}
 }
 }

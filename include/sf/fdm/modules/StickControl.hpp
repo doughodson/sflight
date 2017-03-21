@@ -10,6 +10,7 @@
 
 namespace sf {
 namespace xml { class Node; }
+namespace fdm {
 
 //------------------------------------------------------------------------------
 // Class: StickControl
@@ -36,6 +37,7 @@ class StickControl : public virtual FDMModule
    double pitchGain {};
 };
 
+}
 }
 
 #endif

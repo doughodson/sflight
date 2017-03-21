@@ -3,8 +3,8 @@
 
 #include <iostream>
 
-namespace sf
-{
+namespace sf {
+namespace fdm {
 
 Table3D::Table3D(const int numPages, double pageVals[])
     : pageVals(pageVals), numPages(numPages)
@@ -69,8 +69,8 @@ double Table3D::interp(double pageVal, double rowVal, double colVal)
    if (numPages > 1)
       pageweight = (pageVal - pageVals[lowpage]) / (pageVals[highpage] - pageVals[lowpage]);
 
-   double firstpage = data[lowpage]->interp(rowVal, colVal);
-   double secpage = data[highpage]->interp(rowVal, colVal);
+   const double firstpage = data[lowpage]->interp(rowVal, colVal);
+   const double secpage = data[highpage]->interp(rowVal, colVal);
 
    return firstpage + (secpage - firstpage) * pageweight;
 }
@@ -79,9 +79,9 @@ void Table3D::print()
 {
    for (int i = 0; i < numPages; i++)
    {
-
       std::cout << "page: " << i << ", val: " << pageVals[i] << std::endl;
       data[i]->print();
    }
+}
 }
 }

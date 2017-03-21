@@ -3,8 +3,8 @@
 
 #include "sf/fdm/FDMGlobals.hpp"
 
-namespace sf
-{
+namespace sf {
+namespace fdm {
 
 FDMModule::FDMModule(FDMGlobals *globals, double frameRate)
     : globals(globals)
@@ -19,7 +19,5 @@ FDMModule::FDMModule(FDMGlobals *globals, double frameRate)
    }
 }
 
-FDMModule::~FDMModule()
-{
 }
 }

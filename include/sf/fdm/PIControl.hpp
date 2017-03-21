@@ -2,8 +2,8 @@
 #ifndef __PIControl_H__
 #define __PIControl_H__
 
-namespace sf
-{
+namespace sf {
+namespace fdm {
 
 //------------------------------------------------------------------------------
 // Class: PIControl
@@ -16,7 +16,7 @@ class PIControl
  public:
    PIControl() = default;
    PIControl(double minVal, double maxVal, double p, double i);
-   virtual ~PIControl();
+   virtual ~PIControl() = default;
 
    virtual double getMax();
    virtual void setMax(double maxVal);
@@ -44,6 +44,7 @@ class PIControl
    double ep0 {}, ep1 {};
 };
 
+}
 }
 
 #endif

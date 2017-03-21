@@ -8,6 +8,7 @@
 
 namespace sf {
 namespace xml { class Node; }
+namespace fdm {
 class FDMGlobals;
 
 //------------------------------------------------------------------------------
@@ -33,6 +34,7 @@ public:
    int frameCounter {};
 };
 
+}
 }
 
 #endif

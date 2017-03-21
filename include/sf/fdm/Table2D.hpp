@@ -4,8 +4,8 @@
 
 #include <string>
 
-namespace sf
-{
+namespace sf {
+namespace fdm {
 
 //------------------------------------------------------------------------------
 // Class: Table2D
@@ -42,6 +42,7 @@ class Table2D
    double* colVals {};
 };
 
+}
 }
 
 #endif

@@ -13,8 +13,8 @@
 #include <iostream>
 #include <cmath>
 
-namespace sf
-{
+namespace sf {
+namespace fdm {
 
 WaypointFollower::WaypointFollower(FDMGlobals *globals, double frameRate)
     : FDMModule(globals, frameRate)
@@ -90,7 +90,7 @@ void WaypointFollower::update(double timestep)
    double hdgDiff = std::fabs(UnitConvert::wrapHeading(hdg - az, true));
 
    bool isClose = dist < distTol;
-   bool isBehind = std::fabs(hdgDiff) > sf::PI / 2.;
+   bool isBehind = std::fabs(hdgDiff) > PI / 2.;
 
    if (isClose && isBehind)
    {
@@ -171,6 +171,7 @@ int WaypointFollower::getNumWaypoints()
 
 void WaypointFollower::setCurrentWp(int num)
 {
-   this->wpNum = num;
+   wpNum = num;
+}
 }
 }

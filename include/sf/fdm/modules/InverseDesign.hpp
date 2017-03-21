@@ -6,6 +6,7 @@
 
 namespace sf {
 namespace xml { class Node; }
+namespace fdm {
 class FDMGlobals;
 
 //------------------------------------------------------------------------------
@@ -50,6 +51,7 @@ class InverseDesign : public virtual FDMModule
 
    bool usingMachEffects {true};
 };
+}
 }
 
 #endif

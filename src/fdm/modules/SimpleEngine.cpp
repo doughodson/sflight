@@ -14,6 +14,7 @@
 #include <vector>
 
 namespace sf {
+namespace fdm {
 
 SimpleEngine::SimpleEngine(FDMGlobals* globals, double frameRate) : FDMModule(globals, frameRate)
 {
@@ -108,4 +109,5 @@ void SimpleEngine::update(double timestep)
    globals->mass -= globals->fuelflow * timestep;
 }
 
+}
 }

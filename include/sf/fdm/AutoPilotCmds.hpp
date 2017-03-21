@@ -3,6 +3,7 @@
 #define __AutoPilotCmds_H__
 
 namespace sf {
+namespace fdm {
 
 //------------------------------------------------------------------------------
 // Class: AutoPilotCmds
@@ -97,6 +98,7 @@ class AutoPilotCmds
    double maxBank {};    // radians
    double maxVS {};
 };
+}
 }
 
 #endif
