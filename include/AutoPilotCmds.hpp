@@ -9,70 +9,77 @@ namespace sf {
 //------------------------------------------------------------------------------
 class AutoPilotCmds
 {
-public:
-   AutoPilotCmds();
-   ~AutoPilotCmds();
+ public:
+   AutoPilotCmds() = default;
+   virtual ~AutoPilotCmds() = default;
 
-   void setAutoPilotOn(bool onOff);
-   bool isAutoPilotOn();
+   void setAutoPilotOn(const bool x)                 { apOn = x;           }
+   bool isAutoPilotOn() const                        { return apOn;        }
 
-   void setAutoThrottleOn(bool onOff);
-   bool isAutoThrottleOn();
+   void setAutoThrottleOn(const bool x)              { atOn = x;           }
+   bool isAutoThrottleOn() const                     { return atOn;        }
 
-   void setCmdHeading(double radHeading);
-   double getCmdHeading();
+   // commanded heading (radians)
+   void setCmdHeading(const double radHeading);
+   double getCmdHeading() const                      { return hdg;         }
 
-   void setCmdAltitude(double metersMSLAlt);
-   double getCmdAltitude();
+   // MSL altitude (meters)
+   void setCmdAltitude(const double x)               { alt = x;            }
+   double getCmdAltitude() const                     { return alt;         }
 
-   void setCmdVertSpeed(double metersPerSec);
-   double getCmdVertSpeed();
+   // commanded vertical speed (m/s)
+   void setCmdVertSpeed(const double x)              { vs = x;             }
+   double getCmdVertSpeed() const                    { return vs;          }
 
-   void setCmdSpeed( double metersPerSec );
-   double getCmdSpeed();
+   // commanded speed (m/s)
+   void setCmdSpeed(const double x)                  { vel = x;            }
+   double getCmdSpeed() const                        { return vel;         }
 
-   bool isAltHoldOn();
-   void setAltHoldOn(bool altHoldOn);
+   void setCmdMach(const double x)                   { mach = x;           }
+   double getCmdMach() const                         { return mach;        }
 
-   bool isVsHoldOn();
-   void setVsHoldOn(bool vsHoldOn);
+   void setUseMach(const bool x)                     { useMach = x;        }
+   bool isUsingMach() const                          { return useMach;     }
 
-   bool isHdgHoldOn();
-   void setHdgHoldOn(bool hdgHoldOn);
+   // side slip (m/s)
+   void setCmdSideSlip(const double x)               { sideslip = x;       }
+   double getCmdSideSlip() const                     { return sideslip;    }
 
-   bool isOrbitHoldOn();
-   void setOrbitHoldOn(bool orbitHoldOn);
+   void setAltHoldOn(const bool x)                   { altHoldOn = x;      }
+   bool isAltHoldOn() const                          { return altHoldOn;   }
 
-   bool isLevelOn();
-   void setLevelOn(bool levelOn);
+   void setVsHoldOn(const bool x)                    { vsHoldOn = x;       }
+   bool isVsHoldOn() const                           { return vsHoldOn;    }
 
-   void setMaxPitchUp(double radPitch);
-   double getMaxPitchUp();
+   void setHdgHoldOn(const bool x)                   { hdgHoldOn = x;      }
+   bool isHdgHoldOn() const                          { return hdgHoldOn;   }
 
-   void setMaxPitchDown(double radPitch);
-   double getMaxPitchDown();
+   void setOrbitHoldOn(const bool x)                 { orbitHoldOn = x;    }
+   bool isOrbitHoldOn() const                        { return orbitHoldOn; }
 
-   void setMaxBank(double radbank);
-   double getMaxBank();
+   void setLevelOn(const bool x)                     { levelOn = x;        }
+   bool isLevelOn() const                            { return levelOn;     }
 
-   void setMaxVS(double vs);
-   double getMaxVS();
+   // max pitch up (in )radians)
+   void setMaxPitchUp(const double x)                { maxPitch = x;       }
+   double getMaxPitchUp() const                      { return maxPitch;    }
 
-   void setUseMach(bool useMach);
-   bool isUsingMach();
+   // max pitch down (radians)
+   void setMaxPitchDown(const double x)              { minPitch = x;       }
+   double getMaxPitchDown() const                    { return minPitch;    }
 
-   void setCmdMach(double mach);
-   double getCmdMach();
+   // max bank (radians)
+   void setMaxBank(const double x)                   { maxBank = x;        }
+   double getMaxBank() const                         { return maxBank;     }
 
-   void setCmdSideSlip(double mpsSideslip);
-   double getCmdSideSlip();
+   void setMaxVS(const double x)                     { maxVS = x;          }
+   double getMaxVS() const                           { return maxVS;       }
 
-protected:
-
+ private:
    double vel {};
-   double alt {};
+   double alt {};        // meters
    double vs {};
-   double hdg {};
+   double hdg {};        // radians
    double mach {};
    double sideslip {};
 
@@ -85,12 +92,11 @@ protected:
    bool levelOn {};
    bool useMach {};
 
-   double maxPitch {};
+   double maxPitch {};   // radians
    double minPitch {};
-   double maxBank {};
+   double maxBank {};    // radians
    double maxVS {};
 };
-
 }
 
 #endif
