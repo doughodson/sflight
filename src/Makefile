@@ -17,7 +17,7 @@ OBJS =  \
 	modules/WaypointFollower.o \
 	xml/Node.o \
 	xml/node_utils.o \
-	xml/XMLParser.o \
+	xml/parser_utils.o \
 	AutoPilotCmds.o \
 	Earth.o \
 	Euler.o \

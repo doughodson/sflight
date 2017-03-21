@@ -1,7 +1,8 @@
 
 #include "xml/node_utils.hpp"
+
 #include "xml/Node.hpp"
-#include "xml/XMLParser.hpp"
+#include "xml/parser_utils.hpp"
 
 #include <vector>
 #include <string>
@@ -13,7 +14,7 @@ namespace xml
 {
 
 // returns a list of nodes that contain the childName
-std::vector<Node *> getList(Node *parent, std::string childName)
+std::vector<Node*> getList(Node *parent, std::string childName)
 {
 
    if (parent == nullptr)
@@ -131,9 +132,8 @@ std::vector<std::string> splitString(std::string inStr, char splitChar)
    int i = 0;
    while (i < len)
    {
-
       // trim leading delimeters
-      while (i < len && (charStr[i] == splitChar || XMLParser::isWhitespace(charStr[i])))
+      while (i < len && (charStr[i] == splitChar || isWhitespace(charStr[i])))
       {
          i++;
       }
@@ -141,7 +141,7 @@ std::vector<std::string> splitString(std::string inStr, char splitChar)
       startLoc = i;
       i++;
 
-      while (i < len && charStr[i] != splitChar && !XMLParser::isWhitespace(charStr[i]))
+      while (i < len && charStr[i] != splitChar && !isWhitespace(charStr[i]))
       {
          i++;
       }

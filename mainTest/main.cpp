@@ -1,6 +1,6 @@
 
 #include "xml/Node.hpp"
-#include "xml/XMLParser.hpp"
+#include "xml/parser_utils.hpp"
 
 #include "FDMGlobals.hpp"
 #include "SimTimer.hpp"
@@ -19,8 +19,7 @@ int main(int argc, char** argv)
 	auto globals = new sf::FDMGlobals();
 
    // parse input file and return top node
-	auto parser = new xml::XMLParser();
-	xml::Node* node = parser->parse(argv[1], true);
+	xml::Node* node = xml::parse(argv[1], true);
 
    //
 	load_modules(node, globals);

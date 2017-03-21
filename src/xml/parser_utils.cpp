@@ -1,5 +1,5 @@
 
-#include "xml/XMLParser.hpp"
+#include "xml/parser_utils.hpp"
 
 #include <fstream>
 #include <sstream>
@@ -9,7 +9,7 @@
 namespace xml
 {
 
-Node *XMLParser::parse(std::string filename, bool treatAttributesAsChildren)
+Node* parse(std::string filename, bool treatAttributesAsChildren)
 {
    std::ifstream fin(filename.c_str());
 
@@ -24,7 +24,7 @@ Node *XMLParser::parse(std::string filename, bool treatAttributesAsChildren)
    return node;
 }
 
-Node *XMLParser::parseString(std::string xmlString, bool treatAttributesAsChildren)
+Node* parseString(std::string xmlString, bool treatAttributesAsChildren)
 {
    std::istringstream fin(xmlString);
 
@@ -38,7 +38,7 @@ Node *XMLParser::parseString(std::string xmlString, bool treatAttributesAsChildr
    return node;
 }
 
-Node *XMLParser::parse(std::istream &r, bool treatAttributesAsChildren)
+Node* parse(std::istream &r, bool treatAttributesAsChildren)
 {
    Node *rootNode = nullptr;
    Node *node = nullptr;
@@ -141,7 +141,7 @@ Node *XMLParser::parse(std::istream &r, bool treatAttributesAsChildren)
    return rootNode;
 }
 
-std::string XMLParser::readChunk(std::istream &r)
+std::string readChunk(std::istream &r)
 {
    std::string buf;
    try
@@ -172,7 +172,7 @@ std::string XMLParser::readChunk(std::istream &r)
    return buf;
 }
 
-void XMLParser::subChars(std::string &srcStr)
+void subChars(std::string &srcStr)
 {
    unsigned int loc = srcStr.find("&lt");
    while (loc != std::string::npos)
@@ -210,7 +210,7 @@ void XMLParser::subChars(std::string &srcStr)
    }
 }
 
-std::string XMLParser::putAttributes(std::string str, Node *node, bool treatAsChildren)
+std::string putAttributes(std::string str, Node *node, bool treatAsChildren)
 {
    try
    {
@@ -252,7 +252,7 @@ std::string XMLParser::putAttributes(std::string str, Node *node, bool treatAsCh
    return str;
 }
 
-bool XMLParser::isWhitespace(char ch)
+bool isWhitespace(char ch)
 {
    if (ch == '\t' || ch == '\n' || ch == '\r' || ch == ' ')
    {
@@ -261,13 +261,12 @@ bool XMLParser::isWhitespace(char ch)
    return false;
 }
 
-bool XMLParser::startsWith(std::string str, std::string search)
+bool startsWith(std::string str, std::string search)
 {
-
    return (str.find(search, 0) == 0);
 }
 
-bool XMLParser::endsWith(std::string str, std::string search)
+bool endsWith(std::string str, std::string search)
 {
    int searchLimit = str.length() - search.length();
    return (str.rfind(search, searchLimit) == searchLimit);
