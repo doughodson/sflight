@@ -1,34 +1,34 @@
-// this is taken from a Flightgear help page as a simple PIDControl algorithm. The original source is not cited.
-// it is identical to the PID controller with differential control removed
 
-#ifndef PIDCONTROL_H
-#define PIDCONTROL_H
+#ifndef __PIDConttol_H__
+#define __PIDConttol_H__
 
 #include "PIControl.hpp"
 
-namespace sf {
+namespace sf
+{
 
-class PIDControl : public PIControl {
+//------------------------------------------------------------------------------
+// Class: PIDControl
+//------------------------------------------------------------------------------
+class PIDControl : public PIControl
+{
 
-    public:
-   
-    PIDControl();
-    PIDControl(double minVal, double maxVal, double p, double i, double d);
-    ~PIDControl();
+ public:
+   PIDControl();
+   PIDControl(const double minVal, const double maxVal, const double p,
+              const double i, const double d);
+   ~PIDControl();
 
+   virtual double getD() const;
+   virtual void setD(const double d);
 
-    virtual double getD();
-    virtual void setD(double d);
+   virtual double getOutput(const double timestep, const double desired_pt,
+                            const double current_pt, const double current_output);
 
-    virtual double getOutput(double timestep, double desired_pt, double current_pt, double current_output);
-
-    protected:
-
-    double edf0, edf1, edf2;
-    double tstf;
-    double ed;
-
-
+ protected:
+   double edf0 {}, edf1 {}, edf2 {};
+   double tstf {};
+   double ed {};
 };
 
 }

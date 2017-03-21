@@ -20,7 +20,6 @@ Table2D::Table2D()
 
 Table2D::Table2D(const int numRows, const int numCols, double rowVals[], double colVals[])
 {
-
    this->rowVals = rowVals;
    this->colVals = colVals;
    this->numRows = numRows;
