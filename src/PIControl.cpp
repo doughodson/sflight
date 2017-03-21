@@ -6,7 +6,7 @@
 namespace sf
 {
 PIControl::PIControl(double minVal, double maxVal, double p, double i)
-   : kp(p),ti(i), min(minVal), max(maxVal)
+   : kp(p), ti(i), max(maxVal), min(minVal)
 {
 }
 

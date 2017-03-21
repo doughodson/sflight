@@ -1,47 +1,38 @@
 
- <?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 
-<!--
-    Document   : fiveDOF.xml
-    Created on : January 18, 2006, 6:29 PM
-    Author     : matt
-    Description:
-        Purpose of the document follows.
--->
-<SimpleFlight>    
-    
+<SimpleFlight>
+
     <Modules Rate="60">
-	    <Module Class="Analyzer"/>
         <Module Class="EOMFiveDOF"/>
-        <Module Class="InverseDesign"/>   
+        <Module Class="InverseDesign"/>
         <Module Class="SimpleAutopilot"/>
         <Module Class="Atmosphere" Rate="10" />
         <Module Class="StickControl"/>
         <Module Class="WaypointFollower"/>
-		<Module Class="FileOutput"/>
-		
-    </Modules>     
-    
+        <Module Class="FileOutput"/>
+    </Modules>
+
     <Callsign>Example</Callsign>
     <Name>Test Aircraft</Name>
     <Version>1.0</Version>
-    
+
     <InitialConditions>
-        <Position Latitude="37.61354309" Longitude="-122.3572449" Altitude="10000"/> 
+        <Position Latitude="37.61354309" Longitude="-122.3572449" Altitude="10000"/>
         <Orientation Heading="270.0" Pitch="0.0" Roll="0.0"/>         <!-- deg -->
         <Airspeed>250</Airspeed>
         <Throttle>0.5</Throttle>
         <Weight>140000</Weight>               <!-- LBS -->
         <Fuel>20000</Fuel>
     </InitialConditions>
-    
+
     <AutoPilot>
         <Component Type="HeadingHold" MaxBank="30" MaxBankRate="15" BankWeight="0.05" />
         <Component Type="VSHold" MaxG="1.5" MinG="0.5" MaxPitchUp="15" MaxPitchDown="-5" PitchWeight="0.0" />
-        <Component Type="AltitudeHold" MaxVS="2000" AltWeight="0.1" />  
-        <Component Type="AutoThrottle" MaxThrottle="1.0" MinThrottle="0.01" SpoolTime="10" />  
-    </AutoPilot> 
-    
+        <Component Type="AltitudeHold" MaxVS="2000" AltWeight="0.1" />
+        <Component Type="AutoThrottle" MaxThrottle="1.0" MinThrottle="0.01" SpoolTime="10" />
+    </AutoPilot>
+
     <!-- this section is used for stick control only, not autopilots -->
     <Control>
         <DesignAirspeed>400</DesignAirspeed>
@@ -51,8 +42,7 @@
         <PitchGain>-0.5</PitchGain>
         <AutoRudder>true</AutoRudder>
     </Control>
-    
-    
+
     <!-- This section is used by the InverseDesign Module employing the two point aero method -->
     <Design>
         <Engine>
@@ -60,18 +50,18 @@
             <StaticThrust>40000</StaticThrust>
             <ThrustAngle>0</ThrustAngle>
         </Engine>
-        
+
         <CompressibleFlow>false</CompressibleFlow>
-        
+
         <FlightConditions WingArea="1000" WingSpan="90" Weight="140000">
             <FlightCondition Altitude="35000" Pitch="0" Throttle="0.85" VS="0" Airspeed="480" FuelFlow="8000"/>
-            <FlightCondition Altitude="0" Pitch="10" Throttle="1" VS="0" Airspeed="135" FuelFlow="10000"/> 
-        </FlightConditions>	
-        
+            <FlightCondition Altitude="0" Pitch="10" Throttle="1" VS="0" Airspeed="135" FuelFlow="10000"/>
+        </FlightConditions>
+
     </Design>
 
     <FileOutput>output</FileOutput>
-    
+
     <WaypointFollower>
         <WaypointFollow>true</WaypointFollow>
         <PathType>DIRECT</PathType>
@@ -79,8 +69,6 @@
             <Waypoint Lat="37.8" Lon="-122.3572449" Alt="10000" Speed="250" Heading="270"/>
         </WaypointList>
     </WaypointFollower>
-	
 
-    
 </SimpleFlight>
 

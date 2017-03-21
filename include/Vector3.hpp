@@ -1,4 +1,3 @@
-/* class that defines a 3-d vector */
 
 #ifndef VECTOR3_H
 #define VECTOR3_H
@@ -8,6 +7,10 @@
 namespace sf
 {
 
+//------------------------------------------------------------------------------
+// Class: Vector3
+// Description: Defines a 3-D vector
+//------------------------------------------------------------------------------
 class Vector3
 {
  public:
@@ -19,13 +22,13 @@ class Vector3
    double a2 {};
    double a3 {};
 
-   double get1() const { return this->a1; }
-   double get2() const { return this->a2; }
-   double get3() const { return this->a3; }
+   double get1() const { return a1; }
+   double get2() const { return a2; }
+   double get3() const { return a3; }
 
-   void set1(double val) { this->a1 = val; }
-   void set2(double val) { this->a2 = val; }
-   void set3(double val) { this->a3 = val; }
+   void set1(const double x) { a1 = x; }
+   void set2(const double x) { a2 = x; }
+   void set3(const double x) { a3 = x; }
 
    void cross(Vector3 &v);
    static void cross(Vector3 &ret, Vector3 &v1, Vector3 &v2);

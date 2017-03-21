@@ -2,6 +2,7 @@
 
 #include "Vector3.hpp"
 #include "WindAxis.hpp"
+
 #include <cmath>
 
 namespace sf
