@@ -8,9 +8,7 @@
 #include "xml/NodeUtil.hpp"
 #include "UnitConvert.hpp"
 
-#include <iostream>
-
-using namespace std;
+#include <cmath>
 
 namespace sf
 {
@@ -24,15 +22,13 @@ WaypointFollower::~WaypointFollower() {}
 
 void WaypointFollower::initialize(Node* node)
 {
-   std::cout << "INIT!!\n";
-
    Node *tmp = node->getChild("WaypointFollower");
 
    isOn = NodeUtil::getBool(tmp, "WaypointFollow", true);
 
    cmdPathType = (NodeUtil::get(tmp, "PathType", "DIRECT") == "BEARING") ? PathType::BEARING : PathType::DIRECT;
 
-   vector<Node *> wps = NodeUtil::getList(tmp->getChild("WaypointList"), "Waypoint");
+   std::vector<Node *> wps = NodeUtil::getList(tmp->getChild("WaypointList"), "Waypoint");
 
    for (unsigned int i = 0; i < wps.size(); i++)
    {
@@ -47,7 +43,7 @@ void WaypointFollower::initialize(Node* node)
    if (isOn)
    {
       wpNum = 0;
-      currentWp = 0;
+      currentWp = nullptr;
 
       altTol = 10.;
       distTol = UnitConvert::NMtoEarthRadians(0.1);
@@ -76,11 +72,10 @@ void WaypointFollower::setState(bool isOn)
 
 void WaypointFollower::update(double timestep)
 {
-
    if (!isOn)
       return;
 
-   if (currentWp == 0)
+   if (currentWp == nullptr)
    {
       loadWaypoint();
       return;
@@ -90,11 +85,11 @@ void WaypointFollower::update(double timestep)
    double dist = Earth::distance(globals->lat, globals->lon, currentWp->radLat, currentWp->radLon);
 
    //double hdgDiff = fabs( UnitConvert :: wrapHeading(globals->eulers.getPsi() - az, true) );
-   double hdg = atan2(globals->nedVel.get2(), globals->nedVel.get1());
-   double hdgDiff = fabs(UnitConvert::wrapHeading(hdg - az, true));
+   double hdg = std::atan2(globals->nedVel.get2(), globals->nedVel.get1());
+   double hdgDiff = std::fabs(UnitConvert::wrapHeading(hdg - az, true));
 
    bool isClose = dist < distTol;
-   bool isBehind = fabs(hdgDiff) > sf::PI / 2.;
+   bool isBehind = std::fabs(hdgDiff) > sf::PI / 2.;
 
    if (isClose && isBehind)
    {
@@ -121,7 +116,7 @@ void WaypointFollower::update(double timestep)
 
 void WaypointFollower::loadWaypoint()
 {
-   currentWp = 0;
+   currentWp = nullptr;
 
    std::cout << "loading wpt: " << wpNum << std::endl;
 
@@ -160,7 +155,7 @@ void WaypointFollower::clearAllWaypoints()
 {
    waypoints.clear();
    wpNum = 0;
-   currentWp = 0;
+   currentWp = nullptr;
 }
 
 int WaypointFollower::getCurrentWp()

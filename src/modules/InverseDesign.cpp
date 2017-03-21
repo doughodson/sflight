@@ -14,8 +14,6 @@
 #include <vector>
 #include <cmath>
 
-using namespace std;
-
 namespace sf
 {
 
@@ -59,16 +57,15 @@ void InverseDesign::update(double timestep)
 
 void InverseDesign::initialize(Node *node)
 {
+   double thrustRatio {};
+   double speedSound {};
+   double beta_mach {};
+   double pitch {};
+   double airspeed {};
+   double vs {};
+   double thrust {};
 
-   double thrustRatio;
-   double speedSound;
-   double beta_mach;
-   double pitch;
-   double airspeed;
-   double vs;
-   double thrust;
-
-   double rho;
+   double rho {};
 
    Node *tmp = node->getChild("Design");
 
@@ -78,7 +75,7 @@ void InverseDesign::initialize(Node *node)
    thrustAngle = UnitConvert::toRads(NodeUtil::getDouble(tmp, "Engine/ThrustAngle", 0.0));
    staticThrust = UnitConvert::toNewtons(NodeUtil::getDouble(tmp, "Engine/StaticThrust", 0));
 
-   string engineType = NodeUtil::get(tmp, "Engine/Type", "");
+   std::string engineType = NodeUtil::get(tmp, "Engine/Type", "");
    if (engineType == "Turbojet")
    {
       dTdM = 0;
@@ -96,7 +93,7 @@ void InverseDesign::initialize(Node *node)
    }
 
    // setup flight conditions (2 points expected)
-   vector<Node *> fcNodes = tmp->getChildren("FlightConditions/FlightCondition");
+   std::vector<Node *> fcNodes = tmp->getChildren("FlightConditions/FlightCondition");
 
    // get default values
    designWeight = NodeUtil::getDouble(tmp, "FlightConditions/Weight", 0.0);
@@ -104,7 +101,7 @@ void InverseDesign::initialize(Node *node)
    wingArea = UnitConvert::toSqMeters(NodeUtil::getDouble(tmp, "FlightConditions/WingArea", 6.0));
    designAlt = NodeUtil::getDouble(tmp, "FlightConditions/Altitude", 0.0);
 
-   int size = fcNodes.size();
+   const int size = fcNodes.size();
 
    double *cl = new double[size];
    double *cd = new double[size];
@@ -114,7 +111,6 @@ void InverseDesign::initialize(Node *node)
 
    for (int i = 0; i < size; i++)
    {
-
       tmp = fcNodes[i];
 
       pitch = UnitConvert::toRads(NodeUtil::getDouble(tmp, "Pitch", 0));

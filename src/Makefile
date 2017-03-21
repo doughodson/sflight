@@ -15,13 +15,14 @@ OBJS =  \
 	modules/StickControl.o \
 	modules/TableAero.o \
 	modules/WaypointFollower.o \
+	xml/Node.o \
+	xml/NodeUtil.o \
+	xml/XMLParser.o \
 	AutoPilotCmds.o \
 	Earth.o \
 	Euler.o \
 	FDMGlobals.o \
 	ModuleLoader.o \
-	Node.o \
-	NodeUtil.o \
 	PIControl.o \
 	PID.o \
 	PIDControl.o \
@@ -31,8 +32,7 @@ OBJS =  \
 	Table3D.o \
 	Vector3.o \
 	Waypoint.o \
-	WindAxis.o \
-	XMLParser.o
+	WindAxis.o
 
 .PHONY: all clean
 
@@ -43,5 +43,6 @@ $(LIB) : $(OBJS)
 
 clean:
 	-rm -f modules/*.o
+	-rm -f xml/*.o
 	-rm -f *.o
 	-rm -f $(LIB)

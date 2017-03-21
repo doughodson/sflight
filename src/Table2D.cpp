@@ -5,8 +5,6 @@
 #include <string>
 #include <iostream>
 
-using namespace std;
-
 namespace sf
 {
 
@@ -52,7 +50,7 @@ Table2D::~Table2D()
 void Table2D::setData(std::string data)
 {
 
-   vector<string> v = NodeUtil::splitString(data, ',');
+   std::vector<std::string> v = NodeUtil::splitString(data, ',');
 
    if (v.size() != numRows * numCols)
       return;

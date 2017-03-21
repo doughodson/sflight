@@ -10,8 +10,6 @@
 #include <iostream>
 #include <algorithm>
 
-using namespace std;
-
 namespace sf
 {
 
@@ -26,7 +24,7 @@ void SimpleAutoPilot::initialize(Node* node)
 {
    Node *apProps = node->getChild("AutoPilot");
 
-   vector<Node *> comps = NodeUtil::getList(apProps, "Component");
+   std::vector<Node *> comps = NodeUtil::getList(apProps, "Component");
 
    for (int i = 0; i < comps.size(); i++)
    {
@@ -109,7 +107,7 @@ void SimpleAutoPilot::update(double timestep)
 void SimpleAutoPilot::updateHdg(double timestep, double cmdHdg)
 {
 
-   double hdgDiff;
+   double hdgDiff {};
 
    if (turnType == TURNTYPE_TRAJECTORY)
    {
@@ -125,10 +123,10 @@ void SimpleAutoPilot::updateHdg(double timestep, double cmdHdg)
 
    double phiCmd = kphi * hdgDiff * globals->vInf * maxBankRate;
    // bound phiCmd to -maxBank...maxBank
-   phiCmd = std::min(globals->autoPilotCmds.getMaxBank(), max(-globals->autoPilotCmds.getMaxBank(), phiCmd));
+   phiCmd = std::min(globals->autoPilotCmds.getMaxBank(), std::max(-globals->autoPilotCmds.getMaxBank(), phiCmd));
 
    // bound pCmd to -maxBankRate...maxBankRate
-   double pCmd = min(maxBankRate, max(-maxBankRate, phiCmd - globals->eulers.getPhi()));
+   double pCmd = std::min(maxBankRate, std::max(-maxBankRate, phiCmd - globals->eulers.getPhi()));
 
    globals->pqr.set1(pCmd);
 }
@@ -138,7 +136,7 @@ void SimpleAutoPilot::updateAlt(double timestep)
 
    double vscmd = kalt * (globals->autoPilotCmds.getCmdAltitude() - globals->alt);
 
-   vscmd = min(fabs(vscmd), globals->autoPilotCmds.getMaxVS()) * UnitConvert::signum(vscmd);
+   vscmd = std::min(fabs(vscmd), globals->autoPilotCmds.getMaxVS()) * UnitConvert::signum(vscmd);
 
    updateVS(timestep, vscmd);
 }
@@ -163,17 +161,17 @@ void SimpleAutoPilot::updateVS(double timestep, double cmdVs)
 
    if (qCmd > 0)
    {
-      double qLimit = min((globals->autoPilotCmds.getMaxPitchUp() - theta) / globals->autoPilotCmds.getMaxPitchUp(), 1.0);
+      double qLimit = std::min((globals->autoPilotCmds.getMaxPitchUp() - theta) / globals->autoPilotCmds.getMaxPitchUp(), 1.0);
       double qMax = maxG / u * qLimit;
-      qCmd = min(qCmd, qMax);
-      qCmd = min(q + maxG_rate / u * timestep, qCmd);
+      qCmd = std::min(qCmd, qMax);
+      qCmd = std::min(q + maxG_rate / u * timestep, qCmd);
    }
    else
    {
-      double qLimit = min((globals->autoPilotCmds.getMaxPitchDown() - theta) / globals->autoPilotCmds.getMaxPitchDown(), 1.0);
+      double qLimit = std::min((globals->autoPilotCmds.getMaxPitchDown() - theta) / globals->autoPilotCmds.getMaxPitchDown(), 1.0);
       double qMin = minG / u * qLimit;
-      qCmd = max(qMin, qCmd);
-      qCmd = max(q - qTurn + minG_rate / u * timestep, qCmd);
+      qCmd = std::max(qMin, qCmd);
+      qCmd = std::max(q - qTurn + minG_rate / u * timestep, qCmd);
    }
 
    // if in a turn, add in extra q to compensate for r pulling downward

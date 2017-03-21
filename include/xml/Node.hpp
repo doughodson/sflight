@@ -7,40 +7,41 @@
 #include <iostream>
 #include <string>
 
-namespace sf {
+namespace sf
+{
 
 //------------------------------------------------------------------------------
 // Class: Node
 //------------------------------------------------------------------------------
 class Node
 {
-public:
+ public:
    Node();
-   Node( std::string tagName);
-   Node( std::string name, std::string text);
-   Node( Node& );
+   Node(std::string tagName);
+   Node(std::string name, std::string text);
+   Node(Node &);
    ~Node();
 
    std::string getTagName();
    void setTagName(std::string name);
 
-   Node* addChild(std::string tagName);
+   Node *addChild(std::string tagName);
 
-   Node* addChild(Node* child);
+   Node *addChild(Node *child);
 
    int getChildCount();
 
-   Node* getChild(std::string childName);
+   Node *getChild(std::string childName);
 
-   std::vector<Node*> getChildren(std::string childName);
+   std::vector<Node *> getChildren(std::string childName);
 
-   Node* getChild(int index);
+   Node *getChild(int index);
 
    void putAttribute(std::string name, std::string val);
 
    std::string getAttribute(std::string name);
 
-   void getAttributeNames(std::string* storeArray);
+   void getAttributeNames(std::string *storeArray);
 
    int getAttributeCount();
 
@@ -48,15 +49,15 @@ public:
 
    void setText(std::string text);
 
-   Node* getParent();
+   Node *getParent();
 
    void setParent(Node *parentNode);
 
    std::string toString();
 
-   bool remove(Node* node);
+   bool remove(Node *node);
 
-private:
+ private:
    std::string name;
    std::string text;
    std::map<std::string, std::string> attrMap;
@@ -64,7 +65,6 @@ private:
 
    Node* parentNode {};
 };
-
 }
 
 #endif

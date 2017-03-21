@@ -9,8 +9,6 @@
 #include "modules/Atmosphere.hpp"
 #include "modules/FDMModule.hpp"
 
-#include <string>
-
 #include "UnitConvert.hpp"
 #include "xml/NodeUtil.hpp"
 #include "UnitConvert.hpp"
@@ -18,7 +16,8 @@
 #include "AutoPilotCmds.hpp"
 #include "xml/Node.hpp"
 
-using namespace std;
+#include <string>
+#include <cmath>
 
 namespace sf
 {
@@ -65,7 +64,7 @@ FDMGlobals::FDMGlobals()
    this->frameNum = 0;
    this->paused = true;
 
-   this->modules = vector<FDMModule *>();
+   this->modules = std::vector<FDMModule *>();
 }
 
 FDMGlobals::~FDMGlobals()
@@ -96,7 +95,6 @@ void FDMGlobals::initialize()
 
 void FDMGlobals::initialize(Node *node)
 {
-
    rootNode = node;
 
    mass = (UnitConvert::toKilos(NodeUtil::getDouble(node, "InitialConditions/Weight", 0.0)));
@@ -106,8 +104,8 @@ void FDMGlobals::initialize(Node *node)
    {
       double wspeed = UnitConvert::toMPS(NodeUtil::getDouble(wind, "Speed", 0));
       double dir = UnitConvert::toRads(NodeUtil::getDouble(wind, "Direction", 0) + 180);
-      windVel.set1(wspeed * cos(dir));
-      windVel.set2(wspeed * sin(dir));
+      windVel.set1(wspeed * std::cos(dir));
+      windVel.set2(wspeed * std::sin(dir));
       windVel.set3(0);
    }
 
@@ -162,7 +160,7 @@ void FDMGlobals::update(double timestep)
    frameNum++;
 }
 
-void FDMGlobals::setProperty(string tag, double val)
+void FDMGlobals::setProperty(std::string tag, double val)
 {
    for (int i = 0; i < modules.size(); i++)
    {

@@ -19,20 +19,18 @@
 #include <vector>
 #include <iostream>
 
-using namespace std;
-
 namespace sf
 {
 
 void ModuleLoader::loadModules(Node* parent, FDMGlobals* globals)
 {
    Node* node = parent->getChild("Modules");
-   vector<Node*> nodeList = NodeUtil::getList(node, "Module");
+   std::vector<Node*> nodeList = NodeUtil::getList(node, "Module");
    const double defaultRate = NodeUtil::getDouble(node, "Rate", 0);
 
    for (int i = 0; i < nodeList.size(); i++)
    {
-      string className = NodeUtil::get(nodeList[i], "Class", "");
+      std::string className = NodeUtil::get(nodeList[i], "Class", "");
       const double rate = NodeUtil::getDouble(nodeList[i], "Rate", 0);
 
       if (className == "EOMFiveDOF")

@@ -14,8 +14,6 @@
 
 #include <iostream>
 
-using namespace std;
-
 namespace sf
 {
 
@@ -64,7 +62,7 @@ void TableAero::initialize(Node *node)
    if (thrustNode != 0)
    {
 
-      vector<Node *> tables = thrustNode->getChildren("Table");
+      std::vector<Node *> tables = thrustNode->getChildren("Table");
       int numpages = tables.size();
       double *throttleVals = new double[numpages];
       this->thrustTable = new Table3D(numpages, throttleVals);
@@ -76,8 +74,8 @@ void TableAero::initialize(Node *node)
 
          throttleVals[i] = NodeUtil::getDouble(tables[i], "Throttle", 0);
 
-         string valstr = NodeUtil::get(tablenode, "AltVals", "");
-         vector<string> splits = NodeUtil::splitString(valstr, ',');
+         std::string valstr = NodeUtil::get(tablenode, "AltVals", "");
+         std::vector<std::string> splits = NodeUtil::splitString(valstr, ',');
          int numAltVals = splits.size();
 
          double *altvals = new double[numAltVals];
@@ -109,7 +107,7 @@ void TableAero::initialize(Node *node)
    if (ffNode != 0)
    {
 
-      vector<Node *> tables = ffNode->getChildren("Table");
+      std::vector<Node *> tables = ffNode->getChildren("Table");
       int numpages = tables.size();
       double *throttleVals = new double[numpages];
       this->fuelflowTable = new Table3D(numpages, throttleVals);
@@ -121,8 +119,8 @@ void TableAero::initialize(Node *node)
 
          throttleVals[i] = NodeUtil::getDouble(tables[i], "Throttle", 0);
 
-         string valstr = NodeUtil::get(tablenode, "AltVals", "");
-         vector<string> splits = NodeUtil::splitString(valstr, ',');
+         std::string valstr = NodeUtil::get(tablenode, "AltVals", "");
+         std::vector<std::string> splits = NodeUtil::splitString(valstr, ',');
          int numAltVals = splits.size();
 
          double *altvals = new double[numAltVals];
@@ -152,20 +150,19 @@ void TableAero::initialize(Node *node)
    if (liftNode != 0)
    {
 
-      vector<Node *> tables = liftNode->getChildren("Table");
+      std::vector<Node *> tables = liftNode->getChildren("Table");
       int numpages = tables.size();
       double *machVals = new double[numpages];
       this->liftTable = new Table3D(numpages, machVals);
 
       for (int i = 0; i < numpages; i++)
       {
-
          Node *tablenode = tables[i];
 
          machVals[i] = NodeUtil::getDouble(tables[i], "Mach", 0);
 
-         string valstr = NodeUtil::get(tablenode, "AltVals", "");
-         vector<string> splits = NodeUtil::splitString(valstr, ',');
+         std::string valstr = NodeUtil::get(tablenode, "AltVals", "");
+         std::vector<std::string> splits = NodeUtil::splitString(valstr, ',');
          int numAltVals = splits.size();
 
          double *altvals = new double[numAltVals];
@@ -193,7 +190,7 @@ void TableAero::initialize(Node *node)
    if (dragNode != 0)
    {
 
-      vector<Node *> tables = dragNode->getChildren("Table");
+      std::vector<Node *> tables = dragNode->getChildren("Table");
       int numpages = tables.size();
       double *machVals = new double[numpages];
       this->dragTable = new Table3D(numpages, machVals);
@@ -205,8 +202,8 @@ void TableAero::initialize(Node *node)
 
          machVals[i] = NodeUtil::getDouble(tables[i], "Mach", 0);
 
-         string valstr = NodeUtil::get(tablenode, "AltVals", "");
-         vector<string> splits = NodeUtil::splitString(valstr, ',');
+         std::string valstr = NodeUtil::get(tablenode, "AltVals", "");
+         std::vector<std::string> splits = NodeUtil::splitString(valstr, ',');
          int numAltVals = splits.size();
 
          double *altvals = new double[numAltVals];
@@ -222,7 +219,7 @@ void TableAero::initialize(Node *node)
          double *alphavals = new double[numAlphaVals];
          for (int j = 0; j < numAlphaVals; j++)
          {
-            alphavals[j] = atof(splits[j].c_str());
+            alphavals[j] = std::atof(splits[j].c_str());
          }
 
          Table2D *table = new Table2D(numAltVals, numAlphaVals, altvals, alphavals);

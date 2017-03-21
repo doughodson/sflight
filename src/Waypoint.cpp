@@ -24,7 +24,7 @@ double Waypoint::getLat()
 
 void Waypoint::setLat(double radLat)
 {
-   this->lat = radLat;
+   lat = radLat;
 }
 
 double Waypoint::getLon()
@@ -34,7 +34,7 @@ double Waypoint::getLon()
 
 void Waypoint::setLon(double radLon)
 {
-   this->lon = radLon;
+   lon = radLon;
 }
 
 double Waypoint::getAlt()
