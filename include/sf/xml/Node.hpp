@@ -16,45 +16,45 @@ class Node
 {
  public:
    Node() = default;
-   Node(std::string tagName);
-   Node(std::string name, std::string text);
+   Node(const std::string& tagName);
+   Node(const std::string& name, const std::string& text);
    Node(const Node&);
    virtual ~Node();
 
    std::string getTagName() const;
-   void setTagName(std::string name);
+   void setTagName(const std::string&);
 
-   Node *addChild(std::string tagName);
+   Node *addChild(const std::string&);
 
-   Node *addChild(Node *child);
+   Node *addChild(Node* const);
 
    int getChildCount() const;
 
-   Node *getChild(std::string childName) const;
+   Node *getChild(const std::string&) const;
 
-   std::vector<Node*> getChildren(std::string childName) const;
+   std::vector<Node*> getChildren(const std::string& childName) const;
 
-   Node *getChild(int index) const;
+   Node *getChild(const int index) const;
 
    void putAttribute(std::string name, std::string val);
 
    std::string getAttribute(const std::string name) const;
 
-   void getAttributeNames(std::string *storeArray) const;
+   void getAttributeNames(std::string * const) const;
 
    int getAttributeCount() const;
 
    std::string getText() const;
 
-   void setText(const std::string text);
+   void setText(const std::string& text);
 
    Node *getParent() const;
 
-   void setParent(Node *);
+   void setParent(Node* const);
 
    std::string toString() const;
 
-   bool remove(Node *node);
+   bool remove(Node* const);
 
  private:
    std::string name;

@@ -8,15 +8,12 @@
 namespace sf {
 namespace xml {
 
-Node::Node(std::string tagName)
+Node::Node(const std::string& tagName) : name(tagName)
 {
-   name = tagName;
 }
 
-Node::Node(std::string tagName, std::string text)
+Node::Node(const std::string& tagName, const std::string& text): name(tagName), text(text)
 {
-   name = tagName;
-   text = text;
 }
 
 Node::Node(const Node& src)
@@ -57,22 +54,22 @@ std::string Node::getTagName() const
    return name;
 }
 
-void Node::setTagName(std::string name)
+void Node::setTagName(const std::string& x)
 {
-   name = name;
+   name = x;
 }
 
-Node *Node::addChild(std::string tagName)
+Node *Node::addChild(const std::string& x)
 {
-   Node *child = new Node(tagName);
+   Node *child = new Node(x);
    return addChild(child);
 }
 
-Node *Node::addChild(Node *child)
+Node *Node::addChild(Node* const x)
 {
-   childList.push_back(child);
-   child->setParent(this);
-   return child;
+   childList.push_back(x);
+   x->setParent(this);
+   return x;
 }
 
 int Node::getChildCount() const
@@ -80,7 +77,7 @@ int Node::getChildCount() const
    return childList.size();
 }
 
-Node *Node::getChild(int index) const
+Node *Node::getChild(const int index) const
 {
    if (index < getChildCount())
       return childList[index];
@@ -93,8 +90,9 @@ Node *Node::getChild(int index) const
 // if none is found.  To find a nested child, specify the childname
 // as tags separated by "/"
 //
-Node *Node::getChild(std::string childName) const
+Node *Node::getChild(const std::string& x) const
 {
+   std::string childName = x;
    const Node *tmp = this;
 
    const int splitPt = childName.find_first_of("/");
@@ -123,8 +121,9 @@ Node *Node::getChild(std::string childName) const
 // Returns a vector containing all children encountered with specified name, or null
 // if none are found.
 //
-std::vector<Node*> Node::getChildren(std::string childName) const
+std::vector<Node*> Node::getChildren(const std::string& x) const
 {
+   std::string childName = x;
    std::vector<Node*> list;
 
    const Node *tmp = this;
@@ -174,7 +173,7 @@ std::string Node::getAttribute(const std::string name) const
    return 0;
 }
 
-void Node::getAttributeNames(std::string *storeArray) const
+void Node::getAttributeNames(std::string * const storeArray) const
 {
    std::map<std::string, std::string>::const_iterator iter;
    int i = 0;
@@ -196,7 +195,7 @@ std::string Node::getText() const
    return text;
 }
 
-void Node::setText(const std::string x)
+void Node::setText(const std::string& x)
 {
    text = x;
 }
@@ -206,14 +205,14 @@ Node *Node::getParent() const
    return parentNode;
 }
 
-void Node::setParent(Node *x)
+void Node::setParent(Node* const x)
 {
    parentNode = x;
 }
 
-bool Node::remove(Node *node)
+bool Node::remove(Node* const node)
 {
-   std::vector<Node *>::iterator it;
+   std::vector<Node*>::iterator it;
 
    for (it = childList.begin(); it < childList.end(); it++)
    {
