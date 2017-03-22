@@ -49,10 +49,11 @@ bool simpleLatLon(double* const lat, double* const lon, const double alt, const 
    return true;
 }
 
-/** calculates the approx heading from lat1, lon1 to lat2, lon2
- *  based on the openmap great circle computations (http://openmap.bbn.com)
- *  @returns the heading in the [-PI..PI] domain
- */
+//
+// calculates the approx heading from lat1, lon1 to lat2, lon2
+//  based on the openmap great circle computations (http://openmap.bbn.com)
+//  @returns the heading in the [-PI..PI] domain
+//
 double headingBetween(const double lat1, const double lon1, const double lat2,
                       const double lon2)
 {
@@ -64,10 +65,11 @@ double headingBetween(const double lat1, const double lon1, const double lat2,
        (std::cos(lat1) * std::sin(lat2) - std::sin(lat1) * coslat * std::cos(londiff)));
 }
 
-/** calculates the distance from lat1, lon1 to lat2, lon2
- *  based on the openmap great circle computations (http://openmap.bbn.com)
- *  @returns the distance in radians
- */
+//
+// calculates the distance from lat1, lon1 to lat2, lon2
+// based on the openmap great circle computations (http://openmap.bbn.com)
+// @returns the distance in radians
+//
 double distance(const double lat1, const double lon1, const double lat2, const double lon2)
 {
    const double latdiff = std::sin(((lat2 - lat1) / 2.));
@@ -78,12 +80,13 @@ double distance(const double lat1, const double lon1, const double lat2, const d
    return 2.0 * std::asin(rval);
 }
 
-/** needs update.  Will always return gravity at lat = 0, lon = 0, alt = 0; */
+// needs update.  Will always return gravity at lat = 0, lon = 0, alt = 0;
 double getG(const double lat, const double lon, const double alt) { return gravEq; }
 
-/** fills a Vector with the 3-d components of gravity based on current euler
-    angles and grav force
-*/
+//
+// fills a Vector with the 3-d components of gravity based on current euler
+// angles and grav force
+//
 bool getGravForce(Vector3* const v, const double theta, const double phi,
                          const double g)
 {
