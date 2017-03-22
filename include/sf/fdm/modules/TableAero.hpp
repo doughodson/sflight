@@ -5,7 +5,9 @@
 #include "sf/fdm/modules/FDMModule.hpp"
 
 namespace sf {
-namespace xml { class Node; }
+namespace xml {
+class Node;
+}
 namespace fdm {
 class Table3D;
 class FDMGlobals;
@@ -19,28 +21,29 @@ class TableAero : public virtual FDMModule
    TableAero(FDMGlobals* globals, double frameRate);
 
    // module interface
-   virtual void initialize(xml::Node *node) override;
-   virtual void update(double timestep) override;
+   virtual void initialize(xml::Node* node) override;
+   virtual void update(const double timestep) override;
 
-   //void createCoefs( double pitch, double u, double vz, double thrust, double& alpha, double& cl, double& cd );
+   // void createCoefs( double pitch, double u, double vz, double thrust,
+   // double& alpha, double& cl, double& cd );
 
  protected:
-   double wingSpan {};
-   double wingArea {};
-   double thrustAngle {};
+   double wingSpan{};
+   double wingArea{};
+   double thrustAngle{};
 
-   Table3D* liftTable {};
-   Table3D* dragTable {};
-   Table3D* thrustTable {};
-   Table3D* fuelflowTable {};
+   Table3D* liftTable{};
+   Table3D* dragTable{};
+   Table3D* thrustTable{};
+   Table3D* fuelflowTable{};
 
-   double a1 {};
-   double a2 {};
-   double b1 {};
-   double b2 {};
+   double a1{};
+   double a2{};
+   double b1{};
+   double b2{};
 
-   double stallCL {};
-   double wingEffects {};
+   double stallCL{};
+   double wingEffects{};
 };
 }
 }

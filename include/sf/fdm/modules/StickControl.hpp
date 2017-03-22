@@ -9,7 +9,9 @@
 #include "sf/xml/Node.hpp"
 
 namespace sf {
-namespace xml { class Node; }
+namespace xml {
+class Node;
+}
 namespace fdm {
 
 //------------------------------------------------------------------------------
@@ -18,25 +20,23 @@ namespace fdm {
 class StickControl : public virtual FDMModule
 {
  public:
-   StickControl(FDMGlobals *globals, const double frameRate);
+   StickControl(FDMGlobals* globals, const double frameRate);
    virtual ~StickControl() = default;
 
    // module interface
-   virtual void initialize(xml::Node *node) override;
-   virtual void update(double timestep) override;
-   virtual void setProperty(std::string tag, double val) override  {};
+   virtual void initialize(xml::Node* node) override;
+   virtual void update(const double timestep) override;
 
  private:
    Vector3 maxRates;
    Vector3 maxDef;
 
-   double designQbar {};
-   double elevGain {};
-   double rudGain {};
-   double ailGain {};
-   double pitchGain {};
+   double designQbar{};
+   double elevGain{};
+   double rudGain{};
+   double ailGain{};
+   double pitchGain{};
 };
-
 }
 }
 

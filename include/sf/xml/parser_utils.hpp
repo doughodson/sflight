@@ -10,16 +10,16 @@
 namespace sf {
 namespace xml {
 
-Node* parse (std::istream &reader, bool treatAttributesAsChildren);
-Node* parse (std::string filename, bool treatAttributesAsChildren);
-Node* parseString (std::string xmlString, bool treatAttributesAsChildren);
-bool isWhitespace(char ch);
+Node* parse (std::istream& reader, const bool treatAttributesAsChildren);
+Node* parse (const std::string filename, const bool treatAttributesAsChildren);
+Node* parseString (const std::string& xmlString, const bool treatAttributesAsChildren);
+bool isWhitespace(const char ch);
 
-std::string readChunk(std::istream &reader);
-void subChars(std::string &srcStr);
-std::string putAttributes(std::string str, Node* node, bool treatAsChildren);
-bool startsWith(std::string str, std::string search);
-bool endsWith(std::string str, std::string search);
+std::string readChunk(std::istream& reader);
+void subChars(std::string& srcStr);
+std::string putAttributes(std::string str, Node* node, const bool treatAsChildren);
+bool startsWith(const std::string str, const std::string search);
+bool endsWith(const std::string str, const std::string search);
 
 }
 }

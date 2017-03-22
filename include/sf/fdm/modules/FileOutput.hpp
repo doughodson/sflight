@@ -22,7 +22,7 @@ public:
 
    // module interface
    virtual void initialize(xml::Node* node) override;
-   virtual void update(double timestep) override;
+   virtual void update(const double timestep) override;
 
    void update();
    void close();

@@ -11,28 +11,31 @@
 
 int main(int argc, char** argv)
 {
-	if (argc < 4) {
-		std::cout << "usage: SimpleFlight <input file> <total time (sec)> <frame rate (frames/sec)>" << std::endl;
-		return 1;
-	}
+   if (argc < 4) {
+      std::cout << "usage: SimpleFlight <input file> <total time (sec)> <frame "
+                   "rate (frames/sec)>"
+                << std::endl;
+      return 1;
+   }
 
-	auto globals = new sf::fdm::FDMGlobals();
+   auto globals = new sf::fdm::FDMGlobals();
 
    // parse input file and return top node
-	sf::xml::Node* node = sf::xml::parse(argv[1], true);
+   sf::xml::Node* node = sf::xml::parse(argv[1], true);
 
    //
-	load_modules(node, globals);
-	globals->initialize(node);
+   load_modules(node, globals);
+   globals->initialize(node);
 
-	auto timer = new sf::fdm::SimTimer(globals, std::atof(argv[3]),
-                                  std::atof(argv[3]) * std::atof(argv[2]));
+   auto timer = new sf::fdm::SimTimer(globals, std::atof(argv[3]),
+                                      std::atof(argv[3]) * std::atof(argv[2]));
 
-	std::cout << "Running SimpleFlight for " << argv[2] << " seconds.\n" << std::endl;
+   std::cout << "Running SimpleFlight for " << argv[2] << " seconds.\n"
+             << std::endl;
 
-	timer->startConstructive();
+   timer->startConstructive();
 
-	std::cout << "Done\n" << std::endl;
+   std::cout << "Done\n" << std::endl;
 
-	return 0;
+   return 0;
 }

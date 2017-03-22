@@ -10,24 +10,24 @@ namespace fdm {
 //------------------------------------------------------------------------------
 // Class: Table3D
 //------------------------------------------------------------------------------
-class Table3D
-{
+class Table3D {
  public:
-   Table3D();
+   Table3D() = delete;
    Table3D(const int numPages, double pageVals[]);
-   ~Table3D();
+   virtual ~Table3D();
 
    int getNumPages();
-   void multiply(double val);
-   void setPage(int page, Table2D* table);
-   Table2D* getPage(int page);
-   double interp(double pageVal, double rowVal, double colVal);
-   void print();
+   void multiply(const double val);
+   void setPage(const int page, Table2D* table);
+   Table2D* getPage(const int page);
+   double interp(const double pageVal, const double rowVal,
+                 const double colVal);
+   void print() const;
 
  private:
-   Table2D** data {};
-   double* pageVals {};
-   int numPages {};
+   Table2D** data{};
+   double* pageVals{};
+   int numPages{};
 };
 }
 }

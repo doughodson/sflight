@@ -4,35 +4,37 @@
 #include "sf/xml/Node.hpp"
 #include "sf/xml/node_utils.hpp"
 
-#include "sf/fdm/FDMGlobals.hpp"
 #include "sf/fdm/Earth.hpp"
+#include "sf/fdm/FDMGlobals.hpp"
+#include "sf/fdm/UnitConvert.hpp"
 #include "sf/fdm/UnitConvert.hpp"
 #include "sf/fdm/constants.hpp"
-#include "sf/fdm/UnitConvert.hpp"
 
-#include <iostream>
 #include <cmath>
+#include <iostream>
 
 namespace sf {
 namespace fdm {
 
-WaypointFollower::WaypointFollower(FDMGlobals *globals, double frameRate)
+WaypointFollower::WaypointFollower(FDMGlobals* globals, double frameRate)
     : FDMModule(globals, frameRate)
 {
 }
 
 void WaypointFollower::initialize(xml::Node* node)
 {
-   xml::Node *tmp = node->getChild("WaypointFollower");
+   xml::Node* tmp = node->getChild("WaypointFollower");
 
    isOn = getBool(tmp, "WaypointFollow", true);
 
-   cmdPathType = (get(tmp, "PathType", "DIRECT") == "BEARING") ? PathType::BEARING : PathType::DIRECT;
+   cmdPathType = (get(tmp, "PathType", "DIRECT") == "BEARING")
+                     ? PathType::BEARING
+                     : PathType::DIRECT;
 
-   std::vector<xml::Node*> wps = xml::getList(tmp->getChild("WaypointList"), "Waypoint");
+   std::vector<xml::Node*> wps =
+       xml::getList(tmp->getChild("WaypointList"), "Waypoint");
 
-   for (unsigned int i = 0; i < wps.size(); i++)
-   {
+   for (unsigned int i = 0; i < wps.size(); i++) {
       xml::Node* wp = wps[i];
       addWaypoint(UnitConvert::toRads(getDouble(wp, "Lat", 0)),
                   UnitConvert::toRads(getDouble(wp, "Lon", 0)),
@@ -41,8 +43,7 @@ void WaypointFollower::initialize(xml::Node* node)
                   UnitConvert::toRads(getDouble(wp, "Heading", 0)));
    }
 
-   if (isOn)
-   {
+   if (isOn) {
       wpNum = 0;
       currentWp = nullptr;
 
@@ -61,8 +62,7 @@ void WaypointFollower::initialize(xml::Node* node)
 
 void WaypointFollower::setState(bool isOn)
 {
-   if (isOn)
-   {
+   if (isOn) {
       globals->autoPilotCmds.setAltHoldOn(isOn);
       globals->autoPilotCmds.setHdgHoldOn(isOn);
       globals->autoPilotCmds.setAutoPilotOn(isOn);
@@ -71,46 +71,42 @@ void WaypointFollower::setState(bool isOn)
    this->isOn = isOn;
 }
 
-void WaypointFollower::update(double timestep)
+void WaypointFollower::update(const double timestep)
 {
    if (!isOn)
       return;
 
-   if (currentWp == nullptr)
-   {
+   if (currentWp == nullptr) {
       loadWaypoint();
       return;
    }
 
-   double az = Earth::headingBetween(globals->lat, globals->lon, currentWp->radLat, currentWp->radLon);
-   double dist = Earth::distance(globals->lat, globals->lon, currentWp->radLat, currentWp->radLon);
+   double az = Earth::headingBetween(globals->lat, globals->lon,
+                                     currentWp->radLat, currentWp->radLon);
+   double dist = Earth::distance(globals->lat, globals->lon, currentWp->radLat,
+                                 currentWp->radLon);
 
-   //double hdgDiff = fabs( UnitConvert :: wrapHeading(globals->eulers.getPsi() - az, true) );
+   // double hdgDiff = fabs( UnitConvert :: wrapHeading(globals->eulers.getPsi()
+   // - az, true) );
    double hdg = std::atan2(globals->nedVel.get2(), globals->nedVel.get1());
    double hdgDiff = std::fabs(UnitConvert::wrapHeading(hdg - az, true));
 
    bool isClose = dist < distTol;
    bool isBehind = std::fabs(hdgDiff) > PI / 2.;
 
-   if (isClose && isBehind)
-   {
+   if (isClose && isBehind) {
       loadWaypoint();
       return;
    }
 
-   if (cmdPathType == PathType::DIRECT)
-   {
+   if (cmdPathType == PathType::DIRECT) {
       globals->autoPilotCmds.setCmdHeading(az);
-   }
-   else
-   {
-      if (hdgDiff >= PI)
-      {
+   } else {
+      if (hdgDiff >= PI) {
          globals->autoPilotCmds.setCmdHeading(az);
-      }
-      else
-      {
-         globals->autoPilotCmds.setCmdHeading(UnitConvert::wrapHeading(2 * az - currentWp->radHeading - 0.01, true));
+      } else {
+         globals->autoPilotCmds.setCmdHeading(UnitConvert::wrapHeading(
+             2 * az - currentWp->radHeading - 0.01, true));
       }
    }
 }
@@ -121,8 +117,7 @@ void WaypointFollower::loadWaypoint()
 
    std::cout << "loading wpt: " << wpNum << std::endl;
 
-   if (waypoints.size() > wpNum)
-   {
+   if (waypoints.size() > wpNum) {
       setState(true);
       currentWp = &waypoints[wpNum];
       globals->autoPilotCmds.setCmdAltitude(currentWp->meterAlt);
@@ -133,14 +128,14 @@ void WaypointFollower::loadWaypoint()
       std::cerr << distTol << std::endl;
 
       wpNum++;
-   }
-   else
-   {
+   } else {
       setState(false);
    }
 }
 
-void WaypointFollower::addWaypoint(double radLat, double radLon, double meterAlt, double mpsSpeed, double radHeading)
+void WaypointFollower::addWaypoint(const double radLat, const double radLon,
+                                   const double meterAlt, const double mpsSpeed,
+                                   const double radHeading)
 {
    Waypoint wp;
    wp.radLat = radLat;
@@ -159,19 +154,10 @@ void WaypointFollower::clearAllWaypoints()
    currentWp = nullptr;
 }
 
-int WaypointFollower::getCurrentWp()
-{
-   return wpNum;
-}
+int WaypointFollower::getCurrentWp() { return wpNum; }
 
-int WaypointFollower::getNumWaypoints()
-{
-   return waypoints.size();
-}
+int WaypointFollower::getNumWaypoints() { return waypoints.size(); }
 
-void WaypointFollower::setCurrentWp(int num)
-{
-   wpNum = num;
-}
+void WaypointFollower::setCurrentWp(int num) { wpNum = num; }
 }
 }

@@ -10,7 +10,9 @@
 #define TURNTYPE_TRAJECTORY 1
 
 namespace sf {
-namespace xml { class Node; }
+namespace xml {
+class Node;
+}
 namespace fdm {
 
 //------------------------------------------------------------------------------
@@ -23,8 +25,8 @@ class SimpleAutoPilot : public FDMModule
    ~SimpleAutoPilot();
 
    // module interface
-   virtual void initialize(xml::Node *node) override;
-   virtual void update(double timestep) override;
+   virtual void initialize(xml::Node* node) override;
+   virtual void update(const double timestep) override;
 
    void updateHdg(double timestep, double cmdHdg);
    void updateAlt(double timestep);
@@ -32,26 +34,26 @@ class SimpleAutoPilot : public FDMModule
    void updateSpeed(double timestep);
 
  protected:
-   double kphi {0.05};
-   double maxBankRate {0.2};   // rads/sec
-   double kalt {};
-   double kpitch {};
-   double maxG {2.0};
-   double minG {};
-   double maxG_rate {2.0};
-   double minG_rate {};
+   double kphi{0.05};
+   double maxBankRate{0.2}; // rads/sec
+   double kalt{};
+   double kpitch{};
+   double maxG{2.0};
+   double minG{};
+   double maxG_rate{2.0};
+   double minG_rate{};
 
-   double maxThrottle {};
-   double minThrottle {};
-   double spoolTime {1.0};
+   double maxThrottle{};
+   double minThrottle{};
+   double spoolTime{1.0};
 
-   double lastVz {};
+   double lastVz{};
 
-   int turnType {};
+   int turnType{};
 
-   double hdgErrTol {};
+   double hdgErrTol{};
 
-   bool vsHoldOn {}, altHoldOn {}, hdgHoldOn {};
+   bool vsHoldOn{}, altHoldOn{}, hdgHoldOn{};
 };
 }
 }

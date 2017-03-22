@@ -6,10 +6,12 @@
 #include <iostream>
 #include <string>
 
-namespace sf {
-namespace xml {
+namespace sf
+{
+namespace xml
+{
 
-Node* parse(std::string filename, bool treatAttributesAsChildren)
+Node *parse(const std::string filename, const bool treatAttributesAsChildren)
 {
    std::ifstream fin(filename.c_str());
 
@@ -24,7 +26,7 @@ Node* parse(std::string filename, bool treatAttributesAsChildren)
    return node;
 }
 
-Node* parseString(std::string xmlString, bool treatAttributesAsChildren)
+Node *parseString(const std::string& xmlString, const bool treatAttributesAsChildren)
 {
    std::istringstream fin(xmlString);
 
@@ -38,7 +40,7 @@ Node* parseString(std::string xmlString, bool treatAttributesAsChildren)
    return node;
 }
 
-Node* parse(std::istream &r, bool treatAttributesAsChildren)
+Node *parse(std::istream& r, const bool treatAttributesAsChildren)
 {
    Node *rootNode = nullptr;
    Node *node = nullptr;
@@ -141,6 +143,15 @@ Node* parse(std::istream &r, bool treatAttributesAsChildren)
    return rootNode;
 }
 
+bool isWhitespace(const char ch)
+{
+   if (ch == '\t' || ch == '\n' || ch == '\r' || ch == ' ')
+   {
+      return true;
+   }
+   return false;
+}
+
 std::string readChunk(std::istream &r)
 {
    std::string buf;
@@ -172,7 +183,7 @@ std::string readChunk(std::istream &r)
    return buf;
 }
 
-void subChars(std::string &srcStr)
+void subChars(std::string& srcStr)
 {
    unsigned int loc = srcStr.find("&lt");
    while (loc != std::string::npos)
@@ -210,7 +221,7 @@ void subChars(std::string &srcStr)
    }
 }
 
-std::string putAttributes(std::string str, Node *node, bool treatAsChildren)
+std::string putAttributes(std::string str, Node *node, const bool treatAsChildren)
 {
    try
    {
@@ -252,21 +263,12 @@ std::string putAttributes(std::string str, Node *node, bool treatAsChildren)
    return str;
 }
 
-bool isWhitespace(char ch)
-{
-   if (ch == '\t' || ch == '\n' || ch == '\r' || ch == ' ')
-   {
-      return true;
-   }
-   return false;
-}
-
-bool startsWith(std::string str, std::string search)
+bool startsWith(const std::string str, const std::string search)
 {
    return (str.find(search, 0) == 0);
 }
 
-bool endsWith(std::string str, std::string search)
+bool endsWith(const std::string str, const std::string search)
 {
    int searchLimit = str.length() - search.length();
    return (str.rfind(search, searchLimit) == searchLimit);

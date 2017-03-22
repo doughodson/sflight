@@ -21,7 +21,7 @@ Atmosphere::Atmosphere(FDMGlobals *globals, double frameRate)
     : FDMModule( globals, frameRate)
 {}
 
-void Atmosphere::update(double timestep)
+void Atmosphere::update(const double timestep)
 {
    globals->rho = getRho( globals->alt );
 }

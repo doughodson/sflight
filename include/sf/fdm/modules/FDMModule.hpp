@@ -5,7 +5,9 @@
 #include <string>
 
 namespace sf {
-namespace xml { class Node; }
+namespace xml {
+class Node;
+}
 namespace fdm {
 class FDMGlobals;
 
@@ -16,18 +18,18 @@ class FDMGlobals;
 class FDMModule
 {
  public:
-   FDMModule(FDMGlobals* globals, double frameRate);
+   FDMModule(FDMGlobals* globals, const double frameRate);
    virtual ~FDMModule() = default;
 
    // module interface
-   virtual void initialize(xml::Node *node)               {};
-   virtual void update(double timestep)                   {};
-   virtual void setProperty(std::string tag, double val)  {};
+   virtual void initialize(xml::Node* node){};
+   virtual void update(const double timestep){};
+   virtual void setProperty(std::string tag, const double val){};
 
-   FDMGlobals* globals {};
+   FDMGlobals* globals{};
 
-   double frameTime {};
-   double lastTime {};
+   double frameTime{};
+   double lastTime{};
 };
 }
 }

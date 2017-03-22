@@ -6,8 +6,7 @@
 namespace sf {
 namespace fdm {
 
-FDMModule::FDMModule(FDMGlobals *globals, double frameRate)
-    : globals(globals)
+FDMModule::FDMModule(FDMGlobals* globals, const double frameRate) : globals(globals)
 {
    if (globals != nullptr)
       globals->addModule(this);
@@ -18,6 +17,5 @@ FDMModule::FDMModule(FDMGlobals *globals, double frameRate)
       frameTime = 1.0 / frameRate;
    }
 }
-
 }
 }

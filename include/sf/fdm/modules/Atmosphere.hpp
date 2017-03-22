@@ -56,29 +56,29 @@ namespace fdm {
 //------------------------------------------------------------------------------
 class Atmosphere : public FDMModule
 {
-public:
-   Atmosphere( FDMGlobals *globals, double frameRate);
+ public:
+   Atmosphere(FDMGlobals* globals, double frameRate);
 
    // module interface
-   void update(double timestep) override;
+   virtual void update(const double timestep) override;
 
    // returns density in kg/m^3
-   static double getRho( double alt_meters);
+   static double getRho(double alt_meters);
 
    // returns pressure in kPa
-   static double getPressure( double alt_meters);
+   static double getPressure(double alt_meters);
 
    // returns temperature in Kelvin
-   static double getTemp( double alt_meters);
+   static double getTemp(double alt_meters);
 
-   static double getRemainder( double alt);
+   static double getRemainder(double alt);
 
-   static int getIndex( double alt);
+   static int getIndex(double alt);
 
    // returns speed of sound in mps
-   static double getSpeedSound( double tempK );
+   static double getSpeedSound(double tempK);
 
-private:
+ private:
    static const double alt[37];
    static const double temp[37];
    static const double press[37];
@@ -86,7 +86,6 @@ private:
 
    static int const maxIndex = 36;
 };
-
 }
 }
 

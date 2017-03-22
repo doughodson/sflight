@@ -8,20 +8,22 @@
 
 #include "sf/fdm/FDMGlobals.hpp"
 #include "sf/fdm/UnitConvert.hpp"
-#include "sf/fdm/WindAxis.hpp"
 #include "sf/fdm/Vector3.hpp"
+#include "sf/fdm/WindAxis.hpp"
 #include "sf/fdm/constants.hpp"
 
-#include <iostream>
 #include <cmath>
+#include <iostream>
 
 namespace sf {
 namespace fdm {
 
-InterpAero::InterpAero(FDMGlobals *globals, double frameRate) : FDMModule(globals, frameRate)
-{}
+InterpAero::InterpAero(FDMGlobals* globals, double frameRate)
+    : FDMModule(globals, frameRate)
+{
+}
 
-void InterpAero::update(double timestep)
+void InterpAero::update(const double timestep)
 {
    if (globals == nullptr)
       return;
@@ -32,17 +34,17 @@ void InterpAero::update(double timestep)
    double cd = b1 + b2 * cl * cl;
    double cy = -2.0 * globals->beta;
 
-   if (usingMachEffects)
-   {
+   if (usingMachEffects) {
       const double beta_mach = getBetaMach(globals->mach);
       cl /= beta_mach;
       cd /= beta_mach;
    }
 
-   WindAxis::windToBody(globals->aeroForce, globals->alpha, globals->beta, cl * qbar, cd * qbar, cy * qbar);
+   WindAxis::windToBody(globals->aeroForce, globals->alpha, globals->beta,
+                        cl * qbar, cd * qbar, cy * qbar);
 }
 
-void InterpAero::initialize(xml::Node *node)
+void InterpAero::initialize(xml::Node* node)
 {
    double thrustRatio{};
    double speedSound{};
@@ -53,7 +55,7 @@ void InterpAero::initialize(xml::Node *node)
    double mach{};
    double thrust{};
 
-   xml::Node *tmp = node->getChild("Design");
+   xml::Node* tmp = node->getChild("Design");
 
    designAlt = UnitConvert::toMeters(getDouble(tmp, "DesignAltitude", 0.0));
 
@@ -63,7 +65,7 @@ void InterpAero::initialize(xml::Node *node)
    wingArea = UnitConvert::toSqMeters(getDouble(tmp, "WingArea", 6.0));
 
    wingEffects = PI * wingSpan * wingSpan / wingArea;
-   //wingEffects = 1.0;
+   // wingEffects = 1.0;
 
    thrustAngle = UnitConvert::toRads(getDouble(tmp, "ThrustAngle", 0.0));
 
@@ -72,10 +74,10 @@ void InterpAero::initialize(xml::Node *node)
 
    // cruise condition
    pitch = UnitConvert::toRads(getDouble(tmp, "CruiseCondition/Pitch", 0));
-   airspeed = UnitConvert::toMPS(getDouble(tmp, "CruiseCondition/Airspeed", 0.0));
+   airspeed =
+       UnitConvert::toMPS(getDouble(tmp, "CruiseCondition/Airspeed", 0.0));
    vs = UnitConvert::FPMtoMPS(getDouble(tmp, "CruiseCondition/VS", 0.0));
-   if (airspeed < 1E-6)
-   {
+   if (airspeed < 1E-6) {
       airspeed = getDouble(tmp, "CruiseCondition/Mach", 0) * speedSound;
    }
 
@@ -85,8 +87,7 @@ void InterpAero::initialize(xml::Node *node)
 
    createCoefs(pitch, thrust, vs, airspeed, cruiseAlpha, cruiseCL, cruiseCD);
 
-   if (usingMachEffects)
-   {
+   if (usingMachEffects) {
       mach = airspeed / speedSound;
       beta_mach = getBetaMach(mach);
       cruiseCL *= beta_mach;
@@ -95,10 +96,10 @@ void InterpAero::initialize(xml::Node *node)
 
    // climb condition
    pitch = UnitConvert::toRads(getDouble(tmp, "ClimbCondition/Pitch", 0));
-   airspeed = UnitConvert::toMPS(getDouble(tmp, "ClimbCondition/Airspeed", 0.0));
+   airspeed =
+       UnitConvert::toMPS(getDouble(tmp, "ClimbCondition/Airspeed", 0.0));
    vs = UnitConvert::FPMtoMPS(getDouble(tmp, "ClimbCondition/VS", 0.0));
-   if (airspeed < 1E-6)
-   {
+   if (airspeed < 1E-6) {
       airspeed = getDouble(tmp, "ClimbCondition/Mach", 0) * speedSound;
    }
    mach = airspeed / speedSound;
@@ -109,8 +110,7 @@ void InterpAero::initialize(xml::Node *node)
 
    createCoefs(pitch, thrust, vs, airspeed, climbAlpha, climbCL, climbCD);
 
-   if (usingMachEffects)
-   {
+   if (usingMachEffects) {
       mach = airspeed / speedSound;
       beta_mach = getBetaMach(mach);
       climbCL *= beta_mach;
@@ -125,7 +125,7 @@ void InterpAero::initialize(xml::Node *node)
 }
 
 void InterpAero::createCoefs(double theta, double thrust, double vz, double u,
-                             double &alpha, double &cl, double &cd)
+                             double& alpha, double& cl, double& cd)
 {
    vz = -vz;
 
@@ -152,7 +152,7 @@ void InterpAero::createCoefs(double theta, double thrust, double vz, double u,
 
 double InterpAero::getBetaMach(double mach)
 {
-   //if (mach > 1.02 ) return 1 + sqrt( mach * mach - 1.0);
+   // if (mach > 1.02 ) return 1 + sqrt( mach * mach - 1.0);
    if (mach > 1.05)
       mach = 1.0 / mach;
    if (mach > 0.95)

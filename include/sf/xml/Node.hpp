@@ -2,9 +2,9 @@
 #ifndef __Node_H__
 #define __Node_H__
 
-#include <vector>
 #include <map>
 #include <string>
+#include <vector>
 
 namespace sf {
 namespace xml {
@@ -12,8 +12,7 @@ namespace xml {
 //------------------------------------------------------------------------------
 // Class: Node
 //------------------------------------------------------------------------------
-class Node
-{
+class Node {
  public:
    Node() = default;
    Node(const std::string& tagName);
@@ -24,23 +23,23 @@ class Node
    std::string getTagName() const;
    void setTagName(const std::string&);
 
-   Node *addChild(const std::string&);
+   Node* addChild(const std::string&);
 
-   Node *addChild(Node* const);
+   Node* addChild(Node* const);
 
    int getChildCount() const;
 
-   Node *getChild(const std::string&) const;
+   Node* getChild(const std::string&) const;
 
    std::vector<Node*> getChildren(const std::string& childName) const;
 
-   Node *getChild(const int index) const;
+   Node* getChild(const int index) const;
 
    void putAttribute(std::string name, std::string val);
 
    std::string getAttribute(const std::string name) const;
 
-   void getAttributeNames(std::string * const) const;
+   void getAttributeNames(std::string* const) const;
 
    int getAttributeCount() const;
 
@@ -48,7 +47,7 @@ class Node
 
    void setText(const std::string& text);
 
-   Node *getParent() const;
+   Node* getParent() const;
 
    void setParent(Node* const);
 
@@ -60,9 +59,9 @@ class Node
    std::string name;
    std::string text;
    std::map<std::string, std::string> attrMap;
-   std::vector<Node*> childList {};
+   std::vector<Node*> childList{};
 
-   Node* parentNode {};
+   Node* parentNode{};
 };
 }
 }

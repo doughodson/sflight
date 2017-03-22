@@ -7,23 +7,24 @@
 #include "sf/xml/node_utils.hpp"
 
 #include "sf/fdm/FDMGlobals.hpp"
-#include "sf/fdm/UnitConvert.hpp"
-#include "sf/fdm/WindAxis.hpp"
-#include "sf/fdm/Vector3.hpp"
-#include "sf/fdm/Table3D.hpp"
 #include "sf/fdm/Table2D.hpp"
+#include "sf/fdm/Table3D.hpp"
+#include "sf/fdm/UnitConvert.hpp"
+#include "sf/fdm/Vector3.hpp"
+#include "sf/fdm/WindAxis.hpp"
 
-#include <iostream>
 #include <cmath>
+#include <iostream>
 
 namespace sf {
 namespace fdm {
 
-TableAero::TableAero(FDMGlobals *globals, double frameRate) : FDMModule(globals, frameRate)
+TableAero::TableAero(FDMGlobals* globals, double frameRate)
+    : FDMModule(globals, frameRate)
 {
 }
 
-void TableAero::update(double timestep)
+void TableAero::update(const double timestep)
 {
    if (globals == nullptr)
       return;
@@ -33,22 +34,25 @@ void TableAero::update(double timestep)
 
    double qbarS = 0.5 * globals->vInf * globals->vInf * globals->rho * wingArea;
 
-   WindAxis::windToBody(globals->aeroForce, globals->alpha, globals->beta, cl * qbarS, cd * qbarS, 0);
+   WindAxis::windToBody(globals->aeroForce, globals->alpha, globals->beta,
+                        cl * qbarS, cd * qbarS, 0);
 
-   globals->fuelflow = thrustTable->interp(globals->mach, globals->alt, globals->throttle);
+   globals->fuelflow =
+       thrustTable->interp(globals->mach, globals->alt, globals->throttle);
    globals->fuel = globals->fuel - globals->fuelflow * timestep;
    globals->mass = globals->mass - globals->fuelflow * timestep;
 
-   double thrust = thrustTable->interp(globals->mach, globals->alt, globals->throttle);
+   double thrust =
+       thrustTable->interp(globals->mach, globals->alt, globals->throttle);
    globals->thrust.set1(thrust * cos(thrustAngle));
    globals->thrust.set2(0);
    globals->thrust.set3(-thrust * sin(thrustAngle));
 }
 
-void TableAero::initialize(xml::Node *node)
+void TableAero::initialize(xml::Node* node)
 {
 
-   xml::Node *tmp = node->getChild("Design");
+   xml::Node* tmp = node->getChild("Design");
    if (tmp == 0)
       return;
 
@@ -56,23 +60,21 @@ void TableAero::initialize(xml::Node *node)
    wingArea = UnitConvert::toSqMeters(xml::getDouble(tmp, "WingArea", 6.0));
    thrustAngle = UnitConvert::toRads(xml::getDouble(tmp, "ThrustAngle", 0.0));
 
-   xml::Node *thrustNode = tmp->getChild("ThrustTable");
-   xml::Node *ffNode = tmp->getChild("FuelFlowTable");
-   xml::Node *liftNode = tmp->getChild("LiftTable");
-   xml::Node *dragNode = tmp->getChild("DragTable");
+   xml::Node* thrustNode = tmp->getChild("ThrustTable");
+   xml::Node* ffNode = tmp->getChild("FuelFlowTable");
+   xml::Node* liftNode = tmp->getChild("LiftTable");
+   xml::Node* dragNode = tmp->getChild("DragTable");
 
-   if (thrustNode != nullptr)
-   {
+   if (thrustNode != nullptr) {
 
       std::vector<xml::Node*> tables = thrustNode->getChildren("Table");
       const int numpages = tables.size();
-      double *throttleVals = new double[numpages];
+      double* throttleVals = new double[numpages];
       this->thrustTable = new Table3D(numpages, throttleVals);
 
-      for (int i = 0; i < numpages; i++)
-      {
+      for (int i = 0; i < numpages; i++) {
 
-         xml::Node *tablenode = tables[i];
+         xml::Node* tablenode = tables[i];
 
          throttleVals[i] = xml::getDouble(tables[i], "Throttle", 0);
 
@@ -80,9 +82,8 @@ void TableAero::initialize(xml::Node *node)
          std::vector<std::string> splits = xml::splitString(valstr, ',');
          int numAltVals = splits.size();
 
-         double *altvals = new double[numAltVals];
-         for (int j = 0; j < numAltVals; j++)
-         {
+         double* altvals = new double[numAltVals];
+         for (int j = 0; j < numAltVals; j++) {
             altvals[j] = UnitConvert::toMeters(std::atof(splits[j].c_str()));
          }
 
@@ -90,13 +91,13 @@ void TableAero::initialize(xml::Node *node)
          splits = xml::splitString(valstr, ',');
          int numMachVals = splits.size();
 
-         double *machvals = new double[numMachVals];
-         for (int j = 0; j < numMachVals; j++)
-         {
+         double* machvals = new double[numMachVals];
+         for (int j = 0; j < numMachVals; j++) {
             machvals[j] = std::atof(splits[j].c_str());
          }
 
-         Table2D *table = new Table2D(numAltVals, numMachVals, machvals, altvals);
+         Table2D* table =
+             new Table2D(numAltVals, numMachVals, machvals, altvals);
          table->setData(xml::get(tablenode, "Data", ""));
          thrustTable->setPage(i, table);
       }
@@ -106,18 +107,16 @@ void TableAero::initialize(xml::Node *node)
       thrustTable->print();
    }
 
-   if (ffNode != nullptr)
-   {
+   if (ffNode != nullptr) {
 
       std::vector<xml::Node*> tables = ffNode->getChildren("Table");
       int numpages = tables.size();
-      double *throttleVals = new double[numpages];
+      double* throttleVals = new double[numpages];
       this->fuelflowTable = new Table3D(numpages, throttleVals);
 
-      for (int i = 0; i < numpages; i++)
-      {
+      for (int i = 0; i < numpages; i++) {
 
-         xml::Node *tablenode = tables[i];
+         xml::Node* tablenode = tables[i];
 
          throttleVals[i] = getDouble(tables[i], "Throttle", 0);
 
@@ -125,9 +124,8 @@ void TableAero::initialize(xml::Node *node)
          std::vector<std::string> splits = xml::splitString(valstr, ',');
          int numAltVals = splits.size();
 
-         double *altvals = new double[numAltVals];
-         for (int j = 0; j < numAltVals; j++)
-         {
+         double* altvals = new double[numAltVals];
+         for (int j = 0; j < numAltVals; j++) {
             altvals[j] = UnitConvert::toMeters(std::atof(splits[j].c_str()));
          }
 
@@ -135,31 +133,29 @@ void TableAero::initialize(xml::Node *node)
          splits = xml::splitString(valstr, ',');
          int numMachVals = splits.size();
 
-         double *machvals = new double[numMachVals];
-         for (int j = 0; j < numMachVals; j++)
-         {
+         double* machvals = new double[numMachVals];
+         for (int j = 0; j < numMachVals; j++) {
             machvals[j] = std::atof(splits[j].c_str());
          }
 
-         Table2D *table = new Table2D(numAltVals, numMachVals, altvals, machvals);
+         Table2D* table =
+             new Table2D(numAltVals, numMachVals, altvals, machvals);
          table->setData(xml::get(tablenode, "Data", ""));
          fuelflowTable->setPage(i, table);
       }
-      //convert from lbs/sec to kilos/sec
+      // convert from lbs/sec to kilos/sec
       fuelflowTable->multiply(UnitConvert::toKilos(1));
    }
 
-   if (liftNode != nullptr)
-   {
+   if (liftNode != nullptr) {
 
       std::vector<xml::Node*> tables = liftNode->getChildren("Table");
       int numpages = tables.size();
-      double *machVals = new double[numpages];
+      double* machVals = new double[numpages];
       this->liftTable = new Table3D(numpages, machVals);
 
-      for (int i = 0; i < numpages; i++)
-      {
-         xml::Node *tablenode = tables[i];
+      for (int i = 0; i < numpages; i++) {
+         xml::Node* tablenode = tables[i];
 
          machVals[i] = getDouble(tables[i], "Mach", 0);
 
@@ -167,9 +163,8 @@ void TableAero::initialize(xml::Node *node)
          std::vector<std::string> splits = xml::splitString(valstr, ',');
          int numAltVals = splits.size();
 
-         double *altvals = new double[numAltVals];
-         for (int j = 0; j < numAltVals; j++)
-         {
+         double* altvals = new double[numAltVals];
+         for (int j = 0; j < numAltVals; j++) {
             altvals[j] = UnitConvert::toMeters(std::atof(splits[j].c_str()));
          }
 
@@ -178,28 +173,26 @@ void TableAero::initialize(xml::Node *node)
          int numAlphaVals = splits.size();
 
          double* alphavals = new double[numAlphaVals];
-         for (int j = 0; j < numAlphaVals; j++)
-         {
+         for (int j = 0; j < numAlphaVals; j++) {
             alphavals[j] = UnitConvert::toRads(std::atof(splits[j].c_str()));
          }
 
-         Table2D *table = new Table2D(numAltVals, numAlphaVals, altvals, alphavals);
+         Table2D* table =
+             new Table2D(numAltVals, numAlphaVals, altvals, alphavals);
          table->setData(get(tablenode, "Data", ""));
          liftTable->setPage(i, table);
       }
    }
 
-   if (dragNode != nullptr)
-   {
+   if (dragNode != nullptr) {
       std::vector<xml::Node*> tables = dragNode->getChildren("Table");
       int numpages = tables.size();
-      double *machVals = new double[numpages];
+      double* machVals = new double[numpages];
       this->dragTable = new Table3D(numpages, machVals);
 
-      for (int i = 0; i < numpages; i++)
-      {
+      for (int i = 0; i < numpages; i++) {
 
-         xml::Node *tablenode = tables[i];
+         xml::Node* tablenode = tables[i];
 
          machVals[i] = xml::getDouble(tables[i], "Mach", 0);
 
@@ -207,9 +200,8 @@ void TableAero::initialize(xml::Node *node)
          std::vector<std::string> splits = xml::splitString(valstr, ',');
          int numAltVals = splits.size();
 
-         double *altvals = new double[numAltVals];
-         for (int j = 0; j < numAltVals; j++)
-         {
+         double* altvals = new double[numAltVals];
+         for (int j = 0; j < numAltVals; j++) {
             altvals[j] = UnitConvert::toMeters(std::atof(splits[j].c_str()));
          }
 
@@ -217,13 +209,13 @@ void TableAero::initialize(xml::Node *node)
          splits = xml::splitString(valstr, ',');
          int numAlphaVals = splits.size();
 
-         double *alphavals = new double[numAlphaVals];
-         for (int j = 0; j < numAlphaVals; j++)
-         {
+         double* alphavals = new double[numAlphaVals];
+         for (int j = 0; j < numAlphaVals; j++) {
             alphavals[j] = std::atof(splits[j].c_str());
          }
 
-         Table2D *table = new Table2D(numAltVals, numAlphaVals, altvals, alphavals);
+         Table2D* table =
+             new Table2D(numAltVals, numAlphaVals, altvals, alphavals);
          table->setData(xml::get(tablenode, "Data", ""));
          dragTable->setPage(i, table);
       }

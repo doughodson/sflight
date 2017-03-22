@@ -7,19 +7,18 @@
 #include "sf/fdm/FDMGlobals.hpp"
 #include "sf/fdm/UnitConvert.hpp"
 
-#include <iostream>
 #include <iomanip>
+#include <iostream>
 
 namespace sf {
 namespace fdm {
 
-FileOutput::FileOutput(FDMGlobals *globals, double frameRate) : FDMModule(globals, frameRate)
-{}
-
-FileOutput::~FileOutput()
+FileOutput::FileOutput(FDMGlobals* globals, double frameRate)
+    : FDMModule(globals, frameRate)
 {
-    fout.close();
 }
+
+FileOutput::~FileOutput() { fout.close(); }
 
 void FileOutput::initialize(xml::Node* node)
 {
@@ -28,14 +27,17 @@ void FileOutput::initialize(xml::Node* node)
    std::cout << "Saving output to: " << filename << std::endl;
    fout.open(filename.c_str());
    frameCounter = 0;
-   if (fout.is_open() ) {
-      fout << "Time (sec)\tLatitude(deg)\tLongitude(deg)\tAltitude(ft)\tSpeed(ktas)\tBank(deg)\tPitch(deg)\tHeading(deg)\tThrottle" << std::endl;
+   if (fout.is_open()) {
+      fout << "Time "
+              "(sec)\tLatitude(deg)\tLongitude(deg)\tAltitude(ft)\tSpeed(ktas)"
+              "\tBank(deg)\tPitch(deg)\tHeading(deg)\tThrottle"
+           << std::endl;
    }
 }
 
-void FileOutput::update(double timestep)
+void FileOutput::update(const double timestep)
 {
-   if ( globals->simTime - lastTime > 1./rate) {
+   if (globals->simTime - lastTime > 1. / rate) {
       update();
       lastTime = globals->simTime;
    }
@@ -50,25 +52,20 @@ void FileOutput::update()
 
    fout << std::setprecision(7);
 
-   fout << UnitConvert :: toDegs(globals->lat) << "\t";
-   fout << UnitConvert :: toDegs(globals->lon) << "\t";
-   fout << UnitConvert :: toFeet(globals->alt) << "\t";
+   fout << UnitConvert::toDegs(globals->lat) << "\t";
+   fout << UnitConvert::toDegs(globals->lon) << "\t";
+   fout << UnitConvert::toFeet(globals->alt) << "\t";
 
-   fout << UnitConvert :: toKnots(globals->vInf) << "\t";
+   fout << UnitConvert::toKnots(globals->vInf) << "\t";
 
-   fout << UnitConvert :: toDegs(globals->eulers.getPhi()) << "\t";
-   fout << UnitConvert :: toDegs(globals->eulers.getTheta()) << "\t";
-   fout << UnitConvert :: toDegs(globals->eulers.getPsi()) << "\t";
+   fout << UnitConvert::toDegs(globals->eulers.getPhi()) << "\t";
+   fout << UnitConvert::toDegs(globals->eulers.getTheta()) << "\t";
+   fout << UnitConvert::toDegs(globals->eulers.getPsi()) << "\t";
 
    fout << globals->throttle << "\t";
    fout << std::endl;
 }
 
-void FileOutput::close()
-{
-   fout.close();
-}
-
+void FileOutput::close() { fout.close(); }
 }
 }
-

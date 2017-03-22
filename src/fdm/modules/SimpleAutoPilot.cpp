@@ -70,7 +70,7 @@ void SimpleAutoPilot::initialize(xml::Node* node)
    globals->autoPilotCmds.setAutoThrottleOn(true);
 }
 
-void SimpleAutoPilot::update(double timestep)
+void SimpleAutoPilot::update(const double timestep)
 {
 
    if (globals->autoPilotCmds.isAutoPilotOn())

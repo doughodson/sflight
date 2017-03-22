@@ -8,7 +8,9 @@
 #include <vector>
 
 namespace sf {
-namespace xml { class Node; }
+namespace xml {
+class Node;
+}
 namespace fdm {
 
 //------------------------------------------------------------------------------
@@ -17,11 +19,11 @@ namespace fdm {
 class Waypoint
 {
  public:
-   double radLat {};
-   double radLon {};
-   double meterAlt {};
-   double mpsSpeed {};
-   double radHeading {};
+   double radLat{};
+   double radLon{};
+   double meterAlt{};
+   double mpsSpeed{};
+   double radHeading{};
 };
 
 //------------------------------------------------------------------------------
@@ -30,12 +32,12 @@ class Waypoint
 class WaypointFollower : public FDMModule
 {
  public:
-   WaypointFollower(FDMGlobals *globals, double frameRate);
+   WaypointFollower(FDMGlobals* globals, double frameRate);
    virtual ~WaypointFollower() = default;
 
    // module interface
-   void initialize(xml::Node *node);
-   void update(double timestep);
+   void initialize(xml::Node* node);
+   void update(const double timestep);
 
    void loadWaypoint();
    void setState(bool isOn);
@@ -43,18 +45,20 @@ class WaypointFollower : public FDMModule
    int getCurrentWp();
    int getNumWaypoints();
    void clearAllWaypoints();
-   void addWaypoint(double radLat, double radLon, double meterAlt, double mpsSpeed, double radBearing);
+   void addWaypoint(const double radLat, const double radLon,
+                    const double meterAlt, const double mpsSpeed,
+                    const double radBearing);
 
  protected:
    std::vector<Waypoint> waypoints;
-   Waypoint* currentWp {};
-   int wpNum {};
+   Waypoint* currentWp{};
+   int wpNum{};
 
-   double altTol {};
-   double distTol {};
-   double azTol {};
+   double altTol{};
+   double distTol{};
+   double azTol{};
 
-   bool isOn {};
+   bool isOn{};
 
    enum class PathType { DIRECT, BEARING };
 

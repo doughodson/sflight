@@ -4,32 +4,32 @@
 #include "sf/xml/Node.hpp"
 #include "sf/xml/parser_utils.hpp"
 
-#include <vector>
-#include <string>
-#include <iostream>
-#include <cmath>
 #include <cctype>
+#include <cmath>
+#include <iostream>
+#include <string>
+#include <vector>
 
 namespace sf {
 namespace xml {
 
 // returns a list of nodes that contain the childName
-std::vector<Node*> getList(Node *parent, std::string childName)
+std::vector<Node*> getList(Node* const parent, const std::string childName)
 {
-
    if (parent == nullptr)
-      return std::vector<Node *>();
+      return std::vector<Node*>();
 
    return parent->getChildren(childName);
 }
 
-std::string get(Node *parent, std::string pathName, std::string defaultVal)
+std::string get(Node* const parent, const std::string pathName,
+                const std::string defaultVal)
 {
 
    if (parent == nullptr)
       return defaultVal;
 
-   Node *node = parent->getChild(pathName);
+   Node* node = parent->getChild(pathName);
 
    if (node == nullptr)
       return defaultVal;
@@ -37,13 +37,13 @@ std::string get(Node *parent, std::string pathName, std::string defaultVal)
    return node->getText();
 }
 
-int getInt(Node *parent, std::string pathName, int defaultVal)
+int getInt(Node* const parent, const std::string pathName, const int defaultVal)
 {
 
    if (parent == nullptr)
       return defaultVal;
 
-   Node *node = parent->getChild(pathName);
+   Node* node = parent->getChild(pathName);
 
    if (node == nullptr)
       return defaultVal;
@@ -51,13 +51,14 @@ int getInt(Node *parent, std::string pathName, int defaultVal)
    return std::atoi(node->getText().c_str());
 }
 
-long getLong(Node *parent, std::string pathName, long defaultVal)
+long getLong(Node* const parent, const std::string pathName,
+             const long defaultVal)
 {
 
    if (parent == nullptr)
       return defaultVal;
 
-   Node *node = parent->getChild(pathName);
+   Node* node = parent->getChild(pathName);
 
    if (node == nullptr)
       return defaultVal;
@@ -65,29 +66,13 @@ long getLong(Node *parent, std::string pathName, long defaultVal)
    return std::atol(node->getText().c_str());
 }
 
-double getDouble(Node *parent, std::string pathName, double defaultVal)
+float getFloat(Node* const parent, const std::string pathName,
+               const float defaultVal)
 {
-
    if (parent == nullptr)
       return defaultVal;
 
-   Node *node = parent->getChild(pathName);
-
-   if (node == nullptr)
-      return defaultVal;
-
-   double val = std::atof(node->getText().c_str());
-
-   return std::atof(node->getText().c_str());
-}
-
-float getFloat(Node *parent, std::string pathName, float defaultVal)
-{
-
-   if (parent == nullptr)
-      return defaultVal;
-
-   Node *node = parent->getChild(pathName);
+   Node* node = parent->getChild(pathName);
 
    if (node == nullptr)
       return defaultVal;
@@ -95,20 +80,35 @@ float getFloat(Node *parent, std::string pathName, float defaultVal)
    return (float)atof(node->getText().c_str());
 }
 
-bool getBool(Node *parent, std::string pathName, bool defaultVal)
+double getDouble(Node* const parent, const std::string pathName,
+                 const double defaultVal)
 {
-
    if (parent == nullptr)
       return defaultVal;
 
-   Node *node = parent->getChild(pathName);
+   Node* node = parent->getChild(pathName);
+
+   if (node == nullptr)
+      return defaultVal;
+
+   const double val = std::atof(node->getText().c_str());
+
+   return val;
+}
+
+bool getBool(Node* const parent, const std::string pathName,
+             const bool defaultVal)
+{
+   if (parent == nullptr)
+      return defaultVal;
+
+   Node* node = parent->getChild(pathName);
    if (node == nullptr)
       return defaultVal;
 
    std::string text = node->getText();
 
-   for (int i = 0; i < text.length(); i++)
-   {
+   for (int i = 0; i < text.length(); i++) {
       text[i] = std::toupper(text[i]);
    }
 
@@ -120,29 +120,27 @@ bool getBool(Node *parent, std::string pathName, bool defaultVal)
    return defaultVal;
 }
 
-std::vector<std::string> splitString(std::string inStr, char splitChar)
+std::vector<std::string> splitString(const std::string inStr,
+                                     const char splitChar)
 {
    std::vector<std::string> retV;
 
    int startLoc = 0;
 
-   const char *charStr = inStr.c_str();
+   const char* charStr = inStr.c_str();
    int len = inStr.length();
 
    int i = 0;
-   while (i < len)
-   {
+   while (i < len) {
       // trim leading delimeters
-      while (i < len && (charStr[i] == splitChar || isWhitespace(charStr[i])))
-      {
+      while (i < len && (charStr[i] == splitChar || isWhitespace(charStr[i]))) {
          i++;
       }
 
       startLoc = i;
       i++;
 
-      while (i < len && charStr[i] != splitChar && !isWhitespace(charStr[i]))
-      {
+      while (i < len && charStr[i] != splitChar && !isWhitespace(charStr[i])) {
          i++;
       }
 

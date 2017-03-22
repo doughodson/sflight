@@ -23,9 +23,11 @@ public:
    EOMFiveDOF(FDMGlobals* globals, double frameRate);
    virtual ~EOMFiveDOF() = default;
 
+   // module interface
+   virtual void initialize(xml::Node* node) override;
+   virtual void update(const double timestep) override;
+
    void computeEOM(double timestep);
-   void initialize(xml::Node* node);
-   void update(double timestep);
 
 private:
    Quaternion quat;

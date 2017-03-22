@@ -5,7 +5,9 @@
 #include "sf/fdm/modules/FDMModule.hpp"
 
 namespace sf {
-namespace xml { class Node; }
+namespace xml {
+class Node;
+}
 namespace fdm {
 class FDMGlobals;
 
@@ -15,41 +17,42 @@ class FDMGlobals;
 //------------------------------------------------------------------------------
 class InverseDesign : public virtual FDMModule
 {
-
  public:
-   InverseDesign(FDMGlobals *globals, double frameRate);
+   InverseDesign(FDMGlobals* globals, double frameRate);
 
    // module interface
-   virtual void initialize(xml::Node *node) override;
-   virtual void update(double timestep) override;
+   virtual void initialize(xml::Node* node) override;
+   virtual void update(const double timestep) override;
 
-   void getAeroCoefs(double pitch, double u, double vz, double rho, double weight, double thrust, double &alpha, double &cl, double &cd);
+   void getAeroCoefs(double pitch, double u, double vz, double rho,
+                     double weight, double thrust, double& alpha, double& cl,
+                     double& cd);
 
    double getThrust(double rho, double mach, double throttle);
 
    double getFuelFlow(double rho, double mach, double thrust);
 
  protected:
-   double designWeight {};
-   double designAlt {};
-   double wingSpan {};
-   double wingArea {};
+   double designWeight{};
+   double designAlt{};
+   double wingSpan{};
+   double wingArea{};
 
-   double staticThrust {};
-   double staticTSFC {};
-   double thrustAngle {};
-   double dTdM {};
-   double dTdRho {};
-   double dTSFCdM {};
+   double staticThrust{};
+   double staticTSFC{};
+   double thrustAngle{};
+   double dTdM{};
+   double dTdRho{};
+   double dTSFCdM{};
 
-   double qdes {};
+   double qdes{};
 
-   double cdo {};
-   double clo {};
-   double a {};
-   double b {};
+   double cdo{};
+   double clo{};
+   double a{};
+   double b{};
 
-   bool usingMachEffects {true};
+   bool usingMachEffects{true};
 };
 }
 }
