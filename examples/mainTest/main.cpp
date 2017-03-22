@@ -9,6 +9,8 @@
 #include <cstdlib>
 #include <iostream>
 
+using namespace sf;
+
 int main(int argc, char** argv)
 {
    if (argc < 4) {
@@ -22,18 +24,18 @@ int main(int argc, char** argv)
    const double frame_rate = std::atof(argv[3]); // hz
    const long num_frames = static_cast<long>(total_time * frame_rate);
 
-   auto globals = new sf::fdm::FDMGlobals();
+   auto globals = new fdm::FDMGlobals();
 
    // parse input file and return top node
-   sf::xml::Node* node = sf::xml::parse(filename, true);
+   xml::Node* node = xml::parse(filename, true);
 
    // construct obj tree and have each obj read their own configuration
    load_modules(node, globals);
    globals->initialize(node);
 
-   auto exec = new sf::fdm::SimExec(globals, frame_rate, num_frames);
+   auto exec = new fdm::SimExec(globals, frame_rate, num_frames);
 
-   std::cout << "Running SimpleFlight for " << argv[2] << " seconds.\n"
+   std::cout << "Running SimpleFlight for " << total_time << " seconds.\n"
              << std::endl;
 
    exec->startConstructive();
