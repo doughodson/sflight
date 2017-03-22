@@ -16,10 +16,10 @@ OBJS =  \
 	modules/TableAero.o \
 	modules/WaypointFollower.o \
 	AutoPilotCmds.o \
-	Earth.o \
 	Euler.o \
 	FDMGlobals.o \
 	load_modules.o \
+	nav_utils.o \
 	PIControl.o \
 	PID.o \
 	PIDControl.o \

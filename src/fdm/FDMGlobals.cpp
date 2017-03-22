@@ -5,13 +5,13 @@
 #include "sf/fdm/modules/FDMModule.hpp"
 
 #include "sf/fdm/AutoPilotCmds.hpp"
-#include "sf/fdm/Earth.hpp"
 #include "sf/fdm/Euler.hpp"
 #include "sf/fdm/Quaternion.hpp"
 #include "sf/fdm/UnitConvert.hpp"
 #include "sf/fdm/Vector3.hpp"
 
 #include "sf/xml/Node.hpp"
+#include "sf/fdm/nav_utils.hpp"
 #include "sf/xml/node_utils.hpp"
 
 #include <string>
@@ -22,7 +22,7 @@ namespace fdm {
 
 FDMGlobals::FDMGlobals()
 {
-   this->g = Earth::getG(0, 0, 0);
+   this->g = nav::getG(0, 0, 0);
 
    this->uvw = Vector3();
    this->uvwdot = Vector3();

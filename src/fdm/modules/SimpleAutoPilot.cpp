@@ -45,8 +45,8 @@ void SimpleAutoPilot::initialize(xml::Node* node)
              UnitConvert::FPMtoMPS(xml::getDouble(tmp, "MaxVS", 0)));
          kalt = xml::getDouble(tmp, "AltWeight", 0.2);
       } else if (xml::get(tmp, "Type", "") == "VSHold") {
-         maxG = (xml::getDouble(tmp, "MaxG", maxG) - 1) * Earth::getG(0, 0, 0);
-         minG = (xml::getDouble(tmp, "MinG", minG) - 1) * Earth::getG(0, 0, 0);
+         maxG = (xml::getDouble(tmp, "MaxG", maxG) - 1) * nav::getG(0, 0, 0);
+         minG = (xml::getDouble(tmp, "MinG", minG) - 1) * nav::getG(0, 0, 0);
          maxG_rate = maxG;
          minG_rate = minG;
          globals->autoPilotCmds.setMaxPitchUp(

@@ -4,7 +4,7 @@
 
 #include "sf/xml/Node.hpp"
 
-#include "sf/fdm/Earth.hpp"
+#include "sf/fdm/nav_utils.hpp"
 #include "sf/fdm/Euler.hpp"
 #include "sf/fdm/Quaternion.hpp"
 #include "sf/fdm/Vector3.hpp"

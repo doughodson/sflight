@@ -1,29 +1,30 @@
 
-#include "sf/fdm/Vector3.hpp"
+#include "sf/fdm/nav_utils.hpp"
 
-#include "sf/fdm/Earth.hpp"
 #include "sf/fdm/UnitConvert.hpp"
+#include "sf/fdm/Vector3.hpp"
 #include "sf/fdm/constants.hpp"
 
 #include <cmath>
 
 namespace sf {
 namespace fdm {
+namespace nav {
 
-bool Earth::wgs84LatLon(double* const lat, double* const lon, const double alt,
-                        const double vn, const double ve, const double time_diff)
+bool wgs84LatLon(double* const lat, double* const lon, const double alt, const double vn,
+                 const double ve, const double time_diff)
 {
    // check to ensure we have good pointers
    if (!lat || !lon)
       return false;
 
    const double divisor =
-       std::sqrt(1 - earth::epsilon * earth::epsilon * std::sin(*lat) * std::sin(*lat));
+       std::sqrt(1 - epsilon * epsilon * std::sin(*lat) * std::sin(*lat));
 
    const double rMeridian =
-       earth::radiusEq * (1. - earth::epsilon * earth::epsilon) / std::pow(divisor, 3.0);
+       radiusEq * (1. - epsilon * epsilon) / std::pow(divisor, 3.0);
 
-   const double rNormal = earth::radiusEq / divisor;
+   const double rNormal = radiusEq / divisor;
 
    // double requiv = sqrt(rMeridian * rNormal);
 
@@ -38,13 +39,13 @@ bool Earth::wgs84LatLon(double* const lat, double* const lon, const double alt,
    return true;
 }
 
-bool Earth::simpleLatLon(double* const lat, double* const lon, const double alt,
-                         const double vn, const double ve, const double time_diff)
+bool simpleLatLon(double* const lat, double* const lon, const double alt, const double vn,
+                  const double ve, const double time_diff)
 {
    if (!lat || !lon)
       return false;
-   *lat = *lat + vn / (earth::radiusEq + alt) * time_diff;
-   *lon = *lon + ve / ((earth::radiusEq + alt) * std::cos(*lat)) * time_diff;
+   *lat = *lat + vn / (radiusEq + alt) * time_diff;
+   *lon = *lon + ve / ((radiusEq + alt) * std::cos(*lat)) * time_diff;
    return true;
 }
 
@@ -52,8 +53,8 @@ bool Earth::simpleLatLon(double* const lat, double* const lon, const double alt,
  *  based on the openmap great circle computations (http://openmap.bbn.com)
  *  @returns the heading in the [-PI..PI] domain
  */
-double Earth::headingBetween(const double lat1, const double lon1, const double lat2,
-                             const double lon2)
+double headingBetween(const double lat1, const double lon1, const double lat2,
+                      const double lon2)
 {
    const double londiff = lon2 - lon1;
    const double coslat = std::cos(lat2);
@@ -67,8 +68,7 @@ double Earth::headingBetween(const double lat1, const double lon1, const double 
  *  based on the openmap great circle computations (http://openmap.bbn.com)
  *  @returns the distance in radians
  */
-double Earth::distance(const double lat1, const double lon1, const double lat2,
-                       const double lon2)
+double distance(const double lat1, const double lon1, const double lat2, const double lon2)
 {
    const double latdiff = std::sin(((lat2 - lat1) / 2.));
    const double londiff = std::sin((lon2 - lon1) / 2.);
@@ -79,15 +79,12 @@ double Earth::distance(const double lat1, const double lon1, const double lat2,
 }
 
 /** needs update.  Will always return gravity at lat = 0, lon = 0, alt = 0; */
-double Earth::getG(const double lat, const double lon, const double alt)
-{
-   return earth::gravEq;
-}
+double getG(const double lat, const double lon, const double alt) { return gravEq; }
 
 /** fills a Vector with the 3-d components of gravity based on current euler
     angles and grav force
 */
-bool Earth::getGravForce(Vector3* const v, const double theta, const double phi,
+bool getGravForce(Vector3* const v, const double theta, const double phi,
                          const double g)
 {
    if (!v)
@@ -96,6 +93,7 @@ bool Earth::getGravForce(Vector3* const v, const double theta, const double phi,
    v->set2(g * std::sin(phi) * std::cos(theta));
    v->set3(g * std::cos(theta) * std::cos(phi));
    return true;
+}
 }
 }
 }

@@ -4,11 +4,11 @@
 #include "sf/xml/Node.hpp"
 #include "sf/xml/node_utils.hpp"
 
-#include "sf/fdm/Earth.hpp"
 #include "sf/fdm/FDMGlobals.hpp"
 #include "sf/fdm/UnitConvert.hpp"
 #include "sf/fdm/UnitConvert.hpp"
 #include "sf/fdm/constants.hpp"
+#include "sf/fdm/nav_utils.hpp"
 
 #include <cmath>
 #include <iostream>
@@ -27,12 +27,10 @@ void WaypointFollower::initialize(xml::Node* node)
 
    isOn = getBool(tmp, "WaypointFollow", true);
 
-   cmdPathType = (get(tmp, "PathType", "DIRECT") == "BEARING")
-                     ? PathType::BEARING
-                     : PathType::DIRECT;
+   cmdPathType =
+       (get(tmp, "PathType", "DIRECT") == "BEARING") ? PathType::BEARING : PathType::DIRECT;
 
-   std::vector<xml::Node*> wps =
-       xml::getList(tmp->getChild("WaypointList"), "Waypoint");
+   std::vector<xml::Node*> wps = xml::getList(tmp->getChild("WaypointList"), "Waypoint");
 
    for (unsigned int i = 0; i < wps.size(); i++) {
       xml::Node* wp = wps[i];
@@ -81,10 +79,10 @@ void WaypointFollower::update(const double timestep)
       return;
    }
 
-   double az = Earth::headingBetween(globals->lat, globals->lon,
-                                     currentWp->radLat, currentWp->radLon);
-   double dist = Earth::distance(globals->lat, globals->lon, currentWp->radLat,
-                                 currentWp->radLon);
+   double az =
+       nav::headingBetween(globals->lat, globals->lon, currentWp->radLat, currentWp->radLon);
+   double dist =
+       nav::distance(globals->lat, globals->lon, currentWp->radLat, currentWp->radLon);
 
    // double hdgDiff = fabs( UnitConvert :: wrapHeading(globals->eulers.getPsi()
    // - az, true) );
@@ -105,8 +103,8 @@ void WaypointFollower::update(const double timestep)
       if (hdgDiff >= math::PI) {
          globals->autoPilotCmds.setCmdHeading(az);
       } else {
-         globals->autoPilotCmds.setCmdHeading(UnitConvert::wrapHeading(
-             2 * az - currentWp->radHeading - 0.01, true));
+         globals->autoPilotCmds.setCmdHeading(
+             UnitConvert::wrapHeading(2 * az - currentWp->radHeading - 0.01, true));
       }
    }
 }
@@ -124,7 +122,7 @@ void WaypointFollower::loadWaypoint()
       globals->autoPilotCmds.setCmdSpeed(currentWp->mpsSpeed);
 
       // set the distance tolerance to x seconds of flight time
-      distTol = (currentWp->mpsSpeed * 5) * earth::metersToRadian;
+      distTol = (currentWp->mpsSpeed * 5) * nav::metersToRadian;
       std::cerr << distTol << std::endl;
 
       wpNum++;

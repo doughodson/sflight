@@ -3,13 +3,14 @@
 
 #include "sf/fdm/modules/Atmosphere.hpp"
 
-#include "sf/fdm/Earth.hpp"
 #include "sf/fdm/Euler.hpp"
 #include "sf/fdm/FDMGlobals.hpp"
 #include "sf/fdm/Quaternion.hpp"
 #include "sf/fdm/Vector3.hpp"
 
 #include "sf/xml/Node.hpp"
+
+#include "sf/fdm/nav_utils.hpp"
 #include "sf/xml/node_utils.hpp"
 
 #include <cmath>
@@ -18,8 +19,7 @@
 namespace sf {
 namespace fdm {
 
-EOMFiveDOF::EOMFiveDOF(FDMGlobals* globals, double frameRate)
-    : FDMModule(globals, frameRate)
+EOMFiveDOF::EOMFiveDOF(FDMGlobals* globals, double frameRate) : FDMModule(globals, frameRate)
 {
 }
 
@@ -36,7 +36,7 @@ void EOMFiveDOF::initialize(xml::Node* node)
    xyz = Vector3();
    gravAccel = Vector3();
 
-   gravConst = Earth::getG(0, 0, 0);
+   gravConst = nav::getG(0, 0, 0);
    autoRudder = xml::getBool(node, "Control/AutoRudder", true);
 }
 
@@ -65,9 +65,8 @@ void EOMFiveDOF::computeEOM(double timestep)
                         globals->pqr.get1() * globals->uvw.get2());
 
    // get gravity acceleration for current orientation
-   Earth::getGravForce(&gravAccel, globals->eulers.getTheta(),
-                       globals->eulers.getPhi(),
-                       Earth::getG(globals->lat, globals->lon, globals->alt));
+   nav::getGravForce(&gravAccel, globals->eulers.getTheta(), globals->eulers.getPhi(),
+                     nav::getG(globals->lat, globals->lon, globals->alt));
 
    // set the "g" term in the globals
    globals->g = (globals->uvwdot.get3() + gravAccel.get3()) / gravConst;
@@ -104,8 +103,7 @@ void EOMFiveDOF::computeEOM(double timestep)
          globals->pqr.set2(globals->pqr.get2() > 0 ? globals->pqr.get2() : 0);
       }
       globals->uvw.set3(globals->uvw.get3() < 0 ? globals->uvw.get3() : 0);
-      globals->uvwdot.set3(globals->uvwdot.get3() < 0 ? globals->uvwdot.get3()
-                                                      : 0);
+      globals->uvwdot.set3(globals->uvwdot.get3() < 0 ? globals->uvwdot.get3() : 0);
       // globals->alt = globals->altagl;
    }
 
@@ -115,8 +113,7 @@ void EOMFiveDOF::computeEOM(double timestep)
 
    // adjust the quaternion based on the body angular rates
    const double psi = globals->eulers.getPsi();
-   quat.getQdot(qdot, globals->pqr.get1(), globals->pqr.get2(),
-                globals->pqr.get3());
+   quat.getQdot(qdot, globals->pqr.get1(), globals->pqr.get2(), globals->pqr.get3());
    qdot.multiply(timestep);
    quat.add(qdot);
    quat.getEulers(globals->eulers);
@@ -131,8 +128,8 @@ void EOMFiveDOF::computeEOM(double timestep)
    // globals->nedVel.toString() << std::endl;
 
    // integrate velocities to get new lat, lon
-   Earth::wgs84LatLon(&globals->lat, &globals->lon, globals->alt,
-                      globals->nedVel.get1(), globals->nedVel.get2(), timestep);
+   nav::wgs84LatLon(&globals->lat, &globals->lon, globals->alt, globals->nedVel.get1(),
+                    globals->nedVel.get2(), timestep);
 
    // update the position in x-y-z space
    Vector3::multiply(xyz, globals->nedVel, timestep);
@@ -142,8 +139,8 @@ void EOMFiveDOF::computeEOM(double timestep)
    globals->alt = globals->alt - globals->nedVel.get3() * timestep;
 
    // set the mach number
-   globals->mach = globals->vInf /
-                   Atmosphere::getSpeedSound(Atmosphere::getTemp(globals->alt));
+   globals->mach =
+       globals->vInf / Atmosphere::getSpeedSound(Atmosphere::getTemp(globals->alt));
 }
 }
 }
