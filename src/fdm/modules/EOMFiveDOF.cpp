@@ -65,7 +65,7 @@ void EOMFiveDOF::computeEOM(double timestep)
                         globals->pqr.get1() * globals->uvw.get2());
 
    // get gravity acceleration for current orientation
-   Earth::getGravForce(gravAccel, globals->eulers.getTheta(),
+   Earth::getGravForce(&gravAccel, globals->eulers.getTheta(),
                        globals->eulers.getPhi(),
                        Earth::getG(globals->lat, globals->lon, globals->alt));
 
@@ -131,7 +131,7 @@ void EOMFiveDOF::computeEOM(double timestep)
    // globals->nedVel.toString() << std::endl;
 
    // integrate velocities to get new lat, lon
-   Earth::wgs84LatLon(globals->lat, globals->lon, globals->alt,
+   Earth::wgs84LatLon(&globals->lat, &globals->lon, globals->alt,
                       globals->nedVel.get1(), globals->nedVel.get2(), timestep);
 
    // update the position in x-y-z space

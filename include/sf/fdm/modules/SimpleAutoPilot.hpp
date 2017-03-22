@@ -1,13 +1,10 @@
 
-#ifndef __AutoPilot_H__
-#define __AutoPilot_H__
+#ifndef __sf_fdm_AutoPilot_H__
+#define __sf_fdm_AutoPilot_H__
 
 #include "sf/fdm/modules/FDMModule.hpp"
 
 #include "sf/xml/Node.hpp"
-
-#define TURNTYPE_HDG 0
-#define TURNTYPE_TRAJECTORY 1
 
 namespace sf {
 namespace xml {
@@ -34,6 +31,8 @@ class SimpleAutoPilot : public FDMModule
    void updateSpeed(double timestep);
 
  protected:
+   enum class TurnType { HDG = 0, TRAJECTORY = 1 };
+
    double kphi{0.05};
    double maxBankRate{0.2}; // rads/sec
    double kalt{};
@@ -49,7 +48,7 @@ class SimpleAutoPilot : public FDMModule
 
    double lastVz{};
 
-   int turnType{};
+   TurnType turnType{TurnType::HDG};
 
    double hdgErrTol{};
 

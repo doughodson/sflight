@@ -92,7 +92,7 @@ void WaypointFollower::update(const double timestep)
    double hdgDiff = std::fabs(UnitConvert::wrapHeading(hdg - az, true));
 
    bool isClose = dist < distTol;
-   bool isBehind = std::fabs(hdgDiff) > PI / 2.;
+   bool isBehind = std::fabs(hdgDiff) > math::PI / 2.0;
 
    if (isClose && isBehind) {
       loadWaypoint();
@@ -102,7 +102,7 @@ void WaypointFollower::update(const double timestep)
    if (cmdPathType == PathType::DIRECT) {
       globals->autoPilotCmds.setCmdHeading(az);
    } else {
-      if (hdgDiff >= PI) {
+      if (hdgDiff >= math::PI) {
          globals->autoPilotCmds.setCmdHeading(az);
       } else {
          globals->autoPilotCmds.setCmdHeading(UnitConvert::wrapHeading(
@@ -124,7 +124,7 @@ void WaypointFollower::loadWaypoint()
       globals->autoPilotCmds.setCmdSpeed(currentWp->mpsSpeed);
 
       // set the distance tolerance to x seconds of flight time
-      distTol = (currentWp->mpsSpeed * 5) * Earth::metersToRadian;
+      distTol = (currentWp->mpsSpeed * 5) * earth::metersToRadian;
       std::cerr << distTol << std::endl;
 
       wpNum++;

@@ -1,7 +1,7 @@
 
 
-#ifndef __WaypointFollower_H__
-#define __WaypointFollower_H__
+#ifndef __sf_fdm_WaypointFollower_H__
+#define __sf_fdm_WaypointFollower_H__
 
 #include "sf/fdm/modules/FDMModule.hpp"
 

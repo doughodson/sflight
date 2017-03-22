@@ -1,6 +1,6 @@
 
-#ifndef __Euler_H__
-#define __Euler_H__
+#ifndef __sf_fdm_Euler_H__
+#define __sf_fdm_Euler_H__
 
 #include "sf/fdm/Vector3.hpp"
 

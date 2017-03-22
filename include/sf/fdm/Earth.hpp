@@ -1,6 +1,6 @@
 
-#ifndef __Earth_H__
-#define __Earth_H__
+#ifndef __sf_fdm_Earth_H__
+#define __sf_fdm_Earth_H__
 
 namespace sf {
 namespace fdm {
@@ -11,28 +11,24 @@ class Vector3;
 //------------------------------------------------------------------------------
 class Earth
 {
-public:
-   static const double epsilon;
-   static const double gravEq;
-   static const double radiusEq;
-   static const double gravConst;
+ public:
+   static bool wgs84LatLon(double* const lat, double* const lon, const double alt,
+                           const double vn, const double ve, const double time_diff);
 
-   static const double metersToRadian;
-   static const double radianToMeter;
+   static bool simpleLatLon(double* const lat, double* const lon, const double alt,
+                            const double vn, const double ve, const double time_diff);
 
-   static void wgs84LatLon(double &lat, double &lon, double alt, double vn, double ve, double time_diff);
+   static double headingBetween(const double lat1, const double lon1, const double lat2,
+                                const double lon2);
 
-   static void simpleLatLon(double &lat, double &lon, double alt, double vn, double ve, double time_diff);
+   static double distance(const double lat1, const double lon1, const double lat2,
+                          const double lon2);
 
-   static double headingBetween(double lat1, double lon1, double lat2, double lon2);
+   static double getG(const double lat, const double lon, const double alt);
 
-   static double distance(double lat1, double lon1, double lat2, double lon2);
-
-   static double getG(double lat, double lon, double alt);
-
-   static void getGravForce(Vector3 &v, double theta, double phi, double g);
+   static bool getGravForce(Vector3* const v, const double theta, const double phi,
+                            const double g);
 };
-
 }
 }
 

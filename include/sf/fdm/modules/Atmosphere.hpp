@@ -1,6 +1,6 @@
 
-#ifndef __Atmosphere_H__
-#define __Atmosphere_H__
+#ifndef __sf_fdm_Atmosphere_H__
+#define __sf_fdm_Atmosphere_H__
 
 #include "sf/fdm/modules/FDMModule.hpp"
 

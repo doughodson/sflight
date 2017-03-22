@@ -1,6 +1,6 @@
 
-#ifndef __WindAxis_H__
-#define __WindAxis_H__
+#ifndef __sf_fdm_WindAxis_H__
+#define __sf_fdm_WindAxis_H__
 
 namespace sf {
 namespace fdm {

@@ -1,6 +1,6 @@
 
-#ifndef __InterpAero_H__
-#define __InterpAero_H__
+#ifndef __sf_fdm_InterpAero_H__
+#define __sf_fdm_InterpAero_H__
 
 #include "sf/fdm/modules/FDMModule.hpp"
 

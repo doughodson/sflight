@@ -1,6 +1,6 @@
 
-#ifndef __Quaternion_H__
-#define __Quaternion_H__
+#ifndef __sf_fdm_Quaternion_H__
+#define __sf_fdm_Quaternion_H__
 
 namespace sf {
 namespace fdm {

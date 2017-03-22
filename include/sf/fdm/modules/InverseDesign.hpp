@@ -1,6 +1,6 @@
 
-#ifndef __InverseDesign_H__
-#define __InverseDesign_H__
+#ifndef __sf_fdm_InverseDesign_H__
+#define __sf_fdm_InverseDesign_H__
 
 #include "sf/fdm/modules/FDMModule.hpp"
 

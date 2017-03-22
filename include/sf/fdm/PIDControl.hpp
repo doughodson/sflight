@@ -1,6 +1,6 @@
 
-#ifndef __PIDConttol_H__
-#define __PIDConttol_H__
+#ifndef __sf_fdm_PIDConttol_H__
+#define __sf_fdm_PIDConttol_H__
 
 #include "sf/fdm/PIControl.hpp"
 

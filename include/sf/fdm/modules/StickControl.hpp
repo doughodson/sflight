@@ -1,6 +1,6 @@
 
-#ifndef _StickControl_H
-#define _StickControl_H
+#ifndef __sf_fdm_StickControl_H__
+#define __sf_fdm_StickControl_H__
 
 #include "sf/fdm/modules/FDMModule.hpp"
 

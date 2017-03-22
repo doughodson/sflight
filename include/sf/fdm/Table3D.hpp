@@ -1,6 +1,6 @@
 
-#ifndef __Table3D_H__
-#define __Table3D_H__
+#ifndef __sf_fdm_Table3D_H__
+#define __sf_fdm_Table3D_H__
 
 #include "sf/fdm/Table2D.hpp"
 

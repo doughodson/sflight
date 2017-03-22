@@ -1,6 +1,6 @@
 
-#ifndef __SimExec_H__
-#define __SimExec_H__
+#ifndef __sf_fdm_SimExec_H__
+#define __sf_fdm_SimExec_H__
 
 namespace sf {
 namespace xml {

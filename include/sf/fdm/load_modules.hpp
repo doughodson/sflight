@@ -1,6 +1,6 @@
 
-#ifndef __loadModules_H__
-#define __loadModules_H__
+#ifndef __sf_fdm_load_modules_H__
+#define __sf_fdm_load_modules_H__
 
 namespace sf {
 namespace xml {

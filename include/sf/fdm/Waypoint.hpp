@@ -1,6 +1,6 @@
 
-#ifndef __Waypoint_H__
-#define __Waypoint_H__
+#ifndef __sf_fdm_Waypoint_H__
+#define __sf_fdm_Waypoint_H__
 
 namespace sf {
 namespace fdm {

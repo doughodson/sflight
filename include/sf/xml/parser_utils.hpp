@@ -1,6 +1,6 @@
 
-#ifndef __xml_parser_utils_H__
-#define __xml_parser_utils_H__
+#ifndef __sf_xml_parser_utils_H__
+#define __sf_xml_parser_utils_H__
 
 #include "sf/xml/Node.hpp"
 

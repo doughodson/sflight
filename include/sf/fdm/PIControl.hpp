@@ -1,6 +1,6 @@
 
-#ifndef __PIControl_H__
-#define __PIControl_H__
+#ifndef __sf_fdm_PIControl_H__
+#define __sf_fdm_PIControl_H__
 
 namespace sf {
 namespace fdm {

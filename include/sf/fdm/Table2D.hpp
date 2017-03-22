@@ -1,6 +1,6 @@
 
-#ifndef __Table2D_H__
-#define __Table2D_H__
+#ifndef __sf_fdm_Table2D_H__
+#define __sf_fdm_Table2D_H__
 
 #include <string>
 

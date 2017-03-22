@@ -1,6 +1,6 @@
 
-#ifndef __FDMModule_H__
-#define __FDMModule_H__
+#ifndef __sf_fdm_FDMModule_H__
+#define __sf_fdm_FDMModule_H__
 
 #include <string>
 

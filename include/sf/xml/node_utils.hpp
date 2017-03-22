@@ -1,6 +1,6 @@
 
-#ifndef __node_utils_H__
-#define __node_utils_H__
+#ifndef __sf_xml_node_utils_H__
+#define __sf_xml_node_utils_H__
 
 #include "sf/xml/Node.hpp"
 

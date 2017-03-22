@@ -1,6 +1,6 @@
 
-#ifndef __PID_H__
-#define __PID_H__
+#ifndef __sf_fdm_PID_H__
+#define __sf_fdm_PID_H__
 
 namespace sf {
 namespace fdm {

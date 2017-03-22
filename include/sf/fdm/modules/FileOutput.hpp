@@ -1,6 +1,6 @@
 
-#ifndef FileOutput_H
-#define FileOutput_H
+#ifndef __sf_fdm_FileOutput_H__
+#define __sf_fdm_FileOutput_H__
 
 #include "sf/fdm/modules/FDMModule.hpp"
 

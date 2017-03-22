@@ -1,6 +1,6 @@
 
-#ifndef __FDMGlobals_H__
-#define __FDMGlobals_H__
+#ifndef __sf_fdm_FDMGlobals_H__
+#define __sf_fdm_FDMGlobals_H__
 
 #include "sf/xml/Node.hpp"
 

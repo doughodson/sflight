@@ -1,6 +1,6 @@
 
-#ifndef __AutoPilotCmds_H__
-#define __AutoPilotCmds_H__
+#ifndef __sf_fdm_AutoPilotCmds_H__
+#define __sf_fdm_AutoPilotCmds_H__
 
 namespace sf {
 namespace fdm {

@@ -18,8 +18,7 @@
 namespace sf {
 namespace fdm {
 
-InverseDesign::InverseDesign(FDMGlobals* globals, double frameRate)
-    : FDMModule(globals, frameRate)
+InverseDesign::InverseDesign(FDMGlobals* globals, double frameRate) : FDMModule(globals, frameRate)
 {
 }
 
@@ -38,15 +37,13 @@ void InverseDesign::update(const double timestep)
    double cd = cdo + b * sinAlpha * sinAlpha;
 
    if (usingMachEffects) {
-      double beta_mach = globals->mach > 0.95
-                             ? 1.0
-                             : 1.0 / sqrt(1.0 - globals->mach * globals->mach);
+      double beta_mach =
+          globals->mach > 0.95 ? 1.0 : 1.0 / sqrt(1.0 - globals->mach * globals->mach);
       cl *= beta_mach;
       cd *= beta_mach;
    }
 
-   WindAxis::windToBody(globals->aeroForce, globals->alpha, globals->beta,
-                        cl * qbar, cd * qbar, 0);
+   WindAxis::windToBody(globals->aeroForce, globals->alpha, globals->beta, cl * qbar, cd * qbar, 0);
 
    double thrust = getThrust(globals->rho, globals->mach, globals->throttle);
 
@@ -76,10 +73,8 @@ void InverseDesign::initialize(xml::Node* node)
    usingMachEffects = xml::getBool(tmp, "CompressibleFlow", false);
 
    // get Engine parameters
-   thrustAngle =
-       UnitConvert::toRads(xml::getDouble(tmp, "Engine/ThrustAngle", 0.0));
-   staticThrust =
-       UnitConvert::toNewtons(xml::getDouble(tmp, "Engine/StaticThrust", 0));
+   thrustAngle = UnitConvert::toRads(xml::getDouble(tmp, "Engine/ThrustAngle", 0.0));
+   staticThrust = UnitConvert::toNewtons(xml::getDouble(tmp, "Engine/StaticThrust", 0));
 
    std::string engineType = xml::get(tmp, "Engine/Type", "");
    if (engineType == "Turbojet") {
@@ -94,15 +89,12 @@ void InverseDesign::initialize(xml::Node* node)
    }
 
    // setup flight conditions (2 points expected)
-   std::vector<xml::Node*> fcNodes =
-       tmp->getChildren("FlightConditions/FlightCondition");
+   std::vector<xml::Node*> fcNodes = tmp->getChildren("FlightConditions/FlightCondition");
 
    // get default values
    designWeight = getDouble(tmp, "FlightConditions/Weight", 0.0);
-   wingSpan =
-       UnitConvert::toMeters(getDouble(tmp, "FlightCondiitons/WingSpan", 6.0));
-   wingArea = UnitConvert::toSqMeters(
-       getDouble(tmp, "FlightConditions/WingArea", 6.0));
+   wingSpan = UnitConvert::toMeters(getDouble(tmp, "FlightCondiitons/WingSpan", 6.0));
+   wingArea = UnitConvert::toSqMeters(getDouble(tmp, "FlightConditions/WingArea", 6.0));
    designAlt = getDouble(tmp, "FlightConditions/Altitude", 0.0);
 
    const int size = fcNodes.size();
@@ -122,8 +114,7 @@ void InverseDesign::initialize(xml::Node* node)
       double alt = UnitConvert::toMeters(getDouble(tmp, "Altitude", designAlt));
       speedSound = Atmosphere::getSpeedSound(Atmosphere::getTemp(alt));
       rho = Atmosphere::getRho(alt);
-      double weight =
-          UnitConvert::toNewtons(getDouble(tmp, "Weight", designWeight));
+      double weight = UnitConvert::toNewtons(getDouble(tmp, "Weight", designWeight));
 
       if (airspeed < 1E-6) {
          mach[i] = getDouble(tmp, "Mach", 0);
@@ -134,11 +125,9 @@ void InverseDesign::initialize(xml::Node* node)
 
       thrust = getThrust(rho, mach[i], getDouble(tmp, "Throttle", 0));
 
-      getAeroCoefs(pitch, airspeed, vs, rho, weight, thrust, alpha[i], cl[i],
-                   cd[i]);
+      getAeroCoefs(pitch, airspeed, vs, rho, weight, thrust, alpha[i], cl[i], cd[i]);
 
-      tsfc[i] =
-          UnitConvert::toKilos(getDouble(tmp, "FuelFlow", 0) / 3600.) / thrust;
+      tsfc[i] = UnitConvert::toKilos(getDouble(tmp, "FuelFlow", 0) / 3600.) / thrust;
 
       // apply compressibility if used.  this finds the incompressible cl and cd
       // values by deviding by the
@@ -152,8 +141,8 @@ void InverseDesign::initialize(xml::Node* node)
 
    if (size == 1) {
       // find cdo and clo and assume dCLdalpa = 2*PI, dCDdCL = 1/(PI*AR)
-      a = 2 * PI;
-      b = 1.0 / PI / (wingSpan * wingSpan / wingArea);
+      a = 2 * math::PI;
+      b = 1.0 / math::PI / (wingSpan * wingSpan / wingArea);
       clo = cl[0] - a * alpha[0];
       cdo = cd[0] - b * cl[0] * cl[0];
 
@@ -194,9 +183,8 @@ void InverseDesign::initialize(xml::Node* node)
    delete mach;
 }
 
-void InverseDesign::getAeroCoefs(double theta, double u, double vz, double rho,
-                                 double weight, double thrust, double& alpha,
-                                 double& cl, double& cd)
+void InverseDesign::getAeroCoefs(double theta, double u, double vz, double rho, double weight,
+                                 double thrust, double& alpha, double& cl, double& cd)
 {
 
    vz = -vz;

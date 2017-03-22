@@ -1,6 +1,6 @@
 
-#ifndef __Engine_H__
-#define __Engine_H__
+#ifndef __sf_fdm_Engine_H__
+#define __sf_fdm_Engine_H__
 
 #include "sf/fdm/modules/FDMModule.hpp"
 

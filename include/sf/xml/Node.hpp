@@ -1,6 +1,6 @@
 
-#ifndef __Node_H__
-#define __Node_H__
+#ifndef __sf_xml_Node_H__
+#define __sf_xml_Node_H__
 
 #include <map>
 #include <string>
