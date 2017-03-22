@@ -10,11 +10,11 @@ namespace fdm {
 //------------------------------------------------------------------------------
 // Class: Table2D
 //------------------------------------------------------------------------------
-class Table2D
-{
+class Table2D {
  public:
    Table2D() = default;
-   Table2D(const int numRows, const int numCols, double rowVals[], double colVals[]);
+   Table2D(const int numRows, const int numCols, double rowVals[],
+           double colVals[]);
    virtual ~Table2D();
 
    int getNumCols();
@@ -33,15 +33,14 @@ class Table2D
    void print();
 
  private:
-   double** data {};
+   double** data{};
 
-   int numRows {};
-   int numCols {};
+   int numRows{};
+   int numCols{};
 
-   double* rowVals {};
-   double* colVals {};
+   double* rowVals{};
+   double* colVals{};
 };
-
 }
 }
 

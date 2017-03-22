@@ -3,7 +3,9 @@
 #define _SimTimer_H
 
 namespace sf {
-namespace xml { class Node; }
+namespace xml {
+class Node;
+}
 namespace fdm {
 class FDMGlobals;
 
@@ -13,21 +15,20 @@ class FDMGlobals;
 class SimTimer
 {
  public:
-   SimTimer(FDMGlobals *globals, const double frameRate);
-   SimTimer(FDMGlobals *globals, const double frameRate, const long maxFrames);
+   SimTimer(FDMGlobals* globals, const double frameRate);
+   SimTimer(FDMGlobals* globals, const double frameRate, const long maxFrames);
    virtual ~SimTimer() = default;
 
    void start();
    void startConstructive();
    void stop();
-   void initialize(xml::Node *node);
+   void initialize(xml::Node* node);
 
  private:
-   FDMGlobals* globals {};
-   double frameRate {};
-   long maxFrames {1000000000};
+   FDMGlobals* globals{};
+   double frameRate{};
+   long maxFrames{1000000000};
 };
-
 }
 }
 
