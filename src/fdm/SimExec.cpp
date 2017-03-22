@@ -1,5 +1,5 @@
 
-#include "sf/fdm/SimTimer.hpp"
+#include "sf/fdm/SimExec.hpp"
 
 #include "sf/xml/Node.hpp"
 #include "sf/xml/node_utils.hpp"
@@ -17,18 +17,18 @@
 namespace sf {
 namespace fdm {
 
-SimTimer::SimTimer(FDMGlobals* globals, const double frameRate)
+SimExec::SimExec(FDMGlobals* globals, const double frameRate)
     : globals(globals), frameRate(frameRate)
 {
 }
 
-SimTimer::SimTimer(FDMGlobals* globals, const double frameRate,
+SimExec::SimExec(FDMGlobals* globals, const double frameRate,
                    const long maxFrames)
     : globals(globals), frameRate(frameRate), maxFrames(maxFrames)
 {
 }
 
-void SimTimer::start()
+void SimExec::start()
 {
    if (globals == nullptr || frameRate == 0.0)
       return;
@@ -49,7 +49,7 @@ void SimTimer::start()
    }
 }
 
-void SimTimer::startConstructive()
+void SimExec::startConstructive()
 {
    if (globals == nullptr || frameRate == 0)
       return;
@@ -72,9 +72,9 @@ void SimTimer::startConstructive()
    }
 }
 
-void SimTimer::stop() {}
+void SimExec::stop() {}
 
-void SimTimer::initialize(xml::Node* node)
+void SimExec::initialize(xml::Node* node)
 {
    frameRate = xml::getDouble(node, "Modules/Rate", 20);
 }

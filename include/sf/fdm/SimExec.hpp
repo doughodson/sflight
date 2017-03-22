@@ -1,6 +1,6 @@
 
-#ifndef _SimTimer_H
-#define _SimTimer_H
+#ifndef __SimExec_H__
+#define __SimExec_H__
 
 namespace sf {
 namespace xml {
@@ -10,14 +10,14 @@ namespace fdm {
 class FDMGlobals;
 
 //------------------------------------------------------------------------------
-// Class: SimTimer
+// Class: SimExec
 //------------------------------------------------------------------------------
-class SimTimer
+class SimExec
 {
  public:
-   SimTimer(FDMGlobals* globals, const double frameRate);
-   SimTimer(FDMGlobals* globals, const double frameRate, const long maxFrames);
-   virtual ~SimTimer() = default;
+   SimExec(FDMGlobals* globals, const double frameRate);
+   SimExec(FDMGlobals* globals, const double frameRate, const long maxFrames);
+   virtual ~SimExec() = default;
 
    void start();
    void startConstructive();

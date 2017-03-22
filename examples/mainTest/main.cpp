@@ -3,7 +3,7 @@
 #include "sf/xml/parser_utils.hpp"
 
 #include "sf/fdm/FDMGlobals.hpp"
-#include "sf/fdm/SimTimer.hpp"
+#include "sf/fdm/SimExec.hpp"
 #include "sf/fdm/load_modules.hpp"
 
 #include <cstdlib>
@@ -31,12 +31,12 @@ int main(int argc, char** argv)
    load_modules(node, globals);
    globals->initialize(node);
 
-   auto timer = new sf::fdm::SimTimer(globals, frame_rate, num_frames);
+   auto exec = new sf::fdm::SimExec(globals, frame_rate, num_frames);
 
    std::cout << "Running SimpleFlight for " << argv[2] << " seconds.\n"
              << std::endl;
 
-   timer->startConstructive();
+   exec->startConstructive();
 
    std::cout << "Done\n" << std::endl;
 
