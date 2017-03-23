@@ -7,12 +7,14 @@
 #include "sflt/fdm/FDMGlobals.hpp"
 
 #include <iostream>
+#include <thread>
+#include <chrono>
 
-#ifdef _WIN32
-#include "windows.h"
-#else
-#include <unistd.h>
-#endif
+//#ifdef _WIN32
+//#include "windows.h"
+//#else
+//#include <unistd.h>
+//#endif
 
 namespace sflt {
 namespace fdm {
@@ -41,11 +43,14 @@ void SimExec::start()
       if (!globals->paused) {
          globals->update(frameTime);
       }
-#ifdef _WIN32
-      Sleep(sleepTime);
-#else
-      usleep(sleepTime);
-#endif
+
+   std::this_thread::sleep_for(std::chrono::milliseconds(sleepTime));
+//#ifdef _WIN32
+//      Sleep(sleepTime);
+//#else
+//      usleep(sleepTime);
+//#endif
+
    }
 }
 
