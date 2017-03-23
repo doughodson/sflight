@@ -1,21 +1,21 @@
 
-#include "sf/fdm/modules/InverseDesign.hpp"
+#include "sflt/fdm/modules/InverseDesign.hpp"
 
-#include "sf/xml/Node.hpp"
-#include "sf/xml/node_utils.hpp"
+#include "sflt/xml/Node.hpp"
+#include "sflt/xml/node_utils.hpp"
 
-#include "sf/fdm/modules/Atmosphere.hpp"
+#include "sflt/fdm/modules/Atmosphere.hpp"
 
-#include "sf/fdm/FDMGlobals.hpp"
-#include "sf/fdm/UnitConvert.hpp"
-#include "sf/fdm/Vector3.hpp"
-#include "sf/fdm/WindAxis.hpp"
+#include "sflt/fdm/FDMGlobals.hpp"
+#include "sflt/fdm/UnitConvert.hpp"
+#include "sflt/fdm/Vector3.hpp"
+#include "sflt/fdm/WindAxis.hpp"
 
 #include <cmath>
 #include <iostream>
 #include <vector>
 
-namespace sf {
+namespace sflt {
 namespace fdm {
 
 InverseDesign::InverseDesign(FDMGlobals* globals, double frameRate) : FDMModule(globals, frameRate)

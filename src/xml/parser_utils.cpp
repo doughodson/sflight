@@ -1,12 +1,12 @@
 
-#include "sf/xml/parser_utils.hpp"
+#include "sflt/xml/parser_utils.hpp"
 
 #include <fstream>
 #include <iostream>
 #include <sstream>
 #include <string>
 
-namespace sf {
+namespace sflt {
 namespace xml {
 
 Node* parse(const std::string filename, const bool treatAttributesAsChildren)

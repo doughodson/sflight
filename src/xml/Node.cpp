@@ -1,11 +1,11 @@
 
-#include "sf/xml/Node.hpp"
+#include "sflt/xml/Node.hpp"
 
 #include <algorithm>
 #include <iterator>
 #include <iostream>
 
-namespace sf {
+namespace sflt {
 namespace xml {
 
 Node::Node(const std::string& tagName) : name(tagName)

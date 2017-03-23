@@ -1,7 +1,7 @@
 
-#include "sf/fdm/Waypoint.hpp"
+#include "sflt/fdm/Waypoint.hpp"
 
-namespace sf {
+namespace sflt {
 namespace fdm {
 
 Waypoint::Waypoint(double lat, double lon, double alt, double speed, double bearing)

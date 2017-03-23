@@ -1,11 +1,11 @@
 
 
-#include "sf/fdm/Vector3.hpp"
-#include "sf/fdm/WindAxis.hpp"
+#include "sflt/fdm/Vector3.hpp"
+#include "sflt/fdm/WindAxis.hpp"
 
 #include <cmath>
 
-namespace sf {
+namespace sflt {
 namespace fdm {
 
 /** takes an input of drag, sideforce, and lift and returns [fx, fy, fz] in the body axis

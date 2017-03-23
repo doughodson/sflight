@@ -1,18 +1,18 @@
 
-#include "sf/fdm/modules/SimpleEngine.hpp"
+#include "sflt/fdm/modules/SimpleEngine.hpp"
 
-#include "sf/fdm/modules/Atmosphere.hpp"
+#include "sflt/fdm/modules/Atmosphere.hpp"
 
-#include "sf/xml/Node.hpp"
-#include "sf/xml/node_utils.hpp"
+#include "sflt/xml/Node.hpp"
+#include "sflt/xml/node_utils.hpp"
 
-#include "sf/fdm/FDMGlobals.hpp"
-#include "sf/fdm/UnitConvert.hpp"
+#include "sflt/fdm/FDMGlobals.hpp"
+#include "sflt/fdm/UnitConvert.hpp"
 
 #include <iostream>
 #include <vector>
 
-namespace sf {
+namespace sflt {
 namespace fdm {
 
 SimpleEngine::SimpleEngine(FDMGlobals* globals, double frameRate)

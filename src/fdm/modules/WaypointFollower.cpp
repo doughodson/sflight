@@ -1,19 +1,19 @@
 
-#include "sf/fdm/modules/WaypointFollower.hpp"
+#include "sflt/fdm/modules/WaypointFollower.hpp"
 
-#include "sf/xml/Node.hpp"
-#include "sf/xml/node_utils.hpp"
+#include "sflt/xml/Node.hpp"
+#include "sflt/xml/node_utils.hpp"
 
-#include "sf/fdm/FDMGlobals.hpp"
-#include "sf/fdm/UnitConvert.hpp"
-#include "sf/fdm/UnitConvert.hpp"
-#include "sf/fdm/constants.hpp"
-#include "sf/fdm/nav_utils.hpp"
+#include "sflt/fdm/FDMGlobals.hpp"
+#include "sflt/fdm/UnitConvert.hpp"
+#include "sflt/fdm/UnitConvert.hpp"
+#include "sflt/fdm/constants.hpp"
+#include "sflt/fdm/nav_utils.hpp"
 
 #include <cmath>
 #include <iostream>
 
-namespace sf {
+namespace sflt {
 namespace fdm {
 
 WaypointFollower::WaypointFollower(FDMGlobals* globals, double frameRate)

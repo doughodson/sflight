@@ -1,22 +1,22 @@
 
-#include "sf/fdm/modules/TableAero.hpp"
+#include "sflt/fdm/modules/TableAero.hpp"
 
-#include "sf/fdm/modules/Atmosphere.hpp"
+#include "sflt/fdm/modules/Atmosphere.hpp"
 
-#include "sf/xml/Node.hpp"
-#include "sf/xml/node_utils.hpp"
+#include "sflt/xml/Node.hpp"
+#include "sflt/xml/node_utils.hpp"
 
-#include "sf/fdm/FDMGlobals.hpp"
-#include "sf/fdm/Table2D.hpp"
-#include "sf/fdm/Table3D.hpp"
-#include "sf/fdm/UnitConvert.hpp"
-#include "sf/fdm/Vector3.hpp"
-#include "sf/fdm/WindAxis.hpp"
+#include "sflt/fdm/FDMGlobals.hpp"
+#include "sflt/fdm/Table2D.hpp"
+#include "sflt/fdm/Table3D.hpp"
+#include "sflt/fdm/UnitConvert.hpp"
+#include "sflt/fdm/Vector3.hpp"
+#include "sflt/fdm/WindAxis.hpp"
 
 #include <cmath>
 #include <iostream>
 
-namespace sf {
+namespace sflt {
 namespace fdm {
 
 TableAero::TableAero(FDMGlobals* globals, double frameRate)

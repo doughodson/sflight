@@ -47,7 +47,7 @@ workspace "sflt"
    project "xml"
       kind "StaticLib"
       files {
-         "../../include/sf/xml/**.h*",
+         "../../include/sflt/xml/**.h*",
          "../../src/xml/**.cpp"
       }
       targetdir ("../../lib/")
@@ -57,7 +57,7 @@ workspace "sflt"
    project "fdm"
       kind "StaticLib"
       files {
-         "../../include/sf/fdm/**.h*",
+         "../../include/sflt/fdm/**.h*",
          "../../src/fdm/**.cpp"
       }
       targetdir ("../../lib/")

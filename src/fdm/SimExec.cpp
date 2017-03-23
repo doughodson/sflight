@@ -1,10 +1,10 @@
 
-#include "sf/fdm/SimExec.hpp"
+#include "sflt/fdm/SimExec.hpp"
 
-#include "sf/xml/Node.hpp"
-#include "sf/xml/node_utils.hpp"
+#include "sflt/xml/Node.hpp"
+#include "sflt/xml/node_utils.hpp"
 
-#include "sf/fdm/FDMGlobals.hpp"
+#include "sflt/fdm/FDMGlobals.hpp"
 
 #include <iostream>
 
@@ -14,7 +14,7 @@
 #include <unistd.h>
 #endif
 
-namespace sf {
+namespace sflt {
 namespace fdm {
 
 SimExec::SimExec(FDMGlobals* globals, const double frameRate)

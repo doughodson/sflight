@@ -1,11 +1,11 @@
 
-#include "sf/fdm/modules/Atmosphere.hpp"
+#include "sflt/fdm/modules/Atmosphere.hpp"
 
-#include "sf/fdm/FDMGlobals.hpp"
+#include "sflt/fdm/FDMGlobals.hpp"
 
 #include <cmath>
 
-namespace sf {
+namespace sflt {
 namespace fdm {
 
 const double Atmosphere::alt[] = {

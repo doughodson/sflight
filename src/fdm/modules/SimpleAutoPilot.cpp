@@ -1,19 +1,19 @@
 
-#include "sf/fdm/modules/SimpleAutoPilot.hpp"
+#include "sflt/fdm/modules/SimpleAutoPilot.hpp"
 
-#include "sf/fdm/modules/Atmosphere.hpp"
+#include "sflt/fdm/modules/Atmosphere.hpp"
 
-#include "sf/xml/Node.hpp"
-#include "sf/xml/node_utils.hpp"
+#include "sflt/xml/Node.hpp"
+#include "sflt/xml/node_utils.hpp"
 
-#include "sf/fdm/FDMGlobals.hpp"
-#include "sf/fdm/UnitConvert.hpp"
+#include "sflt/fdm/FDMGlobals.hpp"
+#include "sflt/fdm/UnitConvert.hpp"
 
 #include <algorithm>
 #include <cmath>
 #include <iostream>
 
-namespace sf {
+namespace sflt {
 namespace fdm {
 
 SimpleAutoPilot::SimpleAutoPilot(FDMGlobals* globals, const double frameRate)

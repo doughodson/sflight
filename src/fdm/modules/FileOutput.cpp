@@ -1,16 +1,16 @@
 
-#include "sf/fdm/modules/FileOutput.hpp"
+#include "sflt/fdm/modules/FileOutput.hpp"
 
-#include "sf/xml/Node.hpp"
-#include "sf/xml/node_utils.hpp"
+#include "sflt/xml/Node.hpp"
+#include "sflt/xml/node_utils.hpp"
 
-#include "sf/fdm/FDMGlobals.hpp"
-#include "sf/fdm/UnitConvert.hpp"
+#include "sflt/fdm/FDMGlobals.hpp"
+#include "sflt/fdm/UnitConvert.hpp"
 
 #include <iomanip>
 #include <iostream>
 
-namespace sf {
+namespace sflt {
 namespace fdm {
 
 FileOutput::FileOutput(FDMGlobals* globals, double frameRate)

@@ -1,15 +1,15 @@
 
-#include "sf/xml/Node.hpp"
-#include "sf/xml/parser_utils.hpp"
+#include "sflt/xml/Node.hpp"
+#include "sflt/xml/parser_utils.hpp"
 
-#include "sf/fdm/FDMGlobals.hpp"
-#include "sf/fdm/SimExec.hpp"
-#include "sf/fdm/load_modules.hpp"
+#include "sflt/fdm/FDMGlobals.hpp"
+#include "sflt/fdm/SimExec.hpp"
+#include "sflt/fdm/load_modules.hpp"
 
 #include <cstdlib>
 #include <iostream>
 
-using namespace sf;
+using namespace sflt;
 
 int main(int argc, char** argv)
 {

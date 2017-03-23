@@ -1,15 +1,15 @@
 
-#include "sf/fdm/modules/StickControl.hpp"
+#include "sflt/fdm/modules/StickControl.hpp"
 
-#include "sf/fdm/modules/Atmosphere.hpp"
+#include "sflt/fdm/modules/Atmosphere.hpp"
 
-#include "sf/xml/Node.hpp"
-#include "sf/xml/node_utils.hpp"
+#include "sflt/xml/Node.hpp"
+#include "sflt/xml/node_utils.hpp"
 
-#include "sf/fdm/FDMGlobals.hpp"
-#include "sf/fdm/UnitConvert.hpp"
+#include "sflt/fdm/FDMGlobals.hpp"
+#include "sflt/fdm/UnitConvert.hpp"
 
-namespace sf {
+namespace sflt {
 namespace fdm {
 
 StickControl::StickControl(FDMGlobals* globals, const double frameRate)

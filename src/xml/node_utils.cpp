@@ -1,8 +1,8 @@
 
-#include "sf/xml/node_utils.hpp"
+#include "sflt/xml/node_utils.hpp"
 
-#include "sf/xml/Node.hpp"
-#include "sf/xml/parser_utils.hpp"
+#include "sflt/xml/Node.hpp"
+#include "sflt/xml/parser_utils.hpp"
 
 #include <cctype>
 #include <cmath>
@@ -10,7 +10,7 @@
 #include <string>
 #include <vector>
 
-namespace sf {
+namespace sflt {
 namespace xml {
 
 // returns a list of nodes that contain the childName

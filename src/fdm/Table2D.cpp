@@ -1,12 +1,12 @@
 
-#include "sf/fdm/Table2D.hpp"
+#include "sflt/fdm/Table2D.hpp"
 
-#include "sf/xml/node_utils.hpp"
+#include "sflt/xml/node_utils.hpp"
 
 #include <iostream>
 #include <string>
 
-namespace sf {
+namespace sflt {
 namespace fdm {
 
 Table2D::Table2D(const int numRows, const int numCols, double rowVals[],

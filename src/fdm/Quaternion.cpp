@@ -1,11 +1,11 @@
 
-#include "sf/fdm/Quaternion.hpp"
-#include "sf/fdm/Euler.hpp"
+#include "sflt/fdm/Quaternion.hpp"
+#include "sflt/fdm/Euler.hpp"
 
 #include <iostream>
 #include <cmath>
 
-namespace sf {
+namespace sflt {
 namespace fdm {
 
 Quaternion::Quaternion()
