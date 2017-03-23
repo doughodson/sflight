@@ -1,15 +1,15 @@
 
-#include "sflt/xml/Node.hpp"
-#include "sflt/xml/parser_utils.hpp"
+#include "sflight/xml/Node.hpp"
+#include "sflight/xml/parser_utils.hpp"
 
-#include "sflt/fdm/FDMGlobals.hpp"
-#include "sflt/fdm/SimExec.hpp"
-#include "sflt/fdm/load_modules.hpp"
+#include "sflight/fdm/FDMGlobals.hpp"
+#include "sflight/fdm/SimExec.hpp"
+#include "sflight/fdm/load_modules.hpp"
 
 #include <cstdlib>
 #include <iostream>
 
-using namespace sflt;
+using namespace sflight;
 
 int main(int argc, char** argv)
 {
@@ -30,7 +30,7 @@ int main(int argc, char** argv)
    xml::Node* node = xml::parse(filename, true);
 
    // construct obj tree and have each obj read their own configuration
-   load_modules(node, globals);
+   fdm::load_modules(node, globals);
    globals->initialize(node);
 
    auto exec = new fdm::SimExec(globals, frame_rate, num_frames);

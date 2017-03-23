@@ -1,16 +1,16 @@
 
-#include "sflt/fdm/SimExec.hpp"
+#include "sflight/fdm/SimExec.hpp"
 
-#include "sflt/xml/Node.hpp"
-#include "sflt/xml/node_utils.hpp"
+#include "sflight/xml/Node.hpp"
+#include "sflight/xml/node_utils.hpp"
 
-#include "sflt/fdm/FDMGlobals.hpp"
+#include "sflight/fdm/FDMGlobals.hpp"
 
 #include <iostream>
 #include <thread>
 #include <chrono>
 
-namespace sflt {
+namespace sflight {
 namespace fdm {
 
 SimExec::SimExec(FDMGlobals* globals, const double frameRate)

@@ -1,21 +1,21 @@
 
-#include "sflt/fdm/modules/InterpAero.hpp"
+#include "sflight/fdm/modules/InterpAero.hpp"
 
-#include "sflt/fdm/modules/Atmosphere.hpp"
+#include "sflight/fdm/modules/Atmosphere.hpp"
 
-#include "sflt/xml/Node.hpp"
-#include "sflt/xml/node_utils.hpp"
+#include "sflight/xml/Node.hpp"
+#include "sflight/xml/node_utils.hpp"
 
-#include "sflt/fdm/FDMGlobals.hpp"
-#include "sflt/fdm/UnitConvert.hpp"
-#include "sflt/fdm/Vector3.hpp"
-#include "sflt/fdm/WindAxis.hpp"
-#include "sflt/fdm/constants.hpp"
+#include "sflight/fdm/FDMGlobals.hpp"
+#include "sflight/fdm/UnitConvert.hpp"
+#include "sflight/fdm/Vector3.hpp"
+#include "sflight/fdm/WindAxis.hpp"
+#include "sflight/fdm/constants.hpp"
 
 #include <cmath>
 #include <iostream>
 
-namespace sflt {
+namespace sflight {
 namespace fdm {
 
 InterpAero::InterpAero(FDMGlobals* globals, double frameRate) : FDMModule(globals, frameRate) {}

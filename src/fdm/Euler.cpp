@@ -1,11 +1,11 @@
 
-#include "sflt/fdm/Euler.hpp"
+#include "sflight/fdm/Euler.hpp"
 
-#include "sflt/fdm/Vector3.hpp"
+#include "sflight/fdm/Vector3.hpp"
 
 #include <cmath>
 
-namespace sflt {
+namespace sflight {
 namespace fdm {
 
 Euler :: Euler(double psi, double theta, double phi)

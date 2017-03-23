@@ -1,16 +1,16 @@
 
-#include "sflt/fdm/modules/FileOutput.hpp"
+#include "sflight/fdm/modules/FileOutput.hpp"
 
-#include "sflt/xml/Node.hpp"
-#include "sflt/xml/node_utils.hpp"
+#include "sflight/xml/Node.hpp"
+#include "sflight/xml/node_utils.hpp"
 
-#include "sflt/fdm/FDMGlobals.hpp"
-#include "sflt/fdm/UnitConvert.hpp"
+#include "sflight/fdm/FDMGlobals.hpp"
+#include "sflight/fdm/UnitConvert.hpp"
 
 #include <iomanip>
 #include <iostream>
 
-namespace sflt {
+namespace sflight {
 namespace fdm {
 
 FileOutput::FileOutput(FDMGlobals* globals, double frameRate)

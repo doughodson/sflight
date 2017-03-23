@@ -1,11 +1,11 @@
 
-#include "sflt/fdm/Vector3.hpp"
+#include "sflight/fdm/Vector3.hpp"
 
 #include <cmath>
 #include <iostream>
 #include <sstream>
 
-namespace sflt {
+namespace sflight {
 namespace fdm {
 
 Vector3::Vector3(const double a1, const double a2, const double a3)

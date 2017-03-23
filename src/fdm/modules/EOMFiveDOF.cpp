@@ -1,22 +1,22 @@
 
-#include "sflt/fdm/modules/EOMFiveDOF.hpp"
+#include "sflight/fdm/modules/EOMFiveDOF.hpp"
 
-#include "sflt/fdm/modules/Atmosphere.hpp"
+#include "sflight/fdm/modules/Atmosphere.hpp"
 
-#include "sflt/fdm/Euler.hpp"
-#include "sflt/fdm/FDMGlobals.hpp"
-#include "sflt/fdm/Quaternion.hpp"
-#include "sflt/fdm/Vector3.hpp"
+#include "sflight/fdm/Euler.hpp"
+#include "sflight/fdm/FDMGlobals.hpp"
+#include "sflight/fdm/Quaternion.hpp"
+#include "sflight/fdm/Vector3.hpp"
 
-#include "sflt/xml/Node.hpp"
+#include "sflight/xml/Node.hpp"
 
-#include "sflt/fdm/nav_utils.hpp"
-#include "sflt/xml/node_utils.hpp"
+#include "sflight/fdm/nav_utils.hpp"
+#include "sflight/xml/node_utils.hpp"
 
 #include <cmath>
 #include <iostream>
 
-namespace sflt {
+namespace sflight {
 namespace fdm {
 
 EOMFiveDOF::EOMFiveDOF(FDMGlobals* globals, double frameRate) : FDMModule(globals, frameRate)

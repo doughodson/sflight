@@ -1,7 +1,7 @@
 
 include ../../makedefs
 
-LIB = ../../lib/libsflt_xml.a
+LIB = ../../lib/libsflight_xml.a
 
 OBJS =  \
 	Node.o \

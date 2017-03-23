@@ -1,9 +1,9 @@
 
-#include "sflt/fdm/PIDControl.hpp"
+#include "sflight/fdm/PIDControl.hpp"
 
 #include <cmath>
 
-namespace sflt {
+namespace sflight {
 namespace fdm {
 
 PIDControl::PIDControl() : PIControl() {}

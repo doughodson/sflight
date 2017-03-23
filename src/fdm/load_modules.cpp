@@ -1,25 +1,25 @@
 
-#include "sflt/fdm/load_modules.hpp"
+#include "sflight/fdm/load_modules.hpp"
 
-#include "sflt/xml/Node.hpp"
-#include "sflt/xml/node_utils.hpp"
+#include "sflight/xml/Node.hpp"
+#include "sflight/xml/node_utils.hpp"
 
-#include "sflt/fdm/modules/Atmosphere.hpp"
-#include "sflt/fdm/modules/EOMFiveDOF.hpp"
-#include "sflt/fdm/modules/FileOutput.hpp"
-#include "sflt/fdm/modules/InterpAero.hpp"
-#include "sflt/fdm/modules/InverseDesign.hpp"
-#include "sflt/fdm/modules/SimpleAutoPilot.hpp"
-#include "sflt/fdm/modules/SimpleEngine.hpp"
-#include "sflt/fdm/modules/StickControl.hpp"
-#include "sflt/fdm/modules/TableAero.hpp"
-#include "sflt/fdm/modules/WaypointFollower.hpp"
+#include "sflight/fdm/modules/Atmosphere.hpp"
+#include "sflight/fdm/modules/EOMFiveDOF.hpp"
+#include "sflight/fdm/modules/FileOutput.hpp"
+#include "sflight/fdm/modules/InterpAero.hpp"
+#include "sflight/fdm/modules/InverseDesign.hpp"
+#include "sflight/fdm/modules/SimpleAutoPilot.hpp"
+#include "sflight/fdm/modules/SimpleEngine.hpp"
+#include "sflight/fdm/modules/StickControl.hpp"
+#include "sflight/fdm/modules/TableAero.hpp"
+#include "sflight/fdm/modules/WaypointFollower.hpp"
 
 #include <iostream>
 #include <string>
 #include <vector>
 
-namespace sflt {
+namespace sflight {
 namespace fdm {
 
 void load_modules(xml::Node* parent, FDMGlobals* globals)

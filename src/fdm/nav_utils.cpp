@@ -1,13 +1,13 @@
 
-#include "sflt/fdm/nav_utils.hpp"
+#include "sflight/fdm/nav_utils.hpp"
 
-#include "sflt/fdm/UnitConvert.hpp"
-#include "sflt/fdm/Vector3.hpp"
-#include "sflt/fdm/constants.hpp"
+#include "sflight/fdm/UnitConvert.hpp"
+#include "sflight/fdm/Vector3.hpp"
+#include "sflight/fdm/constants.hpp"
 
 #include <cmath>
 
-namespace sflt {
+namespace sflight {
 namespace fdm {
 namespace nav {
 

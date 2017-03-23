@@ -1,9 +1,9 @@
 
-#include "sflt/fdm/PIControl.hpp"
+#include "sflight/fdm/PIControl.hpp"
 
 #include <cmath>
 
-namespace sflt {
+namespace sflight {
 namespace fdm {
 
 PIControl::PIControl(double minVal, double maxVal, double p, double i)

@@ -1,9 +1,9 @@
 
-#include "sflt/fdm/modules/FDMModule.hpp"
+#include "sflight/fdm/modules/FDMModule.hpp"
 
-#include "sflt/fdm/FDMGlobals.hpp"
+#include "sflight/fdm/FDMGlobals.hpp"
 
-namespace sflt {
+namespace sflight {
 namespace fdm {
 
 FDMModule::FDMModule(FDMGlobals* globals, const double frameRate)

@@ -1,9 +1,9 @@
 
-#include "sflt/fdm/Table3D.hpp"
+#include "sflight/fdm/Table3D.hpp"
 
 #include <iostream>
 
-namespace sflt {
+namespace sflight {
 namespace fdm {
 
 Table3D::Table3D(const int numPages, double pageVals[])

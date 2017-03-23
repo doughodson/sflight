@@ -12,7 +12,7 @@ if (_ACTION == nil) then
   return
 end
 
-workspace "sflt"
+workspace "sflight"
 
    -- destination directory for generated solution/project files
    location ("../" .. _ACTION)
@@ -29,6 +29,11 @@ workspace "sflt"
    --     Debug          (Application linked to Multi-threaded Debug DLL)
    --
    configurations { "Release32", "Debug32" }
+
+   -- visual studio options and warnings
+   -- /wd4351 (C4351 warning) - disable warning associated with array brace initialization
+   -- /Oi - generate intrinsic functions
+   buildoptions( { "/wd4351", "/Oi" } )
 
    -- common release configuration flags and symbols
    filter { "Release32" }
@@ -47,21 +52,21 @@ workspace "sflt"
    project "xml"
       kind "StaticLib"
       files {
-         "../../include/sflt/xml/**.h*",
+         "../../include/sflight/xml/**.h*",
          "../../src/xml/**.cpp"
       }
       targetdir ("../../lib/")
-      targetname "sflt_xml"
+      targetname "sflight_xml"
 
    -- flight dynamics model
    project "fdm"
       kind "StaticLib"
       files {
-         "../../include/sflt/fdm/**.h*",
+         "../../include/sflight/fdm/**.h*",
          "../../src/fdm/**.cpp"
       }
       targetdir ("../../lib/")
-      targetname "sflt_fdm"
+      targetname "sflight_fdm"
 
    -- simple application
    project "mainTest"

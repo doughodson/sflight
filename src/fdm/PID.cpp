@@ -1,9 +1,9 @@
 
-#include "sflt/fdm/PID.hpp"
+#include "sflight/fdm/PID.hpp"
 
 #include <cmath>
 
-namespace sflt {
+namespace sflight {
 namespace fdm {
 
 PID::PID(const double minVal, const double maxVal, const double kp)

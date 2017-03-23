@@ -1,8 +1,8 @@
 
-#include "sflt/fdm/AutoPilotCmds.hpp"
-#include "sflt/fdm/UnitConvert.hpp"
+#include "sflight/fdm/AutoPilotCmds.hpp"
+#include "sflight/fdm/UnitConvert.hpp"
 
-namespace sflt {
+namespace sflight {
 namespace fdm {
 
 void AutoPilotCmds :: setCmdHeading(const double radHeading)
