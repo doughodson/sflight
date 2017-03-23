@@ -5,7 +5,7 @@ PGM = mainTest
 
 OBJS = main.o
 
-LDFLAGS += -lsf_fdm -lsf_xml
+LDFLAGS += -lsflt_fdm -lsflt_xml
 #LDFLAGS += -lftgl -lfreetype -lglut -lGLU -lGL -lX11 -lpthread
 #LDFLAGS += -lXi -lXmu
 #LDFLAGS += -lrt

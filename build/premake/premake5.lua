@@ -12,7 +12,7 @@ if (_ACTION == nil) then
   return
 end
 
-workspace "simpleflight"
+workspace "sflt"
 
    -- destination directory for generated solution/project files
    location ("../" .. _ACTION)
@@ -44,24 +44,24 @@ workspace "simpleflight"
       defines { "WIN32", "_DEBUG" }
 
    -- xml parser
-   project "sf_xml"
+   project "xml"
       kind "StaticLib"
       files {
          "../../include/sf/xml/**.h*",
          "../../src/xml/**.cpp"
       }
       targetdir ("../../lib/")
-      targetname "sf_xml"
+      targetname "sflt_xml"
 
    -- flight dynamics model
-   project "sf_fdm"
+   project "fdm"
       kind "StaticLib"
       files {
          "../../include/sf/fdm/**.h*",
          "../../src/fdm/**.cpp"
       }
       targetdir ("../../lib/")
-      targetname "sf_fdm"
+      targetname "sflt_fdm"
 
    -- simple application
    project "mainTest"
@@ -73,7 +73,8 @@ workspace "simpleflight"
          "../../examples/mainTest/**.h*",
          "../../examples/mainTest/**.cpp"
       }
-      links { "sf_xml", "sf_fdm" }
+      links { "xml", "fdm" }
+      libdirs { "../../lib" }
       defines { "_CONSOLE" }
       filter "configurations:Release*"
          links { "Ws2_32", "Winmm", "comctl32", "gdi32"}

@@ -1,7 +1,7 @@
 
 include ../../makedefs
 
-LIB = ../../lib/libsf_fdm.a
+LIB = ../../lib/libsflt_fdm.a
 
 OBJS =  \
 	modules/Atmosphere.o \
