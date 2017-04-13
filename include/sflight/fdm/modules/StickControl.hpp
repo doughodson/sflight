@@ -2,7 +2,7 @@
 #ifndef __sflight_fdm_StickControl_H__
 #define __sflight_fdm_StickControl_H__
 
-#include "sflight/fdm/modules/FDMModule.hpp"
+#include "sflight/fdm/modules/Module.hpp"
 
 #include "sflight/fdm/Vector3.hpp"
 
@@ -17,7 +17,7 @@ namespace fdm {
 //------------------------------------------------------------------------------
 // Class: StickControl
 //------------------------------------------------------------------------------
-class StickControl : public virtual FDMModule
+class StickControl : public Module
 {
  public:
    StickControl(FDMGlobals* globals, const double frameRate);

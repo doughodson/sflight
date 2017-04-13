@@ -18,7 +18,7 @@
 namespace sflight {
 namespace fdm {
 
-InverseDesign::InverseDesign(FDMGlobals* globals, double frameRate) : FDMModule(globals, frameRate)
+InverseDesign::InverseDesign(FDMGlobals* globals, const double frameRate) : Module(globals, frameRate)
 {
 }
 
@@ -58,7 +58,7 @@ void InverseDesign::update(const double timestep)
 
 void InverseDesign::initialize(xml::Node* node)
 {
-   double thrustRatio{};
+//   double thrustRatio{};
    double speedSound{};
    double beta_mach{};
    double pitch{};

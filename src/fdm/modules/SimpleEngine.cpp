@@ -15,8 +15,8 @@
 namespace sflight {
 namespace fdm {
 
-SimpleEngine::SimpleEngine(FDMGlobals* globals, double frameRate)
-    : FDMModule(globals, frameRate)
+SimpleEngine::SimpleEngine(FDMGlobals* globals, const double frameRate)
+    : Module(globals, frameRate)
 {
    seaLevelTemp = Atmosphere::getTemp(0);
    seaLevelPress = Atmosphere::getPressure(0);

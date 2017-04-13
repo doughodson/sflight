@@ -1,6 +1,6 @@
 
-#ifndef __sflight_fdm_FDMModule_H__
-#define __sflight_fdm_FDMModule_H__
+#ifndef __sflight_fdm_Module_H__
+#define __sflight_fdm_Module_H__
 
 #include <string>
 
@@ -12,14 +12,14 @@ namespace fdm {
 class FDMGlobals;
 
 //------------------------------------------------------------------------------
-// Class: FDMModule
-// Description: Base class for all flight dynamics modules
+// Class: Module
+// Description: Base class for all modules
 //------------------------------------------------------------------------------
-class FDMModule
+class Module
 {
  public:
-   FDMModule(FDMGlobals* globals, const double frameRate);
-   virtual ~FDMModule() = default;
+   Module(FDMGlobals* globals, const double frameRate);
+   virtual ~Module() = default;
 
    // module interface
    virtual void initialize(xml::Node* node){};

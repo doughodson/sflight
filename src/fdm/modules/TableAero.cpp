@@ -19,8 +19,8 @@
 namespace sflight {
 namespace fdm {
 
-TableAero::TableAero(FDMGlobals* globals, double frameRate)
-    : FDMModule(globals, frameRate)
+TableAero::TableAero(FDMGlobals* globals, const double frameRate)
+    : Module(globals, frameRate)
 {
 }
 

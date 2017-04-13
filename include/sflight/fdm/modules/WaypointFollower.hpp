@@ -3,7 +3,7 @@
 #ifndef __sflight_fdm_WaypointFollower_H__
 #define __sflight_fdm_WaypointFollower_H__
 
-#include "sflight/fdm/modules/FDMModule.hpp"
+#include "sflight/fdm/modules/Module.hpp"
 
 #include <vector>
 
@@ -29,10 +29,10 @@ class Waypoint
 //------------------------------------------------------------------------------
 // Class: WaypointFollower
 //------------------------------------------------------------------------------
-class WaypointFollower : public FDMModule
+class WaypointFollower : public Module
 {
  public:
-   WaypointFollower(FDMGlobals* globals, double frameRate);
+   WaypointFollower(FDMGlobals* globals, const double frameRate);
    virtual ~WaypointFollower() = default;
 
    // module interface

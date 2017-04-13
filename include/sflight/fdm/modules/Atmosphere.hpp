@@ -2,7 +2,7 @@
 #ifndef __sflight_fdm_Atmosphere_H__
 #define __sflight_fdm_Atmosphere_H__
 
-#include "sflight/fdm/modules/FDMModule.hpp"
+#include "sflight/fdm/modules/Module.hpp"
 
 namespace sflight {
 namespace fdm {
@@ -54,10 +54,10 @@ namespace fdm {
 // 35000	-36.1	   5.6    0.0082
 //
 //------------------------------------------------------------------------------
-class Atmosphere : public FDMModule
+class Atmosphere : public Module
 {
  public:
-   Atmosphere(FDMGlobals* globals, double frameRate);
+   Atmosphere(FDMGlobals* globals, const double frameRate);
 
    // module interface
    virtual void update(const double timestep) override;

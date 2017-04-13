@@ -6,10 +6,10 @@ LIB = ../../lib/libsflight_fdm.a
 OBJS =  \
 	modules/Atmosphere.o \
 	modules/EOMFiveDOF.o \
-	modules/FDMModule.o \
 	modules/FileOutput.o \
 	modules/InterpAero.o \
 	modules/InverseDesign.o \
+	modules/Module.o \
 	modules/SimpleAutoPilot.o \
 	modules/SimpleEngine.o \
 	modules/StickControl.o \

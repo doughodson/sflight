@@ -2,7 +2,7 @@
 #ifndef __sflight_fdm_InterpAero_H__
 #define __sflight_fdm_InterpAero_H__
 
-#include "sflight/fdm/modules/FDMModule.hpp"
+#include "sflight/fdm/modules/Module.hpp"
 
 namespace sflight {
 namespace xml {
@@ -15,10 +15,10 @@ class FDMGlobals;
 // Class: InterpAero
 // Description: Sets up a simple aero lookup table system
 //------------------------------------------------------------------------------
-class InterpAero : public virtual FDMModule
+class InterpAero : public Module
 {
  public:
-   InterpAero(FDMGlobals* globals, double frameRate);
+   InterpAero(FDMGlobals* globals, const double frameRate);
 
    // module interface
    virtual void initialize(xml::Node* node) override;

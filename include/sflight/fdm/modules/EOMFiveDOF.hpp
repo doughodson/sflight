@@ -2,7 +2,7 @@
 #ifndef __sflight_fdm_EOMFiveDOF_H__
 #define __sflight_fdm_EOMFiveDOF_H__
 
-#include "sflight/fdm/modules/FDMModule.hpp"
+#include "sflight/fdm/modules/Module.hpp"
 
 #include "sflight/fdm/Quaternion.hpp"
 #include "sflight/fdm/Vector3.hpp"
@@ -17,10 +17,10 @@ class FDMGlobals;
 // Description: Implements psuedo five DOF dynamics for fixed wing aircraft
 //              (imposes a no-slip condition)
 //------------------------------------------------------------------------------
-class EOMFiveDOF : public FDMModule
+class EOMFiveDOF : public Module
 {
 public:
-   EOMFiveDOF(FDMGlobals* globals, double frameRate);
+   EOMFiveDOF(FDMGlobals* globals, const double frameRate);
    virtual ~EOMFiveDOF() = default;
 
    // module interface

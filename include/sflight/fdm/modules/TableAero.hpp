@@ -2,7 +2,7 @@
 #ifndef __sflight_fdm_TableAero_H__
 #define __sflight_fdm_TableAero_H__
 
-#include "sflight/fdm/modules/FDMModule.hpp"
+#include "sflight/fdm/modules/Module.hpp"
 
 namespace sflight {
 namespace xml {
@@ -15,10 +15,10 @@ class FDMGlobals;
 //------------------------------------------------------------------------------
 // Class: Quaternion
 //------------------------------------------------------------------------------
-class TableAero : public virtual FDMModule
+class TableAero : public Module
 {
  public:
-   TableAero(FDMGlobals* globals, double frameRate);
+   TableAero(FDMGlobals* globals, const double frameRate);
 
    // module interface
    virtual void initialize(xml::Node* node) override;

@@ -2,7 +2,7 @@
 #ifndef __sflight_fdm_AutoPilot_H__
 #define __sflight_fdm_AutoPilot_H__
 
-#include "sflight/fdm/modules/FDMModule.hpp"
+#include "sflight/fdm/modules/Module.hpp"
 
 #include "sflight/xml/Node.hpp"
 
@@ -15,7 +15,7 @@ namespace fdm {
 //------------------------------------------------------------------------------
 // Class: SimpleAutoPilot
 //------------------------------------------------------------------------------
-class SimpleAutoPilot : public FDMModule
+class SimpleAutoPilot : public Module
 {
  public:
    SimpleAutoPilot(FDMGlobals* globals, const double frameRate);

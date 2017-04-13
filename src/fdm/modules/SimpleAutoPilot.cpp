@@ -17,7 +17,7 @@ namespace sflight {
 namespace fdm {
 
 SimpleAutoPilot::SimpleAutoPilot(FDMGlobals* globals, const double frameRate)
-    : FDMModule(globals, frameRate)
+    : Module(globals, frameRate)
 {
 }
 

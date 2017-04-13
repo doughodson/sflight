@@ -15,7 +15,7 @@
 namespace sflight {
 namespace xml { class Node; }
 namespace fdm {
-class FDMModule;
+class Module;
 
 //------------------------------------------------------------------------------
 // Class: FDMGlobals
@@ -27,7 +27,7 @@ public:
    FDMGlobals();
    ~FDMGlobals();
 
-   void addModule(FDMModule* module);
+   void addModule(Module* module);
    void initialize();
    void initialize(xml::Node* node);
    void update(double timestep);
@@ -131,7 +131,7 @@ public:
    AutoPilotCmds autoPilotCmds;
 
    xml::Node* rootNode {};
-   std::vector<FDMModule*> modules {};
+   std::vector<Module*> modules {};
 };
 
 }

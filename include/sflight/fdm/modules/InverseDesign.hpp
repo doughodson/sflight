@@ -2,7 +2,7 @@
 #ifndef __sflight_fdm_InverseDesign_H__
 #define __sflight_fdm_InverseDesign_H__
 
-#include "sflight/fdm/modules/FDMModule.hpp"
+#include "sflight/fdm/modules/Module.hpp"
 
 namespace sflight {
 namespace xml {
@@ -15,10 +15,10 @@ class FDMGlobals;
 // Class: InverseDesign
 // Description: Sets up a simple aero lookup table system
 //------------------------------------------------------------------------------
-class InverseDesign : public virtual FDMModule
+class InverseDesign : public Module
 {
  public:
-   InverseDesign(FDMGlobals* globals, double frameRate);
+   InverseDesign(FDMGlobals* globals, const double frameRate);
 
    // module interface
    virtual void initialize(xml::Node* node) override;

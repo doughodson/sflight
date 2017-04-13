@@ -19,7 +19,7 @@
 namespace sflight {
 namespace fdm {
 
-EOMFiveDOF::EOMFiveDOF(FDMGlobals* globals, double frameRate) : FDMModule(globals, frameRate)
+EOMFiveDOF::EOMFiveDOF(FDMGlobals* globals, const double frameRate) : Module(globals, frameRate)
 {
 }
 

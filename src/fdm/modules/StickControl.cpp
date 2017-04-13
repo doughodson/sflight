@@ -13,7 +13,7 @@ namespace sflight {
 namespace fdm {
 
 StickControl::StickControl(FDMGlobals* globals, const double frameRate)
-    : FDMModule(globals, frameRate)
+    : Module(globals, frameRate)
 {
 }
 

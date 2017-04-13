@@ -16,8 +16,8 @@
 namespace sflight {
 namespace fdm {
 
-WaypointFollower::WaypointFollower(FDMGlobals* globals, double frameRate)
-    : FDMModule(globals, frameRate)
+WaypointFollower::WaypointFollower(FDMGlobals* globals, const double frameRate)
+    : Module(globals, frameRate)
 {
 }
 

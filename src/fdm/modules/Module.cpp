@@ -1,12 +1,12 @@
 
-#include "sflight/fdm/modules/FDMModule.hpp"
+#include "sflight/fdm/modules/Module.hpp"
 
 #include "sflight/fdm/FDMGlobals.hpp"
 
 namespace sflight {
 namespace fdm {
 
-FDMModule::FDMModule(FDMGlobals* globals, const double frameRate)
+Module::Module(FDMGlobals* globals, const double frameRate)
     : globals(globals)
 {
    if (globals != nullptr)

@@ -2,7 +2,7 @@
 #ifndef __sflight_fdm_FileOutput_H__
 #define __sflight_fdm_FileOutput_H__
 
-#include "sflight/fdm/modules/FDMModule.hpp"
+#include "sflight/fdm/modules/Module.hpp"
 
 #include <fstream>
 
@@ -14,10 +14,10 @@ class FDMGlobals;
 //------------------------------------------------------------------------------
 // Class: FileOutput
 //------------------------------------------------------------------------------
-class FileOutput : public virtual FDMModule
+class FileOutput : public Module
 {
 public:
-   FileOutput(FDMGlobals* globals, double frameRate);
+   FileOutput(FDMGlobals* globals, const double frameRate);
    ~FileOutput();
 
    // module interface

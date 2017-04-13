@@ -2,7 +2,7 @@
 #ifndef __sflight_fdm_Engine_H__
 #define __sflight_fdm_Engine_H__
 
-#include "sflight/fdm/modules/FDMModule.hpp"
+#include "sflight/fdm/modules/Module.hpp"
 
 namespace sflight {
 namespace xml {
@@ -14,10 +14,10 @@ namespace fdm {
 // Class: SimpleEngine
 // Description: Implements a simple engine
 //------------------------------------------------------------------------------
-class SimpleEngine : public virtual FDMModule
+class SimpleEngine : public Module
 {
  public:
-   SimpleEngine(FDMGlobals* globals, double timestep);
+   SimpleEngine(FDMGlobals* globals, const double timestep);
    ~SimpleEngine();
 
    // module interface

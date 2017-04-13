@@ -13,8 +13,8 @@
 namespace sflight {
 namespace fdm {
 
-FileOutput::FileOutput(FDMGlobals* globals, double frameRate)
-    : FDMModule(globals, frameRate)
+FileOutput::FileOutput(FDMGlobals* globals, const double frameRate)
+    : Module(globals, frameRate)
 {
 }
 
