@@ -11,6 +11,7 @@ namespace xml {
 class Node;
 }
 namespace fdm {
+class Player;
 
 //------------------------------------------------------------------------------
 // Class: AutoPilot
@@ -19,11 +20,11 @@ namespace fdm {
 class AutoPilot : public Module
 {
  public:
-   AutoPilot(FDMGlobals* globals, const double frameRate);
+   AutoPilot(Player*, const double frameRate);
    ~AutoPilot();
 
    // module interface
-   virtual void initialize(xml::Node* node) override;
+   virtual void initialize(xml::Node*) override;
    virtual void update(const double timestep) override;
 
    void updateHdg(double timestep, double cmdHdg);

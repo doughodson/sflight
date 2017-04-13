@@ -9,6 +9,7 @@ namespace xml {
 class Node;
 }
 namespace fdm {
+class Player;
 
 //------------------------------------------------------------------------------
 // Class: Engine
@@ -17,11 +18,11 @@ namespace fdm {
 class Engine : public Module
 {
  public:
-   Engine(FDMGlobals* globals, const double timestep);
+   Engine(Player*, const double timestep);
    ~Engine();
 
    // module interface
-   virtual void initialize(xml::Node* node) override;
+   virtual void initialize(xml::Node*) override;
    virtual void update(const double timestep) override;
 
  protected:

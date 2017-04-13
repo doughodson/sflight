@@ -6,7 +6,7 @@
 
 #include "sflight/fdm/modules/Atmosphere.hpp"
 
-#include "sflight/fdm/FDMGlobals.hpp"
+#include "sflight/fdm/Player.hpp"
 #include "sflight/fdm/UnitConvert.hpp"
 #include "sflight/fdm/Vector3.hpp"
 #include "sflight/fdm/WindAxis.hpp"
@@ -18,7 +18,7 @@
 namespace sflight {
 namespace fdm {
 
-InverseDesign::InverseDesign(FDMGlobals* globals, const double frameRate) : Module(globals, frameRate)
+InverseDesign::InverseDesign(Player* globals, const double frameRate) : Module(globals, frameRate)
 {
 }
 
@@ -38,12 +38,13 @@ void InverseDesign::update(const double timestep)
 
    if (usingMachEffects) {
       double beta_mach =
-          globals->mach > 0.95 ? 1.0 : 1.0 / sqrt(1.0 - globals->mach * globals->mach);
+          globals->mach > 0.95 ? 1.0 : 1.0 / std::sqrt(1.0 - globals->mach * globals->mach);
       cl *= beta_mach;
       cd *= beta_mach;
    }
 
-   WindAxis::windToBody(globals->aeroForce, globals->alpha, globals->beta, cl * qbar, cd * qbar, 0);
+   WindAxis::windToBody(globals->aeroForce, globals->alpha, globals->beta, cl * qbar,
+                        cd * qbar, 0);
 
    double thrust = getThrust(globals->rho, globals->mach, globals->throttle);
 
@@ -58,7 +59,7 @@ void InverseDesign::update(const double timestep)
 
 void InverseDesign::initialize(xml::Node* node)
 {
-//   double thrustRatio{};
+   //   double thrustRatio{};
    double speedSound{};
    double beta_mach{};
    double pitch{};

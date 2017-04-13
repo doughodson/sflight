@@ -9,7 +9,7 @@
 namespace sflight {
 namespace xml { class Node; }
 namespace fdm {
-class FDMGlobals;
+class Player;
 
 //------------------------------------------------------------------------------
 // Class: FileOutput
@@ -17,17 +17,16 @@ class FDMGlobals;
 class FileOutput : public Module
 {
 public:
-   FileOutput(FDMGlobals* globals, const double frameRate);
+   FileOutput(Player*, const double frameRate);
    ~FileOutput();
 
    // module interface
-   virtual void initialize(xml::Node* node) override;
+   virtual void initialize(xml::Node*) override;
    virtual void update(const double timestep) override;
 
    void update();
    void close();
 
-   //FDMGlobals *globals;
    std::ofstream fout;
    int rate {};
    double lastTime {};

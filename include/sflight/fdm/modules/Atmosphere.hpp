@@ -6,6 +6,7 @@
 
 namespace sflight {
 namespace fdm {
+class Player;
 
 //------------------------------------------------------------------------------
 // Class: Atmosphere
@@ -57,7 +58,7 @@ namespace fdm {
 class Atmosphere : public Module
 {
  public:
-   Atmosphere(FDMGlobals* globals, const double frameRate);
+   Atmosphere(Player*, const double frameRate);
 
    // module interface
    virtual void update(const double timestep) override;

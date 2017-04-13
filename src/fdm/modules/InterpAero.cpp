@@ -6,7 +6,7 @@
 #include "sflight/xml/Node.hpp"
 #include "sflight/xml/node_utils.hpp"
 
-#include "sflight/fdm/FDMGlobals.hpp"
+#include "sflight/fdm/Player.hpp"
 #include "sflight/fdm/UnitConvert.hpp"
 #include "sflight/fdm/Vector3.hpp"
 #include "sflight/fdm/WindAxis.hpp"
@@ -18,7 +18,7 @@
 namespace sflight {
 namespace fdm {
 
-InterpAero::InterpAero(FDMGlobals* globals, const double frameRate)
+InterpAero::InterpAero(Player* globals, const double frameRate)
     : Module(globals, frameRate)
 {
 }

@@ -6,13 +6,13 @@
 #include "sflight/xml/Node.hpp"
 #include "sflight/xml/node_utils.hpp"
 
-#include "sflight/fdm/FDMGlobals.hpp"
+#include "sflight/fdm/Player.hpp"
 #include "sflight/fdm/UnitConvert.hpp"
 
 namespace sflight {
 namespace fdm {
 
-StickControl::StickControl(FDMGlobals* globals, const double frameRate)
+StickControl::StickControl(Player* globals, const double frameRate)
     : Module(globals, frameRate)
 {
 }

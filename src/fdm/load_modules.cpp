@@ -4,6 +4,7 @@
 #include "sflight/xml/Node.hpp"
 #include "sflight/xml/node_utils.hpp"
 
+#include "sflight/fdm/Player.hpp"
 #include "sflight/fdm/modules/Atmosphere.hpp"
 #include "sflight/fdm/modules/AutoPilot.hpp"
 #include "sflight/fdm/modules/EOMFiveDOF.hpp"
@@ -22,7 +23,7 @@
 namespace sflight {
 namespace fdm {
 
-void load_modules(xml::Node* parent, FDMGlobals* globals)
+void load_modules(xml::Node* parent, Player* globals)
 {
    xml::Node* node = parent->getChild("Modules");
    std::vector<xml::Node*> nodeList = xml::getList(node, "Module");

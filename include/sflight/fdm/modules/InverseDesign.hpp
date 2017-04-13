@@ -9,7 +9,7 @@ namespace xml {
 class Node;
 }
 namespace fdm {
-class FDMGlobals;
+class Player;
 
 //------------------------------------------------------------------------------
 // Class: InverseDesign
@@ -18,10 +18,10 @@ class FDMGlobals;
 class InverseDesign : public Module
 {
  public:
-   InverseDesign(FDMGlobals* globals, const double frameRate);
+   InverseDesign(Player*, const double frameRate);
 
    // module interface
-   virtual void initialize(xml::Node* node) override;
+   virtual void initialize(xml::Node*) override;
    virtual void update(const double timestep) override;
 
    void getAeroCoefs(double pitch, double u, double vz, double rho,

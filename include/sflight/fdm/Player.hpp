@@ -1,31 +1,34 @@
 
-#ifndef __sflight_fdm_FDMGlobals_H__
-#define __sflight_fdm_FDMGlobals_H__
+#ifndef __sflight_fdm_FDM_H__
+#define __sflight_fdm_FDM_H__
 
 #include "sflight/xml/Node.hpp"
 
-#include "sflight/fdm/nav_utils.hpp"
+#include "sflight/fdm/AutoPilotCmds.hpp"
 #include "sflight/fdm/Euler.hpp"
 #include "sflight/fdm/Quaternion.hpp"
 #include "sflight/fdm/Vector3.hpp"
-#include "sflight/fdm/AutoPilotCmds.hpp"
+#include "sflight/fdm/nav_utils.hpp"
 
 #include <vector>
 
 namespace sflight {
-namespace xml { class Node; }
+namespace xml {
+class Node;
+}
 namespace fdm {
 class Module;
 
 //------------------------------------------------------------------------------
-// Class: FDMGlobals
-// Description: Global variables for use by the flight model
+// Class: Player
+// Description: Player/Platform/Entity object with an associated
+//              flight dynamics model
 //------------------------------------------------------------------------------
-class FDMGlobals
+class Player
 {
-public:
-   FDMGlobals();
-   ~FDMGlobals();
+ public:
+   Player();
+   ~Player();
 
    void addModule(Module* module);
    void initialize();
@@ -34,42 +37,42 @@ public:
    void setProperty(std::string tag, double val);
 
    // lat, lon (radians) and alt (meters)
-   double lat {};
-   double lon {};
-   double alt {};
+   double lat{};
+   double lon{};
+   double alt{};
 
    // mass (kg)
-   double mass {};
+   double mass{};
 
    // air density (kg/m3)
-   double rho {1.22};
+   double rho{1.22};
 
    // magnitude of vehicle true airspeed (m/s)
-   double vInf {1e-32};
+   double vInf{1e-32};
 
    // mach number
-   double mach {};
+   double mach{};
 
    // angle of attack (radians)
-   double alpha {};
+   double alpha{};
 
    // sideslip angle (radians)
-   double beta {};
+   double beta{};
 
    // change in alpha with time (rad/sec)
-   double alphaDot {};
+   double alphaDot{};
 
    // change in beta with time (rads/sec)
-   double betaDot {};
+   double betaDot{};
 
    // altitude above ground (meters)
-   double altagl {};
+   double altagl{};
 
    // terrain elevation (meters)
-   double terrainElev {};
+   double terrainElev{};
 
    // gravitational accel (m/s2)
-   double g {};
+   double g{};
 
    // velocity in the body axis [u, v, w] (m/s)
    Vector3 uvw;
@@ -101,7 +104,7 @@ public:
    // velocity in the earth plane [vnorth, veast, vdown] (m/s)
    Vector3 nedVel;
 
-	// position in the x-y-z coordinates [north, east, down] from starting point (meters)
+   // position in the x-y-z coordinates [north, east, down] from starting point (meters)
    Vector3 xyz;
 
    // control surface deflections [aileron elevator rudder] (radians)
@@ -117,23 +120,22 @@ public:
    Vector3 windGust;
 
    // engine-related values
-   double throttle {};
-   double rpm {};
-   double fuel {};	    // kilos
-   double fuelflow {};  // kilos/sec
+   double throttle{};
+   double rpm{};
+   double fuel{};     // kilos
+   double fuelflow{}; // kilos/sec
 
    // sim related items
-   unsigned int frameNum {};
-   double simTime {};
-   bool paused {true};
+   unsigned int frameNum{};
+   double simTime{};
+   bool paused{true};
 
    // Autopilot commands
    AutoPilotCmds autoPilotCmds;
 
-   xml::Node* rootNode {};
-   std::vector<Module*> modules {};
+   xml::Node* rootNode{};
+   std::vector<Module*> modules{};
 };
-
 }
 }
 

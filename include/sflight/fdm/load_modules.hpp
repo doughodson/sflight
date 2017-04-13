@@ -7,9 +7,9 @@ namespace xml {
 class Node;
 }
 namespace fdm {
-class FDMGlobals;
+class Player;
 
-void load_modules(xml::Node* node, FDMGlobals* globals);
+void load_modules(xml::Node* node, Player*);
 }
 }
 

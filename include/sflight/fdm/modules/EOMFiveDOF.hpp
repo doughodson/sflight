@@ -10,7 +10,7 @@
 namespace sflight {
 namespace xml { class Node; }
 namespace fdm {
-class FDMGlobals;
+class Player;
 
 //------------------------------------------------------------------------------
 // Class: EOMFiveDOF
@@ -20,11 +20,11 @@ class FDMGlobals;
 class EOMFiveDOF : public Module
 {
 public:
-   EOMFiveDOF(FDMGlobals* globals, const double frameRate);
+   EOMFiveDOF(Player*, const double frameRate);
    virtual ~EOMFiveDOF() = default;
 
    // module interface
-   virtual void initialize(xml::Node* node) override;
+   virtual void initialize(xml::Node*) override;
    virtual void update(const double timestep) override;
 
    void computeEOM(double timestep);

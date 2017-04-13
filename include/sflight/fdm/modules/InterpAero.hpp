@@ -9,7 +9,7 @@ namespace xml {
 class Node;
 }
 namespace fdm {
-class FDMGlobals;
+class Player;
 
 //------------------------------------------------------------------------------
 // Class: InterpAero
@@ -18,10 +18,10 @@ class FDMGlobals;
 class InterpAero : public Module
 {
  public:
-   InterpAero(FDMGlobals* globals, const double frameRate);
+   InterpAero(Player*, const double frameRate);
 
    // module interface
-   virtual void initialize(xml::Node* node) override;
+   virtual void initialize(xml::Node*) override;
    virtual void update(const double timestep) override;
 
    void createCoefs(double pitch, double u, double vz, double thrust,

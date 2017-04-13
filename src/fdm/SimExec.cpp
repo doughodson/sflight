@@ -4,7 +4,7 @@
 #include "sflight/xml/Node.hpp"
 #include "sflight/xml/node_utils.hpp"
 
-#include "sflight/fdm/FDMGlobals.hpp"
+#include "sflight/fdm/Player.hpp"
 
 #include <iostream>
 #include <thread>
@@ -13,12 +13,12 @@
 namespace sflight {
 namespace fdm {
 
-SimExec::SimExec(FDMGlobals* globals, const double frameRate)
+SimExec::SimExec(Player* globals, const double frameRate)
     : globals(globals), frameRate(frameRate)
 {
 }
 
-SimExec::SimExec(FDMGlobals* globals, const double frameRate,
+SimExec::SimExec(Player* globals, const double frameRate,
                    const long maxFrames)
     : globals(globals), frameRate(frameRate), maxFrames(maxFrames)
 {

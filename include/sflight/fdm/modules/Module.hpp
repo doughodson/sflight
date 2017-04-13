@@ -9,7 +9,7 @@ namespace xml {
 class Node;
 }
 namespace fdm {
-class FDMGlobals;
+class Player;
 
 //------------------------------------------------------------------------------
 // Class: Module
@@ -18,15 +18,15 @@ class FDMGlobals;
 class Module
 {
  public:
-   Module(FDMGlobals* globals, const double frameRate);
+   Module(Player*, const double frameRate);
    virtual ~Module() = default;
 
    // module interface
-   virtual void initialize(xml::Node* node){};
+   virtual void initialize(xml::Node*){};
    virtual void update(const double timestep){};
    virtual void setProperty(std::string tag, const double val){};
 
-   FDMGlobals* globals{};
+   Player* globals{};
 
    double frameTime{};
    double lastTime{};

@@ -6,7 +6,7 @@
 #include "sflight/xml/Node.hpp"
 #include "sflight/xml/node_utils.hpp"
 
-#include "sflight/fdm/FDMGlobals.hpp"
+#include "sflight/fdm/Player.hpp"
 #include "sflight/fdm/UnitConvert.hpp"
 
 #include <iostream>
@@ -15,7 +15,7 @@
 namespace sflight {
 namespace fdm {
 
-Engine::Engine(FDMGlobals* globals, const double frameRate)
+Engine::Engine(Player* globals, const double frameRate)
     : Module(globals, frameRate)
 {
    seaLevelTemp = Atmosphere::getTemp(0);

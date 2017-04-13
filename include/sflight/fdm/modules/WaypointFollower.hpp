@@ -12,6 +12,7 @@ namespace xml {
 class Node;
 }
 namespace fdm {
+class Player;
 
 //------------------------------------------------------------------------------
 // Class: Waypoint
@@ -32,11 +33,11 @@ class Waypoint
 class WaypointFollower : public Module
 {
  public:
-   WaypointFollower(FDMGlobals* globals, const double frameRate);
+   WaypointFollower(Player*, const double frameRate);
    virtual ~WaypointFollower() = default;
 
    // module interface
-   void initialize(xml::Node* node);
+   void initialize(xml::Node*);
    void update(const double timestep);
 
    void loadWaypoint();

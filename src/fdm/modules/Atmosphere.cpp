@@ -1,7 +1,7 @@
 
 #include "sflight/fdm/modules/Atmosphere.hpp"
 
-#include "sflight/fdm/FDMGlobals.hpp"
+#include "sflight/fdm/Player.hpp"
 
 #include <cmath>
 
@@ -29,7 +29,7 @@ const double Atmosphere::dens[] = {
     0.088, 0.075, 0.064, 0.054, 0.046,  0.039,  0.034, 0.029, 0.025, 0.021,
     0.018, 0.015, 0.013, 0.011, 0.0096, 0.0082, 1E-6};
 
-Atmosphere::Atmosphere(FDMGlobals* globals, const double frameRate)
+Atmosphere::Atmosphere(Player* globals, const double frameRate)
     : Module(globals, frameRate)
 {
 }

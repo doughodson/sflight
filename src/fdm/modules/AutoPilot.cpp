@@ -6,7 +6,7 @@
 #include "sflight/xml/Node.hpp"
 #include "sflight/xml/node_utils.hpp"
 
-#include "sflight/fdm/FDMGlobals.hpp"
+#include "sflight/fdm/Player.hpp"
 #include "sflight/fdm/UnitConvert.hpp"
 
 #include <algorithm>
@@ -16,7 +16,7 @@
 namespace sflight {
 namespace fdm {
 
-AutoPilot::AutoPilot(FDMGlobals* globals, const double frameRate) : Module(globals, frameRate)
+AutoPilot::AutoPilot(Player* globals, const double frameRate) : Module(globals, frameRate)
 {
 }
 

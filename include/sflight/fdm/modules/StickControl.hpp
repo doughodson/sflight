@@ -13,6 +13,7 @@ namespace xml {
 class Node;
 }
 namespace fdm {
+class Player;
 
 //------------------------------------------------------------------------------
 // Class: StickControl
@@ -20,11 +21,11 @@ namespace fdm {
 class StickControl : public Module
 {
  public:
-   StickControl(FDMGlobals* globals, const double frameRate);
+   StickControl(Player*, const double frameRate);
    virtual ~StickControl() = default;
 
    // module interface
-   virtual void initialize(xml::Node* node) override;
+   virtual void initialize(xml::Node*) override;
    virtual void update(const double timestep) override;
 
  private:

@@ -4,7 +4,7 @@
 #include "sflight/xml/Node.hpp"
 #include "sflight/xml/node_utils.hpp"
 
-#include "sflight/fdm/FDMGlobals.hpp"
+#include "sflight/fdm/Player.hpp"
 #include "sflight/fdm/UnitConvert.hpp"
 
 #include <iomanip>
@@ -13,7 +13,7 @@
 namespace sflight {
 namespace fdm {
 
-FileOutput::FileOutput(FDMGlobals* globals, const double frameRate)
+FileOutput::FileOutput(Player* globals, const double frameRate)
     : Module(globals, frameRate)
 {
 }

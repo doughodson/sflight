@@ -7,7 +7,7 @@ namespace xml {
 class Node;
 }
 namespace fdm {
-class FDMGlobals;
+class Player;
 
 //------------------------------------------------------------------------------
 // Class: SimExec
@@ -15,8 +15,8 @@ class FDMGlobals;
 class SimExec
 {
  public:
-   SimExec(FDMGlobals* globals, const double frameRate);
-   SimExec(FDMGlobals* globals, const double frameRate, const long maxFrames);
+   SimExec(Player*, const double frameRate);
+   SimExec(Player*, const double frameRate, const long maxFrames);
    virtual ~SimExec() = default;
 
    void start();
@@ -25,7 +25,7 @@ class SimExec
    void initialize(xml::Node* node);
 
  private:
-   FDMGlobals* globals{};
+   Player* globals{};
    double frameRate{};
    long maxFrames{1000000000};
 };

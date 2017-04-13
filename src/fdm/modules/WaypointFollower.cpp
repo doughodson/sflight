@@ -4,7 +4,7 @@
 #include "sflight/xml/Node.hpp"
 #include "sflight/xml/node_utils.hpp"
 
-#include "sflight/fdm/FDMGlobals.hpp"
+#include "sflight/fdm/Player.hpp"
 #include "sflight/fdm/UnitConvert.hpp"
 #include "sflight/fdm/UnitConvert.hpp"
 #include "sflight/fdm/constants.hpp"
@@ -16,7 +16,7 @@
 namespace sflight {
 namespace fdm {
 
-WaypointFollower::WaypointFollower(FDMGlobals* globals, const double frameRate)
+WaypointFollower::WaypointFollower(Player* globals, const double frameRate)
     : Module(globals, frameRate)
 {
 }

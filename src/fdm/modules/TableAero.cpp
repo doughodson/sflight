@@ -6,7 +6,7 @@
 #include "sflight/xml/Node.hpp"
 #include "sflight/xml/node_utils.hpp"
 
-#include "sflight/fdm/FDMGlobals.hpp"
+#include "sflight/fdm/Player.hpp"
 #include "sflight/fdm/Table2D.hpp"
 #include "sflight/fdm/Table3D.hpp"
 #include "sflight/fdm/UnitConvert.hpp"
@@ -19,7 +19,7 @@
 namespace sflight {
 namespace fdm {
 
-TableAero::TableAero(FDMGlobals* globals, const double frameRate)
+TableAero::TableAero(Player* globals, const double frameRate)
     : Module(globals, frameRate)
 {
 }

@@ -17,9 +17,9 @@ OBJS =  \
 	modules/WaypointFollower.o \
 	AutoPilotCmds.o \
 	Euler.o \
-	FDMGlobals.o \
 	load_modules.o \
 	nav_utils.o \
+	Player.o \
 	PIControl.o \
 	PID.o \
 	PIDControl.o \

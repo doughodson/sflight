@@ -10,7 +10,7 @@ class Node;
 }
 namespace fdm {
 class Table3D;
-class FDMGlobals;
+class Player;
 
 //------------------------------------------------------------------------------
 // Class: Quaternion
@@ -18,10 +18,10 @@ class FDMGlobals;
 class TableAero : public Module
 {
  public:
-   TableAero(FDMGlobals* globals, const double frameRate);
+   TableAero(Player*, const double frameRate);
 
    // module interface
-   virtual void initialize(xml::Node* node) override;
+   virtual void initialize(xml::Node*) override;
    virtual void update(const double timestep) override;
 
    // void createCoefs( double pitch, double u, double vz, double thrust,

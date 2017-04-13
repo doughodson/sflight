@@ -1,5 +1,5 @@
 
-#include "sflight/fdm/FDMGlobals.hpp"
+#include "sflight/fdm/Player.hpp"
 
 #include "sflight/fdm/modules/Atmosphere.hpp"
 #include "sflight/fdm/modules/Module.hpp"
@@ -20,18 +20,18 @@
 namespace sflight {
 namespace fdm {
 
-FDMGlobals::FDMGlobals() { g = nav::getG(0, 0, 0); }
+Player::Player() { g = nav::getG(0, 0, 0); }
 
-FDMGlobals::~FDMGlobals()
+Player::~Player()
 {
    for (int i = 0; i < modules.size(); i++) {
       delete modules[i];
    }
 }
 
-void FDMGlobals::addModule(Module* module) { this->modules.push_back(module); }
+void Player::addModule(Module* module) { this->modules.push_back(module); }
 
-void FDMGlobals::initialize()
+void Player::initialize()
 {
    if (rootNode == nullptr)
       return;
@@ -42,7 +42,7 @@ void FDMGlobals::initialize()
    }
 }
 
-void FDMGlobals::initialize(xml::Node* node)
+void Player::initialize(xml::Node* node)
 {
    rootNode = node;
 
@@ -92,7 +92,7 @@ void FDMGlobals::initialize(xml::Node* node)
    initialize();
 }
 
-void FDMGlobals::update(double timestep)
+void Player::update(double timestep)
 {
    simTime += timestep;
 
@@ -106,7 +106,7 @@ void FDMGlobals::update(double timestep)
    frameNum++;
 }
 
-void FDMGlobals::setProperty(std::string tag, double val)
+void Player::setProperty(std::string tag, double val)
 {
    for (int i = 0; i < modules.size(); i++) {
       modules[i]->setProperty(tag, val);

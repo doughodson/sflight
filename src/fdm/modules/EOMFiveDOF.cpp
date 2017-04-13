@@ -4,7 +4,7 @@
 #include "sflight/fdm/modules/Atmosphere.hpp"
 
 #include "sflight/fdm/Euler.hpp"
-#include "sflight/fdm/FDMGlobals.hpp"
+#include "sflight/fdm/Player.hpp"
 #include "sflight/fdm/Quaternion.hpp"
 #include "sflight/fdm/Vector3.hpp"
 
@@ -19,7 +19,7 @@
 namespace sflight {
 namespace fdm {
 
-EOMFiveDOF::EOMFiveDOF(FDMGlobals* globals, const double frameRate) : Module(globals, frameRate)
+EOMFiveDOF::EOMFiveDOF(Player* globals, const double frameRate) : Module(globals, frameRate)
 {
 }
 
