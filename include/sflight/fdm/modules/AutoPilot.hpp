@@ -13,13 +13,14 @@ class Node;
 namespace fdm {
 
 //------------------------------------------------------------------------------
-// Class: SimpleAutoPilot
+// Class: AutoPilot
+// Description: Implements a simple autopilot
 //------------------------------------------------------------------------------
-class SimpleAutoPilot : public Module
+class AutoPilot : public Module
 {
  public:
-   SimpleAutoPilot(FDMGlobals* globals, const double frameRate);
-   ~SimpleAutoPilot();
+   AutoPilot(FDMGlobals* globals, const double frameRate);
+   ~AutoPilot();
 
    // module interface
    virtual void initialize(xml::Node* node) override;

@@ -4,14 +4,14 @@ include ../../makedefs
 LIB = ../../lib/libsflight_fdm.a
 
 OBJS =  \
+	modules/AutoPilot.o \
 	modules/Atmosphere.o \
+	modules/Engine.o \
 	modules/EOMFiveDOF.o \
 	modules/FileOutput.o \
 	modules/InterpAero.o \
 	modules/InverseDesign.o \
 	modules/Module.o \
-	modules/SimpleAutoPilot.o \
-	modules/SimpleEngine.o \
 	modules/StickControl.o \
 	modules/TableAero.o \
 	modules/WaypointFollower.o \

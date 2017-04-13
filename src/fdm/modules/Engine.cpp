@@ -1,5 +1,5 @@
 
-#include "sflight/fdm/modules/SimpleEngine.hpp"
+#include "sflight/fdm/modules/Engine.hpp"
 
 #include "sflight/fdm/modules/Atmosphere.hpp"
 
@@ -15,16 +15,16 @@
 namespace sflight {
 namespace fdm {
 
-SimpleEngine::SimpleEngine(FDMGlobals* globals, const double frameRate)
+Engine::Engine(FDMGlobals* globals, const double frameRate)
     : Module(globals, frameRate)
 {
    seaLevelTemp = Atmosphere::getTemp(0);
    seaLevelPress = Atmosphere::getPressure(0);
 }
 
-SimpleEngine::~SimpleEngine() {}
+Engine::~Engine() {}
 
-void SimpleEngine::initialize(xml::Node* node)
+void Engine::initialize(xml::Node* node)
 {
    xml::Node* tmp = node->getChild("Design");
 
@@ -93,7 +93,7 @@ void SimpleEngine::initialize(xml::Node* node)
    globals->rpm = globals->throttle;
 }
 
-void SimpleEngine::update(const double timestep)
+void Engine::update(const double timestep)
 {
    if (globals->fuel <= 0) {
       globals->thrust.set1(0);

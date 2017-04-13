@@ -1,5 +1,5 @@
 
-#include "sflight/fdm/modules/SimpleAutoPilot.hpp"
+#include "sflight/fdm/modules/AutoPilot.hpp"
 
 #include "sflight/fdm/modules/Atmosphere.hpp"
 
@@ -16,14 +16,13 @@
 namespace sflight {
 namespace fdm {
 
-SimpleAutoPilot::SimpleAutoPilot(FDMGlobals* globals, const double frameRate)
-    : Module(globals, frameRate)
+AutoPilot::AutoPilot(FDMGlobals* globals, const double frameRate) : Module(globals, frameRate)
 {
 }
 
-SimpleAutoPilot::~SimpleAutoPilot() {}
+AutoPilot::~AutoPilot() {}
 
-void SimpleAutoPilot::initialize(xml::Node* node)
+void AutoPilot::initialize(xml::Node* node)
 {
    xml::Node* apProps = node->getChild("AutoPilot");
 
@@ -66,7 +65,7 @@ void SimpleAutoPilot::initialize(xml::Node* node)
    globals->autoPilotCmds.setAutoThrottleOn(true);
 }
 
-void SimpleAutoPilot::update(const double timestep)
+void AutoPilot::update(const double timestep)
 {
    if (globals->autoPilotCmds.isAutoPilotOn()) {
 
@@ -96,7 +95,7 @@ void SimpleAutoPilot::update(const double timestep)
    }
 }
 
-void SimpleAutoPilot::updateHdg(double timestep, double cmdHdg)
+void AutoPilot::updateHdg(double timestep, double cmdHdg)
 {
    double hdgDiff{};
 
@@ -121,7 +120,7 @@ void SimpleAutoPilot::updateHdg(double timestep, double cmdHdg)
    globals->pqr.set1(pCmd);
 }
 
-void SimpleAutoPilot::updateAlt(double timestep)
+void AutoPilot::updateAlt(double timestep)
 {
    double vscmd = kalt * (globals->autoPilotCmds.getCmdAltitude() - globals->alt);
 
@@ -131,7 +130,7 @@ void SimpleAutoPilot::updateAlt(double timestep)
    updateVS(timestep, vscmd);
 }
 
-void SimpleAutoPilot::updateVS(double timestep, double cmdVs)
+void AutoPilot::updateVS(double timestep, double cmdVs)
 {
    double u = globals->uvw.get1();
    double phi = globals->eulers.getPhi();
@@ -196,7 +195,7 @@ void SimpleAutoPilot::updateVS(double timestep, double cmdVs)
    //        globals->pqr.set2( globals->pqr.get2() + dq );
 }
 
-void SimpleAutoPilot::updateSpeed(double timestep)
+void AutoPilot::updateSpeed(double timestep)
 {
    double cmdVel = globals->autoPilotCmds.getCmdSpeed();
    if (globals->autoPilotCmds.isUsingMach()) {

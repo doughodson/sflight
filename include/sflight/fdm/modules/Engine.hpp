@@ -11,14 +11,14 @@ class Node;
 namespace fdm {
 
 //------------------------------------------------------------------------------
-// Class: SimpleEngine
+// Class: Engine
 // Description: Implements a simple engine
 //------------------------------------------------------------------------------
-class SimpleEngine : public Module
+class Engine : public Module
 {
  public:
-   SimpleEngine(FDMGlobals* globals, const double timestep);
-   ~SimpleEngine();
+   Engine(FDMGlobals* globals, const double timestep);
+   ~Engine();
 
    // module interface
    virtual void initialize(xml::Node* node) override;
