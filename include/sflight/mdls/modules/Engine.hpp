@@ -5,9 +5,6 @@
 #include "sflight/mdls/modules/Module.hpp"
 
 namespace sflight {
-namespace xml {
-class Node;
-}
 namespace mdls {
 class Player;
 
@@ -22,10 +19,9 @@ class Engine : public Module
    ~Engine();
 
    // module interface
-   virtual void initialize(xml::Node*) override;
    virtual void update(const double timestep) override;
 
- protected:
+ public:
    double thrustRatio{};
    double designWeight{};
    double thrustAngle{};

@@ -8,7 +8,6 @@
 #include "sflight/mdls/Vector3.hpp"
 
 namespace sflight {
-namespace xml { class Node; }
 namespace mdls {
 class Player;
 
@@ -24,12 +23,11 @@ public:
    virtual ~EOMFiveDOF() = default;
 
    // module interface
-   virtual void initialize(xml::Node*) override;
    virtual void update(const double timestep) override;
 
    void computeEOM(double timestep);
 
-private:
+public:
    Quaternion quat;
    Quaternion qdot;
    Vector3 forces;

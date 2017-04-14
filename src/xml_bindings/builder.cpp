@@ -17,6 +17,8 @@
 #include "sflight/mdls/modules/WaypointFollower.hpp"
 
 #include "sflight/xml_bindings/init_AutoPilot.hpp"
+#include "sflight/xml_bindings/init_Engine.hpp"
+#include "sflight/xml_bindings/init_EOMFiveDOF.hpp"
 
 #include <iostream>
 #include <string>
@@ -39,7 +41,7 @@ void builder(xml::Node* parent, mdls::Player* player)
 
       if (className == "EOMFiveDOF") {
          auto eomFiveDOF = new mdls::EOMFiveDOF(player, rate);
-         eomFiveDOF->initialize(node);
+         init_EOMFiveDOF(node, eomFiveDOF);
       } else if (className == "InterpAero") {
          auto interpAero = new mdls::InterpAero(player, rate);
          interpAero->initialize(node);
@@ -51,10 +53,10 @@ void builder(xml::Node* parent, mdls::Player* player)
          init_AutoPilot(node, autoPilot);
       } else if (className == "Engine") {
          auto engine = new mdls::Engine(player, rate);
-         engine->initialize(node);
+         init_Engine(node, engine);
       } else if (className == "Atmosphere") {
          auto atmosphere = new mdls::Atmosphere(player, rate);
-         atmosphere->initialize(node);
+         //atmosphere->initialize(node);
       } else if (className == "WaypointFollower") {
          auto waypointFollower = new mdls::WaypointFollower(player, rate);
          waypointFollower->initialize(node);

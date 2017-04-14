@@ -8,10 +8,7 @@
 #include "sflight/mdls/Quaternion.hpp"
 #include "sflight/mdls/Vector3.hpp"
 
-#include "sflight/xml/Node.hpp"
-
 #include "sflight/mdls/nav_utils.hpp"
-#include "sflight/xml/node_utils.hpp"
 
 #include <cmath>
 #include <iostream>
@@ -23,25 +20,9 @@ EOMFiveDOF::EOMFiveDOF(Player* player, const double frameRate) : Module(player, 
 
 void EOMFiveDOF::update(const double timestep) { computeEOM(timestep); }
 
-void EOMFiveDOF::initialize(xml::Node* node)
-{
-   quat = Quaternion(player->eulers);
-   qdot = Quaternion();
-   forces = Vector3();
-
-   uvw = Vector3();
-   pqr = Vector3();
-   xyz = Vector3();
-   gravAccel = Vector3();
-
-   gravConst = nav::getG(0, 0, 0);
-   autoRudder = xml::getBool(node, "Control/AutoRudder", true);
-}
-
 void EOMFiveDOF::computeEOM(double timestep)
 {
-
-   double mass = player->mass;
+   const double mass = player->mass;
 
    quat.initialize(player->eulers);
 
