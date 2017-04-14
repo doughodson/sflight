@@ -25,11 +25,11 @@ void InterpAero::update(const double timestep)
    if (player == nullptr)
       return;
 
-   double qbar = 0.5 * player->vInf * player->vInf * player->rho * wingArea;
+   const double qbar = 0.5 * player->vInf * player->vInf * player->rho * wingArea;
 
    double cl = a1 + a2 * player->alpha;
    double cd = b1 + b2 * cl * cl;
-   double cy = -2.0 * player->beta;
+   const double cy = -2.0 * player->beta;
 
    if (usingMachEffects) {
       const double beta_mach = getBetaMach(player->mach);
@@ -43,71 +43,63 @@ void InterpAero::update(const double timestep)
 
 void InterpAero::initialize(xml::Node* node)
 {
-   double thrustRatio{};
-   double speedSound{};
-   double beta_mach{};
-   double pitch{};
-   double airspeed{};
-   double vs{};
-   double mach{};
-   double thrust{};
-
    xml::Node* tmp = node->getChild("Design");
 
-   designAlt = UnitConvert::toMeters(getDouble(tmp, "DesignAltitude", 0.0));
+   designAlt = UnitConvert::toMeters(xml::getDouble(tmp, "DesignAltitude", 0.0));
 
-   designWeight = UnitConvert::toNewtons(getDouble(tmp, "DesignWeight", 0.0));
+   designWeight = UnitConvert::toNewtons(xml::getDouble(tmp, "DesignWeight", 0.0));
 
-   wingSpan = UnitConvert::toMeters(getDouble(tmp, "WingSpan", 6.0));
-   wingArea = UnitConvert::toSqMeters(getDouble(tmp, "WingArea", 6.0));
+   wingSpan = UnitConvert::toMeters(xml::getDouble(tmp, "WingSpan", 6.0));
+   wingArea = UnitConvert::toSqMeters(xml::getDouble(tmp, "WingArea", 6.0));
 
    wingEffects = math::PI * wingSpan * wingSpan / wingArea;
    // wingEffects = 1.0;
 
-   thrustAngle = UnitConvert::toRads(getDouble(tmp, "ThrustAngle", 0.0));
+   thrustAngle = UnitConvert::toRads(xml::getDouble(tmp, "ThrustAngle", 0.0));
 
-   thrustRatio = getDouble(tmp, "ThrustToWeight", 0.0) * designWeight;
-   speedSound = Atmosphere::getSpeedSound(Atmosphere::getTemp(designAlt));
+   double thrustRatio = xml::getDouble(tmp, "ThrustToWeight", 0.0) * designWeight;
+   double speedSound = Atmosphere::getSpeedSound(Atmosphere::getTemp(designAlt));
 
    // cruise condition
-   pitch = UnitConvert::toRads(getDouble(tmp, "CruiseCondition/Pitch", 0));
-   airspeed = UnitConvert::toMPS(getDouble(tmp, "CruiseCondition/Airspeed", 0.0));
-   vs = UnitConvert::FPMtoMPS(getDouble(tmp, "CruiseCondition/VS", 0.0));
+   double pitch = UnitConvert::toRads(xml::getDouble(tmp, "CruiseCondition/Pitch", 0.0));
+   double airspeed = UnitConvert::toMPS(xml::getDouble(tmp, "CruiseCondition/Airspeed", 0.0));
+   double vs = UnitConvert::FPMtoMPS(xml::getDouble(tmp, "CruiseCondition/VS", 0.0));
    if (airspeed < 1E-6) {
-      airspeed = getDouble(tmp, "CruiseCondition/Mach", 0) * speedSound;
+      airspeed = xml::getDouble(tmp, "CruiseCondition/Mach", 0) * speedSound;
    }
 
-   thrust = UnitConvert::toNewtons(getDouble(tmp, "CruiseCondition/Thrust", 0));
+   double thrust = UnitConvert::toNewtons(xml::getDouble(tmp, "CruiseCondition/Thrust", 0.0));
    if (thrust < 1E-6)
-      thrust = getDouble(tmp, "CruiseCondition/Throttle", 0) * thrustRatio;
+      thrust = xml::getDouble(tmp, "CruiseCondition/Throttle", 0) * thrustRatio;
 
    createCoefs(pitch, thrust, vs, airspeed, cruiseAlpha, cruiseCL, cruiseCD);
 
+   double mach{};
    if (usingMachEffects) {
       mach = airspeed / speedSound;
-      beta_mach = getBetaMach(mach);
+      const double beta_mach = getBetaMach(mach);
       cruiseCL *= beta_mach;
       cruiseCD *= beta_mach;
    }
 
    // climb condition
-   pitch = UnitConvert::toRads(getDouble(tmp, "ClimbCondition/Pitch", 0));
-   airspeed = UnitConvert::toMPS(getDouble(tmp, "ClimbCondition/Airspeed", 0.0));
-   vs = UnitConvert::FPMtoMPS(getDouble(tmp, "ClimbCondition/VS", 0.0));
+   pitch = UnitConvert::toRads(xml::getDouble(tmp, "ClimbCondition/Pitch", 0));
+   airspeed = UnitConvert::toMPS(xml::getDouble(tmp, "ClimbCondition/Airspeed", 0.0));
+   vs = UnitConvert::FPMtoMPS(xml::getDouble(tmp, "ClimbCondition/VS", 0.0));
    if (airspeed < 1E-6) {
-      airspeed = getDouble(tmp, "ClimbCondition/Mach", 0) * speedSound;
+      airspeed = xml::getDouble(tmp, "ClimbCondition/Mach", 0) * speedSound;
    }
    mach = airspeed / speedSound;
 
-   thrust = UnitConvert::toNewtons(getDouble(tmp, "ClimbCondition/Thrust", 0));
+   thrust = UnitConvert::toNewtons(xml::getDouble(tmp, "ClimbCondition/Thrust", 0));
    if (thrust < 1E-6)
-      thrust = getDouble(tmp, "ClimbCondition/Throttle", 0) * thrustRatio;
+      thrust = xml::getDouble(tmp, "ClimbCondition/Throttle", 0) * thrustRatio;
 
    createCoefs(pitch, thrust, vs, airspeed, climbAlpha, climbCL, climbCD);
 
    if (usingMachEffects) {
       mach = airspeed / speedSound;
-      beta_mach = getBetaMach(mach);
+      const double beta_mach = getBetaMach(mach);
       climbCL *= beta_mach;
       climbCD *= beta_mach;
    }

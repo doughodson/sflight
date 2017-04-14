@@ -33,7 +33,7 @@ void Player::addModule(Module* module) { this->modules.push_back(module); }
 
 void Player::initialize(xml::Node* node)
 {
-   mass = (UnitConvert::toKilos(getDouble(node, "InitialConditions/Weight", 0.0)));
+   mass = (UnitConvert::toKilos(xml::getDouble(node, "InitialConditions/Weight", 0.0)));
 
    xml::Node* wind = node->getChild("Wind");
    if (wind != 0) {
@@ -57,7 +57,7 @@ void Player::initialize(xml::Node* node)
 
    const double speed =
        UnitConvert::toMPS(xml::getDouble(node, "InitialConditions/Airspeed", 0.0));
-   const double mach = getDouble(node, "InitialConditions/Mach", 0);
+   const double mach = xml::getDouble(node, "InitialConditions/Mach", 0);
    if (mach != 0 && speed == 0)
       uvw.set1(Atmosphere::getSpeedSound(Atmosphere::getTemp(alt)) * mach);
    else

@@ -60,23 +60,13 @@ void InverseDesign::update(const double timestep)
 
 void InverseDesign::initialize(xml::Node* node)
 {
-   //   double thrustRatio{};
-   double speedSound{};
-   double beta_mach{};
-   double pitch{};
-   double airspeed{};
-   double vs{};
-   double thrust{};
-
-   double rho{};
-
    xml::Node* tmp = node->getChild("Design");
 
    usingMachEffects = xml::getBool(tmp, "CompressibleFlow", false);
 
    // get Engine parameters
    thrustAngle = UnitConvert::toRads(xml::getDouble(tmp, "Engine/ThrustAngle", 0.0));
-   staticThrust = UnitConvert::toNewtons(xml::getDouble(tmp, "Engine/StaticThrust", 0));
+   staticThrust = UnitConvert::toNewtons(xml::getDouble(tmp, "Engine/StaticThrust", 0.0));
 
    std::string engineType = xml::get(tmp, "Engine/Type", "");
    if (engineType == "Turbojet") {
@@ -94,10 +84,10 @@ void InverseDesign::initialize(xml::Node* node)
    std::vector<xml::Node*> fcNodes = tmp->getChildren("FlightConditions/FlightCondition");
 
    // get default values
-   designWeight = getDouble(tmp, "FlightConditions/Weight", 0.0);
-   wingSpan = UnitConvert::toMeters(getDouble(tmp, "FlightCondiitons/WingSpan", 6.0));
-   wingArea = UnitConvert::toSqMeters(getDouble(tmp, "FlightConditions/WingArea", 6.0));
-   designAlt = getDouble(tmp, "FlightConditions/Altitude", 0.0);
+   designWeight = xml::getDouble(tmp, "FlightConditions/Weight", 0.0);
+   wingSpan = UnitConvert::toMeters(xml::getDouble(tmp, "FlightCondiitons/WingSpan", 6.0));
+   wingArea = UnitConvert::toSqMeters(xml::getDouble(tmp, "FlightConditions/WingArea", 6.0));
+   designAlt = xml::getDouble(tmp, "FlightConditions/Altitude", 0.0);
 
    const int size = fcNodes.size();
 
@@ -110,32 +100,32 @@ void InverseDesign::initialize(xml::Node* node)
    for (int i = 0; i < size; i++) {
       tmp = fcNodes[i];
 
-      pitch = UnitConvert::toRads(getDouble(tmp, "Pitch", 0));
-      airspeed = UnitConvert::toMPS(getDouble(tmp, "Airspeed", 0.0));
-      vs = UnitConvert::FPMtoMPS(getDouble(tmp, "VS", 0.0));
-      double alt = UnitConvert::toMeters(getDouble(tmp, "Altitude", designAlt));
-      speedSound = Atmosphere::getSpeedSound(Atmosphere::getTemp(alt));
-      rho = Atmosphere::getRho(alt);
-      double weight = UnitConvert::toNewtons(getDouble(tmp, "Weight", designWeight));
+      const double pitch = UnitConvert::toRads(xml::getDouble(tmp, "Pitch", 0.0));
+      double airspeed = UnitConvert::toMPS(xml::getDouble(tmp, "Airspeed", 0.0));
+      const double vs = UnitConvert::FPMtoMPS(xml::getDouble(tmp, "VS", 0.0));
+      const double alt = UnitConvert::toMeters(xml::getDouble(tmp, "Altitude", designAlt));
+      const double speedSound = Atmosphere::getSpeedSound(Atmosphere::getTemp(alt));
+      const double rho = Atmosphere::getRho(alt);
+      const double weight = UnitConvert::toNewtons(xml::getDouble(tmp, "Weight", designWeight));
 
       if (airspeed < 1E-6) {
-         mach[i] = getDouble(tmp, "Mach", 0);
+         mach[i] = xml::getDouble(tmp, "Mach", 0);
          airspeed = mach[i] * speedSound;
       } else {
          mach[i] = airspeed / speedSound;
       }
 
-      thrust = getThrust(rho, mach[i], getDouble(tmp, "Throttle", 0));
+      const double thrust = getThrust(rho, mach[i], xml::getDouble(tmp, "Throttle", 0.0));
 
       getAeroCoefs(pitch, airspeed, vs, rho, weight, thrust, alpha[i], cl[i], cd[i]);
 
-      tsfc[i] = UnitConvert::toKilos(getDouble(tmp, "FuelFlow", 0) / 3600.) / thrust;
+      tsfc[i] = UnitConvert::toKilos(xml::getDouble(tmp, "FuelFlow", 0.0) / 3600.0) / thrust;
 
       // apply compressibility if used.  this finds the incompressible cl and cd
       // values by deviding by the
       // prandtl-glauert denominator.
       if (usingMachEffects) {
-         beta_mach = mach[i] > 0.95 ? 1 : sqrt(1.0 - mach[i] * mach[i]);
+         const double beta_mach = mach[i] > 0.95 ? 1 : sqrt(1.0 - mach[i] * mach[i]);
          cl[i] *= beta_mach;
          cd[i] *= beta_mach;
       }
@@ -175,7 +165,7 @@ void InverseDesign::initialize(xml::Node* node)
    std::cout << "cdo: " << cdo << " dCDda: " << b << std::endl;
 
    // set initial conditions
-   player->throttle = getDouble(node, "InitialConditions/Throttle", 0);
+   player->throttle = xml::getDouble(node, "InitialConditions/Throttle", 0);
    player->rpm = player->throttle;
 
    delete cl;

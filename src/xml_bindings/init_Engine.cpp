@@ -30,7 +30,7 @@ void init_Engine(xml::Node* node, mdls::Engine* engine)
    double airRatio =
        engine->designTemp * engine->designPress / engine->seaLevelPress / engine->seaLevelTemp;
 
-   engine->thrustAngle = mdls::UnitConvert::toRads(getDouble(tmp, "ThrustAngle", 0.0));
+   engine->thrustAngle = mdls::UnitConvert::toRads(xml::getDouble(tmp, "ThrustAngle", 0.0));
 
    double designThrust =
        xml::getDouble(tmp, "ThrustToWeight", 0.0) * xml::getDouble(tmp, "DesignWeight", 0.0);
@@ -60,7 +60,7 @@ void init_Engine(xml::Node* node, mdls::Engine* engine)
 
    double ff_2 = mdls::UnitConvert::toKilos(
        xml::getDouble(tmp, "ClimbCondition/FuelFlow", 0.0) / 3600.0);
-   double mach_2 = getDouble(tmp, "ClimbCondition/Mach", 0);
+   double mach_2 = xml::getDouble(tmp, "ClimbCondition/Mach", 0);
    if (mach_2 == 0)
       mach_2 = mdls::UnitConvert::toMPS(xml::getDouble(tmp, "ClimbCondition/Airspeed", 0.0)) /
                speedSound;

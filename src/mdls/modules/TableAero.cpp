@@ -118,7 +118,7 @@ void TableAero::initialize(xml::Node* node)
 
          xml::Node* tablenode = tables[i];
 
-         throttleVals[i] = getDouble(tables[i], "Throttle", 0);
+         throttleVals[i] = xml::getDouble(tables[i], "Throttle", 0);
 
          std::string valstr = get(tablenode, "AltVals", "");
          std::vector<std::string> splits = xml::splitString(valstr, ',');
@@ -129,7 +129,7 @@ void TableAero::initialize(xml::Node* node)
             altvals[j] = UnitConvert::toMeters(std::atof(splits[j].c_str()));
          }
 
-         valstr = get(tablenode, "MachVals", "");
+         valstr = xml::get(tablenode, "MachVals", "");
          splits = xml::splitString(valstr, ',');
          int numMachVals = splits.size();
 
@@ -157,7 +157,7 @@ void TableAero::initialize(xml::Node* node)
       for (int i = 0; i < numpages; i++) {
          xml::Node* tablenode = tables[i];
 
-         machVals[i] = getDouble(tables[i], "Mach", 0);
+         machVals[i] = xml::getDouble(tables[i], "Mach", 0);
 
          std::string valstr = xml::get(tablenode, "AltVals", "");
          std::vector<std::string> splits = xml::splitString(valstr, ',');

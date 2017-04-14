@@ -28,17 +28,17 @@ void WaypointFollower::initialize(xml::Node* node)
    isOn = getBool(tmp, "WaypointFollow", true);
 
    cmdPathType =
-       (get(tmp, "PathType", "DIRECT") == "BEARING") ? PathType::BEARING : PathType::DIRECT;
+       (xml::get(tmp, "PathType", "DIRECT") == "BEARING") ? PathType::BEARING : PathType::DIRECT;
 
    std::vector<xml::Node*> wps = xml::getList(tmp->getChild("WaypointList"), "Waypoint");
 
    for (unsigned int i = 0; i < wps.size(); i++) {
       xml::Node* wp = wps[i];
-      addWaypoint(UnitConvert::toRads(getDouble(wp, "Lat", 0)),
-                  UnitConvert::toRads(getDouble(wp, "Lon", 0)),
-                  UnitConvert::toMeters(getDouble(wp, "Alt", 0)),
-                  UnitConvert::toMPS(getDouble(wp, "Speed", 0)),
-                  UnitConvert::toRads(getDouble(wp, "Heading", 0)));
+      addWaypoint(UnitConvert::toRads(xml::getDouble(wp, "Lat", 0)),
+                  UnitConvert::toRads(xml::getDouble(wp, "Lon", 0)),
+                  UnitConvert::toMeters(xml::getDouble(wp, "Alt", 0)),
+                  UnitConvert::toMPS(xml::getDouble(wp, "Speed", 0)),
+                  UnitConvert::toRads(xml::getDouble(wp, "Heading", 0)));
    }
 
    if (isOn) {
