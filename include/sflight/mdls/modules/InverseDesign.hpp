@@ -32,7 +32,7 @@ class InverseDesign : public Module
 
    double getFuelFlow(double rho, double mach, double thrust);
 
- protected:
+ private:
    double designWeight{};
    double designAlt{};
    double wingSpan{};

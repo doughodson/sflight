@@ -7,7 +7,8 @@ OBJS =  \
 	builder.o \
 	init_AutoPilot.o \
 	init_Engine.o \
-	init_EOMFiveDOF.o
+	init_EOMFiveDOF.o \
+	init_FileOutput.o
 
 .PHONY: all clean
 

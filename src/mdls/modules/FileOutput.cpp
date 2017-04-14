@@ -13,27 +13,9 @@
 namespace sflight {
 namespace mdls {
 
-FileOutput::FileOutput(Player* player, const double frameRate)
-    : Module(player, frameRate)
-{
-}
+FileOutput::FileOutput(Player* player, const double frameRate) : Module(player, frameRate) {}
 
 FileOutput::~FileOutput() { fout.close(); }
-
-void FileOutput::initialize(xml::Node* node)
-{
-   std::string filename = get(node, "FileOutput/Path", "");
-   rate = getDouble(node, "FileOutput/Rate", 1);
-   std::cout << "Saving output to: " << filename << std::endl;
-   fout.open(filename.c_str());
-   frameCounter = 0;
-   if (fout.is_open()) {
-      fout << "Time "
-              "(sec)\tLatitude(deg)\tLongitude(deg)\tAltitude(ft)\tSpeed(ktas)"
-              "\tBank(deg)\tPitch(deg)\tHeading(deg)\tThrottle"
-           << std::endl;
-   }
-}
 
 void FileOutput::update(const double timestep)
 {
@@ -48,6 +30,10 @@ void FileOutput::update()
    frameCounter++;
 
    frameCounter = 0;
+
+   if (!fout.is_open())
+      return;
+
    fout << player->simTime << "\t";
 
    fout << std::setprecision(7);

@@ -19,6 +19,7 @@
 #include "sflight/xml_bindings/init_AutoPilot.hpp"
 #include "sflight/xml_bindings/init_Engine.hpp"
 #include "sflight/xml_bindings/init_EOMFiveDOF.hpp"
+#include "sflight/xml_bindings/init_FileOutput.hpp"
 
 #include <iostream>
 #include <string>
@@ -65,7 +66,7 @@ void builder(xml::Node* parent, mdls::Player* player)
          stickControl->initialize(node);
       } else if (className == "FileOutput") {
          auto fileOutput = new mdls::FileOutput(player, rate);
-         fileOutput->initialize(node);
+         init_FileOutput(node, fileOutput);
       } else if (className == "InverseDesign") {
          auto inverseDesign = new mdls::InverseDesign(player, rate);
          inverseDesign->initialize(node);

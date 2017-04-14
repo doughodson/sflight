@@ -29,7 +29,7 @@ class InterpAero : public Module
 
    double getBetaMach(double mach);
 
- protected:
+ private:
    double designWeight{};
    double designAlt{};
    double wingSpan{};

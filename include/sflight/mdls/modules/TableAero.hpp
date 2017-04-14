@@ -27,7 +27,7 @@ class TableAero : public Module
    // void createCoefs( double pitch, double u, double vz, double thrust,
    // double& alpha, double& cl, double& cd );
 
- protected:
+ private:
    double wingSpan{};
    double wingArea{};
    double thrustAngle{};

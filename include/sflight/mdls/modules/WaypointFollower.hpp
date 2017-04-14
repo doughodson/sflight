@@ -50,7 +50,7 @@ class WaypointFollower : public Module
                     const double meterAlt, const double mpsSpeed,
                     const double radBearing);
 
- protected:
+ private:
    std::vector<Waypoint> waypoints;
    Waypoint* currentWp{};
    int wpNum{};

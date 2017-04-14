@@ -4,6 +4,9 @@
 
 #include "sflight/mdls/modules/Module.hpp"
 
+#include "sflight/xml_bindings/init_FileOutput.hpp"
+#include "sflight/xml/Node.hpp"
+
 #include <fstream>
 
 namespace sflight {
@@ -21,12 +24,14 @@ public:
    ~FileOutput();
 
    // module interface
-   virtual void initialize(xml::Node*) override;
    virtual void update(const double timestep) override;
 
    void update();
    void close();
 
+   friend void xml_bindings::init_FileOutput(xml::Node*, FileOutput*);
+
+private:
    std::ofstream fout;
    int rate {};
    double lastTime {};
