@@ -16,6 +16,8 @@
 #include "sflight/mdls/modules/TableAero.hpp"
 #include "sflight/mdls/modules/WaypointFollower.hpp"
 
+#include "sflight/xml_bindings/init_AutoPilot.hpp"
+
 #include <iostream>
 #include <string>
 #include <vector>
@@ -27,32 +29,42 @@ void load_modules(xml::Node* parent, Player* player)
 {
    xml::Node* node = parent->getChild("Modules");
    std::vector<xml::Node*> nodeList = xml::getList(node, "Module");
-   const double defaultRate = xml::getDouble(node, "Rate", 0);
+   const double defaultRate = xml::getDouble(node, "Rate", 0.0);
 
    for (int i = 0; i < nodeList.size(); i++) {
       const std::string className = xml::get(nodeList[i], "Class", "");
-      const double rate = xml::getDouble(nodeList[i], "Rate", 0);
+      const double rate = xml::getDouble(nodeList[i], "Rate", 0.0);
 
       if (className == "EOMFiveDOF") {
-         new EOMFiveDOF(player, rate);
+         auto eomFiveDOF = new EOMFiveDOF(player, rate);
+         eomFiveDOF->initialize(node);
       } else if (className == "InterpAero") {
-         new InterpAero(player, rate);
+         auto interpAero = new InterpAero(player, rate);
+         interpAero->initialize(node);
       } else if (className == "TableAero") {
-         new TableAero(player, rate);
+         auto tableAero = new TableAero(player, rate);
+         tableAero->initialize(node);
       } else if (className == "Autopilot") {
-         new AutoPilot(player, rate);
+         auto autoPilot = new AutoPilot(player, rate);
+         autoPilot->initialize(node);
       } else if (className == "Engine") {
-         new Engine(player, rate);
+         auto engine = new Engine(player, rate);
+         engine->initialize(node);
       } else if (className == "Atmosphere") {
-         new Atmosphere(player, rate);
+         auto atmosphere = new Atmosphere(player, rate);
+         atmosphere->initialize(node);
       } else if (className == "WaypointFollower") {
-         new WaypointFollower(player, rate);
+         auto waypointFollower = new WaypointFollower(player, rate);
+         waypointFollower->initialize(node);
       } else if (className == "StickControl") {
-         new StickControl(player, rate);
+         auto stickControl = new StickControl(player, rate);
+         stickControl->initialize(node);
       } else if (className == "FileOutput") {
-         new FileOutput(player, rate);
+         auto fileOutput = new FileOutput(player, rate);
+         fileOutput->initialize(node);
       } else if (className == "InverseDesign") {
-         new InverseDesign(player, rate);
+         auto inverseDesign = new InverseDesign(player, rate);
+         inverseDesign->initialize(node);
       }
    }
 }

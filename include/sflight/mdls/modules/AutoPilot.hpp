@@ -32,7 +32,7 @@ class AutoPilot : public Module
    void updateVS(double timestep, double cmdVs);
    void updateSpeed(double timestep);
 
- protected:
+ public:
    enum class TurnType { HDG = 0, TRAJECTORY = 1 };
 
    double kphi{0.05};

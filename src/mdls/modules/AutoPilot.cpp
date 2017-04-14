@@ -16,9 +16,7 @@
 namespace sflight {
 namespace mdls {
 
-AutoPilot::AutoPilot(Player* player, const double frameRate) : Module(player, frameRate)
-{
-}
+AutoPilot::AutoPilot(Player* player, const double frameRate) : Module(player, frameRate) {}
 
 AutoPilot::~AutoPilot() {}
 
@@ -143,9 +141,9 @@ void AutoPilot::updateVS(double timestep, double cmdVs)
    // approximation that
    // deltaVS = vInf * dTheta.  for straight and level: deltaVS = uq, so q = deltaVS / u
    // cmdVs is a positive up quantity, nedVel[3] is a negative up quantity
-   double qCmd = (cmdVs + player->nedVel.get3() +
-                  kpitch * (player->nedVel.get3() - lastVz) / timestep) /
-                 u;
+   double qCmd =
+       (cmdVs + player->nedVel.get3() + kpitch * (player->nedVel.get3() - lastVz) / timestep) /
+       u;
    lastVz = player->nedVel.get3();
 
    // amount of q to compensate for turning ( extra back pressure to compensate for r pulling

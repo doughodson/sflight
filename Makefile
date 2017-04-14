@@ -6,12 +6,13 @@ include makedefs
 # xml             :
 # sf              : -
 #
-PROJECTS = src/xml
-PROJECTS += src/mdls
+PROJECTS = src/mdls
+PROJECTS += src/xml
+PROJECTS += src/xml_bindings
 
 # Examples        : Requires
 # ------------------------------------------------------------------------
-# mainTest        : libsf
+# mainTest        : libsflight_mdls, libsflight_xml, libsflight_xml_bindings
 #
 PROJECTS += examples/mainTest
 

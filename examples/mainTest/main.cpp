@@ -32,7 +32,7 @@ int main(int argc, char** argv)
 
    // construct obj tree and have each obj read their own configuration
    mdls::load_modules(node, player);
-   player->initialize(node);
+//   player->initialize(node);
 
    auto exec = new SimExec(player, frame_rate, num_frames);
 
