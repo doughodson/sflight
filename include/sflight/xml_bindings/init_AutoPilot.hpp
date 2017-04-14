@@ -6,9 +6,12 @@ namespace sflight {
 namespace xml {
 class Node;
 }
+namespace mdls {
+class AutoPilot;
+}
 namespace xml_bindings {
 
-void init_AutoPilot(sflight::xml::Node*);
+void init_AutoPilot(sflight::xml::Node*, sflight::mdls::AutoPilot*);
 }
 }
 

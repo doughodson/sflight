@@ -7,9 +7,6 @@
 #include "sflight/xml/Node.hpp"
 
 namespace sflight {
-namespace xml {
-class Node;
-}
 namespace mdls {
 class Player;
 
@@ -24,7 +21,6 @@ class AutoPilot : public Module
    ~AutoPilot();
 
    // module interface
-   virtual void initialize(xml::Node*) override;
    virtual void update(const double timestep) override;
 
    void updateHdg(double timestep, double cmdHdg);

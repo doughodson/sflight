@@ -3,9 +3,6 @@
 
 #include "sflight/mdls/modules/Atmosphere.hpp"
 
-#include "sflight/xml/Node.hpp"
-#include "sflight/xml/node_utils.hpp"
-
 #include "sflight/mdls/Player.hpp"
 #include "sflight/mdls/UnitConvert.hpp"
 
@@ -19,49 +16,6 @@ namespace mdls {
 AutoPilot::AutoPilot(Player* player, const double frameRate) : Module(player, frameRate) {}
 
 AutoPilot::~AutoPilot() {}
-
-void AutoPilot::initialize(xml::Node* node)
-{
-   xml::Node* apProps = node->getChild("AutoPilot");
-
-   std::vector<xml::Node*> comps = xml::getList(apProps, "Component");
-
-   for (int i = 0; i < comps.size(); i++) {
-      xml::Node* tmp = comps[i];
-
-      if (xml::get(tmp, "Type", "") == "HeadingHold") {
-         player->autoPilotCmds.setMaxBank(
-             UnitConvert::toRads(xml::getDouble(tmp, "MaxBank", 30)));
-         kphi = xml::getDouble(tmp, "BankWeight", kphi);
-         maxBankRate = UnitConvert::toRads(xml::getDouble(tmp, "MaxBankRate", maxBankRate));
-         turnType = xml::get(tmp, "TurnType", "").find("TRAJECTORY") == 0
-                        ? TurnType::TRAJECTORY
-                        : TurnType::HDG;
-      } else if (xml::get(tmp, "Type", "") == "AltitudeHold") {
-         player->autoPilotCmds.setMaxVS(
-             UnitConvert::FPMtoMPS(xml::getDouble(tmp, "MaxVS", 0)));
-         kalt = xml::getDouble(tmp, "AltWeight", 0.2);
-      } else if (xml::get(tmp, "Type", "") == "VSHold") {
-         maxG = (xml::getDouble(tmp, "MaxG", maxG) - 1) * nav::getG(0, 0, 0);
-         minG = (xml::getDouble(tmp, "MinG", minG) - 1) * nav::getG(0, 0, 0);
-         maxG_rate = maxG;
-         minG_rate = minG;
-         player->autoPilotCmds.setMaxPitchUp(
-             UnitConvert::toRads(xml::getDouble(tmp, "MaxPitchUp", math::PI / 2.0)));
-         player->autoPilotCmds.setMaxPitchDown(
-             UnitConvert::toRads(xml::getDouble(tmp, "MaxPitchDown", -math::PI / 2.0)));
-         kpitch = xml::getDouble(tmp, "PitchWeight", 0);
-      } else if (xml::get(tmp, "Type", "") == "AutoThrottle") {
-         maxThrottle = xml::getDouble(tmp, "MaxThrottle", maxThrottle);
-         minThrottle = xml::getDouble(tmp, "MinThrottle", minThrottle);
-         spoolTime = xml::getDouble(tmp, "SpoolTime", spoolTime);
-      }
-   }
-
-   hdgErrTol = UnitConvert::toRads(2);
-   player->autoPilotCmds.setAutoPilotOn(true);
-   player->autoPilotCmds.setAutoThrottleOn(true);
-}
 
 void AutoPilot::update(const double timestep)
 {
@@ -201,8 +155,8 @@ void AutoPilot::updateSpeed(double timestep)
                Atmosphere::getSpeedSound(Atmosphere::getTemp(player->alt));
    }
 
-   double dV = (cmdVel - player->uvw.get1()) - player->uvwdot.get1() * spoolTime;
-   double dT = timestep / spoolTime * dV;
+   const double dV = (cmdVel - player->uvw.get1()) - player->uvwdot.get1() * spoolTime;
+   const double dT = timestep / spoolTime * dV;
 
    // double dV = ( cmdVel - player->uvw.get1() );
    // double dT = dV * (1- exp(-timestep/spoolTime));

@@ -48,7 +48,7 @@ void builder(xml::Node* parent, mdls::Player* player)
          tableAero->initialize(node);
       } else if (className == "Autopilot") {
          auto autoPilot = new mdls::AutoPilot(player, rate);
-         autoPilot->initialize(node);
+         init_AutoPilot(node, autoPilot);
       } else if (className == "Engine") {
          auto engine = new mdls::Engine(player, rate);
          engine->initialize(node);
