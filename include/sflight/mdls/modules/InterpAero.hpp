@@ -24,10 +24,10 @@ class InterpAero : public Module
    virtual void initialize(xml::Node*) override;
    virtual void update(const double timestep) override;
 
-   void createCoefs(double pitch, double u, double vz, double thrust,
+   void createCoefs(const double pitch, const double u, const double vz, const double thrust,
                     double& alpha, double& cl, double& cd);
 
-   double getBetaMach(double mach);
+   double getBetaMach(double mach) const;
 
  private:
    double designWeight{};

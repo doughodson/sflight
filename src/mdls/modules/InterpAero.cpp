@@ -111,33 +111,31 @@ void InterpAero::initialize(xml::Node* node)
    b1 = climbCD - b2 * climbCL * climbCL;
 }
 
-void InterpAero::createCoefs(double theta, double thrust, double vz, double u, double& alpha,
-                             double& cl, double& cd)
+void InterpAero::createCoefs(const double theta, const double thrust, const double vz,
+                             const double u, double& alpha, double& cl, double& cd)
 {
-   vz = -vz;
-
    // in this version, thrust is always horizontal
    double thrustAngle = 0;
 
-   double w = (vz + u * std::sin(theta)) * std::cos(theta);
+   const double w = (-vz + u * std::sin(theta)) * std::cos(theta);
 
-   double vInf = std::sqrt(w * w + u * u);
+   const double vInf = std::sqrt(w * w + u * u);
 
    alpha = std::atan2(w, u);
 
-   double q = 0.5 * Atmosphere::getRho(designAlt) * vInf * vInf;
+   const double q = 0.5 * Atmosphere::getRho(designAlt) * vInf * vInf;
 
-   double zforce = (-thrust * std::sin(thrustAngle) + designWeight * std::cos(theta)) / q;
-   double xforce = (thrust * std::cos(thrustAngle) - designWeight * std::sin(theta)) / q;
+   const double zforce = (-thrust * std::sin(thrustAngle) + designWeight * std::cos(theta)) / q;
+   const double xforce = (thrust * std::cos(thrustAngle) - designWeight * std::sin(theta)) / q;
 
-   Vector3 aero = Vector3();
+   Vector3 aero;
    WindAxis::bodyToWind(aero, alpha, 0., xforce, 0., zforce);
 
    cl = -aero.get1() / wingArea;
    cd = -aero.get2() / wingArea;
 }
 
-double InterpAero::getBetaMach(double mach)
+double InterpAero::getBetaMach(double mach) const
 {
    // if (mach > 1.02 ) return 1 + sqrt( mach * mach - 1.0);
    if (mach > 1.05)
