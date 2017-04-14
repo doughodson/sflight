@@ -1,5 +1,5 @@
 
-#include "sflight/xml_bindings/load_modules.hpp"
+#include "sflight/xml_bindings/builder.hpp"
 
 #include "sflight/xml/Node.hpp"
 #include "sflight/xml/node_utils.hpp"
@@ -25,7 +25,7 @@
 namespace sflight {
 namespace xml_bindings {
 
-void load_modules(xml::Node* parent, mdls::Player* player)
+void builder(xml::Node* parent, mdls::Player* player)
 {
    player->initialize(parent);
 

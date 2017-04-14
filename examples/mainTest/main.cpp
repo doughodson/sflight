@@ -5,7 +5,7 @@
 #include "SimExec.hpp"
 
 #include "sflight/mdls/Player.hpp"
-#include "sflight/xml_bindings/load_modules.hpp"
+#include "sflight/xml_bindings/builder.hpp"
 
 #include <cstdlib>
 #include <iostream>
@@ -30,9 +30,7 @@ int main(int argc, char** argv)
    // parse input file and return top node
    xml::Node* node = xml::parse(filename, true);
 
-   // construct obj tree and have each obj read their own configuration
-   xml_bindings::load_modules(node, player);
-//   player->initialize(node);
+   xml_bindings::builder(node, player);
 
    auto exec = new SimExec(player, frame_rate, num_frames);
 

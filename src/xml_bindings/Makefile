@@ -4,8 +4,8 @@ include ../../makedefs
 LIB = ../../lib/libsflight_xml_bindings.a
 
 OBJS =  \
-	init_AutoPilot.o \
-	load_modules.o
+	builder.o \
+	init_AutoPilot.o
 
 .PHONY: all clean
 
