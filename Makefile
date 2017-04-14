@@ -7,7 +7,7 @@ include makedefs
 # sf              : -
 #
 PROJECTS = src/xml
-PROJECTS += src/fdm
+PROJECTS += src/mdls
 
 # Examples        : Requires
 # ------------------------------------------------------------------------

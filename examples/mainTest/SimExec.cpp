@@ -4,18 +4,18 @@
 #include "sflight/xml/Node.hpp"
 #include "sflight/xml/node_utils.hpp"
 
-#include "sflight/fdm/Player.hpp"
+#include "sflight/mdls/Player.hpp"
 
 #include <iostream>
 #include <thread>
 #include <chrono>
 
-SimExec::SimExec(sflight::fdm::Player* globals, const double frameRate)
+SimExec::SimExec(sflight::mdls::Player* globals, const double frameRate)
     : globals(globals), frameRate(frameRate)
 {
 }
 
-SimExec::SimExec(sflight::fdm::Player* globals, const double frameRate,
+SimExec::SimExec(sflight::mdls::Player* globals, const double frameRate,
                    const long maxFrames)
     : globals(globals), frameRate(frameRate), maxFrames(maxFrames)
 {

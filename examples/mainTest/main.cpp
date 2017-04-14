@@ -4,8 +4,8 @@
 
 #include "SimExec.hpp"
 
-#include "sflight/fdm/Player.hpp"
-#include "sflight/fdm/load_modules.hpp"
+#include "sflight/mdls/Player.hpp"
+#include "sflight/mdls/load_modules.hpp"
 
 #include <cstdlib>
 #include <iostream>
@@ -25,13 +25,13 @@ int main(int argc, char** argv)
    const double frame_rate = std::atof(argv[3]); // hz
    const long num_frames = static_cast<long>(total_time * frame_rate);
 
-   auto globals = new fdm::Player();
+   auto globals = new mdls::Player();
 
    // parse input file and return top node
    xml::Node* node = xml::parse(filename, true);
 
    // construct obj tree and have each obj read their own configuration
-   fdm::load_modules(node, globals);
+   mdls::load_modules(node, globals);
    globals->initialize(node);
 
    auto exec = new SimExec(globals, frame_rate, num_frames);
