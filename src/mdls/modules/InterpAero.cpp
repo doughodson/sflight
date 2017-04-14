@@ -18,10 +18,7 @@
 namespace sflight {
 namespace mdls {
 
-InterpAero::InterpAero(Player* player, const double frameRate)
-    : Module(player, frameRate)
-{
-}
+InterpAero::InterpAero(Player* player, const double frameRate) : Module(player, frameRate) {}
 
 void InterpAero::update(const double timestep)
 {
@@ -40,8 +37,8 @@ void InterpAero::update(const double timestep)
       cd /= beta_mach;
    }
 
-   WindAxis::windToBody(player->aeroForce, player->alpha, player->beta, cl * qbar,
-                        cd * qbar, cy * qbar);
+   WindAxis::windToBody(player->aeroForce, player->alpha, player->beta, cl * qbar, cd * qbar,
+                        cy * qbar);
 }
 
 void InterpAero::initialize(xml::Node* node)

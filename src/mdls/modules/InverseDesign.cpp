@@ -18,7 +18,8 @@
 namespace sflight {
 namespace mdls {
 
-InverseDesign::InverseDesign(Player* player, const double frameRate) : Module(player, frameRate)
+InverseDesign::InverseDesign(Player* player, const double frameRate)
+    : Module(player, frameRate)
 {
 }
 
@@ -43,8 +44,8 @@ void InverseDesign::update(const double timestep)
       cd *= beta_mach;
    }
 
-   WindAxis::windToBody(player->aeroForce, player->alpha, player->beta, cl * qbar,
-                        cd * qbar, 0);
+   WindAxis::windToBody(player->aeroForce, player->alpha, player->beta, cl * qbar, cd * qbar,
+                        0);
 
    double thrust = getThrust(player->rho, player->mach, player->throttle);
 

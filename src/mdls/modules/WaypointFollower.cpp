@@ -79,18 +79,18 @@ void WaypointFollower::update(const double timestep)
       return;
    }
 
-   double az =
+   const double az =
        nav::headingBetween(player->lat, player->lon, currentWp->radLat, currentWp->radLon);
-   double dist =
+   const double dist =
        nav::distance(player->lat, player->lon, currentWp->radLat, currentWp->radLon);
 
    // double hdgDiff = fabs( UnitConvert :: wrapHeading(player->eulers.getPsi()
    // - az, true) );
-   double hdg = std::atan2(player->nedVel.get2(), player->nedVel.get1());
-   double hdgDiff = std::fabs(UnitConvert::wrapHeading(hdg - az, true));
+   const double hdg = std::atan2(player->nedVel.get2(), player->nedVel.get1());
+   const double hdgDiff = std::fabs(UnitConvert::wrapHeading(hdg - az, true));
 
-   bool isClose = dist < distTol;
-   bool isBehind = std::fabs(hdgDiff) > math::PI / 2.0;
+   const bool isClose = dist < distTol;
+   const bool isBehind = std::fabs(hdgDiff) > math::PI / 2.0;
 
    if (isClose && isBehind) {
       loadWaypoint();
