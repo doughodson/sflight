@@ -4,6 +4,7 @@
 
 #include "sflight/mdls/modules/Module.hpp"
 
+#include "sflight/xml_bindings/init_AutoPilot.hpp"
 #include "sflight/xml/Node.hpp"
 
 namespace sflight {
@@ -28,7 +29,9 @@ class AutoPilot : public Module
    void updateVS(double timestep, double cmdVs);
    void updateSpeed(double timestep);
 
- public:
+   friend void xml_bindings::init_AutoPilot(xml::Node*, AutoPilot*);
+
+ private:
    enum class TurnType { HDG = 0, TRAJECTORY = 1 };
 
    double kphi{0.05};

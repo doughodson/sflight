@@ -4,6 +4,9 @@
 
 #include "sflight/mdls/modules/Module.hpp"
 
+#include "sflight/xml_bindings/init_Engine.hpp"
+#include "sflight/xml/Node.hpp"
+
 namespace sflight {
 namespace mdls {
 class Player;
@@ -21,7 +24,9 @@ class Engine : public Module
    // module interface
    virtual void update(const double timestep) override;
 
- public:
+   friend void xml_bindings::init_Engine(xml::Node*, Engine*);
+
+ private:
    double thrustRatio{};
    double designWeight{};
    double thrustAngle{};

@@ -7,6 +7,9 @@
 #include "sflight/mdls/Quaternion.hpp"
 #include "sflight/mdls/Vector3.hpp"
 
+#include "sflight/xml_bindings/init_EOMFiveDOF.hpp"
+#include "sflight/xml/Node.hpp"
+
 namespace sflight {
 namespace mdls {
 class Player;
@@ -27,7 +30,9 @@ public:
 
    void computeEOM(double timestep);
 
-public:
+   friend void xml_bindings::init_EOMFiveDOF(xml::Node*, EOMFiveDOF*);
+
+private:
    Quaternion quat;
    Quaternion qdot;
    Vector3 forces;
