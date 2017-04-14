@@ -8,7 +8,8 @@ OBJS =  \
 	init_AutoPilot.o \
 	init_Engine.o \
 	init_EOMFiveDOF.o \
-	init_FileOutput.o
+	init_FileOutput.o \
+	init_InterpAero.o
 
 .PHONY: all clean
 

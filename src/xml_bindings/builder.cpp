@@ -20,6 +20,7 @@
 #include "sflight/xml_bindings/init_Engine.hpp"
 #include "sflight/xml_bindings/init_EOMFiveDOF.hpp"
 #include "sflight/xml_bindings/init_FileOutput.hpp"
+#include "sflight/xml_bindings/init_InterpAero.hpp"
 
 #include <iostream>
 #include <string>
@@ -45,7 +46,7 @@ void builder(xml::Node* parent, mdls::Player* player)
          init_EOMFiveDOF(node, eomFiveDOF);
       } else if (className == "InterpAero") {
          auto interpAero = new mdls::InterpAero(player, rate);
-         interpAero->initialize(node);
+         init_InterpAero(node, interpAero);
       } else if (className == "TableAero") {
          auto tableAero = new mdls::TableAero(player, rate);
          tableAero->initialize(node);

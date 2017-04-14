@@ -4,6 +4,9 @@
 
 #include "sflight/mdls/modules/Module.hpp"
 
+#include "sflight/xml_bindings/init_InterpAero.hpp"
+#include "sflight/xml/Node.hpp"
+
 namespace sflight {
 namespace xml {
 class Node;
@@ -21,13 +24,14 @@ class InterpAero : public Module
    InterpAero(Player*, const double frameRate);
 
    // module interface
-   virtual void initialize(xml::Node*) override;
    virtual void update(const double timestep) override;
 
    void createCoefs(const double pitch, const double u, const double vz, const double thrust,
                     double& alpha, double& cl, double& cd);
 
    double getBetaMach(double mach) const;
+
+   friend void xml_bindings::init_InterpAero(xml::Node*, InterpAero*);
 
  private:
    double designWeight{};
