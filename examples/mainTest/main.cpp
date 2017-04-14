@@ -2,8 +2,9 @@
 #include "sflight/xml/Node.hpp"
 #include "sflight/xml/parser_utils.hpp"
 
+#include "SimExec.hpp"
+
 #include "sflight/fdm/Player.hpp"
-#include "sflight/fdm/SimExec.hpp"
 #include "sflight/fdm/load_modules.hpp"
 
 #include <cstdlib>
@@ -33,10 +34,9 @@ int main(int argc, char** argv)
    fdm::load_modules(node, globals);
    globals->initialize(node);
 
-   auto exec = new fdm::SimExec(globals, frame_rate, num_frames);
+   auto exec = new SimExec(globals, frame_rate, num_frames);
 
-   std::cout << "Running SimpleFlight for " << total_time << " seconds.\n"
-             << std::endl;
+   std::cout << "Running SimpleFlight for " << total_time << " seconds.\n" << std::endl;
 
    exec->startConstructive();
 

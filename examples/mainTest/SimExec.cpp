@@ -1,5 +1,5 @@
 
-#include "sflight/fdm/SimExec.hpp"
+#include "SimExec.hpp"
 
 #include "sflight/xml/Node.hpp"
 #include "sflight/xml/node_utils.hpp"
@@ -10,15 +10,12 @@
 #include <thread>
 #include <chrono>
 
-namespace sflight {
-namespace fdm {
-
-SimExec::SimExec(Player* globals, const double frameRate)
+SimExec::SimExec(sflight::fdm::Player* globals, const double frameRate)
     : globals(globals), frameRate(frameRate)
 {
 }
 
-SimExec::SimExec(Player* globals, const double frameRate,
+SimExec::SimExec(sflight::fdm::Player* globals, const double frameRate,
                    const long maxFrames)
     : globals(globals), frameRate(frameRate), maxFrames(maxFrames)
 {
@@ -66,9 +63,7 @@ void SimExec::startConstructive()
 
 void SimExec::stop() {}
 
-void SimExec::initialize(xml::Node* node)
+void SimExec::initialize(sflight::xml::Node* node)
 {
-   frameRate = xml::getDouble(node, "Modules/Rate", 20);
-}
-}
+   frameRate = sflight::xml::getDouble(node, "Modules/Rate", 20);
 }

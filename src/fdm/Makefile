@@ -24,7 +24,6 @@ OBJS =  \
 	PID.o \
 	PIDControl.o \
 	Quaternion.o \
-	SimExec.o \
 	Table2D.o \
 	Table3D.o \
 	Vector3.o \
