@@ -13,8 +13,8 @@
 namespace sflight {
 namespace mdls {
 
-FileOutput::FileOutput(Player* globals, const double frameRate)
-    : Module(globals, frameRate)
+FileOutput::FileOutput(Player* player, const double frameRate)
+    : Module(player, frameRate)
 {
 }
 
@@ -37,9 +37,9 @@ void FileOutput::initialize(xml::Node* node)
 
 void FileOutput::update(const double timestep)
 {
-   if (globals->simTime - lastTime > 1. / rate) {
+   if (player->simTime - lastTime > 1. / rate) {
       update();
-      lastTime = globals->simTime;
+      lastTime = player->simTime;
    }
 }
 
@@ -48,21 +48,21 @@ void FileOutput::update()
    frameCounter++;
 
    frameCounter = 0;
-   fout << globals->simTime << "\t";
+   fout << player->simTime << "\t";
 
    fout << std::setprecision(7);
 
-   fout << UnitConvert::toDegs(globals->lat) << "\t";
-   fout << UnitConvert::toDegs(globals->lon) << "\t";
-   fout << UnitConvert::toFeet(globals->alt) << "\t";
+   fout << UnitConvert::toDegs(player->lat) << "\t";
+   fout << UnitConvert::toDegs(player->lon) << "\t";
+   fout << UnitConvert::toFeet(player->alt) << "\t";
 
-   fout << UnitConvert::toKnots(globals->vInf) << "\t";
+   fout << UnitConvert::toKnots(player->vInf) << "\t";
 
-   fout << UnitConvert::toDegs(globals->eulers.getPhi()) << "\t";
-   fout << UnitConvert::toDegs(globals->eulers.getTheta()) << "\t";
-   fout << UnitConvert::toDegs(globals->eulers.getPsi()) << "\t";
+   fout << UnitConvert::toDegs(player->eulers.getPhi()) << "\t";
+   fout << UnitConvert::toDegs(player->eulers.getTheta()) << "\t";
+   fout << UnitConvert::toDegs(player->eulers.getPsi()) << "\t";
 
-   fout << globals->throttle << "\t";
+   fout << player->throttle << "\t";
    fout << std::endl;
 }
 

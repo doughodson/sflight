@@ -6,11 +6,11 @@
 namespace sflight {
 namespace mdls {
 
-Module::Module(Player* globals, const double frameRate)
-    : globals(globals)
+Module::Module(Player* p, const double frameRate)
+    : player(p)
 {
-   if (globals != nullptr)
-      globals->addModule(this);
+   if (player != nullptr)
+      player->addModule(this);
 
    if (frameRate <= 0) {
       frameTime = 0;

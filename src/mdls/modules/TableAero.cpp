@@ -19,34 +19,34 @@
 namespace sflight {
 namespace mdls {
 
-TableAero::TableAero(Player* globals, const double frameRate)
-    : Module(globals, frameRate)
+TableAero::TableAero(Player* player, const double frameRate)
+    : Module(player, frameRate)
 {
 }
 
 void TableAero::update(const double timestep)
 {
-   if (globals == nullptr)
+   if (player == nullptr)
       return;
 
-   double cl = liftTable->interp(globals->mach, globals->alt, globals->alpha);
-   double cd = dragTable->interp(globals->mach, globals->alt, cl);
+   double cl = liftTable->interp(player->mach, player->alt, player->alpha);
+   double cd = dragTable->interp(player->mach, player->alt, cl);
 
-   double qbarS = 0.5 * globals->vInf * globals->vInf * globals->rho * wingArea;
+   double qbarS = 0.5 * player->vInf * player->vInf * player->rho * wingArea;
 
-   WindAxis::windToBody(globals->aeroForce, globals->alpha, globals->beta,
+   WindAxis::windToBody(player->aeroForce, player->alpha, player->beta,
                         cl * qbarS, cd * qbarS, 0);
 
-   globals->fuelflow =
-       thrustTable->interp(globals->mach, globals->alt, globals->throttle);
-   globals->fuel = globals->fuel - globals->fuelflow * timestep;
-   globals->mass = globals->mass - globals->fuelflow * timestep;
+   player->fuelflow =
+       thrustTable->interp(player->mach, player->alt, player->throttle);
+   player->fuel = player->fuel - player->fuelflow * timestep;
+   player->mass = player->mass - player->fuelflow * timestep;
 
    double thrust =
-       thrustTable->interp(globals->mach, globals->alt, globals->throttle);
-   globals->thrust.set1(thrust * cos(thrustAngle));
-   globals->thrust.set2(0);
-   globals->thrust.set3(-thrust * sin(thrustAngle));
+       thrustTable->interp(player->mach, player->alt, player->throttle);
+   player->thrust.set1(thrust * std::cos(thrustAngle));
+   player->thrust.set2(0);
+   player->thrust.set3(-thrust * std::sin(thrustAngle));
 }
 
 void TableAero::initialize(xml::Node* node)

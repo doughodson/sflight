@@ -26,9 +26,9 @@ bool wgs84LatLon(double* const lat, double* const lon, const double alt, const d
 
    const double rNormal = radiusEq / divisor;
 
-   // double requiv = sqrt(rMeridian * rNormal);
+   // double requiv = std::sqrt(rMeridian * rNormal);
 
-   // double g = gravEq * ( 1 + gravConst * sin(lat) * sin(lat)) / divisor;
+   // double g = gravEq * ( 1 + gravConst * std::sin(lat) * std::sin(lat)) / divisor;
 
    const double dLat = vn / (rMeridian + alt);
 

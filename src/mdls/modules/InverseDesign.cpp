@@ -18,43 +18,43 @@
 namespace sflight {
 namespace mdls {
 
-InverseDesign::InverseDesign(Player* globals, const double frameRate) : Module(globals, frameRate)
+InverseDesign::InverseDesign(Player* player, const double frameRate) : Module(player, frameRate)
 {
 }
 
 void InverseDesign::update(const double timestep)
 {
-   if (globals == nullptr)
+   if (player == nullptr)
       return;
 
-   double qbar = 0.5 * globals->vInf * globals->vInf * globals->rho * wingArea;
+   double qbar = 0.5 * player->vInf * player->vInf * player->rho * wingArea;
 
-   // double cl = clo + a * globals->alpha;
+   // double cl = clo + a * player->alpha;
    // double cd = cdo + b * cl * cl;
-   double sinAlpha = std::sin(globals->alpha);
+   double sinAlpha = std::sin(player->alpha);
 
-   double cl = clo + a * sinAlpha * cos(globals->alpha);
+   double cl = clo + a * sinAlpha * std::cos(player->alpha);
    double cd = cdo + b * sinAlpha * sinAlpha;
 
    if (usingMachEffects) {
       double beta_mach =
-          globals->mach > 0.95 ? 1.0 : 1.0 / std::sqrt(1.0 - globals->mach * globals->mach);
+          player->mach > 0.95 ? 1.0 : 1.0 / std::sqrt(1.0 - player->mach * player->mach);
       cl *= beta_mach;
       cd *= beta_mach;
    }
 
-   WindAxis::windToBody(globals->aeroForce, globals->alpha, globals->beta, cl * qbar,
+   WindAxis::windToBody(player->aeroForce, player->alpha, player->beta, cl * qbar,
                         cd * qbar, 0);
 
-   double thrust = getThrust(globals->rho, globals->mach, globals->throttle);
+   double thrust = getThrust(player->rho, player->mach, player->throttle);
 
-   globals->thrust.set1(thrust * cos(thrustAngle));
-   globals->thrust.set2(0);
-   globals->thrust.set3(-thrust * sin(thrustAngle));
+   player->thrust.set1(thrust * std::cos(thrustAngle));
+   player->thrust.set2(0);
+   player->thrust.set3(-thrust * std::sin(thrustAngle));
 
-   globals->fuelflow = getFuelFlow(globals->rho, globals->mach, thrust);
-   globals->mass -= globals->fuelflow * timestep;
-   globals->fuel -= globals->fuelflow * timestep;
+   player->fuelflow = getFuelFlow(player->rho, player->mach, thrust);
+   player->mass -= player->fuelflow * timestep;
+   player->fuel -= player->fuelflow * timestep;
 }
 
 void InverseDesign::initialize(xml::Node* node)
@@ -152,16 +152,16 @@ void InverseDesign::initialize(xml::Node* node)
    } else if (size > 1) {
       // setup cl and cd parameters using the two points
 
-      double alphaLift_0 = sin(alpha[0]) * cos(alpha[0]);
-      double alphaLift_1 = sin(alpha[1]) * cos(alpha[1]);
+      double alphaLift_0 = std::sin(alpha[0]) * std::cos(alpha[0]);
+      double alphaLift_1 = std::sin(alpha[1]) * std::cos(alpha[1]);
 
       a = (cl[1] - cl[0]) / (alphaLift_1 - alphaLift_0);
       clo = cl[1] - a * alphaLift_1;
 
       // b = (cd[1] - cd[0]) / ( cl[1] * cl[1] - cl[0] * cl[0] );
       // cdo = cd[0] - b * cl[0] * cl[0];
-      double alphaDrag_0 = sin(alpha[0]) * sin(alpha[0]);
-      double alphaDrag_1 = sin(alpha[1]) * sin(alpha[1]);
+      double alphaDrag_0 = std::sin(alpha[0]) * std::sin(alpha[0]);
+      double alphaDrag_1 = std::sin(alpha[1]) * std::sin(alpha[1]);
 
       b = (cd[1] - cd[0]) / (alphaDrag_1 - alphaDrag_0);
       cdo = cd[0] - b * alphaDrag_0;
@@ -174,8 +174,8 @@ void InverseDesign::initialize(xml::Node* node)
    std::cout << "cdo: " << cdo << " dCDda: " << b << std::endl;
 
    // set initial conditions
-   globals->throttle = getDouble(node, "InitialConditions/Throttle", 0);
-   globals->rpm = globals->throttle;
+   player->throttle = getDouble(node, "InitialConditions/Throttle", 0);
+   player->rpm = player->throttle;
 
    delete cl;
    delete cd;
@@ -187,19 +187,18 @@ void InverseDesign::initialize(xml::Node* node)
 void InverseDesign::getAeroCoefs(double theta, double u, double vz, double rho, double weight,
                                  double thrust, double& alpha, double& cl, double& cd)
 {
-
    vz = -vz;
 
-   double w = (vz + u * sin(theta)) / cos(theta);
+   double w = (vz + u * std::sin(theta)) / std::cos(theta);
 
-   double vInf = sqrt(w * w + u * u);
+   double vInf = std::sqrt(w * w + u * u);
 
-   alpha = atan2(w, u);
+   alpha = std::atan2(w, u);
 
    double q = 0.5 * rho * vInf * vInf;
 
-   double zforce = (-thrust * sin(thrustAngle) + weight * cos(theta)) / q;
-   double xforce = (thrust * cos(thrustAngle) - weight * sin(theta)) / q;
+   double zforce = (-thrust * std::sin(thrustAngle) + weight * std::cos(theta)) / q;
+   double xforce = (thrust * std::cos(thrustAngle) - weight * std::sin(theta)) / q;
 
    Vector3 aero = Vector3();
    WindAxis::bodyToWind(aero, alpha, 0., xforce, 0., zforce);
@@ -210,7 +209,7 @@ void InverseDesign::getAeroCoefs(double theta, double u, double vz, double rho, 
 
 double InverseDesign::getThrust(double rho, double mach, double throttle)
 {
-   return pow(mach, dTdM) * pow(rho / 1.225, dTdRho) * staticThrust * throttle;
+   return std::pow(mach, dTdM) * std::pow(rho / 1.225, dTdRho) * staticThrust * throttle;
 }
 
 double InverseDesign::getFuelFlow(double rho, double mach, double thrust)

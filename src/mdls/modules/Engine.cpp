@@ -15,8 +15,8 @@
 namespace sflight {
 namespace mdls {
 
-Engine::Engine(Player* globals, const double frameRate)
-    : Module(globals, frameRate)
+Engine::Engine(Player* player, const double frameRate)
+    : Module(player, frameRate)
 {
    seaLevelTemp = Atmosphere::getTemp(0);
    seaLevelPress = Atmosphere::getPressure(0);
@@ -89,41 +89,41 @@ void Engine::initialize(xml::Node* node)
              << std::endl;
 
    // set initial conditions
-   globals->throttle = xml::getDouble(node, "InitialConditions/Throttle", 0);
-   globals->rpm = globals->throttle;
+   player->throttle = xml::getDouble(node, "InitialConditions/Throttle", 0);
+   player->rpm = player->throttle;
 }
 
 void Engine::update(const double timestep)
 {
-   if (globals->fuel <= 0) {
-      globals->thrust.set1(0);
-      globals->thrust.set2(0);
-      globals->thrust.set3(0);
+   if (player->fuel <= 0) {
+      player->thrust.set1(0);
+      player->thrust.set2(0);
+      player->thrust.set3(0);
       return;
    }
 
-   double airRatio = (Atmosphere::getTemp(globals->alt)) *
-                     Atmosphere::getPressure(globals->alt) / seaLevelTemp /
+   double airRatio = (Atmosphere::getTemp(player->alt)) *
+                     Atmosphere::getPressure(player->alt) / seaLevelTemp /
                      seaLevelPress;
 
-   // globals->rpm = globals->rpm + (globals->throttle - globals->rpm) /
+   // player->rpm = player->rpm + (player->throttle - player->rpm) /
    // timeConst;
-   globals->rpm = globals->throttle;
+   player->rpm = player->throttle;
 
-   // double thrust = globals->rpm * ( staticThrust + thrustSlope *
-   // globals->mach ) * airRatio;
-   double thrust = globals->rpm * staticThrust * airRatio * globals->mach;
+   // double thrust = player->rpm * ( staticThrust + thrustSlope *
+   // player->mach ) * airRatio;
+   double thrust = player->rpm * staticThrust * airRatio * player->mach;
 
-   globals->thrust.set1(thrust * cos(thrustAngle));
-   globals->thrust.set2(0);
-   globals->thrust.set3(-thrust * sin(thrustAngle));
+   player->thrust.set1(thrust * std::cos(thrustAngle));
+   player->thrust.set2(0);
+   player->thrust.set3(-thrust * std::sin(thrustAngle));
 
-   globals->fuelflow =
-       globals->rpm * (staticFF + FFslope * globals->mach) * airRatio;
-   globals->fuelflow = globals->rpm * staticFF * airRatio;
+   player->fuelflow =
+       player->rpm * (staticFF + FFslope * player->mach) * airRatio;
+   player->fuelflow = player->rpm * staticFF * airRatio;
 
-   globals->fuel -= globals->fuelflow * timestep;
-   globals->mass -= globals->fuelflow * timestep;
+   player->fuel -= player->fuelflow * timestep;
+   player->mass -= player->fuelflow * timestep;
 }
 }
 }

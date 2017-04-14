@@ -23,7 +23,7 @@
 namespace sflight {
 namespace mdls {
 
-void load_modules(xml::Node* parent, Player* globals)
+void load_modules(xml::Node* parent, Player* player)
 {
    xml::Node* node = parent->getChild("Modules");
    std::vector<xml::Node*> nodeList = xml::getList(node, "Module");
@@ -34,25 +34,25 @@ void load_modules(xml::Node* parent, Player* globals)
       const double rate = xml::getDouble(nodeList[i], "Rate", 0);
 
       if (className == "EOMFiveDOF") {
-         new EOMFiveDOF(globals, rate);
+         new EOMFiveDOF(player, rate);
       } else if (className == "InterpAero") {
-         new InterpAero(globals, rate);
+         new InterpAero(player, rate);
       } else if (className == "TableAero") {
-         new TableAero(globals, rate);
+         new TableAero(player, rate);
       } else if (className == "Autopilot") {
-         new AutoPilot(globals, rate);
+         new AutoPilot(player, rate);
       } else if (className == "Engine") {
-         new Engine(globals, rate);
+         new Engine(player, rate);
       } else if (className == "Atmosphere") {
-         new Atmosphere(globals, rate);
+         new Atmosphere(player, rate);
       } else if (className == "WaypointFollower") {
-         new WaypointFollower(globals, rate);
+         new WaypointFollower(player, rate);
       } else if (className == "StickControl") {
-         new StickControl(globals, rate);
+         new StickControl(player, rate);
       } else if (className == "FileOutput") {
-         new FileOutput(globals, rate);
+         new FileOutput(player, rate);
       } else if (className == "InverseDesign") {
-         new InverseDesign(globals, rate);
+         new InverseDesign(player, rate);
       }
    }
 }

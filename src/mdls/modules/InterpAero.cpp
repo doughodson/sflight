@@ -18,29 +18,29 @@
 namespace sflight {
 namespace mdls {
 
-InterpAero::InterpAero(Player* globals, const double frameRate)
-    : Module(globals, frameRate)
+InterpAero::InterpAero(Player* player, const double frameRate)
+    : Module(player, frameRate)
 {
 }
 
 void InterpAero::update(const double timestep)
 {
-   if (globals == nullptr)
+   if (player == nullptr)
       return;
 
-   double qbar = 0.5 * globals->vInf * globals->vInf * globals->rho * wingArea;
+   double qbar = 0.5 * player->vInf * player->vInf * player->rho * wingArea;
 
-   double cl = a1 + a2 * globals->alpha;
+   double cl = a1 + a2 * player->alpha;
    double cd = b1 + b2 * cl * cl;
-   double cy = -2.0 * globals->beta;
+   double cy = -2.0 * player->beta;
 
    if (usingMachEffects) {
-      const double beta_mach = getBetaMach(globals->mach);
+      const double beta_mach = getBetaMach(player->mach);
       cl /= beta_mach;
       cd /= beta_mach;
    }
 
-   WindAxis::windToBody(globals->aeroForce, globals->alpha, globals->beta, cl * qbar,
+   WindAxis::windToBody(player->aeroForce, player->alpha, player->beta, cl * qbar,
                         cd * qbar, cy * qbar);
 }
 
@@ -130,16 +130,16 @@ void InterpAero::createCoefs(double theta, double thrust, double vz, double u, d
    // in this version, thrust is always horizontal
    double thrustAngle = 0;
 
-   double w = (vz + u * sin(theta)) * cos(theta);
+   double w = (vz + u * std::sin(theta)) * std::cos(theta);
 
-   double vInf = sqrt(w * w + u * u);
+   double vInf = std::sqrt(w * w + u * u);
 
    alpha = std::atan2(w, u);
 
    double q = 0.5 * Atmosphere::getRho(designAlt) * vInf * vInf;
 
-   double zforce = (-thrust * sin(thrustAngle) + designWeight * cos(theta)) / q;
-   double xforce = (thrust * cos(thrustAngle) - designWeight * sin(theta)) / q;
+   double zforce = (-thrust * std::sin(thrustAngle) + designWeight * std::cos(theta)) / q;
+   double xforce = (thrust * std::cos(thrustAngle) - designWeight * std::sin(theta)) / q;
 
    Vector3 aero = Vector3();
    WindAxis::bodyToWind(aero, alpha, 0., xforce, 0., zforce);

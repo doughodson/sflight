@@ -23,7 +23,7 @@ class SimExec
    void initialize(sflight::xml::Node* node);
 
  private:
-   sflight::mdls::Player* globals{};
+   sflight::mdls::Player* player{};
    double frameRate{};
    long maxFrames{1000000000};
 };

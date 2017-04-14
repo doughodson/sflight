@@ -16,8 +16,8 @@
 namespace sflight {
 namespace mdls {
 
-WaypointFollower::WaypointFollower(Player* globals, const double frameRate)
-    : Module(globals, frameRate)
+WaypointFollower::WaypointFollower(Player* player, const double frameRate)
+    : Module(player, frameRate)
 {
 }
 
@@ -49,10 +49,10 @@ void WaypointFollower::initialize(xml::Node* node)
       distTol = UnitConvert::NMtoEarthRadians(0.1);
       azTol = UnitConvert::toRads(1);
 
-      globals->autoPilotCmds.setAltHoldOn(true);
-      globals->autoPilotCmds.setHdgHoldOn(true);
-      globals->autoPilotCmds.setAutoPilotOn(true);
-      globals->autoPilotCmds.setAutoThrottleOn(true);
+      player->autoPilotCmds.setAltHoldOn(true);
+      player->autoPilotCmds.setHdgHoldOn(true);
+      player->autoPilotCmds.setAutoPilotOn(true);
+      player->autoPilotCmds.setAutoThrottleOn(true);
 
       loadWaypoint();
    }
@@ -61,10 +61,10 @@ void WaypointFollower::initialize(xml::Node* node)
 void WaypointFollower::setState(bool isOn)
 {
    if (isOn) {
-      globals->autoPilotCmds.setAltHoldOn(isOn);
-      globals->autoPilotCmds.setHdgHoldOn(isOn);
-      globals->autoPilotCmds.setAutoPilotOn(isOn);
-      globals->autoPilotCmds.setAutoThrottleOn(isOn);
+      player->autoPilotCmds.setAltHoldOn(isOn);
+      player->autoPilotCmds.setHdgHoldOn(isOn);
+      player->autoPilotCmds.setAutoPilotOn(isOn);
+      player->autoPilotCmds.setAutoThrottleOn(isOn);
    }
    this->isOn = isOn;
 }
@@ -80,13 +80,13 @@ void WaypointFollower::update(const double timestep)
    }
 
    double az =
-       nav::headingBetween(globals->lat, globals->lon, currentWp->radLat, currentWp->radLon);
+       nav::headingBetween(player->lat, player->lon, currentWp->radLat, currentWp->radLon);
    double dist =
-       nav::distance(globals->lat, globals->lon, currentWp->radLat, currentWp->radLon);
+       nav::distance(player->lat, player->lon, currentWp->radLat, currentWp->radLon);
 
-   // double hdgDiff = fabs( UnitConvert :: wrapHeading(globals->eulers.getPsi()
+   // double hdgDiff = fabs( UnitConvert :: wrapHeading(player->eulers.getPsi()
    // - az, true) );
-   double hdg = std::atan2(globals->nedVel.get2(), globals->nedVel.get1());
+   double hdg = std::atan2(player->nedVel.get2(), player->nedVel.get1());
    double hdgDiff = std::fabs(UnitConvert::wrapHeading(hdg - az, true));
 
    bool isClose = dist < distTol;
@@ -98,12 +98,12 @@ void WaypointFollower::update(const double timestep)
    }
 
    if (cmdPathType == PathType::DIRECT) {
-      globals->autoPilotCmds.setCmdHeading(az);
+      player->autoPilotCmds.setCmdHeading(az);
    } else {
       if (hdgDiff >= math::PI) {
-         globals->autoPilotCmds.setCmdHeading(az);
+         player->autoPilotCmds.setCmdHeading(az);
       } else {
-         globals->autoPilotCmds.setCmdHeading(
+         player->autoPilotCmds.setCmdHeading(
              UnitConvert::wrapHeading(2 * az - currentWp->radHeading - 0.01, true));
       }
    }
@@ -118,8 +118,8 @@ void WaypointFollower::loadWaypoint()
    if (waypoints.size() > wpNum) {
       setState(true);
       currentWp = &waypoints[wpNum];
-      globals->autoPilotCmds.setCmdAltitude(currentWp->meterAlt);
-      globals->autoPilotCmds.setCmdSpeed(currentWp->mpsSpeed);
+      player->autoPilotCmds.setCmdAltitude(currentWp->meterAlt);
+      player->autoPilotCmds.setCmdSpeed(currentWp->mpsSpeed);
 
       // set the distance tolerance to x seconds of flight time
       distTol = (currentWp->mpsSpeed * 5) * nav::metersToRadian;

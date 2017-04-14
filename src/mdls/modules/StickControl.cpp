@@ -12,8 +12,8 @@
 namespace sflight {
 namespace mdls {
 
-StickControl::StickControl(Player* globals, const double frameRate)
-    : Module(globals, frameRate)
+StickControl::StickControl(Player* player, const double frameRate)
+    : Module(player, frameRate)
 {
 }
 
@@ -45,34 +45,34 @@ void StickControl::initialize(xml::Node* node)
 
 void StickControl::update(const double timestep)
 {
-   if (globals->autoPilotCmds.isAutoPilotOn())
+   if (player->autoPilotCmds.isAutoPilotOn())
       return;
 
-   double qbar = 0.5 * globals->vInf * globals->vInf * globals->rho;
+   double qbar = 0.5 * player->vInf * player->vInf * player->rho;
 
    double qRatio = 0.0;
    if (designQbar > 0) {
-      qRatio = qbar / designQbar * cos(globals->alpha);
+      qRatio = qbar / designQbar * cos(player->alpha);
    }
 
    // std::cout << "qRatio: " << qRatio << std::endl;
 
-   double desPitch = elevGain * -globals->deflections.get1() * qbar /
-                     designQbar * cos(globals->eulers.getPhi());
+   double desPitch = elevGain * -player->deflections.get1() * qbar /
+                     designQbar * std::cos(player->eulers.getPhi());
 
    double pitchMom = (1.0 - qRatio) * pitchGain *
-                     cos(globals->eulers.getTheta()) *
-                     cos(globals->eulers.getPhi());
+                     std::cos(player->eulers.getTheta()) *
+                     std::cos(player->eulers.getPhi());
    double yawMom = (1.0 - qRatio) * pitchGain *
-                   cos(globals->eulers.getTheta()) *
-                   sin(globals->eulers.getPhi());
+                   std::cos(player->eulers.getTheta()) *
+                   std::sin(player->eulers.getPhi());
 
-   globals->pqrdot.set1(globals->deflections.get2() * ailGain * qRatio -
-                        globals->pqr.get1());
-   globals->pqrdot.set2(globals->deflections.get1() * elevGain * qRatio +
-                        pitchMom - globals->pqr.get2());
-   globals->pqrdot.set3(globals->deflections.get3() * rudGain * qRatio -
-                        yawMom - globals->pqr.get3());
+   player->pqrdot.set1(player->deflections.get2() * ailGain * qRatio -
+                        player->pqr.get1());
+   player->pqrdot.set2(player->deflections.get1() * elevGain * qRatio +
+                        pitchMom - player->pqr.get2());
+   player->pqrdot.set3(player->deflections.get3() * rudGain * qRatio -
+                        yawMom - player->pqr.get3());
 }
 }
 }

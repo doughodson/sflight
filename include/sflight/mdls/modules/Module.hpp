@@ -26,7 +26,7 @@ class Module
    virtual void update(const double timestep){};
    virtual void setProperty(std::string tag, const double val){};
 
-   Player* globals{};
+   Player* player{};
 
    double frameTime{};
    double lastTime{};

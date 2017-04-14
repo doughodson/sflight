@@ -10,29 +10,29 @@
 #include <thread>
 #include <chrono>
 
-SimExec::SimExec(sflight::mdls::Player* globals, const double frameRate)
-    : globals(globals), frameRate(frameRate)
+SimExec::SimExec(sflight::mdls::Player* p, const double frameRate)
+    : player(p), frameRate(frameRate)
 {
 }
 
-SimExec::SimExec(sflight::mdls::Player* globals, const double frameRate,
+SimExec::SimExec(sflight::mdls::Player* p, const double frameRate,
                    const long maxFrames)
-    : globals(globals), frameRate(frameRate), maxFrames(maxFrames)
+    : player(p), frameRate(frameRate), maxFrames(maxFrames)
 {
 }
 
 void SimExec::start()
 {
-   if (globals == nullptr || frameRate == 0.0)
+   if (player == nullptr || frameRate == 0.0)
       return;
 
    double time{};
    const double frameTime = 1.0 / frameRate;
    const long sleepTime = static_cast<long>(frameTime * 1E3);
 
-   while (globals->frameNum < maxFrames) {
-      if (!globals->paused) {
-         globals->update(frameTime);
+   while (player->frameNum < maxFrames) {
+      if (!player->paused) {
+         player->update(frameTime);
       }
       std::this_thread::sleep_for(std::chrono::milliseconds(sleepTime));
    }
@@ -40,23 +40,23 @@ void SimExec::start()
 
 void SimExec::startConstructive()
 {
-   if (globals == nullptr || frameRate == 0)
+   if (player == nullptr || frameRate == 0)
       return;
 
    double time{};
    const double frameTime = 1.0 / frameRate;
-   globals->paused = false;
+   player->paused = false;
    double frameGroup{};
 
-   while (globals->frameNum < maxFrames) {
+   while (player->frameNum < maxFrames) {
       if (frameGroup >= 100) {
-         std::cout << "updating frame " << globals->frameNum << " of "
+         std::cout << "updating frame " << player->frameNum << " of "
                    << maxFrames << std::endl;
          frameGroup = 0;
       }
       frameGroup++;
-      if (!globals->paused) {
-         globals->update(frameTime);
+      if (!player->paused) {
+         player->update(frameTime);
       }
    }
 }

@@ -128,12 +128,12 @@ void Quaternion::initialize(Euler &euler)
 
 void Quaternion::initialize(double psi, double theta, double phi)
 {
-   const double c_psi = cos(psi / 2.0);
-   const double s_psi = sin(psi / 2.0);
-   const double c_theta = cos(theta / 2.0);
-   const double s_theta = sin(theta / 2.0);
-   const double c_phi = cos(phi / 2.0);
-   const double s_phi = sin(phi / 2.0);
+   const double c_psi = std::cos(psi / 2.0);
+   const double s_psi = std::sin(psi / 2.0);
+   const double c_theta = std::cos(theta / 2.0);
+   const double s_theta = std::sin(theta / 2.0);
+   const double c_phi = std::cos(phi / 2.0);
+   const double s_phi = std::sin(phi / 2.0);
 
    eo = c_phi * c_theta * c_psi + s_phi * s_theta * s_psi;
    ex = s_phi * c_theta * c_psi - c_phi * s_theta * s_psi;
