@@ -1,5 +1,5 @@
 
-#include "sflight/mdls/load_modules.hpp"
+#include "sflight/xml_bindings/load_modules.hpp"
 
 #include "sflight/xml/Node.hpp"
 #include "sflight/xml/node_utils.hpp"
@@ -23,10 +23,12 @@
 #include <vector>
 
 namespace sflight {
-namespace mdls {
+namespace xml_bindings {
 
-void load_modules(xml::Node* parent, Player* player)
+void load_modules(xml::Node* parent, mdls::Player* player)
 {
+   player->initialize(parent);
+
    xml::Node* node = parent->getChild("Modules");
    std::vector<xml::Node*> nodeList = xml::getList(node, "Module");
    const double defaultRate = xml::getDouble(node, "Rate", 0.0);
@@ -36,34 +38,34 @@ void load_modules(xml::Node* parent, Player* player)
       const double rate = xml::getDouble(nodeList[i], "Rate", 0.0);
 
       if (className == "EOMFiveDOF") {
-         auto eomFiveDOF = new EOMFiveDOF(player, rate);
+         auto eomFiveDOF = new mdls::EOMFiveDOF(player, rate);
          eomFiveDOF->initialize(node);
       } else if (className == "InterpAero") {
-         auto interpAero = new InterpAero(player, rate);
+         auto interpAero = new mdls::InterpAero(player, rate);
          interpAero->initialize(node);
       } else if (className == "TableAero") {
-         auto tableAero = new TableAero(player, rate);
+         auto tableAero = new mdls::TableAero(player, rate);
          tableAero->initialize(node);
       } else if (className == "Autopilot") {
-         auto autoPilot = new AutoPilot(player, rate);
+         auto autoPilot = new mdls::AutoPilot(player, rate);
          autoPilot->initialize(node);
       } else if (className == "Engine") {
-         auto engine = new Engine(player, rate);
+         auto engine = new mdls::Engine(player, rate);
          engine->initialize(node);
       } else if (className == "Atmosphere") {
-         auto atmosphere = new Atmosphere(player, rate);
+         auto atmosphere = new mdls::Atmosphere(player, rate);
          atmosphere->initialize(node);
       } else if (className == "WaypointFollower") {
-         auto waypointFollower = new WaypointFollower(player, rate);
+         auto waypointFollower = new mdls::WaypointFollower(player, rate);
          waypointFollower->initialize(node);
       } else if (className == "StickControl") {
-         auto stickControl = new StickControl(player, rate);
+         auto stickControl = new mdls::StickControl(player, rate);
          stickControl->initialize(node);
       } else if (className == "FileOutput") {
-         auto fileOutput = new FileOutput(player, rate);
+         auto fileOutput = new mdls::FileOutput(player, rate);
          fileOutput->initialize(node);
       } else if (className == "InverseDesign") {
-         auto inverseDesign = new InverseDesign(player, rate);
+         auto inverseDesign = new mdls::InverseDesign(player, rate);
          inverseDesign->initialize(node);
       }
    }

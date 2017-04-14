@@ -31,7 +31,6 @@ class Player
    ~Player();
 
    void addModule(Module* module);
-   void initialize();
    void initialize(xml::Node* node);
    void update(double timestep);
    void setProperty(std::string tag, double val);
@@ -133,7 +132,6 @@ class Player
    // Autopilot commands
    AutoPilotCmds autoPilotCmds;
 
-   xml::Node* rootNode{};
    std::vector<Module*> modules{};
 };
 }

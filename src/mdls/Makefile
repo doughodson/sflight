@@ -17,7 +17,6 @@ OBJS =  \
 	modules/WaypointFollower.o \
 	AutoPilotCmds.o \
 	Euler.o \
-	load_modules.o \
 	nav_utils.o \
 	Player.o \
 	PIControl.o \

@@ -31,27 +31,14 @@ Player::~Player()
 
 void Player::addModule(Module* module) { this->modules.push_back(module); }
 
-void Player::initialize()
-{
-   if (rootNode == nullptr)
-      return;
-
-   for (unsigned int i = 0; i < modules.size(); i++) {
-      modules[i]->initialize(rootNode);
-      modules[i]->lastTime = 0;
-   }
-}
-
 void Player::initialize(xml::Node* node)
 {
-   rootNode = node;
-
    mass = (UnitConvert::toKilos(getDouble(node, "InitialConditions/Weight", 0.0)));
 
    xml::Node* wind = node->getChild("Wind");
    if (wind != 0) {
-      double wspeed = UnitConvert::toMPS(xml::getDouble(wind, "Speed", 0));
-      double dir = UnitConvert::toRads(xml::getDouble(wind, "Direction", 0) + 180);
+      double wspeed = UnitConvert::toMPS(xml::getDouble(wind, "Speed", 0.0));
+      double dir = UnitConvert::toRads(xml::getDouble(wind, "Direction", 0.0) + 180);
       windVel.set1(wspeed * std::cos(dir));
       windVel.set2(wspeed * std::sin(dir));
       windVel.set3(0);
@@ -88,8 +75,6 @@ void Player::initialize(xml::Node* node)
    autoPilotCmds.setHdgHoldOn(true);
 
    fuel = UnitConvert::toKilos(xml::getDouble(node, "InitialConditions/Fuel", 0.0));
-
-   initialize();
 }
 
 void Player::update(double timestep)
