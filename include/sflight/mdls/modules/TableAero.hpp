@@ -5,7 +5,6 @@
 #include "sflight/mdls/modules/Module.hpp"
 
 #include "sflight/xml_bindings/init_TableAero.hpp"
-#include "sflight/xml/Node.hpp"
 
 namespace sflight {
 namespace xml {

@@ -24,6 +24,7 @@
 #include "sflight/xml_bindings/init_InverseDesign.hpp"
 #include "sflight/xml_bindings/init_StickControl.hpp"
 #include "sflight/xml_bindings/init_TableAero.hpp"
+#include "sflight/xml_bindings/init_WaypointFollower.hpp"
 
 #include <iostream>
 #include <string>
@@ -63,7 +64,7 @@ void builder(xml::Node* parent, mdls::Player* player)
          auto atmosphere = new mdls::Atmosphere(player, rate);
       } else if (className == "WaypointFollower") {
          auto waypointFollower = new mdls::WaypointFollower(player, rate);
-         waypointFollower->initialize(node);
+         init_WaypointFollower(node, waypointFollower);
       } else if (className == "StickControl") {
          auto stickControl = new mdls::StickControl(player, rate);
          init_StickControl(node, stickControl);

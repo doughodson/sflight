@@ -8,9 +8,11 @@
 #include "sflight/mdls/Vector3.hpp"
 
 #include "sflight/xml_bindings/init_EOMFiveDOF.hpp"
-#include "sflight/xml/Node.hpp"
 
 namespace sflight {
+namespace xml {
+class Node;
+}
 namespace mdls {
 class Player;
 
@@ -21,7 +23,7 @@ class Player;
 //------------------------------------------------------------------------------
 class EOMFiveDOF : public Module
 {
-public:
+ public:
    EOMFiveDOF(Player*, const double frameRate);
    virtual ~EOMFiveDOF() = default;
 
@@ -32,7 +34,7 @@ public:
 
    friend void xml_bindings::init_EOMFiveDOF(xml::Node*, EOMFiveDOF*);
 
-private:
+ private:
    Quaternion quat;
    Quaternion qdot;
    Vector3 forces;
@@ -40,10 +42,9 @@ private:
    Vector3 pqr;
    Vector3 xyz;
    Vector3 gravAccel;
-   double gravConst {};
-   bool autoRudder {};
+   double gravConst{};
+   bool autoRudder{};
 };
-
 }
 }
 

@@ -5,12 +5,13 @@
 #include "sflight/mdls/modules/Module.hpp"
 
 #include "sflight/xml_bindings/init_FileOutput.hpp"
-#include "sflight/xml/Node.hpp"
 
 #include <fstream>
 
 namespace sflight {
-namespace xml { class Node; }
+namespace xml {
+class Node;
+}
 namespace mdls {
 class Player;
 
@@ -19,7 +20,7 @@ class Player;
 //------------------------------------------------------------------------------
 class FileOutput : public Module
 {
-public:
+ public:
    FileOutput(Player*, const double frameRate);
    ~FileOutput();
 
@@ -31,13 +32,12 @@ public:
 
    friend void xml_bindings::init_FileOutput(xml::Node*, FileOutput*);
 
-private:
+ private:
    std::ofstream fout;
-   int rate {};
-   double lastTime {};
-   int frameCounter {};
+   int rate{};
+   double lastTime{};
+   int frameCounter{};
 };
-
 }
 }
 

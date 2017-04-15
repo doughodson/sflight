@@ -7,7 +7,6 @@
 #include "sflight/mdls/Vector3.hpp"
 
 #include "sflight/xml_bindings/init_StickControl.hpp"
-#include "sflight/xml/Node.hpp"
 
 namespace sflight {
 namespace xml {

@@ -5,6 +5,8 @@
 
 #include "sflight/mdls/modules/Module.hpp"
 
+#include "sflight/xml_bindings/init_WaypointFollower.hpp"
+
 #include <vector>
 
 namespace sflight {
@@ -46,9 +48,10 @@ class WaypointFollower : public Module
    int getCurrentWp();
    int getNumWaypoints();
    void clearAllWaypoints();
-   void addWaypoint(const double radLat, const double radLon,
-                    const double meterAlt, const double mpsSpeed,
-                    const double radBearing);
+   void addWaypoint(const double radLat, const double radLon, const double meterAlt,
+                    const double mpsSpeed, const double radBearing);
+
+   friend void xml_bindings::init_WaypointFollower(xml::Node*, WaypointFollower*);
 
  private:
    std::vector<Waypoint> waypoints;

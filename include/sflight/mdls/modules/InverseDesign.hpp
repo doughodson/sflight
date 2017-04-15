@@ -5,7 +5,6 @@
 #include "sflight/mdls/modules/Module.hpp"
 
 #include "sflight/xml_bindings/init_InverseDesign.hpp"
-#include "sflight/xml/Node.hpp"
 
 namespace sflight {
 namespace xml {
@@ -26,9 +25,8 @@ class InverseDesign : public Module
    // module interface
    virtual void update(const double timestep) override;
 
-   void getAeroCoefs(double pitch, double u, double vz, double rho,
-                     double weight, double thrust, double& alpha, double& cl,
-                     double& cd);
+   void getAeroCoefs(double pitch, double u, double vz, double rho, double weight,
+                     double thrust, double& alpha, double& cl, double& cd);
 
    double getThrust(double rho, double mach, double throttle);
 

@@ -5,9 +5,11 @@
 #include "sflight/mdls/modules/Module.hpp"
 
 #include "sflight/xml_bindings/init_AutoPilot.hpp"
-#include "sflight/xml/Node.hpp"
 
 namespace sflight {
+namespace xml {
+class Node;
+}
 namespace mdls {
 class Player;
 
