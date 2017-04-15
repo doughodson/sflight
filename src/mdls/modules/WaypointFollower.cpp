@@ -1,9 +1,6 @@
 
 #include "sflight/mdls/modules/WaypointFollower.hpp"
 
-#include "sflight/xml/Node.hpp"
-#include "sflight/xml/node_utils.hpp"
-
 #include "sflight/mdls/Player.hpp"
 #include "sflight/mdls/UnitConvert.hpp"
 #include "sflight/mdls/UnitConvert.hpp"
@@ -19,43 +16,6 @@ namespace mdls {
 WaypointFollower::WaypointFollower(Player* player, const double frameRate)
     : Module(player, frameRate)
 {
-}
-
-void WaypointFollower::initialize(xml::Node* node)
-{
-   xml::Node* tmp = node->getChild("WaypointFollower");
-
-   isOn = getBool(tmp, "WaypointFollow", true);
-
-   cmdPathType =
-       (xml::get(tmp, "PathType", "DIRECT") == "BEARING") ? PathType::BEARING : PathType::DIRECT;
-
-   std::vector<xml::Node*> wps = xml::getList(tmp->getChild("WaypointList"), "Waypoint");
-
-   for (unsigned int i = 0; i < wps.size(); i++) {
-      xml::Node* wp = wps[i];
-      addWaypoint(UnitConvert::toRads(xml::getDouble(wp, "Lat", 0)),
-                  UnitConvert::toRads(xml::getDouble(wp, "Lon", 0)),
-                  UnitConvert::toMeters(xml::getDouble(wp, "Alt", 0)),
-                  UnitConvert::toMPS(xml::getDouble(wp, "Speed", 0)),
-                  UnitConvert::toRads(xml::getDouble(wp, "Heading", 0)));
-   }
-
-   if (isOn) {
-      wpNum = 0;
-      currentWp = nullptr;
-
-      altTol = 10.;
-      distTol = UnitConvert::NMtoEarthRadians(0.1);
-      azTol = UnitConvert::toRads(1);
-
-      player->autoPilotCmds.setAltHoldOn(true);
-      player->autoPilotCmds.setHdgHoldOn(true);
-      player->autoPilotCmds.setAutoPilotOn(true);
-      player->autoPilotCmds.setAutoThrottleOn(true);
-
-      loadWaypoint();
-   }
 }
 
 void WaypointFollower::setState(bool isOn)

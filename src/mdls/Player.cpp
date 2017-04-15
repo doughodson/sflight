@@ -36,9 +36,9 @@ void Player::initialize(xml::Node* node)
    mass = (UnitConvert::toKilos(xml::getDouble(node, "InitialConditions/Weight", 0.0)));
 
    xml::Node* wind = node->getChild("Wind");
-   if (wind != 0) {
-      double wspeed = UnitConvert::toMPS(xml::getDouble(wind, "Speed", 0.0));
-      double dir = UnitConvert::toRads(xml::getDouble(wind, "Direction", 0.0) + 180);
+   if (wind != nullptr) {
+      const double wspeed = UnitConvert::toMPS(xml::getDouble(wind, "Speed", 0.0));
+      const double dir = UnitConvert::toRads(xml::getDouble(wind, "Direction", 0.0) + 180);
       windVel.set1(wspeed * std::cos(dir));
       windVel.set2(wspeed * std::sin(dir));
       windVel.set3(0);

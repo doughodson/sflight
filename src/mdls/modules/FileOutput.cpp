@@ -1,9 +1,6 @@
 
 #include "sflight/mdls/modules/FileOutput.hpp"
 
-#include "sflight/xml/Node.hpp"
-#include "sflight/xml/node_utils.hpp"
-
 #include "sflight/mdls/Player.hpp"
 #include "sflight/mdls/UnitConvert.hpp"
 

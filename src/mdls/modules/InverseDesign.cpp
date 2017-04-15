@@ -1,9 +1,6 @@
 
 #include "sflight/mdls/modules/InverseDesign.hpp"
 
-#include "sflight/xml/Node.hpp"
-#include "sflight/xml/node_utils.hpp"
-
 #include "sflight/mdls/modules/Atmosphere.hpp"
 
 #include "sflight/mdls/Player.hpp"
@@ -45,7 +42,7 @@ void InverseDesign::update(const double timestep)
    }
 
    WindAxis::windToBody(player->aeroForce, player->alpha, player->beta, cl * qbar, cd * qbar,
-                        0);
+                        0.0);
 
    const double thrust = getThrust(player->rho, player->mach, player->throttle);
 

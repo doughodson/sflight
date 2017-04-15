@@ -39,8 +39,7 @@ class WaypointFollower : public Module
    virtual ~WaypointFollower() = default;
 
    // module interface
-   void initialize(xml::Node*);
-   void update(const double timestep);
+   void update(const double timestep) override;
 
    void loadWaypoint();
    void setState(bool isOn);

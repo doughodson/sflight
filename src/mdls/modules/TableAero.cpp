@@ -3,9 +3,6 @@
 
 #include "sflight/mdls/modules/Atmosphere.hpp"
 
-#include "sflight/xml/Node.hpp"
-#include "sflight/xml/node_utils.hpp"
-
 #include "sflight/mdls/Player.hpp"
 #include "sflight/mdls/Table2D.hpp"
 #include "sflight/mdls/Table3D.hpp"
