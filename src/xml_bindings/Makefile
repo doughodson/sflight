@@ -11,7 +11,8 @@ OBJS =  \
 	init_FileOutput.o \
 	init_InterpAero.o \
 	init_InverseDesign.o \
-	init_StickControl.o
+	init_StickControl.o \
+	init_TableAero.o
 
 .PHONY: all clean
 

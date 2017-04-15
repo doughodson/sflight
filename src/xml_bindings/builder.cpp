@@ -23,6 +23,7 @@
 #include "sflight/xml_bindings/init_InterpAero.hpp"
 #include "sflight/xml_bindings/init_InverseDesign.hpp"
 #include "sflight/xml_bindings/init_StickControl.hpp"
+#include "sflight/xml_bindings/init_TableAero.hpp"
 
 #include <iostream>
 #include <string>
@@ -51,7 +52,7 @@ void builder(xml::Node* parent, mdls::Player* player)
          init_InterpAero(node, interpAero);
       } else if (className == "TableAero") {
          auto tableAero = new mdls::TableAero(player, rate);
-         tableAero->initialize(node);
+         init_TableAero(node, tableAero);
       } else if (className == "Autopilot") {
          auto autoPilot = new mdls::AutoPilot(player, rate);
          init_AutoPilot(node, autoPilot);
@@ -60,7 +61,6 @@ void builder(xml::Node* parent, mdls::Player* player)
          init_Engine(node, engine);
       } else if (className == "Atmosphere") {
          auto atmosphere = new mdls::Atmosphere(player, rate);
-         //atmosphere->initialize(node);
       } else if (className == "WaypointFollower") {
          auto waypointFollower = new mdls::WaypointFollower(player, rate);
          waypointFollower->initialize(node);

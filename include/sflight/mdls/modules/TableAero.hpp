@@ -4,6 +4,9 @@
 
 #include "sflight/mdls/modules/Module.hpp"
 
+#include "sflight/xml_bindings/init_TableAero.hpp"
+#include "sflight/xml/Node.hpp"
+
 namespace sflight {
 namespace xml {
 class Node;
@@ -21,11 +24,12 @@ class TableAero : public Module
    TableAero(Player*, const double frameRate);
 
    // module interface
-   virtual void initialize(xml::Node*) override;
    virtual void update(const double timestep) override;
 
    // void createCoefs( double pitch, double u, double vz, double thrust,
    // double& alpha, double& cl, double& cd );
+
+   friend void xml_bindings::init_TableAero(xml::Node*, TableAero*);
 
  private:
    double wingSpan{};
