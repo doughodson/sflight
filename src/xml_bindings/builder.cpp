@@ -21,6 +21,7 @@
 #include "sflight/xml_bindings/init_EOMFiveDOF.hpp"
 #include "sflight/xml_bindings/init_FileOutput.hpp"
 #include "sflight/xml_bindings/init_InterpAero.hpp"
+#include "sflight/xml_bindings/init_InverseDesign.hpp"
 
 #include <iostream>
 #include <string>
@@ -70,7 +71,7 @@ void builder(xml::Node* parent, mdls::Player* player)
          init_FileOutput(node, fileOutput);
       } else if (className == "InverseDesign") {
          auto inverseDesign = new mdls::InverseDesign(player, rate);
-         inverseDesign->initialize(node);
+         init_InverseDesign(node, inverseDesign);
       }
    }
 }

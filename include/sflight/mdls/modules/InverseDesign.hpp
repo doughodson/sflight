@@ -4,6 +4,9 @@
 
 #include "sflight/mdls/modules/Module.hpp"
 
+#include "sflight/xml_bindings/init_InverseDesign.hpp"
+#include "sflight/xml/Node.hpp"
+
 namespace sflight {
 namespace xml {
 class Node;
@@ -21,7 +24,6 @@ class InverseDesign : public Module
    InverseDesign(Player*, const double frameRate);
 
    // module interface
-   virtual void initialize(xml::Node*) override;
    virtual void update(const double timestep) override;
 
    void getAeroCoefs(double pitch, double u, double vz, double rho,
@@ -31,6 +33,8 @@ class InverseDesign : public Module
    double getThrust(double rho, double mach, double throttle);
 
    double getFuelFlow(double rho, double mach, double thrust);
+
+   friend void xml_bindings::init_InverseDesign(xml::Node*, InverseDesign*);
 
  private:
    double designWeight{};
