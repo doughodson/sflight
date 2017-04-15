@@ -38,7 +38,6 @@ std::string get(Node* const parent, const std::string pathName, const std::strin
 
 int getInt(Node* const parent, const std::string pathName, const int defaultVal)
 {
-
    if (parent == nullptr)
       return defaultVal;
 
@@ -52,7 +51,6 @@ int getInt(Node* const parent, const std::string pathName, const int defaultVal)
 
 long getLong(Node* const parent, const std::string pathName, const long defaultVal)
 {
-
    if (parent == nullptr)
       return defaultVal;
 
@@ -103,7 +101,7 @@ bool getBool(Node* const parent, const std::string pathName, const bool defaultV
 
    std::string text = node->getText();
 
-   for (int i = 0; i < text.length(); i++) {
+   for (unsigned int i = 0; i < text.length(); i++) {
       text[i] = std::toupper(text[i]);
    }
 
@@ -122,7 +120,7 @@ std::vector<std::string> splitString(const std::string inStr, const char splitCh
    int startLoc = 0;
 
    const char* charStr = inStr.c_str();
-   int len = inStr.length();
+   const int len = inStr.length();
 
    int i = 0;
    while (i < len) {

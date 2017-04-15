@@ -89,7 +89,7 @@ Node* Node::getChild(const std::string& x) const
       childName = childName.substr(0, splitPt);
    }
 
-   for (int i = 0; i < tmp->childList.size(); i++) {
+   for (unsigned int i = 0; i < tmp->childList.size(); i++) {
       if (tmp->childList[i]->getTagName() == childName) {
          if (tail != "")
             return childList[i]->getChild(tail);
@@ -119,11 +119,11 @@ std::vector<Node*> Node::getChildren(const std::string& x) const
       childName = childName.substr(0, splitPt);
    }
 
-   for (int i = 0; i < tmp->childList.size(); i++) {
+   for (unsigned int i = 0; i < tmp->childList.size(); i++) {
       if (tmp->childList[i]->getTagName() == childName) {
          if (tail != "") {
             std::vector<Node*> sublist = childList[i]->getChildren(tail);
-            for (int j = 0; j < sublist.size(); j++) {
+            for (unsigned int j = 0; j < sublist.size(); j++) {
                list.push_back(sublist[j]);
             }
          } else {
@@ -204,7 +204,7 @@ std::string Node::toString() const
    }
 
    ret += "\n</" + getTagName() + " ";
-   +"\n";
+//   ret += "\n</" + getTagName() + " " + "\n";   // mistake in orig code
    delete[] attrNames;
    return ret;
 }
