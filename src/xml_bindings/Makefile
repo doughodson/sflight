@@ -11,6 +11,7 @@ OBJS =  \
 	init_FileOutput.o \
 	init_InterpAero.o \
 	init_InverseDesign.o \
+	init_Player.o \
 	init_StickControl.o \
 	init_TableAero.o \
 	init_WaypointFollower.o

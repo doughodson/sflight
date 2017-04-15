@@ -9,9 +9,6 @@ namespace mdls {
 Module::Module(Player* p, const double frameRate)
     : player(p)
 {
-   if (player != nullptr)
-      player->addModule(this);
-
    if (frameRate <= 0) {
       frameTime = 0;
    } else {

@@ -10,6 +10,8 @@
 #include "sflight/mdls/Vector3.hpp"
 #include "sflight/mdls/nav_utils.hpp"
 
+#include "sflight/xml_bindings/init_Player.hpp"
+
 #include <vector>
 
 namespace sflight {
@@ -31,8 +33,9 @@ class Player
    ~Player();
 
    void addModule(Module* module);
-   void initialize(xml::Node* node);
    void update(double timestep);
+
+   friend void xml_bindings::init_Player(xml::Node*, Player*);
 
    // lat, lon (radians) and alt (meters)
    double lat{};
