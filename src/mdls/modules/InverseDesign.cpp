@@ -55,12 +55,11 @@ void InverseDesign::update(const double timestep)
    player->fuel -= player->fuelflow * timestep;
 }
 
-void InverseDesign::getAeroCoefs(double theta, double u, double vz, double rho, double weight,
-                                 double thrust, double& alpha, double& cl, double& cd)
+void InverseDesign::getAeroCoefs(const double theta, const double u, const double vz,
+                                 const double rho, const double weight, const double thrust,
+                                 double& alpha, double& cl, double& cd)
 {
-   vz = -vz;
-
-   double w = (vz + u * std::sin(theta)) / std::cos(theta);
+   double w = (-vz + u * std::sin(theta)) / std::cos(theta);
 
    double vInf = std::sqrt(w * w + u * u);
 

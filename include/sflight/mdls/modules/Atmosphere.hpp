@@ -64,20 +64,20 @@ class Atmosphere : public Module
    virtual void update(const double timestep) override;
 
    // returns density in kg/m^3
-   static double getRho(double alt_meters);
+   static double getRho(const double alt_meters);
 
    // returns pressure in kPa
-   static double getPressure(double alt_meters);
+   static double getPressure(const double alt_meters);
 
    // returns temperature in Kelvin
-   static double getTemp(double alt_meters);
+   static double getTemp(const double alt_meters);
 
-   static double getRemainder(double alt);
+   static double getRemainder(const double alt);
 
-   static int getIndex(double alt);
+   static int getIndex(const double alt);
 
    // returns speed of sound in mps
-   static double getSpeedSound(double tempK);
+   static double getSpeedSound(const double tempK);
 
  private:
    static const double alt[37];

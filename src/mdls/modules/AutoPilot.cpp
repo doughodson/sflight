@@ -47,7 +47,7 @@ void AutoPilot::update(const double timestep)
    }
 }
 
-void AutoPilot::updateHdg(double timestep, double cmdHdg)
+void AutoPilot::updateHdg(const double timestep, const double cmdHdg)
 {
    double hdgDiff{};
    if (turnType == TurnType::TRAJECTORY) {
@@ -71,23 +71,23 @@ void AutoPilot::updateHdg(double timestep, double cmdHdg)
    player->pqr.set1(pCmd);
 }
 
-void AutoPilot::updateAlt(double timestep)
+void AutoPilot::updateAlt(const double timestep)
 {
    double vscmd = kalt * (player->autoPilotCmds.getCmdAltitude() - player->alt);
 
-   vscmd =
-       std::min(std::fabs(vscmd), player->autoPilotCmds.getMaxVS()) * UnitConvert::signum(vscmd);
+   vscmd = std::min(std::fabs(vscmd), player->autoPilotCmds.getMaxVS()) *
+           UnitConvert::signum(vscmd);
 
    updateVS(timestep, vscmd);
 }
 
-void AutoPilot::updateVS(double timestep, double cmdVs)
+void AutoPilot::updateVS(const double timestep, const double cmdVs)
 {
-   double u = player->uvw.get1();
-   double phi = player->eulers.getPhi();
-   double theta = player->eulers.getTheta();
-   double q = player->pqr.get2();
-   double thetaDenom =
+   const double u = player->uvw.get1();
+   const double phi = player->eulers.getPhi();
+   const double theta = player->eulers.getTheta();
+   const double q = player->pqr.get2();
+   const double thetaDenom =
        player->autoPilotCmds.getMaxPitchUp() - player->autoPilotCmds.getMaxPitchDown();
 
    // setup the commanded pitch rate based on difference in vertical speed.  Based on the
@@ -101,20 +101,20 @@ void AutoPilot::updateVS(double timestep, double cmdVs)
 
    // amount of q to compensate for turning ( extra back pressure to compensate for r pulling
    // downward)
-   double qTurn = player->pqr.get3() * std::tan(phi);
+   const double qTurn = player->pqr.get3() * std::tan(phi);
 
    if (qCmd > 0) {
-      double qLimit = std::min((player->autoPilotCmds.getMaxPitchUp() - theta) /
-                                   player->autoPilotCmds.getMaxPitchUp(),
-                               1.0);
-      double qMax = maxG / u * qLimit;
+      const double qLimit = std::min((player->autoPilotCmds.getMaxPitchUp() - theta) /
+                                         player->autoPilotCmds.getMaxPitchUp(),
+                                     1.0);
+      const double qMax = maxG / u * qLimit;
       qCmd = std::min(qCmd, qMax);
       qCmd = std::min(q + maxG_rate / u * timestep, qCmd);
    } else {
-      double qLimit = std::min((player->autoPilotCmds.getMaxPitchDown() - theta) /
-                                   player->autoPilotCmds.getMaxPitchDown(),
-                               1.0);
-      double qMin = minG / u * qLimit;
+      const double qLimit = std::min((player->autoPilotCmds.getMaxPitchDown() - theta) /
+                                         player->autoPilotCmds.getMaxPitchDown(),
+                                     1.0);
+      const double qMin = minG / u * qLimit;
       qCmd = std::max(qMin, qCmd);
       qCmd = std::max(q - qTurn + minG_rate / u * timestep, qCmd);
    }
@@ -146,7 +146,7 @@ void AutoPilot::updateVS(double timestep, double cmdVs)
    //        player->pqr.set2( player->pqr.get2() + dq );
 }
 
-void AutoPilot::updateSpeed(double timestep)
+void AutoPilot::updateSpeed(const double timestep)
 {
    double cmdVel = player->autoPilotCmds.getCmdSpeed();
    if (player->autoPilotCmds.isUsingMach()) {

@@ -42,8 +42,8 @@ class WaypointFollower : public Module
    void update(const double timestep) override;
 
    void loadWaypoint();
-   void setState(bool isOn);
-   void setCurrentWp(int num);
+   void setState(const bool isOn);
+   void setCurrentWp(const int num);
    int getCurrentWp();
    int getNumWaypoints();
    void clearAllWaypoints();

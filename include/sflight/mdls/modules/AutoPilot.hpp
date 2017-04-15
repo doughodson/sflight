@@ -26,10 +26,10 @@ class AutoPilot : public Module
    // module interface
    virtual void update(const double timestep) override;
 
-   void updateHdg(double timestep, double cmdHdg);
-   void updateAlt(double timestep);
-   void updateVS(double timestep, double cmdVs);
-   void updateSpeed(double timestep);
+   void updateHdg(const double timestep, const double cmdHdg);
+   void updateAlt(const double timestep);
+   void updateVS(const double timestep, const double cmdVs);
+   void updateSpeed(const double timestep);
 
    friend void xml_bindings::init_AutoPilot(xml::Node*, AutoPilot*);
 

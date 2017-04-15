@@ -48,7 +48,5 @@ void FileOutput::update()
    fout << player->throttle << "\t";
    fout << std::endl;
 }
-
-void FileOutput::close() { fout.close(); }
 }
 }

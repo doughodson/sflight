@@ -39,7 +39,7 @@ void Atmosphere::update(const double timestep)
    player->rho = getRho(player->alt);
 }
 
-int Atmosphere::getIndex(double metersAlt)
+int Atmosphere::getIndex(const double metersAlt)
 {
    if (metersAlt < 0)
       return 0;
@@ -52,13 +52,13 @@ int Atmosphere::getIndex(double metersAlt)
    return index - 1;
 }
 
-double Atmosphere::getRemainder(double alt)
+double Atmosphere::getRemainder(const double alt)
 {
    return alt / 1000.0 - std::floor(alt / 1000.0);
 }
 
 // returns density in kg/m^3
-double Atmosphere::getRho(double alt_meters)
+double Atmosphere::getRho(const double alt_meters)
 {
    const int index = getIndex(alt_meters);
 
@@ -71,7 +71,7 @@ double Atmosphere::getRho(double alt_meters)
 }
 
 // returns pressure in kPa
-double Atmosphere::getPressure(double alt_meters)
+double Atmosphere::getPressure(const double alt_meters)
 {
    const int index = getIndex(alt_meters);
 
@@ -84,7 +84,7 @@ double Atmosphere::getPressure(double alt_meters)
 }
 
 // returns temperature in Kelvin
-double Atmosphere::getTemp(double alt_meters)
+double Atmosphere::getTemp(const double alt_meters)
 {
    const int index = getIndex(alt_meters);
 
@@ -97,7 +97,7 @@ double Atmosphere::getTemp(double alt_meters)
 }
 
 // returns speed of sound in mps
-double Atmosphere::getSpeedSound(double tempK)
+double Atmosphere::getSpeedSound(const double tempK)
 {
    return std::sqrt(1.4 * 287.01 * tempK);
 }

@@ -19,24 +19,24 @@ class PID
 
    void setGain(const double p);
 
-   double getP() const;
-   double getI() const;
-   double getD() const;
+   double getP() const { return kp; }
+   double getI() const { return ti; }
+   double getD() const { return td; }
 
-   double getOutput(const double timestep, const double desired_pt,
-                    const double current_pt, const double current_output);
+   double getOutput(const double timestep, const double desired_pt, const double current_pt,
+                    const double current_output);
 
-   double kp {};
-   double alpha {0.1}, beta {1.0}, gamma {};
-   double ts {}, ti {}, td {}, tf {};
-   double en {};
-   double rn {}, yn {};
-   double max {}, min {};
-   double du {}, u {};
+   double kp{};
+   double alpha{0.1}, beta{1.0}, gamma{};
+   double ts{}, ti{}, td{}, tf{};
+   double en{};
+   double rn{}, yn{};
+   double max{}, min{};
+   double du{}, u{};
 
-   double ep[2] {};
-   double ed[3] {};
-   double edf[4] {};
+   double ep[2]{};
+   double ed[3]{};
+   double edf[4]{};
 };
 }
 }

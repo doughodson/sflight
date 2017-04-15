@@ -20,7 +20,7 @@ EOMFiveDOF::EOMFiveDOF(Player* player, const double frameRate) : Module(player, 
 
 void EOMFiveDOF::update(const double timestep) { computeEOM(timestep); }
 
-void EOMFiveDOF::computeEOM(double timestep)
+void EOMFiveDOF::computeEOM(const double timestep)
 {
    const double mass = player->mass;
 

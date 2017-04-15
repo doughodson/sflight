@@ -30,7 +30,7 @@ class EOMFiveDOF : public Module
    // module interface
    virtual void update(const double timestep) override;
 
-   void computeEOM(double timestep);
+   void computeEOM(const double timestep);
 
    friend void xml_bindings::init_EOMFiveDOF(xml::Node*, EOMFiveDOF*);
 

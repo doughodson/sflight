@@ -27,12 +27,11 @@ class FileOutput : public Module
    // module interface
    virtual void update(const double timestep) override;
 
-   void update();
-   void close();
-
    friend void xml_bindings::init_FileOutput(xml::Node*, FileOutput*);
 
  private:
+   void update();
+
    std::ofstream fout;
    int rate{};
    double lastTime{};

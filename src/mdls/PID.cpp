@@ -24,21 +24,6 @@ void PID::setGain(const double p)
    kp = p;
 }
 
-double PID::getP() const
-{
-   return kp;
-}
-
-double PID::getI() const
-{
-   return ti;
-}
-
-double PID::getD() const
-{
-   return td;
-}
-
 /** @param current_pt the current point of the process (resulting action)
  *  @param current_output current point of the effector (such as actuator)
  *  @param desired_pt the point desired for the process

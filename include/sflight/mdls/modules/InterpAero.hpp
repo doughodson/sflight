@@ -28,7 +28,7 @@ class InterpAero : public Module
    void createCoefs(const double pitch, const double u, const double vz, const double thrust,
                     double& alpha, double& cl, double& cd);
 
-   double getBetaMach(double mach) const;
+   double getBetaMach(const double mach) const;
 
    friend void xml_bindings::init_InterpAero(xml::Node*, InterpAero*);
 

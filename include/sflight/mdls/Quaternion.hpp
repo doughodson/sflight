@@ -21,19 +21,19 @@ class Quaternion
    Quaternion();
    Quaternion(const double psi, const double theta, const double phi);
    Quaternion(const double eo, const double ex, const double ey, const double ez);
-   Quaternion(Euler &euler);
+   Quaternion(Euler& euler);
    virtual ~Quaternion();
 
    double getPsi();
    double getTheta();
    double getPhi();
 
-   void getEulers(Euler &euler);
-   void getDxDyDz(Vector3 &dxdydz, Vector3 &uvw);
-   void getUVW(Vector3 &uvw, Vector3 &dxdydz);
-   void getQdot(Quaternion &toFill, double p, double q, double r);
+   void getEulers(Euler& euler);
+   void getDxDyDz(Vector3& dxdydz, Vector3& uvw);
+   void getUVW(Vector3& uvw, Vector3& dxdydz);
+   void getQdot(Quaternion& toFill, double p, double q, double r);
 
-   void initialize(Euler &euler);
+   void initialize(Euler& euler);
    void initialize(double psi, double theta, double phi);
    void normalize();
    void add(Quaternion q);
@@ -45,12 +45,11 @@ class Quaternion
    void print();
 
  protected:
-   double eo {};
-   double ex {};
-   double ey {};
-   double ez {};
+   double eo{};
+   double ex{};
+   double ey{};
+   double ez{};
 };
-
 }
 }
 

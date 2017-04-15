@@ -62,8 +62,9 @@ void InterpAero::createCoefs(const double theta, const double thrust, const doub
    cd = -aero.get2() / wingArea;
 }
 
-double InterpAero::getBetaMach(double mach) const
+double InterpAero::getBetaMach(const double x) const
 {
+   double mach {x};
    // if (mach > 1.02 ) return 1 + std::sqrt( mach * mach - 1.0);
    if (mach > 1.05)
       mach = 1.0 / mach;

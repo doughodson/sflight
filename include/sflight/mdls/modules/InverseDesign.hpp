@@ -25,8 +25,8 @@ class InverseDesign : public Module
    // module interface
    virtual void update(const double timestep) override;
 
-   void getAeroCoefs(double pitch, double u, double vz, double rho, double weight,
-                     double thrust, double& alpha, double& cl, double& cd);
+   void getAeroCoefs(const double pitch, const double u, const double vz, const double rho,
+                     const double weight, const double thrust, double& alpha, double& cl, double& cd);
 
    double getThrust(double rho, double mach, double throttle);
 

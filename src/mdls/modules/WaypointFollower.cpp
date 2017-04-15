@@ -18,7 +18,7 @@ WaypointFollower::WaypointFollower(Player* player, const double frameRate)
 {
 }
 
-void WaypointFollower::setState(bool isOn)
+void WaypointFollower::setState(const bool isOn)
 {
    if (isOn) {
       player->autoPilotCmds.setAltHoldOn(isOn);
@@ -116,6 +116,6 @@ int WaypointFollower::getCurrentWp() { return wpNum; }
 
 int WaypointFollower::getNumWaypoints() { return waypoints.size(); }
 
-void WaypointFollower::setCurrentWp(int num) { wpNum = num; }
+void WaypointFollower::setCurrentWp(const int num) { wpNum = num; }
 }
 }
