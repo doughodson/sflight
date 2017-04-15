@@ -2,19 +2,15 @@
 #include "sflight/xml/Node.hpp"
 
 #include <algorithm>
-#include <iterator>
 #include <iostream>
+#include <iterator>
 
 namespace sflight {
 namespace xml {
 
-Node::Node(const std::string& tagName) : name(tagName)
-{
-}
+Node::Node(const std::string& tagName) : name(tagName) {}
 
-Node::Node(const std::string& tagName, const std::string& text): name(tagName), text(text)
-{
-}
+Node::Node(const std::string& tagName, const std::string& text) : name(tagName), text(text) {}
 
 Node::Node(const Node& src)
 {
@@ -22,19 +18,17 @@ Node::Node(const Node& src)
    text = src.getText();
 
    int cnt = src.getAttributeCount();
-   std::string *arry = new std::string[cnt];
+   std::string* arry = new std::string[cnt];
    src.getAttributeNames(arry);
 
-   for (int i = 0; i < cnt; i++)
-   {
+   for (int i = 0; i < cnt; i++) {
       putAttribute(arry[i], src.getAttribute(arry[i]));
    }
 
    cnt = src.getChildCount();
 
-   for (int i = 0; i < cnt; i++)
-   {
-      Node *tmp = new Node(*src.getChild(i));
+   for (int i = 0; i < cnt; i++) {
+      Node* tmp = new Node(*src.getChild(i));
       addChild(tmp);
    }
 
@@ -43,41 +37,31 @@ Node::Node(const Node& src)
 
 Node::~Node()
 {
-   for (int i = childList.size() - 1; i >= 0; i--)
-   {
+   for (int i = childList.size() - 1; i >= 0; i--) {
       delete childList[i];
    }
 }
 
-std::string Node::getTagName() const
-{
-   return name;
-}
+std::string Node::getTagName() const { return name; }
 
-void Node::setTagName(const std::string& x)
-{
-   name = x;
-}
+void Node::setTagName(const std::string& x) { name = x; }
 
-Node *Node::addChild(const std::string& x)
+Node* Node::addChild(const std::string& x)
 {
-   Node *child = new Node(x);
+   Node* child = new Node(x);
    return addChild(child);
 }
 
-Node *Node::addChild(Node* const x)
+Node* Node::addChild(Node* const x)
 {
    childList.push_back(x);
    x->setParent(this);
    return x;
 }
 
-int Node::getChildCount() const
-{
-   return childList.size();
-}
+int Node::getChildCount() const { return childList.size(); }
 
-Node *Node::getChild(const int index) const
+Node* Node::getChild(const int index) const
 {
    if (index < getChildCount())
       return childList[index];
@@ -90,24 +74,21 @@ Node *Node::getChild(const int index) const
 // if none is found.  To find a nested child, specify the childname
 // as tags separated by "/"
 //
-Node *Node::getChild(const std::string& x) const
+Node* Node::getChild(const std::string& x) const
 {
    std::string childName = x;
-   const Node *tmp = this;
+   const Node* tmp = this;
 
    const int splitPt = childName.find_first_of("/");
    std::string tail = "";
 
-   if (splitPt != std::string::npos)
-   {
+   if (splitPt != std::string::npos) {
       tail = childName.substr(splitPt + 1);
       childName = childName.substr(0, splitPt);
    }
 
-   for (int i = 0; i < tmp->childList.size(); i++)
-   {
-      if (tmp->childList[i]->getTagName() == childName)
-      {
+   for (int i = 0; i < tmp->childList.size(); i++) {
+      if (tmp->childList[i]->getTagName() == childName) {
          if (tail != "")
             return childList[i]->getChild(tail);
          else
@@ -126,31 +107,24 @@ std::vector<Node*> Node::getChildren(const std::string& x) const
    std::string childName = x;
    std::vector<Node*> list;
 
-   const Node *tmp = this;
+   const Node* tmp = this;
 
    const int splitPt = childName.find_first_of("/");
    std::string tail = "";
 
-   if (splitPt != std::string::npos)
-   {
+   if (splitPt != std::string::npos) {
       tail = childName.substr(splitPt + 1);
       childName = childName.substr(0, splitPt);
    }
 
-   for (int i = 0; i < tmp->childList.size(); i++)
-   {
-      if (tmp->childList[i]->getTagName() == childName)
-      {
-         if (tail != "")
-         {
-            std::vector<Node *> sublist = childList[i]->getChildren(tail);
-            for (int j = 0; j < sublist.size(); j++)
-            {
+   for (int i = 0; i < tmp->childList.size(); i++) {
+      if (tmp->childList[i]->getTagName() == childName) {
+         if (tail != "") {
+            std::vector<Node*> sublist = childList[i]->getChildren(tail);
+            for (int j = 0; j < sublist.size(); j++) {
                list.push_back(sublist[j]);
             }
-         }
-         else
-         {
+         } else {
             list.push_back(childList[i]);
          }
       }
@@ -166,59 +140,40 @@ void Node::putAttribute(std::string name, std::string val)
 
 std::string Node::getAttribute(const std::string name) const
 {
-   if (attrMap.count(name) == 1)
-   {
+   if (attrMap.count(name) == 1) {
       return attrMap.at(name);
    }
    return 0;
 }
 
-void Node::getAttributeNames(std::string * const storeArray) const
+void Node::getAttributeNames(std::string* const storeArray) const
 {
    std::map<std::string, std::string>::const_iterator iter;
    int i = 0;
 
-   for (iter = attrMap.begin(); iter != attrMap.end(); ++iter)
-   {
+   for (iter = attrMap.begin(); iter != attrMap.end(); ++iter) {
       storeArray[i] = iter->first;
       i++;
    }
 }
 
-int Node::getAttributeCount() const
-{
-   return attrMap.size();
-}
+int Node::getAttributeCount() const { return attrMap.size(); }
 
-std::string Node::getText() const
-{
-   return text;
-}
+std::string Node::getText() const { return text; }
 
-void Node::setText(const std::string& x)
-{
-   text = x;
-}
+void Node::setText(const std::string& x) { text = x; }
 
-Node *Node::getParent() const
-{
-   return parentNode;
-}
+Node* Node::getParent() const { return parentNode; }
 
-void Node::setParent(Node* const x)
-{
-   parentNode = x;
-}
+void Node::setParent(Node* const x) { parentNode = x; }
 
 bool Node::remove(Node* const node)
 {
    std::vector<Node*>::iterator it;
 
-   for (it = childList.begin(); it < childList.end(); it++)
-   {
+   for (it = childList.begin(); it < childList.end(); it++) {
 
-      if (*it == node)
-      {
+      if (*it == node) {
          childList.erase(it);
          return true;
       }
@@ -229,23 +184,20 @@ bool Node::remove(Node* const node)
 std::string Node::toString() const
 {
    std::string ret = "<" + getTagName() + " ";
-   std::string *attrNames = new std::string[getAttributeCount()];
+   std::string* attrNames = new std::string[getAttributeCount()];
    getAttributeNames(attrNames);
 
-   for (int i = 0; i < getAttributeCount(); i++)
-   {
+   for (int i = 0; i < getAttributeCount(); i++) {
       ret += (attrNames[i] + "=" + getAttribute(attrNames[i]) + " ");
    }
    ret += ">";
 
-   for (int i = 0; i < childList.size(); i++)
-   {
+   for (int i = 0; i < childList.size(); i++) {
       ret += "\n";
       ret += childList[i]->toString();
    }
 
-   if (getText() != "")
-   {
+   if (getText() != "") {
       ret += ("\n  " + getText());
    }
 

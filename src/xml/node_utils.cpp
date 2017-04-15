@@ -22,8 +22,7 @@ std::vector<Node*> getList(Node* const parent, const std::string childName)
    return parent->getChildren(childName);
 }
 
-std::string get(Node* const parent, const std::string pathName,
-                const std::string defaultVal)
+std::string get(Node* const parent, const std::string pathName, const std::string defaultVal)
 {
 
    if (parent == nullptr)
@@ -51,8 +50,7 @@ int getInt(Node* const parent, const std::string pathName, const int defaultVal)
    return std::atoi(node->getText().c_str());
 }
 
-long getLong(Node* const parent, const std::string pathName,
-             const long defaultVal)
+long getLong(Node* const parent, const std::string pathName, const long defaultVal)
 {
 
    if (parent == nullptr)
@@ -66,8 +64,7 @@ long getLong(Node* const parent, const std::string pathName,
    return std::atol(node->getText().c_str());
 }
 
-float getFloat(Node* const parent, const std::string pathName,
-               const float defaultVal)
+float getFloat(Node* const parent, const std::string pathName, const float defaultVal)
 {
    if (parent == nullptr)
       return defaultVal;
@@ -80,8 +77,7 @@ float getFloat(Node* const parent, const std::string pathName,
    return (float)atof(node->getText().c_str());
 }
 
-double getDouble(Node* const parent, const std::string pathName,
-                 const double defaultVal)
+double getDouble(Node* const parent, const std::string pathName, const double defaultVal)
 {
    if (parent == nullptr)
       return defaultVal;
@@ -96,8 +92,7 @@ double getDouble(Node* const parent, const std::string pathName,
    return val;
 }
 
-bool getBool(Node* const parent, const std::string pathName,
-             const bool defaultVal)
+bool getBool(Node* const parent, const std::string pathName, const bool defaultVal)
 {
    if (parent == nullptr)
       return defaultVal;
@@ -120,8 +115,7 @@ bool getBool(Node* const parent, const std::string pathName,
    return defaultVal;
 }
 
-std::vector<std::string> splitString(const std::string inStr,
-                                     const char splitChar)
+std::vector<std::string> splitString(const std::string inStr, const char splitChar)
 {
    std::vector<std::string> retV;
 

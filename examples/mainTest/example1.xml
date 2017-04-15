@@ -4,10 +4,9 @@
 <SimpleFlight>
 
     <Modules Rate="60">
-        <Module Class="Analyzer"/>
         <Module Class="EOMFiveDOF"/>
         <Module Class="InverseDesign"/>
-        <Module Class="SimpleAutopilot"/>
+        <Module Class="Autopilot"/>
         <Module Class="Atmosphere" Rate="10" />
         <Module Class="StickControl"/>
         <Module Class="WaypointFollower"/>

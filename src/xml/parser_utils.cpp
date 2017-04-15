@@ -23,8 +23,7 @@ Node* parse(const std::string filename, const bool treatAttributesAsChildren)
    return node;
 }
 
-Node* parseString(const std::string& xmlString,
-                  const bool treatAttributesAsChildren)
+Node* parseString(const std::string& xmlString, const bool treatAttributesAsChildren)
 {
    std::istringstream fin(xmlString);
 
@@ -99,8 +98,7 @@ Node* parse(std::istream& r, const bool treatAttributesAsChildren)
          if (rootNode == 0) {
             rootNode = new Node("");
             node = rootNode;
-         }
-         else {
+         } else {
             Node* tmpNode = node->addChild("");
             node = tmpNode;
          }
@@ -110,8 +108,7 @@ Node* parse(std::istream& r, const bool treatAttributesAsChildren)
             std::string tag = str.substr(0, splitPt);
             node->setTagName(tag);
             putAttributes(str.substr(splitPt), node, treatAttributesAsChildren);
-         }
-         else {
+         } else {
             node->setTagName(str);
          }
 
@@ -149,8 +146,7 @@ std::string readChunk(std::istream& r)
          }
          ch = r.get();
       }
-   }
-   catch (int e) {
+   } catch (int e) {
       return "";
    }
 
@@ -190,8 +186,7 @@ void subChars(std::string& srcStr)
    }
 }
 
-std::string putAttributes(std::string str, Node* node,
-                          const bool treatAsChildren)
+std::string putAttributes(std::string str, Node* node, const bool treatAsChildren)
 {
    try {
       while (str.length() > 0) {
@@ -214,14 +209,12 @@ std::string putAttributes(std::string str, Node* node,
          if (treatAsChildren) {
             Node* tmp = node->addChild(name);
             tmp->setText(attr);
-         }
-         else {
+         } else {
             node->putAttribute(name, attr);
          }
          str = str.substr(attrEnd + 1);
       }
-   }
-   catch (int e) {
+   } catch (int e) {
       std::cerr << "error" << std::endl;
    }
    return str;
