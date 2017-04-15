@@ -48,6 +48,16 @@ workspace "sflight"
       targetsuffix "_d"
       defines { "WIN32", "_DEBUG" }
 
+   -- models
+   project "mdls"
+      kind "StaticLib"
+      files {
+         "../../include/sflight/mdls/**.h*",
+         "../../src/mdls/**.cpp"
+      }
+      targetdir ("../../lib/")
+      targetname "sflight_mdls"
+
    -- xml parser
    project "xml"
       kind "StaticLib"
@@ -58,15 +68,15 @@ workspace "sflight"
       targetdir ("../../lib/")
       targetname "sflight_xml"
 
-   -- flight dynamics model
-   project "fdm"
+   -- xml bindings
+   project "xml_bindings"
       kind "StaticLib"
       files {
-         "../../include/sflight/fdm/**.h*",
-         "../../src/fdm/**.cpp"
+         "../../include/sflight/xml_bindings/**.h*",
+         "../../src/xml_bindings/**.cpp"
       }
       targetdir ("../../lib/")
-      targetname "sflight_fdm"
+      targetname "sflight_xml_bindings"
 
    -- simple application
    project "mainTest"
@@ -78,7 +88,7 @@ workspace "sflight"
          "../../examples/mainTest/**.h*",
          "../../examples/mainTest/**.cpp"
       }
-      links { "xml", "fdm" }
+      links { "xml_bindings", "xml", "mdls" }
       libdirs { "../../lib" }
       defines { "_CONSOLE" }
       filter "configurations:Release*"
