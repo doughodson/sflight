@@ -49,7 +49,7 @@ void init_InverseDesign(xml::Node* node, mdls::InverseDesign* invDsg)
    // get default values
    invDsg->designWeight = xml::getDouble(tmp, "FlightConditions/Weight", 0.0);
    invDsg->wingSpan =
-       mdls::UnitConvert::toMeters(xml::getDouble(tmp, "FlightCondiitons/WingSpan", 6.0));
+       mdls::UnitConvert::toMeters(xml::getDouble(tmp, "FlightConditions/WingSpan", 6.0));
    invDsg->wingArea =
        mdls::UnitConvert::toSqMeters(xml::getDouble(tmp, "FlightConditions/WingArea", 6.0));
    invDsg->designAlt = xml::getDouble(tmp, "FlightConditions/Altitude", 0.0);

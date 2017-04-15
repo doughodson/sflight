@@ -10,9 +10,9 @@
 namespace sflight {
 namespace xml {
 
-Node* parse (std::istream& reader, const bool treatAttributesAsChildren);
-Node* parse (const std::string filename, const bool treatAttributesAsChildren);
-Node* parseString (const std::string& xmlString, const bool treatAttributesAsChildren);
+Node* parse(std::istream& reader, const bool treatAttributesAsChildren);
+Node* parse(const std::string filename, const bool treatAttributesAsChildren);
+Node* parseString(const std::string& xmlString, const bool treatAttributesAsChildren);
 bool isWhitespace(const char ch);
 
 std::string readChunk(std::istream& reader);

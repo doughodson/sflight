@@ -4,6 +4,8 @@
 #include <algorithm>
 #include <iostream>
 #include <iterator>
+#include <string>
+#include <vector>
 
 namespace sflight {
 namespace xml {
@@ -104,13 +106,13 @@ Node* Node::getChild(const std::string& x) const
 //
 std::vector<Node*> Node::getChildren(const std::string& x) const
 {
-   std::string childName = x;
+   std::string childName {x};
    std::vector<Node*> list;
 
    const Node* tmp = this;
 
    const int splitPt = childName.find_first_of("/");
-   std::string tail = "";
+   std::string tail;
 
    if (splitPt != std::string::npos) {
       tail = childName.substr(splitPt + 1);
