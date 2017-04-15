@@ -90,12 +90,5 @@ void Player::update(double timestep)
    }
    frameNum++;
 }
-
-void Player::setProperty(std::string tag, double val)
-{
-   for (int i = 0; i < modules.size(); i++) {
-      modules[i]->setProperty(tag, val);
-   }
-}
 }
 }

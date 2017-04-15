@@ -33,7 +33,6 @@ class Player
    void addModule(Module* module);
    void initialize(xml::Node* node);
    void update(double timestep);
-   void setProperty(std::string tag, double val);
 
    // lat, lon (radians) and alt (meters)
    double lat{};

@@ -22,9 +22,7 @@ class Module
    virtual ~Module() = default;
 
    // module interface
-   virtual void initialize(xml::Node*){};
    virtual void update(const double timestep){};
-   virtual void setProperty(std::string tag, const double val){};
 
    Player* player{};
 
