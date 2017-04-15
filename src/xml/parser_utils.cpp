@@ -41,7 +41,7 @@ Node* parse(std::istream& r, const bool treatAttributesAsChildren)
    Node* rootNode = nullptr;
    Node* node = nullptr;
 
-   std::string str = "";
+   std::string str;
 
    while (true) {
       str = readChunk(r);
@@ -193,11 +193,11 @@ std::string putAttributes(std::string str, Node* node, const bool treatAsChildre
          while (isWhitespace(str[0])) {
             str = str.substr(1, str.length() - 1);
          }
-         unsigned int nameEnd = str.find("=\"", 0);
+         const unsigned int nameEnd = str.find("=\"", 0);
          if (nameEnd == std::string::npos)
             return str;
 
-         int attrEnd = str.find("\"", nameEnd + 3);
+         const int attrEnd = str.find("\"", nameEnd + 3);
          if (attrEnd == std::string::npos)
             throw 1;
 

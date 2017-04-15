@@ -78,11 +78,11 @@ Node* Node::getChild(const int index) const
 //
 Node* Node::getChild(const std::string& x) const
 {
-   std::string childName = x;
+   std::string childName {x};
    const Node* tmp = this;
 
    const int splitPt = childName.find_first_of("/");
-   std::string tail = "";
+   std::string tail;
 
    if (splitPt != std::string::npos) {
       tail = childName.substr(splitPt + 1);
