@@ -43,13 +43,13 @@ void init_InterpAero(xml::Node* node, mdls::InterpAero* iaero)
        mdls::UnitConvert::toMPS(xml::getDouble(tmp, "CruiseCondition/Airspeed", 0.0));
    double vs = mdls::UnitConvert::FPMtoMPS(xml::getDouble(tmp, "CruiseCondition/VS", 0.0));
    if (airspeed < 1E-6) {
-      airspeed = xml::getDouble(tmp, "CruiseCondition/Mach", 0) * speedSound;
+      airspeed = xml::getDouble(tmp, "CruiseCondition/Mach", 0.0) * speedSound;
    }
 
    double thrust =
        mdls::UnitConvert::toNewtons(xml::getDouble(tmp, "CruiseCondition/Thrust", 0.0));
    if (thrust < 1E-6)
-      thrust = xml::getDouble(tmp, "CruiseCondition/Throttle", 0) * thrustRatio;
+      thrust = xml::getDouble(tmp, "CruiseCondition/Throttle", 0.0) * thrustRatio;
 
    iaero->createCoefs(pitch, thrust, vs, airspeed, iaero->cruiseAlpha, iaero->cruiseCL,
                       iaero->cruiseCD);
@@ -63,7 +63,7 @@ void init_InterpAero(xml::Node* node, mdls::InterpAero* iaero)
    }
 
    // climb condition
-   pitch = mdls::UnitConvert::toRads(xml::getDouble(tmp, "ClimbCondition/Pitch", 0));
+   pitch = mdls::UnitConvert::toRads(xml::getDouble(tmp, "ClimbCondition/Pitch", 0.0));
    airspeed = mdls::UnitConvert::toMPS(xml::getDouble(tmp, "ClimbCondition/Airspeed", 0.0));
    vs = mdls::UnitConvert::FPMtoMPS(xml::getDouble(tmp, "ClimbCondition/VS", 0.0));
    if (airspeed < 1E-6) {
@@ -71,9 +71,9 @@ void init_InterpAero(xml::Node* node, mdls::InterpAero* iaero)
    }
    mach = airspeed / speedSound;
 
-   thrust = mdls::UnitConvert::toNewtons(xml::getDouble(tmp, "ClimbCondition/Thrust", 0));
+   thrust = mdls::UnitConvert::toNewtons(xml::getDouble(tmp, "ClimbCondition/Thrust", 0.0));
    if (thrust < 1E-6)
-      thrust = xml::getDouble(tmp, "ClimbCondition/Throttle", 0) * thrustRatio;
+      thrust = xml::getDouble(tmp, "ClimbCondition/Throttle", 0.0) * thrustRatio;
 
    iaero->createCoefs(pitch, thrust, vs, airspeed, iaero->climbAlpha, iaero->climbCL,
                       iaero->climbCD);

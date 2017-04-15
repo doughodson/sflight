@@ -74,7 +74,7 @@ float getFloat(Node* const parent, const std::string pathName, const float defau
    if (node == nullptr)
       return defaultVal;
 
-   return (float)atof(node->getText().c_str());
+   return static_cast<float>(std::atof(node->getText().c_str()));
 }
 
 double getDouble(Node* const parent, const std::string pathName, const double defaultVal)

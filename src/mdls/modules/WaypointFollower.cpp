@@ -44,7 +44,7 @@ void WaypointFollower::update(const double timestep)
    const double dist =
        nav::distance(player->lat, player->lon, currentWp->radLat, currentWp->radLon);
 
-   // double hdgDiff = fabs( UnitConvert :: wrapHeading(player->eulers.getPsi()
+   // double hdgDiff = std::fabs( UnitConvert :: wrapHeading(player->eulers.getPsi()
    // - az, true) );
    const double hdg = std::atan2(player->nedVel.get2(), player->nedVel.get1());
    const double hdgDiff = std::fabs(UnitConvert::wrapHeading(hdg - az, true));

@@ -19,8 +19,9 @@ void init_WaypointFollower(xml::Node* node, mdls::WaypointFollower* wp)
 
    wp->isOn = xml::getBool(tmp, "WaypointFollow", true);
 
-   wp->cmdPathType = (xml::get(tmp, "PathType", "DIRECT") == "BEARING") ? wp->PathType::BEARING
-                                                                        : wp->PathType::DIRECT;
+   wp->cmdPathType = (xml::get(tmp, "PathType", "DIRECT") == "BEARING")
+                         ? mdls::WaypointFollower::PathType::BEARING
+                         : mdls::WaypointFollower::PathType::DIRECT;
 
    std::vector<xml::Node*> wps = xml::getList(tmp->getChild("WaypointList"), "Waypoint");
 

@@ -8,10 +8,7 @@
 namespace sflight {
 namespace mdls {
 
-Vector3::Vector3(const double a1, const double a2, const double a3)
-    : a1(a1), a2(a2), a3(a3)
-{
-}
+Vector3::Vector3(const double a1, const double a2, const double a3) : a1(a1), a2(a2), a3(a3) {}
 
 void Vector3::cross(Vector3& v)
 {
@@ -114,7 +111,7 @@ void Vector3::subtract(Vector3& ret, Vector3& v1, Vector3& v2)
    ret.set3(v1.a3 - v2.a3);
 }
 
-double Vector3::magnitude() { return sqrt(a1 * a1 + a2 * a2 + a3 * a3); }
+double Vector3::magnitude() { return std::sqrt(a1 * a1 + a2 * a2 + a3 * a3); }
 
 void Vector3::reciprocal(Vector3& ret)
 {
@@ -125,8 +122,7 @@ void Vector3::reciprocal(Vector3& ret)
 
 void Vector3::print()
 {
-   std::cout << "Vector3: " << get1() << ", " << get2() << ", " << get3()
-             << std::endl;
+   std::cout << "Vector3: " << get1() << ", " << get2() << ", " << get3() << std::endl;
 }
 
 std::string Vector3::toString() const

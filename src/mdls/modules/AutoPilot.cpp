@@ -50,7 +50,6 @@ void AutoPilot::update(const double timestep)
 void AutoPilot::updateHdg(double timestep, double cmdHdg)
 {
    double hdgDiff{};
-
    if (turnType == TurnType::TRAJECTORY) {
       hdgDiff = cmdHdg - std::atan2(player->nedVel.get2(), player->nedVel.get1());
    } else {
@@ -77,7 +76,7 @@ void AutoPilot::updateAlt(double timestep)
    double vscmd = kalt * (player->autoPilotCmds.getCmdAltitude() - player->alt);
 
    vscmd =
-       std::min(fabs(vscmd), player->autoPilotCmds.getMaxVS()) * UnitConvert::signum(vscmd);
+       std::min(std::fabs(vscmd), player->autoPilotCmds.getMaxVS()) * UnitConvert::signum(vscmd);
 
    updateVS(timestep, vscmd);
 }
@@ -102,7 +101,7 @@ void AutoPilot::updateVS(double timestep, double cmdVs)
 
    // amount of q to compensate for turning ( extra back pressure to compensate for r pulling
    // downward)
-   double qTurn = player->pqr.get3() * tan(phi);
+   double qTurn = player->pqr.get3() * std::tan(phi);
 
    if (qCmd > 0) {
       double qLimit = std::min((player->autoPilotCmds.getMaxPitchUp() - theta) /
@@ -128,7 +127,7 @@ void AutoPilot::updateVS(double timestep, double cmdVs)
    //        //double cmdVs = player->autoPilotCmds.getCmdVertSpeed();
    //
    //        //if turning and commanding descent, complete turn , then descend
-   //        if ( fabs(phi) > 0.1 && cmdVs < 0) {
+   //        if ( std::fabs(phi) > 0.1 && cmdVs < 0) {
    //            cmdVs = 0.;
    //        }
    //

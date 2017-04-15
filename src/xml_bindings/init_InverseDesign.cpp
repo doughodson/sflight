@@ -95,7 +95,7 @@ void init_InverseDesign(xml::Node* node, mdls::InverseDesign* invDsg)
       // values by deviding by the
       // prandtl-glauert denominator.
       if (invDsg->usingMachEffects) {
-         const double beta_mach = mach[i] > 0.95 ? 1 : sqrt(1.0 - mach[i] * mach[i]);
+         const double beta_mach = mach[i] > 0.95 ? 1 : std::sqrt(1.0 - mach[i] * mach[i]);
          cl[i] *= beta_mach;
          cd[i] *= beta_mach;
       }

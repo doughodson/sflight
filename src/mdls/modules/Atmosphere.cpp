@@ -44,7 +44,7 @@ int Atmosphere::getIndex(double metersAlt)
    if (metersAlt < 0)
       return 0;
 
-   int index = 0;
+   int index {};
    for (index = 1; index < maxIndex - 1; index++) {
       if (alt[index] > metersAlt)
          return index - 1;
@@ -54,7 +54,7 @@ int Atmosphere::getIndex(double metersAlt)
 
 double Atmosphere::getRemainder(double alt)
 {
-   return alt / 1000. - std::floor(alt / 1000.);
+   return alt / 1000.0 - std::floor(alt / 1000.0);
 }
 
 // returns density in kg/m^3
