@@ -22,6 +22,7 @@
 #include "sflight/xml_bindings/init_FileOutput.hpp"
 #include "sflight/xml_bindings/init_InterpAero.hpp"
 #include "sflight/xml_bindings/init_InverseDesign.hpp"
+#include "sflight/xml_bindings/init_StickControl.hpp"
 
 #include <iostream>
 #include <string>
@@ -65,7 +66,7 @@ void builder(xml::Node* parent, mdls::Player* player)
          waypointFollower->initialize(node);
       } else if (className == "StickControl") {
          auto stickControl = new mdls::StickControl(player, rate);
-         stickControl->initialize(node);
+         init_StickControl(node, stickControl);
       } else if (className == "FileOutput") {
          auto fileOutput = new mdls::FileOutput(player, rate);
          init_FileOutput(node, fileOutput);

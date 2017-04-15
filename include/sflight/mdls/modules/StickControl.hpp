@@ -6,6 +6,7 @@
 
 #include "sflight/mdls/Vector3.hpp"
 
+#include "sflight/xml_bindings/init_StickControl.hpp"
 #include "sflight/xml/Node.hpp"
 
 namespace sflight {
@@ -25,8 +26,9 @@ class StickControl : public Module
    virtual ~StickControl() = default;
 
    // module interface
-   virtual void initialize(xml::Node*) override;
    virtual void update(const double timestep) override;
+
+   friend void xml_bindings::init_StickControl(xml::Node*, StickControl*);
 
  private:
    Vector3 maxRates;

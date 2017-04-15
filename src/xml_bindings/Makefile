@@ -10,7 +10,8 @@ OBJS =  \
 	init_EOMFiveDOF.o \
 	init_FileOutput.o \
 	init_InterpAero.o \
-	init_InverseDesign.o
+	init_InverseDesign.o \
+	init_StickControl.o
 
 .PHONY: all clean
 
