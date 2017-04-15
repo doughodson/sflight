@@ -85,7 +85,7 @@ void init_TableAero(xml::Node* node, mdls::TableAero* tblAero)
 
          xml::Node* tablenode = tables[i];
 
-         throttleVals[i] = xml::getDouble(tables[i], "Throttle", 0);
+         throttleVals[i] = xml::getDouble(tables[i], "Throttle", 0.0);
 
          std::string valstr = get(tablenode, "AltVals", "");
          std::vector<std::string> splits = xml::splitString(valstr, ',');
@@ -124,7 +124,7 @@ void init_TableAero(xml::Node* node, mdls::TableAero* tblAero)
       for (int i = 0; i < numpages; i++) {
          xml::Node* tablenode = tables[i];
 
-         machVals[i] = xml::getDouble(tables[i], "Mach", 0);
+         machVals[i] = xml::getDouble(tables[i], "Mach", 0.0);
 
          std::string valstr = xml::get(tablenode, "AltVals", "");
          std::vector<std::string> splits = xml::splitString(valstr, ',');
@@ -161,7 +161,7 @@ void init_TableAero(xml::Node* node, mdls::TableAero* tblAero)
 
          xml::Node* tablenode = tables[i];
 
-         machVals[i] = xml::getDouble(tables[i], "Mach", 0);
+         machVals[i] = xml::getDouble(tables[i], "Mach", 0.0);
 
          std::string valstr = xml::get(tablenode, "AltVals", "");
          std::vector<std::string> splits = xml::splitString(valstr, ',');

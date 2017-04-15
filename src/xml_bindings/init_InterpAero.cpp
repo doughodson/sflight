@@ -67,7 +67,7 @@ void init_InterpAero(xml::Node* node, mdls::InterpAero* iaero)
    airspeed = mdls::UnitConvert::toMPS(xml::getDouble(tmp, "ClimbCondition/Airspeed", 0.0));
    vs = mdls::UnitConvert::FPMtoMPS(xml::getDouble(tmp, "ClimbCondition/VS", 0.0));
    if (airspeed < 1E-6) {
-      airspeed = xml::getDouble(tmp, "ClimbCondition/Mach", 0) * speedSound;
+      airspeed = xml::getDouble(tmp, "ClimbCondition/Mach", 0.0) * speedSound;
    }
    mach = airspeed / speedSound;
 

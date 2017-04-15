@@ -65,5 +65,5 @@ void SimExec::stop() {}
 
 void SimExec::initialize(sflight::xml::Node* node)
 {
-   frameRate = sflight::xml::getDouble(node, "Modules/Rate", 20);
+   frameRate = sflight::xml::getDouble(node, "Modules/Rate", 20.0);
 }

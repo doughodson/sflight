@@ -77,7 +77,7 @@ void init_InverseDesign(xml::Node* node, mdls::InverseDesign* invDsg)
           mdls::UnitConvert::toNewtons(xml::getDouble(tmp, "Weight", invDsg->designWeight));
 
       if (airspeed < 1E-6) {
-         mach[i] = xml::getDouble(tmp, "Mach", 0);
+         mach[i] = xml::getDouble(tmp, "Mach", 0.0);
          airspeed = mach[i] * speedSound;
       } else {
          mach[i] = airspeed / speedSound;
@@ -136,7 +136,7 @@ void init_InverseDesign(xml::Node* node, mdls::InverseDesign* invDsg)
    std::cout << "cdo: " << invDsg->cdo << " dCDda: " << invDsg->b << std::endl;
 
    // set initial conditions
-   invDsg->player->throttle = xml::getDouble(node, "InitialConditions/Throttle", 0);
+   invDsg->player->throttle = xml::getDouble(node, "InitialConditions/Throttle", 0.0);
    invDsg->player->rpm = invDsg->player->throttle;
 }
 }

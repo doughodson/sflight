@@ -44,7 +44,7 @@ void init_Engine(xml::Node* node, mdls::Engine* engine)
 
    // setup fuel flow slope
    double ff_1 =
-       mdls::UnitConvert::toKilos(xml::getDouble(tmp, "CruiseCondition/FuelFlow", 0) / 3600.0);
+       mdls::UnitConvert::toKilos(xml::getDouble(tmp, "CruiseCondition/FuelFlow", 0.0) / 3600.0);
    double mach_1 = xml::getDouble(tmp, "CruiseCondition/Mach", 0.0);
    if (mach_1 == 0)
       mach_1 = mdls::UnitConvert::toMPS(xml::getDouble(tmp, "CruiseCondition/Airspeed", 0.0)) /
@@ -60,7 +60,7 @@ void init_Engine(xml::Node* node, mdls::Engine* engine)
 
    double ff_2 = mdls::UnitConvert::toKilos(
        xml::getDouble(tmp, "ClimbCondition/FuelFlow", 0.0) / 3600.0);
-   double mach_2 = xml::getDouble(tmp, "ClimbCondition/Mach", 0);
+   double mach_2 = xml::getDouble(tmp, "ClimbCondition/Mach", 0.0);
    if (mach_2 == 0)
       mach_2 = mdls::UnitConvert::toMPS(xml::getDouble(tmp, "ClimbCondition/Airspeed", 0.0)) /
                speedSound;
@@ -79,7 +79,7 @@ void init_Engine(xml::Node* node, mdls::Engine* engine)
              << std::endl;
 
    // set initial conditions
-   engine->player->throttle = xml::getDouble(node, "InitialConditions/Throttle", 0);
+   engine->player->throttle = xml::getDouble(node, "InitialConditions/Throttle", 0.0);
    engine->player->rpm = engine->player->throttle;
 }
 }
