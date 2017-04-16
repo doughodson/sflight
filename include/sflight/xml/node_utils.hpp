@@ -15,24 +15,21 @@ namespace xml {
 // that contains only the children that have the specified pathName.
 // All children are added to the root of the childList
 //
-std::vector<Node*> getList(Node* const parent, const std::string childName);
+std::vector<Node*> getList(Node* const parent, const std::string& childName);
 
-std::string get(Node* const, const std::string pathName,
-                const std::string defaultVal);
+std::string get(Node* const, const std::string& pathName, const std::string& defaultVal);
 
-int getInt(Node* const, const std::string pathName, const int defaultVal);
+int getInt(Node* const, const std::string& pathName, const int defaultVal);
 
-long getLong(Node* const, const std::string pathName, const long defaultVal);
+long getLong(Node* const, const std::string& pathName, const long defaultVal);
 
-float getFloat(Node* const, const std::string pathName, const float defaultVal);
+float getFloat(Node* const, const std::string& pathName, const float defaultVal);
 
-double getDouble(Node* const, const std::string pathName,
-                 const double defaultVal);
+double getDouble(Node* const, const std::string& pathName, const double defaultVal);
 
-bool getBool(Node* const, const std::string pathName, const bool defaultVal);
+bool getBool(Node* const, const std::string& pathName, const bool defaultVal);
 
-std::vector<std::string> splitString(const std::string instr,
-                                     const char splitChar);
+std::vector<std::string> splitString(const std::string& instr, const char splitChar);
 }
 }
 

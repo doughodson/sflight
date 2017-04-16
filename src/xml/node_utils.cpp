@@ -14,7 +14,7 @@ namespace sflight {
 namespace xml {
 
 // returns a list of nodes that contain the childName
-std::vector<Node*> getList(Node* const parent, const std::string childName)
+std::vector<Node*> getList(Node* const parent, const std::string& childName)
 {
    if (parent == nullptr)
       return std::vector<Node*>();
@@ -22,9 +22,8 @@ std::vector<Node*> getList(Node* const parent, const std::string childName)
    return parent->getChildren(childName);
 }
 
-std::string get(Node* const parent, const std::string pathName, const std::string defaultVal)
+std::string get(Node* const parent, const std::string& pathName, const std::string& defaultVal)
 {
-
    if (parent == nullptr)
       return defaultVal;
 
@@ -36,7 +35,7 @@ std::string get(Node* const parent, const std::string pathName, const std::strin
    return node->getText();
 }
 
-int getInt(Node* const parent, const std::string pathName, const int defaultVal)
+int getInt(Node* const parent, const std::string& pathName, const int defaultVal)
 {
    if (parent == nullptr)
       return defaultVal;
@@ -49,7 +48,7 @@ int getInt(Node* const parent, const std::string pathName, const int defaultVal)
    return std::atoi(node->getText().c_str());
 }
 
-long getLong(Node* const parent, const std::string pathName, const long defaultVal)
+long getLong(Node* const parent, const std::string& pathName, const long defaultVal)
 {
    if (parent == nullptr)
       return defaultVal;
@@ -62,7 +61,7 @@ long getLong(Node* const parent, const std::string pathName, const long defaultV
    return std::atol(node->getText().c_str());
 }
 
-float getFloat(Node* const parent, const std::string pathName, const float defaultVal)
+float getFloat(Node* const parent, const std::string& pathName, const float defaultVal)
 {
    if (parent == nullptr)
       return defaultVal;
@@ -75,7 +74,7 @@ float getFloat(Node* const parent, const std::string pathName, const float defau
    return static_cast<float>(std::atof(node->getText().c_str()));
 }
 
-double getDouble(Node* const parent, const std::string pathName, const double defaultVal)
+double getDouble(Node* const parent, const std::string& pathName, const double defaultVal)
 {
    if (parent == nullptr)
       return defaultVal;
@@ -90,7 +89,7 @@ double getDouble(Node* const parent, const std::string pathName, const double de
    return val;
 }
 
-bool getBool(Node* const parent, const std::string pathName, const bool defaultVal)
+bool getBool(Node* const parent, const std::string& pathName, const bool defaultVal)
 {
    if (parent == nullptr)
       return defaultVal;
@@ -113,11 +112,9 @@ bool getBool(Node* const parent, const std::string pathName, const bool defaultV
    return defaultVal;
 }
 
-std::vector<std::string> splitString(const std::string inStr, const char splitChar)
+std::vector<std::string> splitString(const std::string& inStr, const char splitChar)
 {
    std::vector<std::string> retV;
-
-   int startLoc = 0;
 
    const char* charStr = inStr.c_str();
    const int len = inStr.length();
@@ -129,7 +126,7 @@ std::vector<std::string> splitString(const std::string inStr, const char splitCh
          i++;
       }
 
-      startLoc = i;
+      int startLoc = i;
       i++;
 
       while (i < len && charStr[i] != splitChar && !isWhitespace(charStr[i])) {
