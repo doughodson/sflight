@@ -28,8 +28,8 @@ void StickControl::update(const double timestep)
 
    // std::cout << "qRatio: " << qRatio << std::endl;
 
-   double desPitch = elevGain * -player->deflections.get1() * qbar /
-                     designQbar * std::cos(player->eulers.getPhi());
+//   double desPitch = elevGain * -player->deflections.get1() * qbar /
+//                     designQbar * std::cos(player->eulers.getPhi());
 
    double pitchMom = (1.0 - qRatio) * pitchGain *
                      std::cos(player->eulers.getTheta()) *
