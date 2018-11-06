@@ -84,7 +84,7 @@ double getDouble(Node* const parent, const std::string& pathName, const double d
    if (node == nullptr)
       return defaultVal;
 
-   const double val = std::atof(node->getText().c_str());
+   const double val{std::atof(node->getText().c_str())};
 
    return val;
 }
@@ -94,13 +94,13 @@ bool getBool(Node* const parent, const std::string& pathName, const bool default
    if (parent == nullptr)
       return defaultVal;
 
-   Node* node = parent->getChild(pathName);
+   Node* node{parent->getChild(pathName)};
    if (node == nullptr)
       return defaultVal;
 
    std::string text{node->getText()};
 
-   for (unsigned int i = 0; i < text.length(); i++) {
+   for (std::size_t i = 0; i < text.length(); i++) {
       text[i] = std::toupper(text[i]);
    }
 
@@ -117,16 +117,16 @@ std::vector<std::string> splitString(const std::string& inStr, const char splitC
    std::vector<std::string> retV;
 
    const char* charStr{inStr.c_str()};
-   const int len{inStr.length()};
+   const size_t len{inStr.length()};
 
-   int i{};
+   std::size_t i{};
    while (i < len) {
       // trim leading delimeters
       while (i < len && (charStr[i] == splitChar || isWhitespace(charStr[i]))) {
          i++;
       }
 
-      int startLoc{i};
+      std::size_t startLoc{i};
       i++;
 
       while (i < len && charStr[i] != splitChar && !isWhitespace(charStr[i])) {

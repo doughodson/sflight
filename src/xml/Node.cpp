@@ -19,8 +19,8 @@ Node::Node(const Node& src)
    name = src.getTagName();
    text = src.getText();
 
-   int cnt = src.getAttributeCount();
-   std::string* arry = new std::string[cnt];
+   int cnt{src.getAttributeCount()};
+   std::string* arry{new std::string[cnt]};
    src.getAttributeNames(arry);
 
    for (int i = 0; i < cnt; i++) {
@@ -30,7 +30,7 @@ Node::Node(const Node& src)
    cnt = src.getChildCount();
 
    for (int i = 0; i < cnt; i++) {
-      Node* tmp = new Node(*src.getChild(i));
+      Node* tmp{new Node(*src.getChild(i))};
       addChild(tmp);
    }
 
@@ -50,7 +50,7 @@ void Node::setTagName(const std::string& x) { name = x; }
 
 Node* Node::addChild(const std::string& x)
 {
-   Node* child = new Node(x);
+   Node* child{new Node(x)};
    return addChild(child);
 }
 
@@ -78,10 +78,10 @@ Node* Node::getChild(const int index) const
 //
 Node* Node::getChild(const std::string& x) const
 {
-   std::string childName {x};
-   const Node* tmp = this;
+   std::string childName{x};
+   const Node* tmp{this};
 
-   const int splitPt = childName.find_first_of("/");
+   const std::size_t splitPt{childName.find_first_of("/")};
    std::string tail;
 
    if (splitPt != std::string::npos) {
@@ -89,7 +89,7 @@ Node* Node::getChild(const std::string& x) const
       childName = childName.substr(0, splitPt);
    }
 
-   for (unsigned int i = 0; i < tmp->childList.size(); i++) {
+   for (std::size_t i = 0; i < tmp->childList.size(); i++) {
       if (tmp->childList[i]->getTagName() == childName) {
          if (tail != "")
             return childList[i]->getChild(tail);
@@ -106,12 +106,12 @@ Node* Node::getChild(const std::string& x) const
 //
 std::vector<Node*> Node::getChildren(const std::string& x) const
 {
-   std::string childName {x};
+   std::string childName{x};
    std::vector<Node*> list;
 
-   const Node* tmp = this;
+   const Node* tmp{this};
 
-   const int splitPt = childName.find_first_of("/");
+   const std::size_t splitPt{childName.find_first_of("/")};
    std::string tail;
 
    if (splitPt != std::string::npos) {
@@ -119,11 +119,11 @@ std::vector<Node*> Node::getChildren(const std::string& x) const
       childName = childName.substr(0, splitPt);
    }
 
-   for (unsigned int i = 0; i < tmp->childList.size(); i++) {
+   for (std::size_t i = 0; i < tmp->childList.size(); i++) {
       if (tmp->childList[i]->getTagName() == childName) {
          if (tail != "") {
             std::vector<Node*> sublist = childList[i]->getChildren(tail);
-            for (unsigned int j = 0; j < sublist.size(); j++) {
+            for (std::size_t j = 0; j < sublist.size(); j++) {
                list.push_back(sublist[j]);
             }
          } else {
@@ -151,7 +151,7 @@ std::string Node::getAttribute(const std::string name) const
 void Node::getAttributeNames(std::string* const storeArray) const
 {
    std::map<std::string, std::string>::const_iterator iter;
-   int i = 0;
+   int i{};
 
    for (iter = attrMap.begin(); iter != attrMap.end(); ++iter) {
       storeArray[i] = iter->first;
@@ -185,8 +185,8 @@ bool Node::remove(Node* const node)
 
 std::string Node::toString() const
 {
-   std::string ret = "<" + getTagName() + " ";
-   std::string* attrNames = new std::string[getAttributeCount()];
+   std::string ret{"<" + getTagName() + " "};
+   std::string* attrNames{new std::string[getAttributeCount()]};
    getAttributeNames(attrNames);
 
    for (int i = 0; i < getAttributeCount(); i++) {

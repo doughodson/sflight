@@ -11,4 +11,4 @@ del ..\..\lib\*.lib
 rem
 rem create solution/workspace files
 rem
-premake5-alpha11.exe --os=windows --file=premake5.lua vs2017
+premake5-alpha13.exe --os=windows --file=premake5.lua vs2017

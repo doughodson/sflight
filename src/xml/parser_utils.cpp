@@ -18,7 +18,7 @@ Node* parse(const std::string filename, const bool treatAttributesAsChildren)
       return new Node("");
    }
 
-   Node* node = parse(fin, treatAttributesAsChildren);
+   Node* node{parse(fin, treatAttributesAsChildren)};
    fin.close();
    return node;
 }
