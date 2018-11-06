@@ -194,7 +194,7 @@ std::string putAttributes(std::string str, Node* node, const bool treatAsChildre
          while (isWhitespace(str[0])) {
             str = str.substr(1, str.length() - 1);
          }
-         const unsigned int nameEnd = str.find("=\"", 0);
+         const std::size_t nameEnd = str.find("=\"", 0);
          if (nameEnd == std::string::npos)
             return str;
 
