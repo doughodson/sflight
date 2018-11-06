@@ -15,7 +15,12 @@ namespace xml_bindings {
 
 void init_FileOutput(xml::Node* node, mdls::FileOutput* fileOutput)
 {
-   std::string filename = get(node, "FileOutput/Path", "");
+   std::cout << std::endl;
+   std::cout << "-------------------------" << std::endl;
+   std::cout << "Module: FileOutput"        << std::endl;
+   std::cout << "-------------------------" << std::endl;
+
+   std::string filename{get(node, "FileOutput/Path", "")};
    fileOutput->rate = static_cast<int>(xml::getDouble(node, "FileOutput/Rate", 1.0));
    std::cout << "Saving output to: " << filename << std::endl;
    fileOutput->fout.open(filename.c_str());
@@ -26,6 +31,7 @@ void init_FileOutput(xml::Node* node, mdls::FileOutput* fileOutput)
                           "\tBank(deg)\tPitch(deg)\tHeading(deg)\tThrottle"
                        << std::endl;
    }
+   std::cout << "-------------------------" << std::endl;
 }
 }
 }

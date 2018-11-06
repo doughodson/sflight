@@ -20,11 +20,11 @@ void init_Player(xml::Node* node, mdls::Player* player)
 {
    std::cout << std::endl;
    std::cout << "-------------------------" << std::endl;
-   std::cout << "Reading InitialConditions" << std::endl;
+   std::cout << "Player: InitialConditions" << std::endl;
    std::cout << "-------------------------" << std::endl;
 
    player->mass = mdls::UnitConvert::toKilos(xml::getDouble(node, "InitialConditions/Weight", 0.0));
-   std::cout << "Player mass : " << player->mass << " Kilograms\n";
+   std::cout << "Player mass      : " << player->mass << " Kilograms\n";
 
    xml::Node* wind{node->getChild("Wind")};
    if (wind != nullptr) {
@@ -79,7 +79,6 @@ void init_Player(xml::Node* node, mdls::Player* player)
    std::cout << "Player fuel      : " << fuel << std::endl;
    player->fuel = fuel;
    std::cout << "-------------------------" << std::endl;
-   std::cout << std::endl;
 }
 }
 }

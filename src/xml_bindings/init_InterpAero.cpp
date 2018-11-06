@@ -12,18 +12,22 @@
 #include "sflight/mdls/modules/Atmosphere.hpp"
 
 #include <cmath>
+#include <iostream>
 
 namespace sflight {
 namespace xml_bindings {
 
 void init_InterpAero(xml::Node* node, mdls::InterpAero* iaero)
 {
-   xml::Node* tmp = node->getChild("Design");
+   std::cout << std::endl;
+   std::cout << "-------------------------" << std::endl;
+   std::cout << "Module: InterpAero"        << std::endl;
+   std::cout << "-------------------------" << std::endl;
+
+   xml::Node* tmp{node->getChild("Design")};
 
    iaero->designAlt = mdls::UnitConvert::toMeters(xml::getDouble(tmp, "DesignAltitude", 0.0));
-
-   iaero->designWeight =
-       mdls::UnitConvert::toNewtons(xml::getDouble(tmp, "DesignWeight", 0.0));
+   iaero->designWeight = mdls::UnitConvert::toNewtons(xml::getDouble(tmp, "DesignWeight", 0.0));
 
    iaero->wingSpan = mdls::UnitConvert::toMeters(xml::getDouble(tmp, "WingSpan", 6.0));
    iaero->wingArea = mdls::UnitConvert::toSqMeters(xml::getDouble(tmp, "WingArea", 6.0));
@@ -33,26 +37,23 @@ void init_InterpAero(xml::Node* node, mdls::InterpAero* iaero)
 
    iaero->thrustAngle = mdls::UnitConvert::toRads(xml::getDouble(tmp, "ThrustAngle", 0.0));
 
-   double thrustRatio = xml::getDouble(tmp, "ThrustToWeight", 0.0) * iaero->designWeight;
-   double speedSound =
-       mdls::Atmosphere::getSpeedSound(mdls::Atmosphere::getTemp(iaero->designAlt));
+   const double thrustRatio{xml::getDouble(tmp, "ThrustToWeight", 0.0) * iaero->designWeight};
+   const double speedSound{mdls::Atmosphere::getSpeedSound(mdls::Atmosphere::getTemp(iaero->designAlt))};
 
    // cruise condition
-   double pitch = mdls::UnitConvert::toRads(xml::getDouble(tmp, "CruiseCondition/Pitch", 0.0));
-   double airspeed =
-       mdls::UnitConvert::toMPS(xml::getDouble(tmp, "CruiseCondition/Airspeed", 0.0));
-   double vs = mdls::UnitConvert::FPMtoMPS(xml::getDouble(tmp, "CruiseCondition/VS", 0.0));
+   double pitch{mdls::UnitConvert::toRads(xml::getDouble(tmp, "CruiseCondition/Pitch", 0.0))};
+   double airspeed{mdls::UnitConvert::toMPS(xml::getDouble(tmp, "CruiseCondition/Airspeed", 0.0))};
+   double vs{mdls::UnitConvert::FPMtoMPS(xml::getDouble(tmp, "CruiseCondition/VS", 0.0))};
    if (airspeed < 1E-6) {
       airspeed = xml::getDouble(tmp, "CruiseCondition/Mach", 0.0) * speedSound;
    }
 
-   double thrust =
-       mdls::UnitConvert::toNewtons(xml::getDouble(tmp, "CruiseCondition/Thrust", 0.0));
-   if (thrust < 1E-6)
+   double thrust{mdls::UnitConvert::toNewtons(xml::getDouble(tmp, "CruiseCondition/Thrust", 0.0))};
+   if (thrust < 1E-6) {
       thrust = xml::getDouble(tmp, "CruiseCondition/Throttle", 0.0) * thrustRatio;
+   }
 
-   iaero->createCoefs(pitch, thrust, vs, airspeed, iaero->cruiseAlpha, iaero->cruiseCL,
-                      iaero->cruiseCD);
+   iaero->createCoefs(pitch, thrust, vs, airspeed, iaero->cruiseAlpha, iaero->cruiseCL, iaero->cruiseCD);
 
    double mach{};
    if (iaero->usingMachEffects) {
@@ -72,11 +73,11 @@ void init_InterpAero(xml::Node* node, mdls::InterpAero* iaero)
    mach = airspeed / speedSound;
 
    thrust = mdls::UnitConvert::toNewtons(xml::getDouble(tmp, "ClimbCondition/Thrust", 0.0));
-   if (thrust < 1E-6)
+   if (thrust < 1E-6) {
       thrust = xml::getDouble(tmp, "ClimbCondition/Throttle", 0.0) * thrustRatio;
+   }
 
-   iaero->createCoefs(pitch, thrust, vs, airspeed, iaero->climbAlpha, iaero->climbCL,
-                      iaero->climbCD);
+   iaero->createCoefs(pitch, thrust, vs, airspeed, iaero->climbAlpha, iaero->climbCL, iaero->climbCD);
 
    if (iaero->usingMachEffects) {
       mach = airspeed / speedSound;
@@ -91,6 +92,8 @@ void init_InterpAero(xml::Node* node, mdls::InterpAero* iaero)
    iaero->b2 = (iaero->cruiseCD - iaero->climbCD) /
                (iaero->cruiseCL * iaero->cruiseCL - iaero->climbCL * iaero->climbCL);
    iaero->b1 = iaero->climbCD - iaero->b2 * iaero->climbCL * iaero->climbCL;
+
+   std::cout << "-------------------------" << std::endl;
 }
 }
 }

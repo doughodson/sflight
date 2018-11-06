@@ -12,12 +12,18 @@
 #include "sflight/mdls/constants.hpp"
 
 #include <cmath>
+#include <iostream>
 
 namespace sflight {
 namespace xml_bindings {
 
 void init_StickControl(xml::Node* node, mdls::StickControl* sc)
 {
+   std::cout << std::endl;
+   std::cout << "-------------------------" << std::endl;
+   std::cout << "Module: StickControl"      << std::endl;
+   std::cout << "-------------------------" << std::endl;
+
    xml::Node* cntrlNode = node->getChild("Control");
 
    double designAlt =
@@ -40,6 +46,8 @@ void init_StickControl(xml::Node* node, mdls::StickControl* sc)
    sc->elevGain = mdls::UnitConvert::toRads(sc->elevGain);
    sc->ailGain = mdls::UnitConvert::toRads(sc->ailGain);
    sc->rudGain = mdls::UnitConvert::toRads(sc->rudGain);
+
+   std::cout << "-------------------------" << std::endl;
 }
 }
 }

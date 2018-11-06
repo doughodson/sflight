@@ -10,11 +10,18 @@
 #include "sflight/mdls/UnitConvert.hpp"
 #include "sflight/mdls/constants.hpp"
 
+#include <iostream>
+
 namespace sflight {
 namespace xml_bindings {
 
 void init_WaypointFollower(xml::Node* node, mdls::WaypointFollower* wp)
 {
+   std::cout << std::endl;
+   std::cout << "-------------------------" << std::endl;
+   std::cout << "Module: WaypointFollower"  << std::endl;
+   std::cout << "-------------------------" << std::endl;
+
    xml::Node* tmp = node->getChild("WaypointFollower");
 
    wp->isOn = xml::getBool(tmp, "WaypointFollow", true);
@@ -49,6 +56,8 @@ void init_WaypointFollower(xml::Node* node, mdls::WaypointFollower* wp)
 
       wp->loadWaypoint();
    }
+
+   std::cout << "-------------------------" << std::endl;
 }
 }
 }

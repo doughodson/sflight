@@ -13,12 +13,18 @@
 #include "sflight/mdls/Table3D.hpp"
 
 #include <cmath>
+#include <iostream>
 
 namespace sflight {
 namespace xml_bindings {
 
 void init_TableAero(xml::Node* node, mdls::TableAero* tblAero)
 {
+   std::cout << std::endl;
+   std::cout << "-------------------------" << std::endl;
+   std::cout << "Module: TableAero"         << std::endl;
+   std::cout << "-------------------------" << std::endl;
+
    xml::Node* tmp = node->getChild("Design");
    if (tmp == 0)
       return;
@@ -188,6 +194,7 @@ void init_TableAero(xml::Node* node, mdls::TableAero* tblAero)
       }
    }
 
+   std::cout << "-------------------------" << std::endl;
 }
 }
 }

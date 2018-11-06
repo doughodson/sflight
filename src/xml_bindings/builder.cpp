@@ -48,51 +48,41 @@ void builder(xml::Node* parent, mdls::Player* player)
       const double rate{xml::getDouble(nodeList[i], "Rate", 0.0)};
 
       if (className == "EOMFiveDOF") {
-         std::cout << "Adding module : EOMFiveDOF\n";
          auto eomFiveDOF{new mdls::EOMFiveDOF(player, rate)};
          player->addModule(eomFiveDOF);
          init_EOMFiveDOF(node, eomFiveDOF);
       } else if (className == "InterpAero") {
-         std::cout << "Adding Module : InterpAero\n";
          auto interpAero{new mdls::InterpAero(player, rate)};
          player->addModule(interpAero);
          init_InterpAero(node, interpAero);
       } else if (className == "TableAero") {
-         std::cout << "Adding Module TableAero\n";
          auto tableAero{new mdls::TableAero(player, rate)};
          player->addModule(tableAero);
          init_TableAero(node, tableAero);
       } else if (className == "Autopilot") {
-         std::cout << "Adding Module Autopilot\n";
          auto autoPilot{new mdls::AutoPilot(player, rate)};
          player->addModule(autoPilot);
          init_AutoPilot(node, autoPilot);
       } else if (className == "Engine") {
-         std::cout << "Adding Module Engine\n";
          auto engine{new mdls::Engine(player, rate)};
          player->addModule(engine);
          init_Engine(node, engine);
       } else if (className == "Atmosphere") {
-         std::cout << "Adding Module Atmosphere\n";
          auto atmosphere{new mdls::Atmosphere(player, rate)};
          player->addModule(atmosphere);
       } else if (className == "WaypointFollower") {
-         std::cout << "Adding Module WaypointFollower\n";
          auto waypointFollower{new mdls::WaypointFollower(player, rate)};
          player->addModule(waypointFollower);
          init_WaypointFollower(node, waypointFollower);
       } else if (className == "StickControl") {
-         std::cout << "Adding Module StickControl\n";
          auto stickControl{new mdls::StickControl(player, rate)};
          player->addModule(stickControl);
          init_StickControl(node, stickControl);
       } else if (className == "FileOutput") {
-         std::cout << "Adding Module FileOutput\n";
          auto fileOutput{new mdls::FileOutput(player, rate)};
          player->addModule(fileOutput);
          init_FileOutput(node, fileOutput);
       } else if (className == "InverseDesign") {
-         std::cout << "Adding Module InverseDesign\n";
          auto inverseDesign{new mdls::InverseDesign(player, rate)};
          player->addModule(inverseDesign);
          init_InverseDesign(node, inverseDesign);

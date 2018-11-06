@@ -21,6 +21,11 @@ namespace xml_bindings {
 
 void init_InverseDesign(xml::Node* node, mdls::InverseDesign* invDsg)
 {
+   std::cout << std::endl;
+   std::cout << "-------------------------" << std::endl;
+   std::cout << "Module: InverseDesign"     << std::endl;
+   std::cout << "-------------------------" << std::endl;
+
    std::cout << "init_InverseDesign\n" << std::flush;
 
    xml::Node* tmp{node->getChild("Design")};
@@ -46,7 +51,7 @@ void init_InverseDesign(xml::Node* node, mdls::InverseDesign* invDsg)
    std::cout << "before\n";
 
    // setup flight conditions (2 points expected)
-   std::vector<xml::Node*> fcNodes = tmp->getChildren("FlightConditions/FlightCondition");
+   std::vector<xml::Node*> fcNodes{tmp->getChildren("FlightConditions/FlightCondition")};
 
    std::cout << "after\n";
 
@@ -56,7 +61,7 @@ void init_InverseDesign(xml::Node* node, mdls::InverseDesign* invDsg)
    invDsg->wingArea = mdls::UnitConvert::toSqMeters(xml::getDouble(tmp, "FlightConditions/WingArea", 6.0));
    invDsg->designAlt = xml::getDouble(tmp, "FlightConditions/Altitude", 0.0);
 
-   const std::size_t size = fcNodes.size();
+   const std::size_t size{fcNodes.size()};
 
    auto cl = std::unique_ptr<double[]>{new double[size]};
    auto cd = std::unique_ptr<double[]>{new double[size]};
@@ -134,6 +139,8 @@ void init_InverseDesign(xml::Node* node, mdls::InverseDesign* invDsg)
    // set initial conditions
    invDsg->player->throttle = xml::getDouble(node, "InitialConditions/Throttle", 0.0);
    invDsg->player->rpm = invDsg->player->throttle;
+
+   std::cout << "-------------------------" << std::endl;
 }
 }
 }
