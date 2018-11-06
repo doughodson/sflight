@@ -146,7 +146,7 @@ std::string readChunk(std::istream& r)
          }
          ch = r.get();
       }
-   } catch (int e) {
+   } catch (int) {
       return "";
    }
 
@@ -214,7 +214,7 @@ std::string putAttributes(std::string str, Node* node, const bool treatAsChildre
          }
          str = str.substr(attrEnd + 1);
       }
-   } catch (int e) {
+   } catch (int) {
       std::cerr << "error" << std::endl;
    }
    return str;

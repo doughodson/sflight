@@ -15,8 +15,7 @@ SimExec::SimExec(sflight::mdls::Player* p, const double frameRate)
 {
 }
 
-SimExec::SimExec(sflight::mdls::Player* p, const double frameRate,
-                   const long maxFrames)
+SimExec::SimExec(sflight::mdls::Player* p, const double frameRate,  const long maxFrames)
     : player(p), frameRate(frameRate), maxFrames(maxFrames)
 {
 }
@@ -27,8 +26,8 @@ void SimExec::start()
       return;
 
    double time{};
-   const double frameTime = 1.0 / frameRate;
-   const long sleepTime = static_cast<long>(frameTime * 1E3);
+   const double frameTime{1.0 / frameRate};
+   const long sleepTime{static_cast<long>(frameTime * 1E3)};
 
    while (player->frameNum < maxFrames) {
       if (!player->paused) {
@@ -44,7 +43,7 @@ void SimExec::startConstructive()
       return;
 
    double time{};
-   const double frameTime = 1.0 / frameRate;
+   const double frameTime{1.0 / frameRate};
    player->paused = false;
    double frameGroup{};
 

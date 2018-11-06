@@ -16,12 +16,12 @@ namespace xml_bindings {
 
 void init_AutoPilot(xml::Node* node, mdls::AutoPilot* ap)
 {
-   xml::Node* apProps = node->getChild("AutoPilot");
+   xml::Node* apProps{node->getChild("AutoPilot")};
 
-   std::vector<xml::Node*> comps = xml::getList(apProps, "Component");
+   std::vector<xml::Node*> comps{xml::getList(apProps, "Component")};
 
-   for (int i = 0; i < comps.size(); i++) {
-      xml::Node* tmp = comps[i];
+   for (std::size_t i = 0; i < comps.size(); i++) {
+      xml::Node* tmp{comps[i]};
 
       if (xml::get(tmp, "Type", "") == "HeadingHold") {
          ap->player->autoPilotCmds.setMaxBank(

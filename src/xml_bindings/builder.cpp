@@ -42,7 +42,7 @@ void builder(xml::Node* parent, mdls::Player* player)
    std::vector<xml::Node*> nodeList = xml::getList(node, "Module");
    const double defaultRate = xml::getDouble(node, "Rate", 0.0);
 
-   for (int i = 0; i < nodeList.size(); i++) {
+   for (std::size_t i = 0; i < nodeList.size(); i++) {
       const std::string className = xml::get(nodeList[i], "Class", "");
       const double rate = xml::getDouble(nodeList[i], "Rate", 0.0);
 

@@ -93,9 +93,9 @@ workspace "sflight"
       }
       links { "xml_bindings", "xml", "mdls" }
       libdirs { "../../lib" }
-      if _ACTION ~= "gmake" then
-         defines { "_CONSOLE" }
-      end
+--      if _ACTION ~= "gmake" then
+--         defines { "_CONSOLE" }
+--      end
       filter "configurations:Release"
          if _ACTION ~= "gmake" then
             links { "Ws2_32", "Winmm", "comctl32", "gdi32" }

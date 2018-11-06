@@ -24,7 +24,7 @@ Player::Player() { g = nav::getG(0, 0, 0); }
 
 Player::~Player()
 {
-   for (int i = 0; i < modules.size(); i++) {
+   for (std::size_t i = 0; i < modules.size(); i++) {
       delete modules[i];
    }
 }

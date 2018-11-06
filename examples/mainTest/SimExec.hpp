@@ -20,7 +20,7 @@ class SimExec
    void start();
    void startConstructive();
    void stop();
-   void initialize(sflight::xml::Node* node);
+   void initialize(sflight::xml::Node*);
 
  private:
    sflight::mdls::Player* player{};

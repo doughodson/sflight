@@ -194,7 +194,7 @@ std::string Node::toString() const
    }
    ret += ">";
 
-   for (int i = 0; i < childList.size(); i++) {
+   for (std::size_t i = 0; i < childList.size(); i++) {
       ret += "\n";
       ret += childList[i]->toString();
    }
