@@ -47,7 +47,6 @@ void builder(xml::Node* parent, mdls::Player* player)
       const std::string className{xml::get(nodeList[i], "Class", "")};
       const double rate{xml::getDouble(nodeList[i], "Rate", 0.0)};
 
-
       if (className == "EOMFiveDOF") {
          std::cout << "Adding module : EOMFiveDOF\n";
          auto eomFiveDOF{new mdls::EOMFiveDOF(player, rate)};

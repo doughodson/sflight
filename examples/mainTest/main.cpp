@@ -32,6 +32,11 @@ int main(int argc, char** argv)
 
    // parse input file and return top node
    xml::Node* node{xml::parse(filename, true)};
+   if (node) {
+      std::cout << "XML file: " << filename << " parsed ok\n";
+   } else {
+      std::cout << "XML file: " << filename << " could NOT be parsed!\n";
+   }
 
    std::cout << "Creating and configuring a new player" << std::endl;
    auto player{new mdls::Player()};
