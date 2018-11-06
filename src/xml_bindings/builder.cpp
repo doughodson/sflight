@@ -44,7 +44,7 @@ void builder(xml::Node* parent, mdls::Player* player)
 
    for (std::size_t i = 0; i < nodeList.size(); i++) {
 
-      const std::string className{xml::get(nodeList[i], "Class", "")};
+      const std::string className{xml::getString(nodeList[i], "Class", "")};
       const double rate{xml::getDouble(nodeList[i], "Rate", 0.0)};
 
       if (className == "EOMFiveDOF") {

@@ -51,16 +51,16 @@ void init_TableAero(xml::Node* node, mdls::TableAero* tblAero)
 
          throttleVals[i] = xml::getDouble(tables[i], "Throttle", 0.0);
 
-         std::string valstr = xml::get(tablenode, "AltVals", "");
-         std::vector<std::string> splits = xml::splitString(valstr, ',');
+         std::string valstr{xml::getString(tablenode, "AltVals", "")};
+         std::vector<std::string> splits{xml::splitString(valstr, ',')};
          int numAltVals = splits.size();
 
-         double* altvals = new double[numAltVals];
+         double* altvals{new double[numAltVals]};
          for (int j = 0; j < numAltVals; j++) {
             altvals[j] = mdls::UnitConvert::toMeters(std::atof(splits[j].c_str()));
          }
 
-         valstr = xml::get(tablenode, "MachVals", "");
+         valstr = xml::getString(tablenode, "MachVals", "");
          splits = xml::splitString(valstr, ',');
          int numMachVals = splits.size();
 
@@ -71,7 +71,7 @@ void init_TableAero(xml::Node* node, mdls::TableAero* tblAero)
 
          mdls::Table2D* table =
              new mdls::Table2D(numAltVals, numMachVals, machvals, altvals);
-         table->setData(xml::get(tablenode, "Data", ""));
+         table->setData(xml::getString(tablenode, "Data", ""));
          tblAero->thrustTable->setPage(i, table);
       }
       // convert from lbs to Newtons
@@ -93,7 +93,7 @@ void init_TableAero(xml::Node* node, mdls::TableAero* tblAero)
 
          throttleVals[i] = xml::getDouble(tables[i], "Throttle", 0.0);
 
-         std::string valstr = get(tablenode, "AltVals", "");
+         std::string valstr = getString(tablenode, "AltVals", "");
          std::vector<std::string> splits = xml::splitString(valstr, ',');
          int numAltVals = splits.size();
 
@@ -102,7 +102,7 @@ void init_TableAero(xml::Node* node, mdls::TableAero* tblAero)
             altvals[j] = mdls::UnitConvert::toMeters(std::atof(splits[j].c_str()));
          }
 
-         valstr = xml::get(tablenode, "MachVals", "");
+         valstr = xml::getString(tablenode, "MachVals", "");
          splits = xml::splitString(valstr, ',');
          int numMachVals = splits.size();
 
@@ -113,7 +113,7 @@ void init_TableAero(xml::Node* node, mdls::TableAero* tblAero)
 
          mdls::Table2D* table =
              new mdls::Table2D(numAltVals, numMachVals, altvals, machvals);
-         table->setData(xml::get(tablenode, "Data", ""));
+         table->setData(xml::getString(tablenode, "Data", ""));
          tblAero->fuelflowTable->setPage(i, table);
       }
       // convert from lbs/sec to kilos/sec
@@ -132,7 +132,7 @@ void init_TableAero(xml::Node* node, mdls::TableAero* tblAero)
 
          machVals[i] = xml::getDouble(tables[i], "Mach", 0.0);
 
-         std::string valstr = xml::get(tablenode, "AltVals", "");
+         std::string valstr = xml::getString(tablenode, "AltVals", "");
          std::vector<std::string> splits = xml::splitString(valstr, ',');
          int numAltVals = splits.size();
 
@@ -141,7 +141,7 @@ void init_TableAero(xml::Node* node, mdls::TableAero* tblAero)
             altvals[j] = mdls::UnitConvert::toMeters(std::atof(splits[j].c_str()));
          }
 
-         valstr = xml::get(tablenode, "AlphaVals", "");
+         valstr = xml::getString(tablenode, "AlphaVals", "");
          splits = xml::splitString(valstr, ',');
          int numAlphaVals = splits.size();
 
@@ -152,7 +152,7 @@ void init_TableAero(xml::Node* node, mdls::TableAero* tblAero)
 
          mdls::Table2D* table =
              new mdls::Table2D(numAltVals, numAlphaVals, altvals, alphavals);
-         table->setData(get(tablenode, "Data", ""));
+         table->setData(getString(tablenode, "Data", ""));
          tblAero->liftTable->setPage(i, table);
       }
    }
@@ -169,7 +169,7 @@ void init_TableAero(xml::Node* node, mdls::TableAero* tblAero)
 
          machVals[i] = xml::getDouble(tables[i], "Mach", 0.0);
 
-         std::string valstr = xml::get(tablenode, "AltVals", "");
+         std::string valstr = xml::getString(tablenode, "AltVals", "");
          std::vector<std::string> splits = xml::splitString(valstr, ',');
          const int numAltVals = splits.size();
 
@@ -178,7 +178,7 @@ void init_TableAero(xml::Node* node, mdls::TableAero* tblAero)
             altvals[j] = mdls::UnitConvert::toMeters(std::atof(splits[j].c_str()));
          }
 
-         valstr = xml::get(tablenode, "CLVals", "");
+         valstr = xml::getString(tablenode, "CLVals", "");
          splits = xml::splitString(valstr, ',');
          const int numAlphaVals = splits.size();
 
@@ -189,7 +189,7 @@ void init_TableAero(xml::Node* node, mdls::TableAero* tblAero)
 
          mdls::Table2D* table =
              new mdls::Table2D(numAltVals, numAlphaVals, altvals, alphavals);
-         table->setData(xml::get(tablenode, "Data", ""));
+         table->setData(xml::getString(tablenode, "Data", ""));
          tblAero->dragTable->setPage(i, table);
       }
    }

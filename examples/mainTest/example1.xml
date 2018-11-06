@@ -4,11 +4,11 @@
 <SimpleFlight>
 
     <Modules Rate="60">
+        <Module Class="FileOutput"/>
         <Module Class="EOMFiveDOF"/>
         <Module Class="Autopilot"/>
         <Module Class="Atmosphere" Rate="10" />
         <Module Class="StickControl"/>
-        <Module Class="FileOutput"/>
         <Module Class="WaypointFollower"/>
         <Module Class="InverseDesign"/>
     </Modules>
@@ -60,7 +60,10 @@
 
     </Design>
 
-    <FileOutput>output</FileOutput>
+    <FileOutput>
+        <Path>output.txt</Path>
+        <Rate>20</Rate>
+    </FileOutput>
 
     <WaypointFollower>
         <WaypointFollow>true</WaypointFollow>

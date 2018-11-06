@@ -17,7 +17,7 @@ namespace xml {
 //
 std::vector<Node*> getList(Node* const parent, const std::string& childName);
 
-std::string get(Node* const, const std::string& pathName, const std::string& defaultVal);
+std::string getString(Node* const, const std::string& pathName, const std::string& defaultVal);
 
 int getInt(Node* const, const std::string& pathName, const int defaultVal);
 

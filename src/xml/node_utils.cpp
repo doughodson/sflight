@@ -23,7 +23,7 @@ std::vector<Node*> getList(Node* const parent, const std::string& childName)
    return parent->getChildren(childName);
 }
 
-std::string get(Node* const parent, const std::string& pathName, const std::string& defaultVal)
+std::string getString(Node* const parent, const std::string& pathName, const std::string& defaultVal)
 {
    if (!parent) {
       return defaultVal;

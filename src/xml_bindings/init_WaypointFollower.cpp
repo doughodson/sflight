@@ -26,7 +26,7 @@ void init_WaypointFollower(xml::Node* node, mdls::WaypointFollower* wp)
 
    wp->isOn = xml::getBool(tmp, "WaypointFollow", true);
 
-   wp->cmdPathType = (xml::get(tmp, "PathType", "DIRECT") == "BEARING")
+   wp->cmdPathType = (xml::getString(tmp, "PathType", "DIRECT") == "BEARING")
                          ? mdls::WaypointFollower::PathType::BEARING
                          : mdls::WaypointFollower::PathType::DIRECT;
 

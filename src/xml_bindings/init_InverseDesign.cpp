@@ -36,7 +36,7 @@ void init_InverseDesign(xml::Node* node, mdls::InverseDesign* invDsg)
    invDsg->thrustAngle = mdls::UnitConvert::toRads(xml::getDouble(tmp, "Engine/ThrustAngle", 0.0));
    invDsg->staticThrust = mdls::UnitConvert::toNewtons(xml::getDouble(tmp, "Engine/StaticThrust", 0.0));
 
-   std::string engineType{xml::get(tmp, "Engine/Type", "")};
+   std::string engineType{xml::getString(tmp, "Engine/Type", "")};
    if (engineType == "Turbojet") {
       invDsg->dTdM = 0;
       invDsg->dTdRho = 1;
