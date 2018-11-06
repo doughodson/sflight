@@ -21,6 +21,8 @@ namespace xml_bindings {
 
 void init_InverseDesign(xml::Node* node, mdls::InverseDesign* invDsg)
 {
+   std::cout << "init_InverseDesign\n" << std::flush;
+
    xml::Node* tmp{node->getChild("Design")};
 
    invDsg->usingMachEffects = xml::getBool(tmp, "CompressibleFlow", false);
