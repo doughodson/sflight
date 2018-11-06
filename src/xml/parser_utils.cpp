@@ -38,16 +38,17 @@ Node* parseString(const std::string& xmlString, const bool treatAttributesAsChil
 
 Node* parse(std::istream& r, const bool treatAttributesAsChildren)
 {
-   Node* rootNode = nullptr;
-   Node* node = nullptr;
+   Node* rootNode{};
+   Node* node{};
 
    std::string str;
 
    while (true) {
       str = readChunk(r);
 
-      if (str == "")
+      if (str == "") {
          break;
+      }
 
       // declaration
       if (startsWith(str, "<?")) {
@@ -79,7 +80,7 @@ Node* parse(std::istream& r, const bool treatAttributesAsChildren)
       }
 
       // if this is a text node or close tag, set the element text
-      unsigned int i = str.find("</");
+      std::size_t i{str.find("</")};
       if (i != std::string::npos && node != 0) {
          node->setText(str.substr(0, i));
          str = str.substr(i + 1);
@@ -99,13 +100,13 @@ Node* parse(std::istream& r, const bool treatAttributesAsChildren)
             rootNode = new Node("");
             node = rootNode;
          } else {
-            Node* tmpNode = node->addChild("");
+            Node* tmpNode{node->addChild("")};
             node = tmpNode;
          }
 
-         int splitPt = str.find(" ");
-         if (splitPt != -1) {
-            std::string tag = str.substr(0, splitPt);
+         std::size_t splitPt = str.find(" ");
+         if (splitPt != std::string::npos) {
+            std::string tag{str.substr(0, splitPt)};
             node->setTagName(tag);
             putAttributes(str.substr(splitPt), node, treatAttributesAsChildren);
          } else {
@@ -133,8 +134,8 @@ std::string readChunk(std::istream& r)
 {
    std::string buf;
    try {
-      int ch = r.get();
-      while (((char)ch) != '>') {
+      int ch{r.get()};
+      while ((static_cast<char>(ch)) != '>') {
          if (ch == -1) {
             if (buf.length() > 0) {
                throw 0;
@@ -155,7 +156,7 @@ std::string readChunk(std::istream& r)
 
 void subChars(std::string& srcStr)
 {
-   unsigned int loc = srcStr.find("&lt");
+   std::size_t loc = srcStr.find("&lt");
    while (loc != std::string::npos) {
       srcStr.replace(loc, 3, "<");
       loc = srcStr.find("&lt");
@@ -197,17 +198,17 @@ std::string putAttributes(std::string str, Node* node, const bool treatAsChildre
          if (nameEnd == std::string::npos)
             return str;
 
-         const int attrEnd = str.find("\"", nameEnd + 3);
+         const std::size_t attrEnd = str.find("\"", nameEnd + 3);
          if (attrEnd == std::string::npos)
             throw 1;
 
-         std::string name = str.substr(0, nameEnd);
-         std::string attr = str.substr(nameEnd + 2, attrEnd - nameEnd - 2);
+         std::string name{str.substr(0, nameEnd)};
+         std::string attr{str.substr(nameEnd + 2, attrEnd - nameEnd - 2)};
 
          // subChars( name );
          // subChars( attr );
          if (treatAsChildren) {
-            Node* tmp = node->addChild(name);
+            Node* tmp{node->addChild(name)};
             tmp->setText(attr);
          } else {
             node->putAttribute(name, attr);
@@ -220,15 +221,16 @@ std::string putAttributes(std::string str, Node* node, const bool treatAsChildre
    return str;
 }
 
-bool startsWith(const std::string str, const std::string search)
+bool startsWith(const std::string str, const std::string& search)
 {
    return (str.find(search, 0) == 0);
 }
 
-bool endsWith(const std::string str, const std::string search)
+bool endsWith(const std::string str, const std::string& search)
 {
-   int searchLimit = str.length() - search.length();
+   const std::size_t searchLimit{str.length() - search.length()};
    return (str.rfind(search, searchLimit) == searchLimit);
 }
 }
+
 }

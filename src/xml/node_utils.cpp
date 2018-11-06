@@ -16,90 +16,100 @@ namespace xml {
 // returns a list of nodes that contain the childName
 std::vector<Node*> getList(Node* const parent, const std::string& childName)
 {
-   if (parent == nullptr)
+   if (!parent) {
       return std::vector<Node*>();
+   }
 
    return parent->getChildren(childName);
 }
 
 std::string get(Node* const parent, const std::string& pathName, const std::string& defaultVal)
 {
-   if (parent == nullptr)
+   if (!parent) {
       return defaultVal;
+   }
 
    Node* node{parent->getChild(pathName)};
-
-   if (node == nullptr)
+   if (!node) {
       return defaultVal;
+   }
 
    return node->getText();
 }
 
 int getInt(Node* const parent, const std::string& pathName, const int defaultVal)
 {
-   if (parent == nullptr)
+   if (!parent) {
       return defaultVal;
+   }
 
    Node* node{parent->getChild(pathName)};
 
-   if (node == nullptr)
+   if (!node) {
       return defaultVal;
+   }
 
    return std::atoi(node->getText().c_str());
 }
 
 long getLong(Node* const parent, const std::string& pathName, const long defaultVal)
 {
-   if (parent == nullptr)
+   if (!parent) {
       return defaultVal;
+   }
 
    Node* node{parent->getChild(pathName)};
 
-   if (node == nullptr)
+   if (!node) {
       return defaultVal;
+   }
 
    return std::atol(node->getText().c_str());
 }
 
 float getFloat(Node* const parent, const std::string& pathName, const float defaultVal)
 {
-   if (parent == nullptr)
+   if (!parent) {
       return defaultVal;
+   }
 
    Node* node{parent->getChild(pathName)};
 
-   if (node == nullptr)
+   if (!node) {
       return defaultVal;
+   }
 
    return static_cast<float>(std::atof(node->getText().c_str()));
 }
 
 double getDouble(Node* const parent, const std::string& pathName, const double defaultVal)
 {
-   if (parent == nullptr)
+   if (!parent) {
       return defaultVal;
+   }
 
    Node* node{parent->getChild(pathName)};
 
-   if (node == nullptr)
+   if (!node) {
       return defaultVal;
+   }
 
    const double val{std::atof(node->getText().c_str())};
-
    return val;
 }
 
 bool getBool(Node* const parent, const std::string& pathName, const bool defaultVal)
 {
-   if (parent == nullptr)
+   if (!parent) {
       return defaultVal;
+   }
 
    Node* node{parent->getChild(pathName)};
-   if (node == nullptr)
+   if (!node) {
       return defaultVal;
+   }
 
    std::string text{node->getText()};
-
    for (std::size_t i = 0; i < text.length(); i++) {
       text[i] = std::toupper(text[i]);
    }
@@ -133,8 +143,9 @@ std::vector<std::string> splitString(const std::string& inStr, const char splitC
          i++;
       }
 
-      if (i > len)
+      if (i > len) {
          break;
+      }
 
       retV.push_back(inStr.substr(startLoc, i - startLoc));
    }
