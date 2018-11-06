@@ -2,9 +2,8 @@
 -- If premake command is not supplied an action (target compiler), exit!
 --
 -- Target of interest:
---     vs2013     (Visual Studio 2013)
---     vs2015     (Visual Studio 2015)
 --     vs2017     (Visual Studio 2017)
+--     gmake      (Linux make)
 --
 
 -- we must have an ide/compiler specified
@@ -28,25 +27,29 @@ workspace "sflight"
    --     Release        (Application linked to Multi-threaded DLL)
    --     Debug          (Application linked to Multi-threaded Debug DLL)
    --
-   configurations { "Release32", "Debug32" }
+   configurations { "Release", "Debug" }
 
    -- visual studio options and warnings
    -- /wd4351 (C4351 warning) - disable warning associated with array brace initialization
    -- /Oi - generate intrinsic functions
-   buildoptions( { "/wd4351", "/Oi" } )
+   -- buildoptions( { "/wd4351", "/Oi" } )
 
    -- common release configuration flags and symbols
-   filter { "Release32" }
-      flags { "Optimize" }
-      -- favor speed over size
-      buildoptions { "/Ot" }
-      defines { "WIN32", "NDEBUG" }
+   filter { "Release" }
+      optimize "On"
+      if _ACTION ~= "gmake" then
+         -- favor speed over size
+         buildoptions { "/Ot" }
+         defines { "WIN32", "NDEBUG" }
+      end
 
    -- common debug configuration flags and symbols
-   filter { "Debug32" }
+   filter { "Debug" }
       symbols "On"
       targetsuffix "_d"
-      defines { "WIN32", "_DEBUG" }
+      if _ACTION ~= "gmake" then
+         defines { "WIN32", "_DEBUG" }
+      end
 
    -- models
    project "mdls"
@@ -55,7 +58,7 @@ workspace "sflight"
          "../../include/sflight/mdls/**.h*",
          "../../src/mdls/**.cpp"
       }
-      targetdir ("../../lib/")
+      targetdir "../../lib/"
       targetname "sflight_mdls"
 
    -- xml parser
@@ -65,7 +68,7 @@ workspace "sflight"
          "../../include/sflight/xml/**.h*",
          "../../src/xml/**.cpp"
       }
-      targetdir ("../../lib/")
+      targetdir "../../lib/"
       targetname "sflight_xml"
 
    -- xml bindings
@@ -75,7 +78,7 @@ workspace "sflight"
          "../../include/sflight/xml_bindings/**.h*",
          "../../src/xml_bindings/**.cpp"
       }
-      targetdir ("../../lib/")
+      targetdir "../../lib/"
       targetname "sflight_xml_bindings"
 
    -- simple application
@@ -90,9 +93,15 @@ workspace "sflight"
       }
       links { "xml_bindings", "xml", "mdls" }
       libdirs { "../../lib" }
-      defines { "_CONSOLE" }
-      filter "configurations:Release*"
-         links { "Ws2_32", "Winmm", "comctl32", "gdi32"}
-      filter "configurations:Debug*"
-         links { "Ws2_32", "Winmm", "comctl32", "gdi32" }
+      if _ACTION ~= "gmake" then
+         defines { "_CONSOLE" }
+      end
+      filter "configurations:Release"
+         if _ACTION ~= "gmake" then
+            links { "Ws2_32", "Winmm", "comctl32", "gdi32" }
+         end
+      filter "configurations:Debug"
+         if _ACTION ~= "gmake" then
+            links { "Ws2_32", "Winmm", "comctl32", "gdi32" }
+         end
 

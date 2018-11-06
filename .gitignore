@@ -1,8 +1,7 @@
 
 # vs directories
 build/obj/
-vs2013/
-vs2015/
+gmake/
 vs2017/
 .vscode/
 
