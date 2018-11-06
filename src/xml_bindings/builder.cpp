@@ -44,16 +44,17 @@ void builder(xml::Node* parent, mdls::Player* player)
 
    for (std::size_t i = 0; i < nodeList.size(); i++) {
 
-      const std::string className {xml::get(nodeList[i], "Class", "")};
+      const std::string className{xml::get(nodeList[i], "Class", "")};
       const double rate{xml::getDouble(nodeList[i], "Rate", 0.0)};
 
+
       if (className == "EOMFiveDOF") {
-         std::cout << "Adding Module EOMFiveDOF\n";
+         std::cout << "Adding module : EOMFiveDOF\n";
          auto eomFiveDOF{new mdls::EOMFiveDOF(player, rate)};
          player->addModule(eomFiveDOF);
          init_EOMFiveDOF(node, eomFiveDOF);
       } else if (className == "InterpAero") {
-         std::cout << "Adding Module InterpAero\n";
+         std::cout << "Adding Module : InterpAero\n";
          auto interpAero{new mdls::InterpAero(player, rate)};
          player->addModule(interpAero);
          init_InterpAero(node, interpAero);

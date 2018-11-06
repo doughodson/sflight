@@ -30,21 +30,19 @@ int main(int argc, char** argv)
    std::cout << "Frame rate    : " << frame_rate << std::endl;
    std::cout << "Num of frames : " << num_frames << std::endl;
 
-   auto player{new mdls::Player()};
-
    // parse input file and return top node
    xml::Node* node{xml::parse(filename, true)};
 
+   std::cout << "Creating and configuring a new player" << std::endl;
+   auto player{new mdls::Player()};
    xml_bindings::builder(node, player);
 
+   std::cout << "Creating new simulation executive" << std::endl;
    auto exec{new SimExec(player, frame_rate, num_frames)};
-
-   std::cout << "Running SimpleFlight for " << total_time << " seconds." << std::endl;
-
+   std::cout << "Running for " << total_time << " seconds." << std::endl;
    exec->startConstructive();
-
    std::cout << "Simulation finished" << std::endl;
-   std::cout << std::flush;
 
+   std::cout << std::flush;
    return 0;
 }
