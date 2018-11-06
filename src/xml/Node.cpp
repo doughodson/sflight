@@ -122,7 +122,7 @@ std::vector<Node*> Node::getChildren(const std::string& x) const
    for (std::size_t i = 0; i < tmp->childList.size(); i++) {
       if (tmp->childList[i]->getTagName() == childName) {
          if (tail != "") {
-            std::vector<Node*> sublist = childList[i]->getChildren(tail);
+            std::vector<Node*> sublist{childList[i]->getChildren(tail)};
             for (std::size_t j = 0; j < sublist.size(); j++) {
                list.push_back(sublist[j]);
             }

@@ -5,12 +5,12 @@
 
     <Modules Rate="60">
         <Module Class="EOMFiveDOF"/>
-        <Module Class="InverseDesign"/>
         <Module Class="Autopilot"/>
         <Module Class="Atmosphere" Rate="10" />
         <Module Class="StickControl"/>
-        <Module Class="WaypointFollower"/>
         <Module Class="FileOutput"/>
+        <Module Class="WaypointFollower"/>
+        <Module Class="InverseDesign"/>
     </Modules>
 
     <Callsign>Example</Callsign>

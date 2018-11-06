@@ -22,7 +22,7 @@ void init_WaypointFollower(xml::Node* node, mdls::WaypointFollower* wp)
    std::cout << "Module: WaypointFollower"  << std::endl;
    std::cout << "-------------------------" << std::endl;
 
-   xml::Node* tmp = node->getChild("WaypointFollower");
+   xml::Node* tmp{node->getChild("WaypointFollower")};
 
    wp->isOn = xml::getBool(tmp, "WaypointFollow", true);
 
@@ -30,10 +30,14 @@ void init_WaypointFollower(xml::Node* node, mdls::WaypointFollower* wp)
                          ? mdls::WaypointFollower::PathType::BEARING
                          : mdls::WaypointFollower::PathType::DIRECT;
 
-   std::vector<xml::Node*> wps = xml::getList(tmp->getChild("WaypointList"), "Waypoint");
+   std::cout << "[init_WaypointFollower] begin\n";
 
-   for (unsigned int i = 0; i < wps.size(); i++) {
-      xml::Node* wpNode = wps[i];
+   std::vector<xml::Node*> wps{xml::getList(tmp->getChild("WaypointList"), "Waypoint")};
+
+   std::cout << "[init_WaypointFollower] end\n";
+
+   for (std::size_t i = 0; i < wps.size(); i++) {
+      xml::Node* wpNode{wps[i]};
       wp->addWaypoint(mdls::UnitConvert::toRads(xml::getDouble(wpNode, "Lat", 0.0)),
                       mdls::UnitConvert::toRads(xml::getDouble(wpNode, "Lon", 0.0)),
                       mdls::UnitConvert::toMeters(xml::getDouble(wpNode, "Alt", 0.0)),

@@ -48,12 +48,12 @@ void init_InverseDesign(xml::Node* node, mdls::InverseDesign* invDsg)
       invDsg->dTdRho = 0;
    }
 
-   std::cout << "before\n";
+   std::cout << "[init_InverseDesign] before\n";
 
    // setup flight conditions (2 points expected)
    std::vector<xml::Node*> fcNodes{tmp->getChildren("FlightConditions/FlightCondition")};
 
-   std::cout << "after\n";
+   std::cout << "[init_InverseDesign] after\n";
 
    // get default values
    invDsg->designWeight = xml::getDouble(tmp, "FlightConditions/Weight", 0.0);
