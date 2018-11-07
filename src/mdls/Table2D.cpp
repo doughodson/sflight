@@ -38,12 +38,12 @@ Table2D::~Table2D()
    delete[] colVals;
 }
 
-void Table2D::setData(std::string& data)
+void Table2D::setData(const std::string& data)
 {
-   std::vector<std::string> v = xml::splitString(data, ',');
-
-   if (v.size() != numRows * numCols)
+   std::vector<std::string> v{xml::splitString(data, ',')};
+   if (v.size() != numRows * numCols) {
       return;
+   }
 
    for (std::size_t i = 0; i < numRows; i++) {
       double* rowdata{new double[numCols]};
@@ -53,16 +53,6 @@ void Table2D::setData(std::string& data)
       setRowData(i, rowdata);
    }
 }
-
-double** Table2D::getData() { return this->data; }
-
-double* Table2D::getColVals() { return colVals; }
-
-double* Table2D::getRowVals() { return rowVals; }
-
-std::size_t Table2D::getNumCols() { return numCols; }
-
-std::size_t Table2D::getNumRows() { return numRows; }
 
 void Table2D::setRowData(const std::size_t row, double rowdata[])
 {
