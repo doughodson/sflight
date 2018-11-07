@@ -10,26 +10,28 @@
 namespace sflight {
 namespace xml {
 
-Node::Node(const std::string& tagName) : name(tagName) {}
+Node::Node(const std::string& tagName) : name(tagName)
+{}
 
-Node::Node(const std::string& tagName, const std::string& text) : name(tagName), text(text) {}
+Node::Node(const std::string& tagName, const std::string& text) : name(tagName), text(text)
+{}
 
 Node::Node(const Node& src)
 {
    name = src.getTagName();
    text = src.getText();
 
-   int cnt{src.getAttributeCount()};
+   std::size_t cnt{src.getAttributeCount()};
    std::string* arry{new std::string[cnt]};
    src.getAttributeNames(arry);
 
-   for (int i = 0; i < cnt; i++) {
+   for (std::size_t i = 0; i < cnt; i++) {
       putAttribute(arry[i], src.getAttribute(arry[i]));
    }
 
    cnt = src.getChildCount();
 
-   for (int i = 0; i < cnt; i++) {
+   for (std::size_t i = 0; i < cnt; i++) {
       Node* tmp{new Node(*src.getChild(i))};
       addChild(tmp);
    }
@@ -39,7 +41,7 @@ Node::Node(const Node& src)
 
 Node::~Node()
 {
-   for (int i = childList.size() - 1; i >= 0; i--) {
+   for (std::size_t i = childList.size() - 1; i >= 0; i--) {
       delete childList[i];
    }
 }
@@ -61,9 +63,9 @@ Node* Node::addChild(Node* const x)
    return x;
 }
 
-int Node::getChildCount() const { return childList.size(); }
+std::size_t Node::getChildCount() const { return childList.size(); }
 
-Node* Node::getChild(const int index) const
+Node* Node::getChild(const std::size_t index) const
 {
    if (index < getChildCount())
       return childList[index];
@@ -135,7 +137,7 @@ std::vector<Node*> Node::getChildren(const std::string& x) const
    return list;
 }
 
-void Node::putAttribute(std::string name, std::string val)
+void Node::putAttribute(std::string& name, std::string& val)
 {
    attrMap.insert(std::pair<std::string, std::string>(name, val));
 }
@@ -159,7 +161,7 @@ void Node::getAttributeNames(std::string* const storeArray) const
    }
 }
 
-int Node::getAttributeCount() const { return attrMap.size(); }
+std::size_t Node::getAttributeCount() const { return attrMap.size(); }
 
 std::string Node::getText() const { return text; }
 
@@ -189,7 +191,7 @@ std::string Node::toString() const
    std::string* attrNames{new std::string[getAttributeCount()]};
    getAttributeNames(attrNames);
 
-   for (int i = 0; i < getAttributeCount(); i++) {
+   for (std::size_t i = 0; i < getAttributeCount(); i++) {
       ret += (attrNames[i] + "=" + getAttribute(attrNames[i]) + " ");
    }
    ret += ">";

@@ -127,7 +127,7 @@ class Player
    double fuelflow{}; // kilos/sec
 
    // sim related items
-   unsigned int frameNum{};
+   std::size_t frameNum{};
    double simTime{};
    bool paused{true};
 

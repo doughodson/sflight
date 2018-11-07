@@ -2,6 +2,8 @@
 #ifndef __SimExec_H__
 #define __SimExec_H__
 
+#include <cstddef>
+
 namespace sflight {
 namespace mdls { class Player; }
 namespace xml {  class Node; }
@@ -14,7 +16,7 @@ class SimExec
 {
  public:
    SimExec(sflight::mdls::Player*, const double frameRate);
-   SimExec(sflight::mdls::Player*, const double frameRate, const long maxFrames);
+   SimExec(sflight::mdls::Player*, const double frameRate, const std::size_t maxFrames);
    virtual ~SimExec() = default;
 
    void start();
@@ -25,7 +27,7 @@ class SimExec
  private:
    sflight::mdls::Player* player{};
    double frameRate{};
-   long maxFrames{1000000000};
+   std::size_t maxFrames{1000000000};
 };
 
 #endif

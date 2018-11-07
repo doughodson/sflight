@@ -27,21 +27,21 @@ class Node {
 
    Node* addChild(Node* const);
 
-   int getChildCount() const;
+   std::size_t getChildCount() const;
 
    Node* getChild(const std::string&) const;
 
    std::vector<Node*> getChildren(const std::string& childName) const;
 
-   Node* getChild(const int index) const;
+   Node* getChild(const std::size_t index) const;
 
-   void putAttribute(std::string name, std::string val);
+   void putAttribute(std::string& name, std::string& val);
 
    std::string getAttribute(const std::string name) const;
 
    void getAttributeNames(std::string* const) const;
 
-   int getAttributeCount() const;
+   std::size_t getAttributeCount() const;
 
    std::string getText() const;
 
@@ -59,8 +59,9 @@ class Node {
    std::string name;
    std::string text;
    std::map<std::string, std::string> attrMap;
+   // vector of pointers to children Nodes
    std::vector<Node*> childList{};
-
+   // pointer to parent Node
    Node* parentNode{};
 };
 }

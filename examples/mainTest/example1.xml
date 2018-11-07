@@ -14,7 +14,9 @@
     </Modules>
 
     <Callsign>Example</Callsign>
+
     <Name>Test Aircraft</Name>
+
     <Version>1.0</Version>
 
     <InitialConditions>

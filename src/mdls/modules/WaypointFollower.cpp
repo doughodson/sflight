@@ -73,7 +73,7 @@ void WaypointFollower::loadWaypoint()
 {
    currentWp = nullptr;
 
-   std::cout << "loading wpt: " << wpNum << std::endl;
+   std::cout << "Loading waypoint: " << wpNum << std::endl;
 
    if (waypoints.size() > wpNum) {
       setState(true);
@@ -112,9 +112,9 @@ void WaypointFollower::clearAllWaypoints()
    currentWp = nullptr;
 }
 
-int WaypointFollower::getCurrentWp() { return wpNum; }
+std::size_t WaypointFollower::getCurrentWp() { return wpNum; }
 
-int WaypointFollower::getNumWaypoints() { return waypoints.size(); }
+std::size_t WaypointFollower::getNumWaypoints() { return waypoints.size(); }
 
 void WaypointFollower::setCurrentWp(const int num) { wpNum = num; }
 }

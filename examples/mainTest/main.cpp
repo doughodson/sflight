@@ -33,9 +33,10 @@ int main(int argc, char** argv)
    // parse input file and return top node
    xml::Node* node{xml::parse(filename, true)};
    if (node) {
-      std::cout << "XML file: " << filename << " parsed ok\n";
+      std::cout << "Configuration file parsed\n";
    } else {
-      std::cout << "XML file: " << filename << " could NOT be parsed!\n";
+      std::cout << "Configuration file FAILED parsing!\n";
+      std::exit(1);
    }
 
    std::cout << "Creating and configuring a new player" << std::endl;

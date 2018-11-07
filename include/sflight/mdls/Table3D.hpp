@@ -4,31 +4,34 @@
 
 #include "sflight/mdls/Table2D.hpp"
 
+#include <cstddef>
+
 namespace sflight {
 namespace mdls {
 
 //------------------------------------------------------------------------------
 // Class: Table3D
 //------------------------------------------------------------------------------
-class Table3D {
- public:
+class Table3D
+{
+public:
    Table3D() = delete;
-   Table3D(const int numPages, double pageVals[]);
+   Table3D(const std::size_t numPages, double pageVals[]);
    virtual ~Table3D();
 
-   int getNumPages();
+   std::size_t getNumPages();
    void multiply(const double val);
-   void setPage(const int page, Table2D* table);
-   Table2D* getPage(const int page);
-   double interp(const double pageVal, const double rowVal,
-                 const double colVal);
+   void setPage(const std::size_t page, Table2D* table);
+   Table2D* getPage(const std::size_t);
+   double interp(const double pageVal, const double rowVal, const double colVal);
    void print() const;
 
- private:
+private:
    Table2D** data{};
    double* pageVals{};
-   int numPages{};
+   std::size_t numPages{};
 };
+
 }
 }
 

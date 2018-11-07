@@ -1,7 +1,7 @@
 
 
-#ifndef __sflight_mdls_WaypointFollower_H__
-#define __sflight_mdls_WaypointFollower_H__
+#ifndef __sflight_mdls_WaypointFollower_HPP__
+#define __sflight_mdls_WaypointFollower_HPP__
 
 #include "sflight/mdls/modules/Module.hpp"
 
@@ -10,9 +10,7 @@
 #include <vector>
 
 namespace sflight {
-namespace xml {
-class Node;
-}
+namespace xml { class Node; }
 namespace mdls {
 class Player;
 
@@ -44,8 +42,8 @@ class WaypointFollower : public Module
    void loadWaypoint();
    void setState(const bool isOn);
    void setCurrentWp(const int num);
-   int getCurrentWp();
-   int getNumWaypoints();
+   std::size_t getCurrentWp();
+   std::size_t getNumWaypoints();
    void clearAllWaypoints();
    void addWaypoint(const double radLat, const double radLon, const double meterAlt,
                     const double mpsSpeed, const double radBearing);
@@ -55,7 +53,7 @@ class WaypointFollower : public Module
  private:
    std::vector<Waypoint> waypoints;
    Waypoint* currentWp{};
-   int wpNum{};
+   std::size_t wpNum{};
 
    double altTol{};
    double distTol{};

@@ -5,12 +5,12 @@
 
 #include <iostream>
 #include <string>
+#include <cstdlib>
 
 namespace sflight {
 namespace mdls {
 
-Table2D::Table2D(const int numRows, const int numCols, double rowVals[],
-                 double colVals[])
+Table2D::Table2D(const std::size_t numRows, const std::size_t numCols, double rowVals[], double colVals[])
 {
    this->rowVals = rowVals;
    this->colVals = colVals;
@@ -20,9 +20,9 @@ Table2D::Table2D(const int numRows, const int numCols, double rowVals[],
    // double data[numRows][numCols];
    data = new double*[numRows];
 
-   for (int i = 0; i < numRows; i++) {
+   for (std::size_t i = 0; i < numRows; i++) {
       data[i] = new double[numCols];
-      for (int j = 0; j < numCols; j++) {
+      for (std::size_t j = 0; j < numCols; j++) {
          data[i][j] = 0;
       }
    }
@@ -30,7 +30,7 @@ Table2D::Table2D(const int numRows, const int numCols, double rowVals[],
 
 Table2D::~Table2D()
 {
-   for (int i = 0; i < numRows; i++) {
+   for (std::size_t i = 0; i < numRows; i++) {
       delete[] data[i];
    }
    delete[] data;
@@ -38,17 +38,17 @@ Table2D::~Table2D()
    delete[] colVals;
 }
 
-void Table2D::setData(std::string data)
+void Table2D::setData(std::string& data)
 {
    std::vector<std::string> v = xml::splitString(data, ',');
 
    if (v.size() != numRows * numCols)
       return;
 
-   for (int i = 0; i < numRows; i++) {
-      double* rowdata = new double[numCols];
-      for (int j = 0; j < numCols; j++) {
-         rowdata[j] = atof(v[i * numCols + j].c_str());
+   for (std::size_t i = 0; i < numRows; i++) {
+      double* rowdata{new double[numCols]};
+      for (std::size_t j = 0; j < numCols; j++) {
+         rowdata[j] = std::atof(v[i * numCols + j].c_str());
       }
       setRowData(i, rowdata);
    }
@@ -60,31 +60,31 @@ double* Table2D::getColVals() { return colVals; }
 
 double* Table2D::getRowVals() { return rowVals; }
 
-int Table2D::getNumCols() { return numCols; }
+std::size_t Table2D::getNumCols() { return numCols; }
 
-int Table2D::getNumRows() { return numRows; }
+std::size_t Table2D::getNumRows() { return numRows; }
 
-void Table2D::setRowData(int row, double rowdata[])
+void Table2D::setRowData(const std::size_t row, double rowdata[])
 {
    if (row < numRows) {
       data[row] = rowdata;
    }
 }
 
-void Table2D::set(int row, int col, double val) { data[row][col] = val; }
+void Table2D::set(const std::size_t row, const std::size_t col, const double val) { data[row][col] = val; }
 
-double Table2D::get(int row, int col) { return data[row][col]; }
+double Table2D::get(const std::size_t row, const std::size_t col) { return data[row][col]; }
 
-void Table2D::multiply(double val)
+void Table2D::multiply(const double val)
 {
-   for (int i = 0; i < numRows; i++) {
-      for (int j = 0; j < numCols; j++) {
+   for (std::size_t i = 0; i < numRows; i++) {
+      for (std::size_t j = 0; j < numCols; j++) {
          data[i][j] = data[i][j] * val;
       }
    }
 }
 
-double Table2D::interp(double rowVal, double colVal)
+double Table2D::interp(const double rowVal, const double colVal)
 {
    int lowrow{};
    int highrow{};
@@ -94,7 +94,7 @@ double Table2D::interp(double rowVal, double colVal)
    int highcol{};
    double colweight{};
 
-   for (int i = 1; i < numRows; i++) {
+   for (std::size_t i = 1; i < numRows; i++) {
       lowrow = i - 1;
       highrow = i;
       if (rowVals[i] > rowVal) {
@@ -102,10 +102,9 @@ double Table2D::interp(double rowVal, double colVal)
       }
    }
    if (numRows > 1)
-      rowweight =
-          (rowVal - rowVals[lowrow]) / (rowVals[highrow] - rowVals[lowrow]);
+      rowweight = (rowVal - rowVals[lowrow]) / (rowVals[highrow] - rowVals[lowrow]);
 
-   for (int i = 1; i < numCols; i++) {
+   for (std::size_t i = 1; i < numCols; i++) {
       lowcol = i - 1;
       highcol = i;
       if (colVals[i] > colVal) {
@@ -113,32 +112,27 @@ double Table2D::interp(double rowVal, double colVal)
       }
    }
    if (numCols > 1)
-      colweight =
-          (colVal - colVals[lowcol]) / (colVals[highcol] - colVals[lowcol]);
+      colweight = (colVal - colVals[lowcol]) / (colVals[highcol] - colVals[lowcol]);
 
-   const double firstRow =
-       data[lowrow][lowcol] +
-       (data[lowrow][highcol] - data[lowrow][lowcol]) * colweight;
-   const double secRow =
-       data[highrow][lowcol] +
-       (data[highrow][highcol] - data[highrow][lowcol]) * colweight;
+   const double firstRow{data[lowrow][lowcol] + (data[lowrow][highcol] - data[lowrow][lowcol]) * colweight};
+   const double secRow{data[highrow][lowcol] + (data[highrow][highcol] - data[highrow][lowcol]) * colweight};
    return firstRow + (secRow - firstRow) * rowweight;
 }
 
 void Table2D::print()
 {
    std::cout << "row vals: [";
-   for (int i = 0; i < numRows; i++) {
+   for (std::size_t i = 0; i < numRows; i++) {
       std::cout << rowVals[i] << ", ";
    }
    std::cout << " ]" << std::endl << "col vals: [";
-   for (int i = 0; i < numCols; i++) {
+   for (std::size_t i = 0; i < numCols; i++) {
       std::cout << colVals[i] << ", ";
    }
    std::cout << "]" << std::endl;
-   for (int i = 0; i < numRows; i++) {
+   for (std::size_t i = 0; i < numRows; i++) {
       std::cout << "[ ";
-      for (int j = 0; j < numCols; j++) {
+      for (std::size_t j = 0; j < numCols; j++) {
          std::cout << data[i][j] << ", ";
       }
       std::cout << "]" << std::endl;

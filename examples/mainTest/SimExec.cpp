@@ -15,7 +15,7 @@ SimExec::SimExec(sflight::mdls::Player* p, const double frameRate)
 {
 }
 
-SimExec::SimExec(sflight::mdls::Player* p, const double frameRate,  const long maxFrames)
+SimExec::SimExec(sflight::mdls::Player* p, const double frameRate,  const std::size_t maxFrames)
     : player(p), frameRate(frameRate), maxFrames(maxFrames)
 {
 }
