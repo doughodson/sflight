@@ -5,6 +5,7 @@
 #include <iostream>
 #include <sstream>
 #include <string>
+#include <algorithm>
 #include <cstdlib>
 
 namespace sflight {
@@ -146,41 +147,10 @@ bool isWhitespace(const char x)
    return false;
 }
 
-void subChars(std::string& srcStr)
+std::string putAttributes(const std::string& x, Node* const node, const bool treatAsChildren)
 {
-   std::size_t loc{srcStr.find("&lt")};
-   while (loc != std::string::npos) {
-      srcStr.replace(loc, 3, "<");
-      loc = srcStr.find("&lt");
-   }
+   std::string str(x);
 
-   loc = srcStr.find("&gt");
-   while (loc != std::string::npos) {
-      srcStr.replace(loc, 3, ">");
-      loc = srcStr.find("&gt");
-   }
-
-   loc = srcStr.find("&amp");
-   while (loc != std::string::npos) {
-      srcStr.replace(loc, 4, "&");
-      loc = srcStr.find("&amp");
-   }
-
-   loc = srcStr.find("&apos");
-   while (loc != std::string::npos) {
-      srcStr.replace(loc, 5, "'");
-      loc = srcStr.find("&apos");
-   }
-
-   loc = srcStr.find("&quot");
-   while (loc != std::string::npos) {
-      srcStr.replace(loc, 5, "\"");
-      loc = srcStr.find("&quot");
-   }
-}
-
-std::string putAttributes(std::string str, Node* node, const bool treatAsChildren)
-{
    try {
       while (str.length() > 0) {
          while (isWhitespace(str[0])) {
@@ -196,8 +166,8 @@ std::string putAttributes(std::string str, Node* node, const bool treatAsChildre
             throw 1;
          }
 
-         std::string name{str.substr(0, nameEnd)};
-         std::string attr{str.substr(nameEnd + 2, attrEnd - nameEnd - 2)};
+         const std::string name{str.substr(0, nameEnd)};
+         const std::string attr{str.substr(nameEnd + 2, attrEnd - nameEnd - 2)};
 
          // subChars( name );
          // subChars( attr );
