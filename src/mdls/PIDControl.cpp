@@ -6,7 +6,7 @@
 namespace sflight {
 namespace mdls {
 
-PIDControl::PIDControl() : PIControl() {}
+//PIDControl::PIDControl() : PIControl() {}
 PIDControl::~PIDControl() {}
 
 PIDControl::PIDControl(const double minVal, const double maxVal, const double p,

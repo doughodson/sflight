@@ -1,6 +1,6 @@
 
-#ifndef __sflight_mdls_Engine_H__
-#define __sflight_mdls_Engine_H__
+#ifndef __sflight_mdls_Engine_HPP__
+#define __sflight_mdls_Engine_HPP__
 
 #include "sflight/mdls/modules/Module.hpp"
 

@@ -1,6 +1,6 @@
 
-#ifndef __sflight_mdls_Module_H__
-#define __sflight_mdls_Module_H__
+#ifndef __sflight_mdls_Module_HPP__
+#define __sflight_mdls_Module_HPP__
 
 #include <string>
 

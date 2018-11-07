@@ -1,6 +1,6 @@
 
-#ifndef __sflight_mdls_PID_H__
-#define __sflight_mdls_PID_H__
+#ifndef __sflight_mdls_PID_HPP__
+#define __sflight_mdls_PID_HPP__
 
 namespace sflight {
 namespace mdls {

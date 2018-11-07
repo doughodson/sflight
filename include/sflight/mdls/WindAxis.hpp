@@ -1,6 +1,6 @@
 
-#ifndef __sflight_mdls_WindAxis_H__
-#define __sflight_mdls_WindAxis_H__
+#ifndef __sflight_mdls_WindAxis_HPP__
+#define __sflight_mdls_WindAxis_HPP__
 
 namespace sflight {
 namespace mdls {

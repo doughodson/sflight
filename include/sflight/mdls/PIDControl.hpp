@@ -1,6 +1,6 @@
 
-#ifndef __sflight_mdls_PIDConttol_H__
-#define __sflight_mdls_PIDConttol_H__
+#ifndef __sflight_mdls_PIDConttol_HPP__
+#define __sflight_mdls_PIDConttol_HPP__
 
 #include "sflight/mdls/PIControl.hpp"
 
@@ -12,11 +12,9 @@ namespace mdls {
 //------------------------------------------------------------------------------
 class PIDControl : public PIControl
 {
-
- public:
-   PIDControl();
-   PIDControl(const double minVal, const double maxVal, const double p, const double i,
-              const double d);
+public:
+   PIDControl() = delete;
+   PIDControl(const double minVal, const double maxVal, const double p, const double i, const double d);
    ~PIDControl();
 
    virtual double getD() const;
@@ -25,7 +23,7 @@ class PIDControl : public PIControl
    virtual double getOutput(const double timestep, const double desired_pt,
                             const double current_pt, const double current_output);
 
- private:
+private:
    double edf0{}, edf1{}, edf2{};
    double tstf{};
    double ed{};

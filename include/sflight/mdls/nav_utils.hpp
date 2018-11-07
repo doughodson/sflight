@@ -1,6 +1,6 @@
 
-#ifndef __sflight_mdls_nav_utils_H__
-#define __sflight_mdls_nav_utils_H__
+#ifndef __sflight_mdls_nav_utils_HPP__
+#define __sflight_mdls_nav_utils_HPP__
 
 #include "sflight/mdls/constants.hpp"
 
@@ -10,12 +10,12 @@ class Vector3;
 namespace nav {
 
 // earth related constants
-const double epsilon = 0.0818191908426;
-const double gravEq = 9.7803267714;
-const double radiusEq = 6378137.0;
-const double gravConst = 0.00193185138639;
-const double metersToRadian = 2.0 * math::PI / 6378137.0;
-const double radianToMeter = 6378137.0 / 2.0 * math::PI;
+const double epsilon{0.0818191908426};
+const double gravEq{9.7803267714};
+const double radiusEq{6378137.0};
+const double gravConst{0.00193185138639};
+const double metersToRadian{2.0 * math::PI / 6378137.0};
+const double radianToMeter{6378137.0 / 2.0 * math::PI};
 
 // navigation oriented functions
 bool wgs84LatLon(double* const lat, double* const lon, const double alt, const double vn,

@@ -1,6 +1,6 @@
 
-#ifndef __sflight_mdls_InterpAero_H__
-#define __sflight_mdls_InterpAero_H__
+#ifndef __sflight_mdls_InterpAero_HPP__
+#define __sflight_mdls_InterpAero_HPP__
 
 #include "sflight/mdls/modules/Module.hpp"
 

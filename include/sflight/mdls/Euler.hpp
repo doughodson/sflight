@@ -1,6 +1,6 @@
 
-#ifndef __sflight_mdls_Euler_H__
-#define __sflight_mdls_Euler_H__
+#ifndef __sflight_mdls_Euler_HPP__
+#define __sflight_mdls_Euler_HPP__
 
 #include "sflight/mdls/Vector3.hpp"
 

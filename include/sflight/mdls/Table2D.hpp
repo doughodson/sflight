@@ -1,6 +1,6 @@
 
-#ifndef __sflight_mdls_Table2D_H__
-#define __sflight_mdls_Table2D_H__
+#ifndef __sflight_mdls_Table2D_HPP__
+#define __sflight_mdls_Table2D_HPP__
 
 #include <string>
 #include <cstddef>

@@ -1,6 +1,6 @@
 
-#ifndef __sflight_xml_node_utils_H__
-#define __sflight_xml_node_utils_H__
+#ifndef __sflight_xml_node_utils_HPP__
+#define __sflight_xml_node_utils_HPP__
 
 #include "sflight/xml/Node.hpp"
 

@@ -1,6 +1,6 @@
 
-#ifndef __sflight_mdls_Vector3_H__
-#define __sflight_mdls_Vector3_H__
+#ifndef __sflight_mdls_Vector3_HPP__
+#define __sflight_mdls_Vector3_HPP__
 
 #include <string>
 

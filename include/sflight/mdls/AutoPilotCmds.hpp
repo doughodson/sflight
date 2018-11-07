@@ -1,6 +1,6 @@
 
-#ifndef __sflight_mdls_AutoPilotCmds_H__
-#define __sflight_mdls_AutoPilotCmds_H__
+#ifndef __sflight_mdls_AutoPilotCmds_HPP__
+#define __sflight_mdls_AutoPilotCmds_HPP__
 
 namespace sflight {
 namespace mdls {

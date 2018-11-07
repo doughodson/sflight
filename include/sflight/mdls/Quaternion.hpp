@@ -1,6 +1,6 @@
 
-#ifndef __sflight_mdls_Quaternion_H__
-#define __sflight_mdls_Quaternion_H__
+#ifndef __sflight_mdls_Quaternion_HPP__
+#define __sflight_mdls_Quaternion_HPP__
 
 namespace sflight {
 namespace mdls {

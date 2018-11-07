@@ -1,6 +1,6 @@
 
-#ifndef __sflight_mdls_InverseDesign_H__
-#define __sflight_mdls_InverseDesign_H__
+#ifndef __sflight_mdls_InverseDesign_HPP__
+#define __sflight_mdls_InverseDesign_HPP__
 
 #include "sflight/mdls/modules/Module.hpp"
 

@@ -1,6 +1,6 @@
 
-#ifndef __sflight_mdls_Atmosphere_H__
-#define __sflight_mdls_Atmosphere_H__
+#ifndef __sflight_mdls_Atmosphere_HPP__
+#define __sflight_mdls_Atmosphere_HPP__
 
 #include "sflight/mdls/modules/Module.hpp"
 

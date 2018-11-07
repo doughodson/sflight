@@ -1,6 +1,6 @@
 
-#ifndef __sflight_mdls_PIControl_H__
-#define __sflight_mdls_PIControl_H__
+#ifndef __sflight_mdls_PIControl_HPP__
+#define __sflight_mdls_PIControl_HPP__
 
 namespace sflight {
 namespace mdls {
@@ -14,7 +14,7 @@ namespace mdls {
 class PIControl
 {
  public:
-   PIControl() = default;
+   PIControl() = delete;
    PIControl(double minVal, double maxVal, double p, double i);
    virtual ~PIControl() = default;
 

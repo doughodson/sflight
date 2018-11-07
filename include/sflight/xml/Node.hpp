@@ -1,6 +1,6 @@
 
-#ifndef __sflight_xml_Node_H__
-#define __sflight_xml_Node_H__
+#ifndef __sflight_xml_Node_HPP__
+#define __sflight_xml_Node_HPP__
 
 #include <map>
 #include <string>
@@ -14,7 +14,7 @@ namespace xml {
 //------------------------------------------------------------------------------
 class Node {
  public:
-   Node() = default;
+   Node() = delete;
    Node(const std::string& tagName);
    Node(const std::string& name, const std::string& text);
    Node(const Node&);

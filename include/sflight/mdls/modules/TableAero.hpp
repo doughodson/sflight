@@ -1,6 +1,6 @@
 
-#ifndef __sflight_mdls_TableAero_H__
-#define __sflight_mdls_TableAero_H__
+#ifndef __sflight_mdls_TableAero_HPP__
+#define __sflight_mdls_TableAero_HPP__
 
 #include "sflight/mdls/modules/Module.hpp"
 

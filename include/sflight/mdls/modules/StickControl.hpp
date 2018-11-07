@@ -1,6 +1,6 @@
 
-#ifndef __sflight_mdls_StickControl_H__
-#define __sflight_mdls_StickControl_H__
+#ifndef __sflight_mdls_StickControl_HPP__
+#define __sflight_mdls_StickControl_HPP__
 
 #include "sflight/mdls/modules/Module.hpp"
 

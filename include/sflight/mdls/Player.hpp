@@ -1,6 +1,6 @@
 
-#ifndef __sflight_mdls_FDM_H__
-#define __sflight_mdls_FDM_H__
+#ifndef __sflight_mdls_Player_HPP__
+#define __sflight_mdls_Player_HPP__
 
 #include "sflight/xml/Node.hpp"
 
