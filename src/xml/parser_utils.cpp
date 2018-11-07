@@ -113,15 +113,6 @@ Node* parse(std::istream& ifs, const bool treatAttributesAsChildren)
    return rootNode;
 }
 
-// test to see if char is a whitespace
-bool isWhitespace(const char x)
-{
-   if (x == '\t' || x == '\n' || x == '\r' || x == ' ') {
-      return true;
-   }
-   return false;
-}
-
 std::string readChunk(std::istream& ifs)
 {
    std::string buf;
@@ -144,6 +135,15 @@ std::string readChunk(std::istream& ifs)
    }
 
    return buf;
+}
+
+// test to see if char is a whitespace
+bool isWhitespace(const char x)
+{
+   if (x == '\t' || x == '\n' || x == '\r' || x == ' ') {
+      return true;
+   }
+   return false;
 }
 
 void subChars(std::string& srcStr)
@@ -215,12 +215,12 @@ std::string putAttributes(std::string str, Node* node, const bool treatAsChildre
    return str;
 }
 
-bool startsWith(const std::string str, const std::string& search)
+bool startsWith(const std::string& str, const std::string& search)
 {
    return (str.find(search, 0) == 0);
 }
 
-bool endsWith(const std::string str, const std::string& search)
+bool endsWith(const std::string& str, const std::string& search)
 {
    const std::size_t searchLimit{str.length() - search.length()};
    return (str.rfind(search, searchLimit) == searchLimit);
