@@ -30,11 +30,7 @@ void init_WaypointFollower(xml::Node* node, mdls::WaypointFollower* wp)
                          ? mdls::WaypointFollower::PathType::BEARING
                          : mdls::WaypointFollower::PathType::DIRECT;
 
-   std::cout << "[init_WaypointFollower] begin\n";
-
    std::vector<xml::Node*> wps{xml::getList(tmp->getChild("WaypointList"), "Waypoint")};
-
-   std::cout << "[init_WaypointFollower] end\n";
 
    for (std::size_t i = 0; i < wps.size(); i++) {
       xml::Node* wpNode{wps[i]};

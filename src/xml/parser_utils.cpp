@@ -36,9 +36,9 @@ Node* parse(std::istream& ifs)
 
    while (true) {
       std::string chunk{readChunk(ifs)};
-      std::cout << "Chuck read : " << chunk << std::endl
-                << "----------------------------------------------------------"
-                << std::endl;
+//      std::cout << "Chuck read : " << chunk << std::endl
+//                << "----------------------------------------------------------"
+//                << std::endl;
 
       if (chunk == "") break;
 

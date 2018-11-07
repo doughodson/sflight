@@ -50,42 +50,42 @@ void builder(xml::Node* parent, mdls::Player* player)
       if (className == "EOMFiveDOF") {
          auto eomFiveDOF{new mdls::EOMFiveDOF(player, rate)};
          player->addModule(eomFiveDOF);
-         init_EOMFiveDOF(node, eomFiveDOF);
+         init_EOMFiveDOF(parent, eomFiveDOF);
       } else if (className == "InterpAero") {
          auto interpAero{new mdls::InterpAero(player, rate)};
          player->addModule(interpAero);
-         init_InterpAero(node, interpAero);
+         init_InterpAero(parent, interpAero);
       } else if (className == "TableAero") {
          auto tableAero{new mdls::TableAero(player, rate)};
          player->addModule(tableAero);
-         init_TableAero(node, tableAero);
+         init_TableAero(parent, tableAero);
       } else if (className == "Autopilot") {
          auto autoPilot{new mdls::AutoPilot(player, rate)};
          player->addModule(autoPilot);
-         init_AutoPilot(node, autoPilot);
+         init_AutoPilot(parent, autoPilot);
       } else if (className == "Engine") {
          auto engine{new mdls::Engine(player, rate)};
          player->addModule(engine);
-         init_Engine(node, engine);
+         init_Engine(parent, engine);
       } else if (className == "Atmosphere") {
          auto atmosphere{new mdls::Atmosphere(player, rate)};
          player->addModule(atmosphere);
       } else if (className == "WaypointFollower") {
          auto waypointFollower{new mdls::WaypointFollower(player, rate)};
          player->addModule(waypointFollower);
-         init_WaypointFollower(node, waypointFollower);
+         init_WaypointFollower(parent, waypointFollower);
       } else if (className == "StickControl") {
          auto stickControl{new mdls::StickControl(player, rate)};
          player->addModule(stickControl);
-         init_StickControl(node, stickControl);
+         init_StickControl(parent, stickControl);
       } else if (className == "FileOutput") {
          auto fileOutput{new mdls::FileOutput(player, rate)};
          player->addModule(fileOutput);
-         init_FileOutput(node, fileOutput);
+         init_FileOutput(parent, fileOutput);
       } else if (className == "InverseDesign") {
          auto inverseDesign{new mdls::InverseDesign(player, rate)};
          player->addModule(inverseDesign);
-         init_InverseDesign(node, inverseDesign);
+         init_InverseDesign(parent, inverseDesign);
       }
    }
 }

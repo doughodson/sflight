@@ -60,19 +60,18 @@ Node* Node::getChild(const std::size_t index) const
 //
 Node* Node::getChild(const std::string& x) const
 {
-   std::string childName{x};
-   const Node* tmp{this};
+   std::string childTagName{x};
 
-   const std::size_t splitPt{childName.find_first_of("/")};
+   const std::size_t splitPt{childTagName.find_first_of("/")};
    std::string tail;
 
    if (splitPt != std::string::npos) {
-      tail = childName.substr(splitPt + 1);
-      childName = childName.substr(0, splitPt);
+      tail = childTagName.substr(splitPt + 1);
+      childTagName = childTagName.substr(0, splitPt);
    }
 
-   for (std::size_t i = 0; i < tmp->childList.size(); i++) {
-      if (tmp->childList[i]->getTagName() == childName) {
+   for (std::size_t i = 0; i < childList.size(); i++) {
+      if (childList[i]->getTagName() == childTagName) {
          if (tail != "")
             return childList[i]->getChild(tail);
          else

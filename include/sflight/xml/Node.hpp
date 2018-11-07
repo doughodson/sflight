@@ -12,8 +12,9 @@ namespace xml {
 //------------------------------------------------------------------------------
 // Class: Node
 //------------------------------------------------------------------------------
-class Node {
- public:
+class Node
+{
+public:
    Node() = delete;
    Node(const std::string& tagName) : tagName(tagName)                                   {}
    Node(const std::string& name, const std::string& text) : tagName(tagName), text(text) {}
@@ -28,11 +29,10 @@ class Node {
 
    std::size_t getChildCount() const;
 
-   Node* getChild(const std::string&) const;
+   Node* getChild(const std::string& tagName) const;
+   Node* getChild(const std::size_t index) const;
 
    std::vector<Node*> getChildren(const std::string& childName) const;
-
-   Node* getChild(const std::size_t index) const;
 
    std::string getText() const                      { return text;       }
    void setText(const std::string& x)               { text = x;          }
@@ -44,7 +44,7 @@ class Node {
 
    bool remove(Node* const);
 
- private:
+private:
    std::string tagName;
    std::string text;
    // vector of pointers to children Nodes

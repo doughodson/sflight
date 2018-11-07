@@ -34,7 +34,7 @@ int main(int argc, char** argv)
    xml::Node* node{xml::parse(filename)};
    if (node) {
       std::cout << "Configuration file parsed\n";
-      std::cout << node->toString() << std::endl;
+      //std::cout << node->toString() << std::endl;
    } else {
       std::cout << "Configuration file FAILED parsing!\n";
       std::exit(1);

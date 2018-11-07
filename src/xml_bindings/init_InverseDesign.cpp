@@ -26,8 +26,6 @@ void init_InverseDesign(xml::Node* node, mdls::InverseDesign* invDsg)
    std::cout << "Module: InverseDesign"     << std::endl;
    std::cout << "-------------------------" << std::endl;
 
-   std::cout << "init_InverseDesign\n" << std::flush;
-
    xml::Node* tmp{node->getChild("Design")};
 
    invDsg->usingMachEffects = xml::getBool(tmp, "CompressibleFlow", false);
@@ -48,12 +46,8 @@ void init_InverseDesign(xml::Node* node, mdls::InverseDesign* invDsg)
       invDsg->dTdRho = 0;
    }
 
-   std::cout << "[init_InverseDesign] before\n";
-
    // setup flight conditions (2 points expected)
    std::vector<xml::Node*> fcNodes{tmp->getChildren("FlightConditions/FlightCondition")};
-
-   std::cout << "[init_InverseDesign] after\n";
 
    // get default values
    invDsg->designWeight = xml::getDouble(tmp, "FlightConditions/Weight", 0.0);
