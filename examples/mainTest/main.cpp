@@ -23,7 +23,7 @@ int main(int argc, char** argv)
    const std::string filename{argv[1]};
    const double total_time{std::atof(argv[2])}; // sec
    const double frame_rate{std::atof(argv[3])}; // hz
-   const long num_frames{static_cast<long>(total_time * frame_rate)};
+   const std::size_t num_frames{static_cast<std::size_t>(total_time * frame_rate)};
 
    std::cout << "Filename      : " << filename   << std::endl;
    std::cout << "Total time    : " << total_time << std::endl;
