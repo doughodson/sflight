@@ -84,11 +84,11 @@ Node* parse(std::istream& ifs, const bool treatAttributesAsChildren)
          continue;
       }
 
-      // regular element node
+      // regular element node (nodes that interest us)
       if (startsWith(chunk, "<")) {
 
-         chunk = chunk.substr(1);
-         if (!rootNode) {
+         chunk = chunk.substr(1);       // remove "<" from beginning of chunk
+         if (!rootNode) {               // start building a Node tree
             rootNode = new Node("");
             node = rootNode;
          } else {

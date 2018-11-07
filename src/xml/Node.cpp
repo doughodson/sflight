@@ -10,15 +10,9 @@
 namespace sflight {
 namespace xml {
 
-Node::Node(const std::string& tagName) : name(tagName)
-{}
-
-Node::Node(const std::string& tagName, const std::string& text) : name(tagName), text(text)
-{}
-
 Node::Node(const Node& src)
 {
-   name = src.getTagName();
+   tagName = src.getTagName();
    text = src.getText();
 
    std::size_t cnt{src.getAttributeCount()};
@@ -45,10 +39,6 @@ Node::~Node()
       delete childList[i];
    }
 }
-
-std::string Node::getTagName() const { return name; }
-
-void Node::setTagName(const std::string& x) { name = x; }
 
 Node* Node::addChild(const std::string& x)
 {
@@ -135,11 +125,6 @@ std::vector<Node*> Node::getChildren(const std::string& x) const
    }
 
    return list;
-}
-
-void Node::putAttribute(std::string name, std::string val)
-{
-   attrMap.insert(std::pair<std::string, std::string>(name, val));
 }
 
 std::string Node::getAttribute(const std::string& name) const
