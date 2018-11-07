@@ -37,7 +37,7 @@ void init_Player(xml::Node* node, mdls::Player* player)
       player->windVel.set3(0);
    }
 
-   xml::Node* tmp = node->getChild("InitialConditions/Position");
+   xml::Node* tmp{node->getChild("InitialConditions/Position")};
    player->lat = mdls::UnitConvert::toRads(xml::getDouble(tmp, "Latitude", 0.0));
    player->lon = mdls::UnitConvert::toRads(xml::getDouble(tmp, "Longitude", 0.0));
    player->alt = mdls::UnitConvert::toMeters(xml::getDouble(tmp, "Altitude", 0.0));

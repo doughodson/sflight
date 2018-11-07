@@ -24,16 +24,15 @@ void init_StickControl(xml::Node* node, mdls::StickControl* sc)
    std::cout << "Module: StickControl"      << std::endl;
    std::cout << "-------------------------" << std::endl;
 
-   xml::Node* cntrlNode = node->getChild("Control");
+   xml::Node* cntrlNode{node->getChild("Control")};
 
-   double designAlt =
-       mdls::UnitConvert::toMeters(xml::getDouble(cntrlNode, "DesignAltitude", 0.0));
+   double designAlt{mdls::UnitConvert::toMeters(xml::getDouble(cntrlNode, "DesignAltitude", 0.0))};
 
-   double designSpeed =
-       mdls::UnitConvert::toMPS(xml::getDouble(cntrlNode, "DesignAirspeed", 0.0));
-   if (designSpeed == 0.0)
+   double designSpeed{mdls::UnitConvert::toMPS(xml::getDouble(cntrlNode, "DesignAirspeed", 0.0))};
+   if (designSpeed == 0.0) {
       designSpeed = xml::getDouble(cntrlNode, "DesignPoint/Mach", 0.0) *
                     mdls::Atmosphere::getSpeedSound(mdls::Atmosphere::getTemp(designAlt));
+   }
 
    sc->designQbar = 0.5 * mdls::Atmosphere::getRho(designAlt) * designSpeed * designSpeed;
 

@@ -58,7 +58,7 @@ void init_InterpAero(xml::Node* node, mdls::InterpAero* iaero)
    double mach{};
    if (iaero->usingMachEffects) {
       mach = airspeed / speedSound;
-      const double beta_mach = iaero->getBetaMach(mach);
+      const double beta_mach{iaero->getBetaMach(mach)};
       iaero->cruiseCL *= beta_mach;
       iaero->cruiseCD *= beta_mach;
    }
@@ -81,7 +81,7 @@ void init_InterpAero(xml::Node* node, mdls::InterpAero* iaero)
 
    if (iaero->usingMachEffects) {
       mach = airspeed / speedSound;
-      const double beta_mach = iaero->getBetaMach(mach);
+      const double beta_mach{iaero->getBetaMach(mach)};
       iaero->climbCL *= beta_mach;
       iaero->climbCD *= beta_mach;
    }
