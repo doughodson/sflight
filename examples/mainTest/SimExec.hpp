@@ -6,7 +6,7 @@
 
 namespace sflight {
 namespace mdls { class Player; }
-namespace xml {  class Node; }
+namespace xml { class Node; }
 }
 
 //------------------------------------------------------------------------------
@@ -21,8 +21,8 @@ class SimExec
 
    void start();
    void startConstructive();
-   void stop();
-   void initialize(sflight::xml::Node*);
+   void stop()                                  {}
+   void initialize(sflight::xml::Node* const);
 
  private:
    sflight::mdls::Player* player{};

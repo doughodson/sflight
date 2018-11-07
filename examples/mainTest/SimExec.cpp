@@ -25,7 +25,6 @@ void SimExec::start()
    if (player == nullptr || frameRate == 0.0)
       return;
 
-   double time{};
    const double frameTime{1.0 / frameRate};
    const long sleepTime{static_cast<long>(frameTime * 1E3)};
 
@@ -59,9 +58,7 @@ void SimExec::startConstructive()
    }
 }
 
-void SimExec::stop() {}
-
-void SimExec::initialize(sflight::xml::Node* node)
+void SimExec::initialize(sflight::xml::Node* const node)
 {
    frameRate = sflight::xml::getDouble(node, "Modules/Rate", 20.0);
 }

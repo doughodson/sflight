@@ -16,7 +16,7 @@
 namespace sflight {
 namespace xml_bindings {
 
-void init_Player(xml::Node* node, mdls::Player* player)
+void init_Player(xml::Node* const node, mdls::Player* player)
 {
    std::cout << std::endl;
    std::cout << "-------------------------" << std::endl;

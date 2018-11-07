@@ -28,14 +28,14 @@ class Module;
 //------------------------------------------------------------------------------
 class Player
 {
- public:
+public:
    Player();
    ~Player();
 
-   void addModule(Module* module);
-   void update(double timestep);
+   void addModule(Module* const module);
+   void update(const double timestep);
 
-   friend void xml_bindings::init_Player(xml::Node*, Player*);
+   friend void xml_bindings::init_Player(xml::Node* const, Player*);
 
    // lat, lon (radians) and alt (meters)
    double lat{};

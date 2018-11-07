@@ -7,7 +7,7 @@ namespace sflight {
 namespace xml  { class Node; }
 namespace mdls { class Player; }
 namespace xml_bindings {
-void init_Player(sflight::xml::Node*, sflight::mdls::Player*);
+void init_Player(sflight::xml::Node* const, sflight::mdls::Player*);
 }
 
 }

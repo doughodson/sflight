@@ -29,13 +29,17 @@ Player::~Player()
    }
 }
 
-void Player::addModule(Module* module) { this->modules.push_back(module); }
-
-void Player::update(double timestep)
+void Player::addModule(Module* const module)
 {
+   modules.push_back(module);
+}
+
+void Player::update(const double x)
+{
+   double timestep{x};
    simTime += timestep;
 
-   for (unsigned int i = 0; i < modules.size(); i++) {
+   for (std::size_t i = 0; i < modules.size(); i++) {
       timestep = simTime - modules[i]->lastTime;
       if (timestep >= modules[i]->frameTime) {
          modules[i]->lastTime = simTime;
