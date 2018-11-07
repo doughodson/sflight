@@ -12,25 +12,15 @@ namespace xml {
 
 Node::Node(const Node& src)
 {
-   tagName = src.getTagName();
-   text = src.getText();
+   tagName = src.tagName;
+   text = src.text;
 
-   std::size_t cnt{src.getAttributeCount()};
-   std::string* arry{new std::string[cnt]};
-   src.getAttributeNames(arry);
-
-   for (std::size_t i = 0; i < cnt; i++) {
-      putAttribute(arry[i], src.getAttribute(arry[i]));
-   }
-
-   cnt = src.getChildCount();
-
+   // copy all children
+   std::size_t cnt = src.getChildCount();
    for (std::size_t i = 0; i < cnt; i++) {
       Node* tmp{new Node(*src.getChild(i))};
       addChild(tmp);
    }
-
-   delete[] arry;
 }
 
 Node::~Node()
@@ -127,35 +117,6 @@ std::vector<Node*> Node::getChildren(const std::string& x) const
    return list;
 }
 
-std::string Node::getAttribute(const std::string& name) const
-{
-   if (attrMap.count(name) == 1) {
-      return attrMap.at(name);
-   }
-   return 0;
-}
-
-void Node::getAttributeNames(std::string* const storeArray) const
-{
-   std::map<std::string, std::string>::const_iterator iter;
-   int i{};
-
-   for (iter = attrMap.begin(); iter != attrMap.end(); ++iter) {
-      storeArray[i] = iter->first;
-      i++;
-   }
-}
-
-std::size_t Node::getAttributeCount() const { return attrMap.size(); }
-
-std::string Node::getText() const { return text; }
-
-void Node::setText(const std::string& x) { text = x; }
-
-Node* Node::getParent() const { return parentNode; }
-
-void Node::setParent(Node* const x) { parentNode = x; }
-
 bool Node::remove(Node* const node)
 {
    std::vector<Node*>::iterator it;
@@ -172,28 +133,19 @@ bool Node::remove(Node* const node)
 
 std::string Node::toString() const
 {
-   std::string ret{"<" + getTagName() + " "};
-   std::string* attrNames{new std::string[getAttributeCount()]};
-   getAttributeNames(attrNames);
-
-   for (std::size_t i = 0; i < getAttributeCount(); i++) {
-      ret += (attrNames[i] + "=" + getAttribute(attrNames[i]) + " ");
-   }
-   ret += ">";
-
+   std::string ret{"<" + getTagName() + ">"};
    for (std::size_t i = 0; i < childList.size(); i++) {
       ret += "\n";
       ret += childList[i]->toString();
    }
 
    if (getText() != "") {
-      ret += ("\n  " + getText());
+      ret += ("\n" + getText());
    }
 
-   ret += "\n</" + getTagName() + " ";
-//   ret += "\n</" + getTagName() + " " + "\n";   // mistake in orig code
-   delete[] attrNames;
+   ret += "\n</" + getTagName() + ">";
    return ret;
 }
+
 }
 }

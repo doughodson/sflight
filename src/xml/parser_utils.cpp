@@ -12,7 +12,7 @@ namespace sflight {
 namespace xml {
 
 // parse a given filename
-Node* parse(const std::string& filename, const bool treatAttributesAsChildren)
+Node* parse(const std::string& filename)
 {
    std::ifstream fin(filename, std::ifstream::in);
 
@@ -23,13 +23,13 @@ Node* parse(const std::string& filename, const bool treatAttributesAsChildren)
       std::exit(1);
    }
 
-   Node* node{parse(fin, treatAttributesAsChildren)};
+   Node* node{parse(fin)};
    fin.close();
    return node;
 }
 
 // parse input stream
-Node* parse(std::istream& ifs, const bool treatAttributesAsChildren)
+Node* parse(std::istream& ifs)
 {
    Node* rootNode{};
    Node* node{};
@@ -100,7 +100,7 @@ Node* parse(std::istream& ifs, const bool treatAttributesAsChildren)
          if (splitPt != std::string::npos) {
             std::string tag{chunk.substr(0, splitPt)};
             node->setTagName(tag);
-            putAttributes(chunk.substr(splitPt), node, treatAttributesAsChildren);
+            putAttributes(chunk.substr(splitPt), node);
          } else {
             node->setTagName(chunk);
          }
@@ -147,7 +147,7 @@ bool isWhitespace(const char x)
    return false;
 }
 
-std::string putAttributes(const std::string& x, Node* const node, const bool treatAsChildren)
+std::string putAttributes(const std::string& x, Node* const node)
 {
    std::string str(x);
 
@@ -171,12 +171,12 @@ std::string putAttributes(const std::string& x, Node* const node, const bool tre
 
          // subChars( name );
          // subChars( attr );
-         if (treatAsChildren) {
+//         if (treatAsChildren) {
             Node* tmp{node->addChild(name)};
             tmp->setText(attr);
-         } else {
-            node->putAttribute(name, attr);
-         }
+//         } else {
+//            node->putAttribute(name, attr);
+//         }
          str = str.substr(attrEnd + 1);
       }
    } catch (int) {

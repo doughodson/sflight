@@ -20,8 +20,8 @@ class Node {
    Node(const Node&);
    virtual ~Node();
 
-   void setTagName(const std::string& x)                   { tagName = x;  return; }
-   std::string getTagName() const                          { return tagName;       }
+   void setTagName(const std::string& x)            { tagName = x;  return; }
+   std::string getTagName() const                   { return tagName;       }
 
    Node* addChild(const std::string&);
    Node* addChild(Node* const);
@@ -34,21 +34,11 @@ class Node {
 
    Node* getChild(const std::size_t index) const;
 
-   void putAttribute(std::string name, std::string val)  { attrMap.insert(std::pair<std::string, std::string>(name, val)); }
+   std::string getText() const                      { return text;       }
+   void setText(const std::string& x)               { text = x;          }
 
-   std::string getAttribute(const std::string& name) const;
-
-   void getAttributeNames(std::string* const) const;
-
-   std::size_t getAttributeCount() const;
-
-   std::string getText() const;
-
-   void setText(const std::string& text);
-
-   Node* getParent() const;
-
-   void setParent(Node* const);
+   Node* getParent() const                          { return parentNode; }
+   void setParent(Node* const x)                    { parentNode = x;    }
 
    std::string toString() const;
 
@@ -57,7 +47,6 @@ class Node {
  private:
    std::string tagName;
    std::string text;
-   std::map<std::string, std::string> attrMap;
    // vector of pointers to children Nodes
    std::vector<Node*> childList{};
    // pointer to parent Node

@@ -31,9 +31,10 @@ int main(int argc, char** argv)
    std::cout << "Num of frames : " << num_frames << std::endl;
 
    // parse input file and return top node
-   xml::Node* node{xml::parse(filename, true)};
+   xml::Node* node{xml::parse(filename)};
    if (node) {
       std::cout << "Configuration file parsed\n";
+      std::cout << node->toString() << std::endl;
    } else {
       std::cout << "Configuration file FAILED parsing!\n";
       std::exit(1);
