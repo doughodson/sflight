@@ -42,7 +42,6 @@ void SimExec::startConstructive()
    if (player == nullptr || frameRate == 0)
       return;
 
-   double time{};
    const double frameTime{1.0 / frameRate};
    player->paused = false;
    double frameGroup{};
