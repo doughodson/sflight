@@ -137,7 +137,7 @@ std::vector<Node*> Node::getChildren(const std::string& x) const
    return list;
 }
 
-void Node::putAttribute(std::string& name, std::string& val)
+void Node::putAttribute(std::string name, std::string val)
 {
    attrMap.insert(std::pair<std::string, std::string>(name, val));
 }

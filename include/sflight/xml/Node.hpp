@@ -35,7 +35,7 @@ class Node {
 
    Node* getChild(const std::size_t index) const;
 
-   void putAttribute(std::string& name, std::string& val);
+   void putAttribute(std::string name, std::string val);
 
    std::string getAttribute(const std::string& name) const;
 
