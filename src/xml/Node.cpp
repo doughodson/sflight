@@ -142,7 +142,7 @@ void Node::putAttribute(std::string& name, std::string& val)
    attrMap.insert(std::pair<std::string, std::string>(name, val));
 }
 
-std::string Node::getAttribute(const std::string name) const
+std::string Node::getAttribute(const std::string& name) const
 {
    if (attrMap.count(name) == 1) {
       return attrMap.at(name);

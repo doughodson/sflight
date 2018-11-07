@@ -37,7 +37,7 @@ class Node {
 
    void putAttribute(std::string& name, std::string& val);
 
-   std::string getAttribute(const std::string name) const;
+   std::string getAttribute(const std::string& name) const;
 
    void getAttributeNames(std::string* const) const;
 

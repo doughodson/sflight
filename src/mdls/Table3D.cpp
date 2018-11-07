@@ -47,8 +47,8 @@ Table2D* Table3D::getPage(const std::size_t page)
 
 double Table3D::interp(const double pageVal, const double rowVal, const double colVal)
 {
-   int lowpage{};
-   int highpage{};
+   std::size_t lowpage{};
+   std::size_t highpage{};
    double pageweight{};
 
    for (std::size_t i = 1; i < numPages; i++) {
