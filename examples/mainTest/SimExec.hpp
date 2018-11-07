@@ -14,7 +14,7 @@ namespace xml { class Node; }
 //------------------------------------------------------------------------------
 class SimExec
 {
- public:
+public:
    SimExec(sflight::mdls::Player*, const double frameRate);
    SimExec(sflight::mdls::Player*, const double frameRate, const std::size_t maxFrames);
    virtual ~SimExec() = default;
@@ -24,7 +24,7 @@ class SimExec
    void stop()                                  {}
    void initialize(sflight::xml::Node* const);
 
- private:
+private:
    sflight::mdls::Player* player{};
    double frameRate{};
    std::size_t maxFrames{1000000000};
