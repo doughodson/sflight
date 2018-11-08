@@ -22,6 +22,9 @@ workspace "sflight"
    -- common include directories (all configurations/all projects)
    includedirs { "../../include" }
 
+   -- destination directory for compiled binary target
+   targetdir("../../lib/")
+
    --
    -- Build (solution) configuration options:
    --     Release        (Application linked to Multi-threaded DLL)
@@ -55,57 +58,10 @@ workspace "sflight"
          defines { "WIN32", "_DEBUG" }
       end
 
-   -- models
-   project "mdls"
-      kind "StaticLib"
-      files {
-         "../../include/sflight/mdls/**.h*",
-         "../../src/mdls/**.cpp"
-      }
-      targetdir "../../lib/"
-      targetname "sflight_mdls"
 
-   -- xml parser
-   project "xml"
-      kind "StaticLib"
-      files {
-         "../../include/sflight/xml/**.h*",
-         "../../src/xml/**.cpp"
-      }
-      targetdir "../../lib/"
-      targetname "sflight_xml"
+   -- libs
+   dofile "deps.lua"
+   dofile "sflight.lua"
 
-   -- xml bindings
-   project "xml_bindings"
-      kind "StaticLib"
-      files {
-         "../../include/sflight/xml_bindings/**.h*",
-         "../../src/xml_bindings/**.cpp"
-      }
-      targetdir "../../lib/"
-      targetname "sflight_xml_bindings"
-
-   -- simple application
-   project "mainTest"
-      kind "ConsoleApp"
-      targetname "mainTest"
-      targetdir "../../examples/mainTest"
-      debugdir "../../examples/mainTest"
-      files {
-         "../../examples/mainTest/**.h*",
-         "../../examples/mainTest/**.cpp"
-      }
-      links { "xml_bindings", "xml", "mdls" }
-      libdirs { "../../lib" }
---      if _ACTION ~= "gmake" then
---         defines { "_CONSOLE" }
---      end
-      filter "configurations:Release"
-         if _ACTION ~= "gmake" then
-            links { "Ws2_32", "Winmm", "comctl32", "gdi32" }
-         end
-      filter "configurations:Debug"
-         if _ACTION ~= "gmake" then
-            links { "Ws2_32", "Winmm", "comctl32", "gdi32" }
-         end
-
+  -- examples
+   dofile "examples.lua"

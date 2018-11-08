@@ -47,4 +47,6 @@ vcruntime*.dll
 
 # linux executables
 examples/mainTest/mainTest*
+examples/mainTest/output.txt
+
 
