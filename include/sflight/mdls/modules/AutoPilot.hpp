@@ -7,9 +7,7 @@
 #include "sflight/xml_bindings/init_AutoPilot.hpp"
 
 namespace sflight {
-namespace xml {
-class Node;
-}
+namespace xml { class Node; }
 namespace mdls {
 class Player;
 
@@ -19,7 +17,7 @@ class Player;
 //------------------------------------------------------------------------------
 class AutoPilot : public Module
 {
- public:
+public:
    AutoPilot(Player*, const double frameRate);
    ~AutoPilot();
 
@@ -33,7 +31,7 @@ class AutoPilot : public Module
 
    friend void xml_bindings::init_AutoPilot(xml::Node*, AutoPilot*);
 
- private:
+private:
    enum class TurnType { HDG = 0, TRAJECTORY = 1 };
 
    double kphi{0.05};
