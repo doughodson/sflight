@@ -4,8 +4,8 @@
 #include "sflight/mdls/Player.hpp"
 #include "sflight/mdls/UnitConvert.hpp"
 
-#include <iomanip>
 #include <iostream>
+#include <iomanip>
 
 namespace sflight {
 namespace mdls {
@@ -16,7 +16,7 @@ FileOutput::~FileOutput() { fout.close(); }
 
 void FileOutput::update(const double timestep)
 {
-   if (player->simTime - lastTime > 1. / rate) {
+   if (player->simTime - lastTime > 1.0 / rate) {
       update();
       lastTime = player->simTime;
    }
@@ -28,24 +28,28 @@ void FileOutput::update()
 
    frameCounter = 0;
 
-   if (!fout.is_open())
+   if (!fout.is_open()) {
       return;
+   }
 
-   fout << player->simTime << "\t";
+   fout << std::fixed;
+   fout << std::setprecision(3);
 
-   fout << std::setprecision(7);
+   fout << std::setw(14) << player->simTime;
 
-   fout << UnitConvert::toDegs(player->lat) << "\t";
-   fout << UnitConvert::toDegs(player->lon) << "\t";
-   fout << UnitConvert::toFeet(player->alt) << "\t";
+   fout << std::setprecision(4);
 
-   fout << UnitConvert::toKnots(player->vInf) << "\t";
+   fout << std::setw(14) << UnitConvert::toDegs(player->lat);
+   fout << std::setw(14) << UnitConvert::toDegs(player->lon);
+   fout << std::setw(14) << UnitConvert::toFeet(player->alt);
 
-   fout << UnitConvert::toDegs(player->eulers.getPhi()) << "\t";
-   fout << UnitConvert::toDegs(player->eulers.getTheta()) << "\t";
-   fout << UnitConvert::toDegs(player->eulers.getPsi()) << "\t";
+   fout << std::setw(14) << UnitConvert::toKnots(player->vInf);
 
-   fout << player->throttle << "\t";
+   fout << std::setw(14) << UnitConvert::toDegs(player->eulers.getPhi());
+   fout << std::setw(14) << UnitConvert::toDegs(player->eulers.getTheta());
+   fout << std::setw(14) << UnitConvert::toDegs(player->eulers.getPsi());
+
+   fout << std::setw(14) << player->throttle;
    fout << std::endl;
 }
 }

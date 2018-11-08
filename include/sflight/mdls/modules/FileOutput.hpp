@@ -9,9 +9,7 @@
 #include <fstream>
 
 namespace sflight {
-namespace xml {
-class Node;
-}
+namespace xml { class Node; }
 namespace mdls {
 class Player;
 
@@ -21,6 +19,7 @@ class Player;
 class FileOutput : public Module
 {
  public:
+   FileOutput() = delete;
    FileOutput(Player*, const double frameRate);
    ~FileOutput();
 

@@ -9,6 +9,7 @@
 
 #include <iostream>
 #include <fstream>
+#include <iomanip>
 
 namespace sflight {
 namespace xml_bindings {
@@ -24,9 +25,15 @@ void init_FileOutput(xml::Node* node, mdls::FileOutput* fileOutput)
    std::cout << "Filename : " << filename << std::endl;
    fileOutput->fout.open(filename.c_str());
    if (fileOutput->fout.is_open()) {
-      fileOutput->fout << "Time "
-                          "(sec)\tLatitude(deg)\tLongitude(deg)\tAltitude(ft)\tSpeed(ktas)"
-                          "\tBank(deg)\tPitch(deg)\tHeading(deg)\tThrottle"
+      fileOutput->fout << std::setw(14) << "Time(sec)"
+                       << std::setw(14) << "Lat(deg)"
+                       << std::setw(14) << "Lon(deg)"
+                       << std::setw(14) << "Alt(ft)"
+                       << std::setw(14) << "Speed(ktas)"
+                       << std::setw(14) << "Bank(deg)"
+                       << std::setw(14) << "Pitch(deg)"
+                       << std::setw(14) << "Heading(deg)"
+                       << std::setw(14) << "Throttle"
                        << std::endl;
    }
 
