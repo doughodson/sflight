@@ -37,10 +37,6 @@ workspace "sflight"
    -- /Oi - generate intrinsic functions
    -- buildoptions( { "/wd4351", "/Oi" } )
 
-   if _ACTION == "gmake" then
-      buildoptions "-std=c++14"
-   end
-
    -- common release configuration flags and symbols
    filter { "Release" }
       optimize "On"
