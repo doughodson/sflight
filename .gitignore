@@ -33,9 +33,6 @@ vcruntime*.dll
 .project
 .settings/
 
-# executables
-*.exe
-
 # except for premake tool
 !premake*.*
 
@@ -45,8 +42,10 @@ vcruntime*.dll
 # backup files
 *.bak
 
-# linux executables
+# example executables
+examples/clips/clips-repl*
+examples/lua/lua-repl*
+examples/luac/luac*
 examples/mainTest/mainTest*
 examples/mainTest/output.txt
-
 
