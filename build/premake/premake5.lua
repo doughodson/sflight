@@ -3,6 +3,7 @@
 --
 -- Target of interest:
 --     vs2017     (Visual Studio 2017)
+--     vs2019     (Visual Studio 2019)
 --     gmake      (Linux make)
 --
 
