@@ -3,6 +3,7 @@
 build/obj/
 gmake/
 vs2017/
+vs2019/
 .vscode/
 
 # lib directory
